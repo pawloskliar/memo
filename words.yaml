@@ -1,0 +1,6923 @@
+# DEUTSCH KARTEN — Vocabulary
+# ══════════════════════════════════════════════════════════════════
+#
+# HOW TO ADD WORDS
+# ────────────────
+# Append a new entry. Use the next available id.
+# Next ID: 85
+#
+# FIELD REFERENCE
+# ───────────────
+# type: noun
+#   article: der | die | das
+#   forms:
+#     gen: <genitive sg>      dat: <dative sg>
+#     acc: <accusative sg>    pl:  <plural with article>
+#
+# type: verb
+#   article: ~
+#   forms:
+#     ich: ...   du: ...   er: ...
+#     prät: <Präteritum ich>   pp: <Partizip II>   aux: haben | sein
+#   (only list irregular / non-obvious forms)
+#
+# type: adj
+#   article: ~
+#   forms:
+#     komp: <Komparativ>   sup: <Superlativ>
+#
+# type: phrase | adverb | expression
+#   article: ~
+#   (forms can be omitted)
+#
+# Optional:
+#   notes: free-text usage note
+#   tags: [category1, category2]
+#
+# ══════════════════════════════════════════════════════════════════
+
+# ── NOUNS ────────────────────────────────────────────────────────────
+
+- id: 1
+  en: house
+  uk: будинок
+  de: Haus
+  article: das
+  type: noun
+  forms:
+    gen: des Hauses
+    dat: dem Haus
+    acc: das Haus
+    pl: die Häuser
+  tags: [basics, home]
+
+- id: 2
+  en: dog
+  uk: собака
+  de: Hund
+  article: der
+  type: noun
+  forms:
+    gen: des Hundes
+    dat: dem Hund
+    acc: den Hund
+    pl: die Hunde
+  tags: [basics, animals]
+
+- id: 3
+  en: cat
+  uk: кішка
+  de: Katze
+  article: die
+  type: noun
+  forms:
+    gen: der Katze
+    dat: der Katze
+    acc: die Katze
+    pl: die Katzen
+  tags: [basics, animals]
+
+- id: 4
+  en: book
+  uk: книга
+  de: Buch
+  article: das
+  type: noun
+  forms:
+    gen: des Buches
+    dat: dem Buch
+    acc: das Buch
+    pl: die Bücher
+  tags: [basics, objects]
+
+- id: 5
+  en: time
+  uk: час
+  de: Zeit
+  article: die
+  type: noun
+  forms:
+    gen: der Zeit
+    dat: der Zeit
+    acc: die Zeit
+    pl: die Zeiten
+  tags: [basics, abstract]
+
+# ── VERBS ────────────────────────────────────────────────────────────
+
+- id: 6
+  en: to go / to walk
+  uk: іти / ходити
+  de: gehen
+  article: ~
+  type: verb
+  forms:
+    ich: gehe
+    du: gehst
+    er: geht
+    prät: ging
+    pp: gegangen
+    aux: sein
+  tags: [basics, movement, verbs]
+
+- id: 7
+  en: to eat
+  uk: їсти
+  de: essen
+  article: ~
+  type: verb
+  forms:
+    ich: esse
+    du: isst
+    er: isst
+    prät: aß
+    pp: gegessen
+    aux: haben
+  notes: stem vowel change du/er — e → i
+  tags: [basics, food, verbs]
+
+- id: 8
+  en: to have
+  uk: мати
+  de: haben
+  article: ~
+  type: verb
+  forms:
+    ich: habe
+    du: hast
+    er: hat
+    prät: hatte
+    pp: gehabt
+    aux: haben
+  tags: [basics, verbs]
+
+- id: 9
+  en: to be
+  uk: бути
+  de: sein
+  article: ~
+  type: verb
+  forms:
+    ich: bin
+    du: bist
+    er: ist
+    prät: war
+    pp: gewesen
+    aux: sein
+  tags: [basics, verbs]
+
+# ── ADJECTIVES ───────────────────────────────────────────────────────
+
+- id: 10
+  en: good
+  uk: добрий / хороший
+  de: gut
+  article: ~
+  type: adj
+  forms:
+    komp: besser
+    sup: am besten
+  tags: [basics, adjectives]
+
+# ── EMOTIONS (positive) ──────────────────────────────────────────────
+
+- id: 11
+  en: cheerful / happy
+  uk: веселий / радісний
+  de: fröhlich
+  article: ~
+  type: adj
+  forms:
+    komp: fröhlicher
+    sup: am fröhlichsten
+  tags: [emotions, emotions-positive]
+
+- id: 12
+  en: enthusiastic / excited
+  uk: захоплений / в захваті
+  de: begeistert
+  article: ~
+  type: adj
+  forms:
+    komp: begeisterter
+    sup: am begeistertsten
+  tags: [emotions, emotions-positive]
+
+- id: 13
+  en: funny / amusing
+  uk: кумедний / веселий
+  de: lustig
+  article: ~
+  type: adj
+  forms:
+    komp: lustiger
+    sup: am lustigsten
+  tags: [emotions, emotions-positive]
+
+- id: 14
+  en: relaxed
+  uk: розслаблений / спокійний
+  de: entspannt
+  article: ~
+  type: adj
+  forms:
+    komp: entspannter
+    sup: am entspanntesten
+  tags: [emotions, emotions-positive]
+
+- id: 15
+  en: calm / quiet
+  uk: спокійний / тихий
+  de: ruhig
+  article: ~
+  type: adj
+  forms:
+    komp: ruhiger
+    sup: am ruhigsten
+  tags: [emotions, emotions-positive]
+
+- id: 16
+  en: satisfied / content
+  uk: задоволений
+  de: zufrieden
+  article: ~
+  type: adj
+  forms:
+    komp: zufriedener
+    sup: am zufriedensten
+  tags: [emotions, emotions-positive]
+
+- id: 17
+  en: interested
+  uk: зацікавлений
+  de: interessiert
+  article: ~
+  type: adj
+  forms:
+    komp: interessierter
+    sup: am interessiertesten
+  tags: [emotions, emotions-positive]
+
+# ── EMOTIONS (negative) ──────────────────────────────────────────────
+
+- id: 18
+  en: sad
+  uk: сумний
+  de: traurig
+  article: ~
+  type: adj
+  forms:
+    komp: trauriger
+    sup: am traurigsten
+  tags: [emotions, emotions-negative]
+
+- id: 19
+  en: angry / furious
+  uk: злий / розлючений
+  de: wütend
+  article: ~
+  type: adj
+  forms:
+    komp: wütender
+    sup: am wütendsten
+  tags: [emotions, emotions-negative]
+
+- id: 20
+  en: annoyed / upset
+  uk: роздратований / незадоволений
+  de: verärgert
+  article: ~
+  type: adj
+  forms:
+    komp: verärgerter
+    sup: am verärgertsten
+  tags: [emotions, emotions-negative]
+
+- id: 21
+  en: irritated / fed up
+  uk: роздратований / знервований
+  de: genervt
+  article: ~
+  type: adj
+  forms:
+    komp: genervter
+    sup: am genervtesten
+  tags: [emotions, emotions-negative]
+
+- id: 22
+  en: bored
+  uk: нудьгуючий / нудьгує
+  de: gelangweilt
+  article: ~
+  type: adj
+  forms:
+    komp: gelangweilter
+    sup: am gelangweiltsten
+  tags: [emotions, emotions-negative]
+
+- id: 23
+  en: thoughtful / pensive
+  uk: задумливий
+  de: nachdenklich
+  article: ~
+  type: adj
+  forms:
+    komp: nachdenklicher
+    sup: am nachdenklichsten
+  tags: [emotions, emotions-negative]
+
+- id: 24
+  en: annoying / irritating
+  uk: дратівливий / неприємний
+  de: ärgerlich
+  article: ~
+  type: adj
+  forms:
+    komp: ärgerlicher
+    sup: am ärgerlichsten
+  tags: [emotions, emotions-negative]
+
+# ── PICTURE DESCRIPTION — phrases ────────────────────────────────────
+
+- id: 25
+  en: In the photo / picture I see ...
+  uk: На фото / картинці я бачу ...
+  de: Auf dem Foto / auf dem Bild sehe ich ...
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 26
+  en: The photo shows ...
+  uk: Фото показує ...
+  de: Das Foto zeigt ...
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 27
+  en: In the photo one can see ...
+  uk: На фото видно ...
+  de: Auf dem Foto sieht man ...
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 28
+  en: in the foreground
+  uk: на передньому плані
+  de: im Vordergrund
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 29
+  en: in the background
+  uk: на задньому плані
+  de: im Hintergrund
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 30
+  en: I suspect / assume that ...
+  uk: Я припускаю, що ...
+  de: Ich vermute, dass ...
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 31
+  en: I think / I believe / I mean
+  uk: Я думаю / я вважаю / я маю на увазі
+  de: Ich denke / ich glaube / ich meine
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 32
+  en: In my opinion
+  uk: На мою думку
+  de: Meiner Meinung nach
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 33
+  en: I personally think
+  uk: Я особисто думаю
+  de: Ich persönlich denke
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 34
+  en: As far as I'm concerned
+  uk: Що стосується мене
+  de: Was mich angeht
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 35
+  en: This picture reminds me of ...
+  uk: Це фото нагадує мені ...
+  de: Dieses Bild erinnert mich an ...
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 36
+  en: In my homeland / home country
+  uk: У моїй батьківщині / у мене вдома
+  de: In meiner Heimat
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 37
+  en: similar to
+  uk: схоже як / подібно до
+  de: ähnlich wie
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 38
+  en: different from
+  uk: інакше ніж / відрізняється від
+  de: anders als
+  article: ~
+  type: phrase
+  tags: [picture-description]
+
+- id: 39
+  en: They look / appear ...
+  uk: Вони виглядають ...
+  de: Sie sehen ... aus
+  article: ~
+  type: phrase
+  tags: [picture-description]
+  notes: separable verb — "aus" goes to the end
+
+# ── DIALOGUE HELPERS — Aufgabe nennen (stating the task) ─────────────
+
+- id: 40
+  en: As you know, we should plan ... together.
+  uk: Як ти знаєш, ми повинні разом ... планувати.
+  de: Wie du weißt, sollen wir zusammen ... planen.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-task]
+
+- id: 41
+  en: Our task is to plan ...
+  uk: Наше завдання — ... планувати.
+  de: Unsere Aufgabe ist es, ... zu planen.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-task]
+
+- id: 42
+  en: We should organize ... together.
+  uk: Ми повинні разом ... організовувати.
+  de: Wir sollen gemeinsam ... organisieren.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-task]
+
+# ── DIALOGUE HELPERS — Etwas vorschlagen (making suggestions) ────────
+
+- id: 43
+  en: I find / think / believe that ...
+  uk: Я вважаю / думаю / гадаю, що ...
+  de: Ich finde / denke / meine, dass ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-suggest]
+
+- id: 44
+  en: In my opinion, we should ...
+  uk: На мою думку, ми повинні ...
+  de: Meiner Meinung nach sollten wir ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-suggest]
+
+- id: 45
+  en: I suggest that we ...
+  uk: Я пропоную, щоб ми ...
+  de: Ich schlage vor, dass wir ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-suggest]
+
+- id: 46
+  en: My suggestion is that we ...
+  uk: Моя пропозиція полягає в тому, щоб ми ...
+  de: Mein Vorschlag ist, dass wir ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-suggest]
+
+- id: 47
+  en: It would be good if we ...
+  uk: Було б добре, якби ми ...
+  de: Es wäre gut, wenn wir ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-suggest]
+
+- id: 48
+  en: My idea would be that we ...
+  uk: Моя ідея полягала б у тому, щоб ми ...
+  de: Meine Idee wäre, dass wir ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-suggest]
+
+- id: 49
+  en: I have an idea. We could ...
+  uk: У мене є ідея. Ми могли б ...
+  de: Ich hätte da eine Idee. Wir könnten ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-suggest]
+
+- id: 50
+  en: I would appreciate it if we ...
+  uk: Мені б сподобалось, якби ми ...
+  de: Ich würde gut finden, wenn wir ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-suggest]
+
+# ── DIALOGUE HELPERS — Auf den Partner eingehen (engaging partner) ───
+
+- id: 51
+  en: What do you think / say about it?
+  uk: Що ти думаєш / кажеш про це?
+  de: Was meinst / sagst du dazu?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 52
+  en: What do you think about it?
+  uk: Що ти про це думаєш?
+  de: Was hältst du davon?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 53
+  en: What is your opinion?
+  uk: Яка твоя думка?
+  de: Was ist deine Meinung?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 54
+  en: What do you suggest?
+  uk: Що ти пропонуєш?
+  de: Was schlägst du vor?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 55
+  en: Do you have a (different) suggestion?
+  uk: Чи є в тебе (інша) пропозиція?
+  de: Hast du einen (anderen) Vorschlag?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 56
+  en: Do you have a (better) idea?
+  uk: Чи є в тебе (краща) ідея?
+  de: Hast du eine (bessere) Idee?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 57
+  en: Do you agree with it if we ...?
+  uk: Ти згоден з тим, якщо ми ...?
+  de: Bist du einverstanden damit, wenn wir ...?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 58
+  en: What do you think about it if we ...?
+  uk: Що ти думаєш про це, якщо ми ...?
+  de: Was hältst du davon, wenn wir ...?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 59
+  en: What else do we need?
+  uk: Що нам ще потрібно?
+  de: Was brauchen wir noch?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 60
+  en: What else is important?
+  uk: Що ще важливо?
+  de: Was ist noch wichtig?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 61
+  en: What else do we still need to plan?
+  uk: Що нам ще потрібно запланувати?
+  de: Was müssen wir noch planen?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+- id: 62
+  en: What else do we still need to consider?
+  uk: На що нам ще потрібно звернути увагу?
+  de: Was müssen wir noch beachten?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-engage]
+
+# ── DIALOGUE HELPERS — Zustimmen (agreeing) ──────────────────────────
+
+- id: 63
+  en: That is a good idea.
+  uk: Це гарна ідея.
+  de: Das ist eine gute Idee.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-agree]
+
+- id: 64
+  en: That is a good suggestion / plan.
+  uk: Це хороша пропозиція / план.
+  de: Das ist ein guter Vorschlag / Plan.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-agree]
+
+- id: 65
+  en: I (completely) agree with you.
+  uk: Я (повністю) згоден з тобою.
+  de: Ich bin (ganz) deiner Meinung.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-agree]
+
+- id: 66
+  en: I am of the same opinion as you.
+  uk: Я тієї ж думки, що й ти.
+  de: Ich bin der gleichen Meinung wie du.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-agree]
+
+- id: 67
+  en: I agree with you.
+  uk: Я погоджуюся з тобою.
+  de: Ich stimme dir zu.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-agree]
+
+- id: 68
+  en: You are right.
+  uk: Ти маєш рацію.
+  de: Du hast Recht.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-agree]
+
+- id: 69
+  en: I see it the same way.
+  uk: Я теж так вважаю.
+  de: Das sehe ich auch so.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-agree]
+
+- id: 70
+  en: We can do it that way.
+  uk: Ми можемо так зробити.
+  de: Das können wir so machen.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-agree]
+
+# ── DIALOGUE HELPERS — Widersprechen (disagreeing) ───────────────────
+
+- id: 71
+  en: No, I don't think that's a good idea.
+  uk: Ні, я не вважаю це хорошою ідеєю.
+  de: Nein, ich halte das für keine gute Idee.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 72
+  en: I don't agree with you.
+  uk: Я не згоден з тобою.
+  de: Ich bin nicht deiner Meinung.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 73
+  en: I see it differently than you.
+  uk: Я бачу це інакше, ніж ти.
+  de: Ich sehe das anders als du.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 74
+  en: I must contradict you there.
+  uk: Тут я мушу тобі заперечити.
+  de: Da muss ich dir widersprechen.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 75
+  en: I have a better suggestion.
+  uk: У мене є краща пропозиція.
+  de: Ich habe einen besseren Vorschlag.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 76
+  en: I have a better idea.
+  uk: У мене є краща ідея.
+  de: Ich habe eine bessere Idee.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 77
+  en: I don't think that will work.
+  uk: Я не думаю, що це спрацює.
+  de: Ich glaube nicht, dass das funktioniert.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 78
+  en: It would (perhaps) be better if we ...
+  uk: Було б (можливо) краще, якби ми ...
+  de: Es wäre (vielleicht) besser, wenn wir ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 79
+  en: Don't you think it would be better if we ...?
+  uk: Хіба ти не думаєш, що було б краще, якби ми ...?
+  de: Denkst du nicht, dass es besser wäre, wenn wir ...?
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+- id: 80
+  en: I doubt that will work.
+  uk: Я сумніваюся, що це спрацює.
+  de: Ich bezweifle, dass das funktioniert.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-disagree]
+
+# ── DIALOGUE HELPERS — Zum Abschluss kommen (wrapping up) ────────────
+
+- id: 81
+  en: Let me summarize what we have planned ...
+  uk: Дозвольте підсумую, що ми запланували ...
+  de: Ich fasse noch einmal zusammen, was wir geplant haben ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-conclude]
+
+- id: 82
+  en: So our plan is ...
+  uk: Отже, наш план такий ...
+  de: Unser Plan ist also ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-conclude]
+
+- id: 83
+  en: So we will do the following ...
+  uk: Отже, ми робимо наступне ...
+  de: Wir machen also Folgendes ...
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-conclude]
+
+- id: 84
+  en: We can meet on the weekend and discuss everything in more detail.
+  uk: Ми можемо зустрітися у вихідні та обговорити все детальніше.
+  de: Wir können uns am Wochenende treffen und alles noch einmal genauer besprechen.
+  article: ~
+  type: phrase
+  tags: [dialogue, dialogue-conclude]
+
+- id: 85
+  en: hiking tour
+  uk: піший тур
+  de: Wandertour
+  article: die
+  type: noun
+  forms:
+    pl: die Wandertouren
+  tags: [b1, b1-lektion-1]
+
+- id: 86
+  en: beach holiday
+  uk: відпустка на пляжі
+  de: Strandurlaub
+  article: der
+  type: noun
+  forms:
+    pl: die Strandurlaube
+  tags: [b1, b1-lektion-1]
+
+- id: 87
+  en: city trip
+  uk: поїздка в місто
+  de: Städtereise
+  article: die
+  type: noun
+  forms:
+    pl: die Städtereisen
+  tags: [b1, b1-lektion-1]
+
+- id: 88
+  en: business trip
+  uk: відрядження
+  de: Dienstreise
+  article: die
+  type: noun
+  forms:
+    pl: die Dienstreisen
+  tags: [b1, b1-lektion-1]
+
+- id: 89
+  en: ski holiday
+  uk: гірськолижна відпустка
+  de: Skiurlaub
+  article: der
+  type: noun
+  forms:
+    pl: die Skiurlaube
+  tags: [b1, b1-lektion-1]
+
+- id: 90
+  en: wellness holiday
+  uk: оздоровча відпустка
+  de: Wellnessurlaub
+  article: der
+  type: noun
+  forms:
+    pl: die Wellnessurlauben
+  tags: [b1, b1-lektion-1]
+
+- id: 91
+  en: high season
+  uk: високий сезон
+  de: Hauptsaison
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 92
+  en: low season
+  uk: низький сезон
+  de: Nebensaison
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 93
+  en: single room
+  uk: одномісний номер
+  de: Einzelzimmer
+  article: das
+  type: noun
+  forms:
+    pl: die Einzelzimmer
+  tags: [b1, b1-lektion-1]
+
+- id: 94
+  en: double room
+  uk: двомісний номер
+  de: Doppelzimmer
+  article: das
+  type: noun
+  forms:
+    pl: die Doppelzimmer
+  tags: [b1, b1-lektion-1]
+
+- id: 95
+  en: overnight stay
+  uk: ночівля
+  de: Übernachtung
+  article: die
+  type: noun
+  forms:
+    pl: die Übernachtungen
+  tags: [b1, b1-lektion-1]
+
+- id: 96
+  en: to spend the night
+  uk: ночувати
+  de: übernachten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 97
+  en: arrival / journey to
+  uk: прибуття
+  de: Anreise
+  article: die
+  type: noun
+  forms:
+    pl: die Anreisen
+  tags: [b1, b1-lektion-1]
+
+- id: 98
+  en: to travel (to a destination)
+  uk: приїжджати
+  de: anreisen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 99
+  en: departure
+  uk: від'їзд
+  de: Abreise
+  article: die
+  type: noun
+  forms:
+    pl: die Abreisen
+  tags: [b1, b1-lektion-1]
+
+- id: 100
+  en: dreamlike, wonderful
+  uk: казковий
+  de: traumhaft
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-1]
+
+- id: 101
+  en: magnificent, wonderful
+  uk: чудовий
+  de: herrlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-1]
+
+- id: 102
+  en: hotel description
+  uk: опис готелю
+  de: Hotelbeschreibung
+  article: die
+  type: noun
+  forms:
+    pl: die Hotelbeschreibungen
+  tags: [b1, b1-lektion-1]
+
+- id: 103
+  en: location, position
+  uk: розташування
+  de: Lage
+  article: die
+  type: noun
+  forms:
+    pl: die Lagen
+  tags: [b1, b1-lektion-1]
+
+- id: 104
+  en: review, rating
+  uk: оцінка, відгук
+  de: Bewertung
+  article: die
+  type: noun
+  forms:
+    pl: die Bewertungen
+  tags: [b1, b1-lektion-1]
+
+- id: 105
+  en: surroundings, area
+  uk: навколишня місцевість
+  de: Umgebung
+  article: die
+  type: noun
+  forms:
+    pl: die Umgebungen
+  tags: [b1, b1-lektion-1]
+
+- id: 106
+  en: attentive / inattentive
+  uk: уважний / неуважний
+  de: aufmerksam
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-1]
+
+- id: 107
+  en: staff, personnel
+  uk: персонал
+  de: Personal
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 108
+  en: service
+  uk: сервіс
+  de: Service
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 109
+  en: air conditioning
+  uk: кондиціонер
+  de: Klimaanlage
+  article: die
+  type: noun
+  forms:
+    pl: die Klimaanlagen
+  tags: [b1, b1-lektion-1]
+
+- id: 110
+  en: youth hostel
+  uk: молодіжний хостел
+  de: Jugendherberge
+  article: die
+  type: noun
+  forms:
+    pl: die Jugendherbergen
+  tags: [b1, b1-lektion-1]
+
+- id: 111
+  en: hostel
+  uk: хостел
+  de: Hostel
+  article: das
+  type: noun
+  forms:
+    pl: die Hostels
+  tags: [b1, b1-lektion-1]
+
+- id: 112
+  en: campsite
+  uk: кемпінг
+  de: Campingplatz
+  article: der
+  type: noun
+  forms:
+    pl: die Campingplätze
+  tags: [b1, b1-lektion-1]
+
+- id: 113
+  en: to camp
+  uk: ходити в кемпінг
+  de: campen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 114
+  en: accommodation
+  uk: житло, помешкання
+  de: Unterkunft
+  article: die
+  type: noun
+  forms:
+    pl: die Unterkünfte
+  tags: [b1, b1-lektion-1]
+
+- id: 115
+  en: guesthouse, B&B
+  uk: пансіон, готель типу B&B
+  de: Pension
+  article: die
+  type: noun
+  forms:
+    pl: die Pensionen
+  tags: [b1, b1-lektion-1]
+
+- id: 116
+  en: half board
+  uk: напівпансіон
+  de: Halbpension
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 117
+  en: full board
+  uk: повний пансіон
+  de: Vollpension
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 118
+  en: travel agency
+  uk: туристичне агентство
+  de: Reisebüro
+  article: das
+  type: noun
+  forms:
+    pl: die Reisebüros
+  tags: [b1, b1-lektion-1]
+
+- id: 119
+  en: flight
+  uk: рейс, політ
+  de: Flug
+  article: der
+  type: noun
+  forms:
+    pl: die Flüge
+  tags: [b1, b1-lektion-1]
+
+- id: 120
+  en: package holiday
+  uk: турпакет
+  de: Pauschalreise
+  article: die
+  type: noun
+  forms:
+    pl: die Pauschalreisen
+  tags: [b1, b1-lektion-1]
+
+- id: 121
+  en: holiday apartment
+  uk: орендована квартира для відпочинку
+  de: Ferienwohnung
+  article: die
+  type: noun
+  forms:
+    pl: die Ferienwohnungen
+  tags: [b1, b1-lektion-1]
+
+- id: 122
+  en: tent
+  uk: намет
+  de: Zelt
+  article: das
+  type: noun
+  forms:
+    pl: die Zelte
+  tags: [b1, b1-lektion-1]
+
+- id: 123
+  en: to camp in a tent
+  uk: ночувати в наметі
+  de: zelten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 124
+  en: match (for fire)
+  uk: сірник
+  de: Streichholz
+  article: das
+  type: noun
+  forms:
+    pl: die Streichhölzer
+  tags: [b1, b1-lektion-1]
+
+- id: 125
+  en: sunscreen
+  uk: сонцезахисний крем
+  de: Sonnencreme
+  article: die
+  type: noun
+  forms:
+    pl: die Sonnencremes
+  tags: [b1, b1-lektion-1]
+
+- id: 126
+  en: guidebook / tour guide
+  uk: путівник / гід
+  de: Reiseführer
+  article: der
+  type: noun
+  forms:
+    pl: die Reiseführer
+  tags: [b1, b1-lektion-1]
+
+- id: 127
+  en: bikini
+  uk: бікіні
+  de: Bikini
+  article: der
+  type: noun
+  forms:
+    pl: die Bikinis
+  tags: [b1, b1-lektion-1]
+
+- id: 128
+  en: permitted, allowed
+  uk: дозволено
+  de: gestattet
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-1]
+
+- id: 129
+  en: prohibited, forbidden
+  uk: заборонено
+  de: untersagt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-1]
+
+- id: 130
+  en: exception
+  uk: виняток
+  de: Ausnahme
+  article: die
+  type: noun
+  forms:
+    pl: die Ausnahmen
+  tags: [b1, b1-lektion-1]
+
+- id: 131
+  en: desired, welcome
+  uk: бажано, вітається
+  de: erwünscht
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-1]
+
+- id: 132
+  en: fire
+  uk: вогонь
+  de: Feuer
+  article: das
+  type: noun
+  forms:
+    pl: die Feuer
+  tags: [b1, b1-lektion-1]
+
+- id: 133
+  en: check-in
+  uk: реєстрація
+  de: Check-in
+  article: der
+  type: noun
+  forms:
+    pl: die Check-ins
+  tags: [b1, b1-lektion-1]
+
+- id: 134
+  en: gate (airport)
+  uk: гейт (в аеропорту)
+  de: Gate
+  article: das
+  type: noun
+  forms:
+    pl: die Gates
+  tags: [b1, b1-lektion-1]
+
+- id: 135
+  en: to check in
+  uk: реєструватися
+  de: einchecken
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 136
+  en: luggage, baggage
+  uk: багаж
+  de: Gepäck
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 137
+  en: takeoff, start
+  uk: зліт, старт
+  de: Start
+  article: der
+  type: noun
+  forms:
+    pl: die Starts
+  tags: [b1, b1-lektion-1]
+
+- id: 138
+  en: to take off, to start
+  uk: злітати, стартувати
+  de: starten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 139
+  en: to land
+  uk: приземлятися
+  de: landen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 140
+  en: landing
+  uk: посадка
+  de: Landung
+  article: die
+  type: noun
+  forms:
+    pl: die Landungen
+  tags: [b1, b1-lektion-1]
+
+- id: 141
+  en: boarding pass
+  uk: посадковий талон
+  de: Bordkarte
+  article: die
+  type: noun
+  forms:
+    pl: die Bordkarten
+  tags: [b1, b1-lektion-1]
+
+- id: 142
+  en: pilot
+  uk: пілот
+  de: Pilot
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 143
+  en: security check
+  uk: контроль безпеки
+  de: Sicherheitskontrolle
+  article: die
+  type: noun
+  forms:
+    pl: die Sicherheitskontrollen
+  tags: [b1, b1-lektion-1]
+
+- id: 144
+  en: on board
+  uk: на борту
+  de: an Bord
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-1]
+
+- id: 145
+  en: flight attendant
+  uk: бортпровідник
+  de: Flugbegleiter
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 146
+  en: strike
+  uk: страйк
+  de: Streik
+  article: der
+  type: noun
+  forms:
+    pl: die Streiks
+  tags: [b1, b1-lektion-1]
+
+- id: 147
+  en: to get annoyed
+  uk: злитися, дратуватися
+  de: sich ärgern
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 148
+  en: to calm down
+  uk: заспокоюватися
+  de: sich beruhigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 149
+  en: to complain
+  uk: скаржитися
+  de: sich beschweren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-1]
+
+- id: 150
+  en: baggage claim
+  uk: видача багажу
+  de: Gepäckausgabe
+  article: die
+  type: noun
+  forms:
+    pl: die Gepäckausgaben
+  tags: [b1, b1-lektion-1]
+
+- id: 151
+  en: hand luggage
+  uk: ручна поклажа
+  de: Handgepäck
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-1]
+
+- id: 152
+  en: winter road service, snow clearing
+  uk: зимовий комунальний сервіс (прибирання снігу)
+  de: Winterdienst
+  article: der
+  type: noun
+  forms:
+    pl: die Winterdienste
+  tags: [b1, b1-lektion-2]
+
+- id: 153
+  en: pavement, sidewalk
+  uk: тротуар
+  de: Gehweg
+  article: der
+  type: noun
+  forms:
+    pl: die Gehwege
+  tags: [b1, b1-lektion-2]
+
+- id: 154
+  en: to spread (salt/gravel)
+  uk: посипати (сіллю/піском)
+  de: streuen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 155
+  en: broom
+  uk: мітла
+  de: Besen
+  article: der
+  type: noun
+  forms:
+    pl: die Besen
+  tags: [b1, b1-lektion-2]
+
+- id: 156
+  en: snow shovel
+  uk: лопата для снігу
+  de: Schneeschaufel
+  article: die
+  type: noun
+  forms:
+    pl: die Schneeschaufeln
+  tags: [b1, b1-lektion-2]
+
+- id: 157
+  en: to shovel
+  uk: лопатити, копати лопатою
+  de: schaufeln
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 158
+  en: to sweep
+  uk: підмітати
+  de: fegen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 159
+  en: to clear snow
+  uk: прибирати сніг
+  de: Schnee räumen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 160
+  en: to slip, to slide
+  uk: посковзнутися
+  de: ausrutschen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 161
+  en: to injure oneself
+  uk: травмуватися
+  de: sich verletzen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 162
+  en: obliged, required
+  uk: зобов'язаний
+  de: verpflichtet
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-2]
+
+- id: 163
+  en: to promise sb. sth.
+  uk: обіцяти комусь щось
+  de: jdm. etwas versprechen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 164
+  en: to ask for, to request
+  uk: просити (про щось)
+  de: bitten um
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 165
+  en: to think of, to remember
+  uk: думати про, пам'ятати про
+  de: denken an
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 166
+  en: to paint (walls), to stroke
+  uk: фарбувати (стіни)
+  de: streichen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 167
+  en: to renovate
+  uk: ремонтувати, renovувати
+  de: renovieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 168
+  en: to renew, to replace
+  uk: оновлювати, замінювати
+  de: erneuern
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 169
+  en: to replace
+  uk: замінювати
+  de: ersetzen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 170
+  en: damp, moist
+  uk: вологий
+  de: feucht
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-2]
+
+- id: 171
+  en: defective, broken
+  uk: несправний, зламаний
+  de: defekt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-2]
+
+- id: 172
+  en: to reach, to achieve
+  uk: досягати, зв'язатися (телефоном)
+  de: erreichen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 173
+  en: tidy / untidy
+  uk: охайний / неохайний
+  de: ordentlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-2]
+
+- id: 174
+  en: quite, fairly
+  uk: досить, порівняно
+  de: ziemlich
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-2]
+
+- id: 175
+  en: reasonably, somewhat
+  uk: більш-менш
+  de: einigermaßen
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-2]
+
+- id: 176
+  en: really, genuinely
+  uk: справді, насправді
+  de: echt
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-2]
+
+- id: 177
+  en: totally, completely
+  uk: цілком, повністю
+  de: total
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-2]
+
+- id: 178
+  en: somewhat, a little
+  uk: трохи, дещо
+  de: etwas
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-2]
+
+- id: 179
+  en: quite, entirely
+  uk: цілком, досить
+  de: ganz
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-2]
+
+- id: 180
+  en: not particularly
+  uk: не особливо
+  de: nicht besonders
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 181
+  en: to annoy, to get on one's nerves
+  uk: дратувати, набридати
+  de: nerven
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 182
+  en: annoying
+  uk: дратівливий, набридливий
+  de: nervig
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-2]
+
+- id: 183
+  en: to show consideration for
+  uk: проявляти увагу до, зважати на
+  de: Rücksicht nehmen auf
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 184
+  en: annoyance, trouble
+  uk: роздратування, неприємності
+  de: Ärger
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-2]
+
+- id: 185
+  en: to be right
+  uk: бути правим
+  de: recht haben
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 186
+  en: to be (not) sure
+  uk: бути (не)впевненим
+  de: sich sicher sein
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 187
+  en: to disturb, to bother
+  uk: заважати, турбувати
+  de: stören
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 188
+  en: to have an argument with
+  uk: сваритися з кимось
+  de: Streit haben mit
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 189
+  en: to argue, to quarrel
+  uk: сваритися, сперечатися
+  de: sich streiten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 190
+  en: annoyed, angry (coll.)
+  uk: злий, роздратований
+  de: sauer
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-2]
+
+- id: 191
+  en: to insult, to offend
+  uk: ображати
+  de: beleidigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-2]
+
+- id: 192
+  en: polite
+  uk: ввічливий
+  de: höflich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-2]
+
+- id: 193
+  en: termination notice
+  uk: повідомлення про звільнення / розірвання договору
+  de: Kündigung
+  article: die
+  type: noun
+  forms:
+    pl: die Kündigungen
+  tags: [b1, b1-lektion-2]
+
+- id: 194
+  en: deadline, period
+  uk: строк, термін
+  de: Frist
+  article: die
+  type: noun
+  forms:
+    pl: die Fristen
+  tags: [b1, b1-lektion-2]
+
+- id: 195
+  en: to give notice in time
+  uk: звільнитися / розірвати договір вчасно
+  de: fristgerecht kündigen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 196
+  en: to dismiss without notice
+  uk: звільнити без попередження
+  de: fristlos kündigen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 197
+  en: owner's own use (of property)
+  uk: власні потреби (при виселенні орендаря)
+  de: Eigenbedarf
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-2]
+
+- id: 198
+  en: lawyer, attorney
+  uk: адвокат
+  de: Rechtsanwalt
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-2]
+
+- id: 199
+  en: to file an objection against
+  uk: подати заперечення проти
+  de: Widerspruch einlegen gegen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 200
+  en: court (of law)
+  uk: суд
+  de: Gericht
+  article: das
+  type: noun
+  forms:
+    pl: die Gerichte
+  tags: [b1, b1-lektion-2]
+
+- id: 201
+  en: to sue, to take to court
+  uk: подати до суду
+  de: klagen gegen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 202
+  en: judge
+  uk: суддя
+  de: Richter
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-2]
+
+- id: 203
+  en: verdict, judgment
+  uk: вирок, рішення суду
+  de: Urteil
+  article: das
+  type: noun
+  forms:
+    pl: die Urteile
+  tags: [b1, b1-lektion-2]
+
+- id: 204
+  en: to make a decision
+  uk: приймати рішення
+  de: eine Entscheidung treffen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-2]
+
+- id: 205
+  en: project week
+  uk: тиждень проектів
+  de: Projektwoche
+  article: die
+  type: noun
+  forms:
+    pl: die Projektwochen
+  tags: [b1, b1-lektion-3]
+
+- id: 206
+  en: environment
+  uk: навколишнє середовище
+  de: Umwelt
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 207
+  en: environmental protection
+  uk: охорона навколишнього середовища
+  de: Umweltschutz
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 208
+  en: to protect
+  uk: захищати
+  de: schützen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 209
+  en: climate
+  uk: клімат
+  de: Klima
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 210
+  en: climate change
+  uk: зміна клімату
+  de: Klimawandel
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 211
+  en: to save energy
+  uk: економити енергію
+  de: Energie sparen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-3]
+
+- id: 212
+  en: to convey sth. to sb., to teach
+  uk: передати / донести щось комусь
+  de: jdm. etwas vermitteln
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-3]
+
+- id: 213
+  en: topic, subject
+  uk: тема
+  de: Thema
+  article: das
+  type: noun
+  forms:
+    pl: die Themen
+  tags: [b1, b1-lektion-3]
+
+- id: 214
+  en: learning objective
+  uk: навчальна мета
+  de: Lernziel
+  article: das
+  type: noun
+  forms:
+    pl: die Lernziele
+  tags: [b1, b1-lektion-3]
+
+- id: 215
+  en: high-rise building
+  uk: висотна будівля
+  de: Hochhaus
+  article: das
+  type: noun
+  forms:
+    pl: die Hochhäuser
+  tags: [b1, b1-lektion-3]
+
+- id: 216
+  en: water works, waterworks
+  uk: водопровідна станція
+  de: Wasserwerk
+  article: das
+  type: noun
+  forms:
+    pl: die Wasserwerke
+  tags: [b1, b1-lektion-3]
+
+- id: 217
+  en: to damage, to harm
+  uk: завдавати шкоди
+  de: schädigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 218
+  en: to destroy
+  uk: знищувати
+  de: zerstören
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 219
+  en: to pollute, to dirty
+  uk: забруднювати
+  de: verschmutzen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 220
+  en: flood
+  uk: повінь
+  de: Hochwasser
+  article: das
+  type: noun
+  forms:
+    pl: die Hochwasser
+  tags: [b1, b1-lektion-3]
+
+- id: 221
+  en: tsunami
+  uk: цунамі
+  de: Tsunami
+  article: der
+  type: noun
+  forms:
+    pl: die Tsunami
+  tags: [b1, b1-lektion-3]
+
+- id: 222
+  en: earthquake
+  uk: землетрус
+  de: Erdbeben
+  article: das
+  type: noun
+  forms:
+    pl: die Erdbeben
+  tags: [b1, b1-lektion-3]
+
+- id: 223
+  en: to waste
+  uk: марнувати, витрачати даремно
+  de: verschwenden
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 224
+  en: harmful to the environment / eco-friendly
+  uk: шкідливий для навколишнього середовища / екологічний
+  de: umweltschädlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-3]
+
+- id: 225
+  en: everyday life
+  uk: повсякденне життя
+  de: Alltag
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 226
+  en: to change, to alter
+  uk: змінювати
+  de: verändern
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 227
+  en: change, alteration
+  uk: зміна
+  de: Veränderung
+  article: die
+  type: noun
+  forms:
+    pl: die Veränderungen
+  tags: [b1, b1-lektion-3]
+
+- id: 228
+  en: material
+  uk: матеріал
+  de: Material
+  article: das
+  type: noun
+  forms:
+    pl: die Materialien
+  tags: [b1, b1-lektion-3]
+
+- id: 229
+  en: paper
+  uk: папір
+  de: Papier
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 230
+  en: cardboard
+  uk: картон
+  de: Pappe
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 231
+  en: metal
+  uk: метал
+  de: Metall
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 232
+  en: fabric, material, substance
+  uk: тканина, матеріал, речовина
+  de: Stoff
+  article: der
+  type: noun
+  forms:
+    pl: die Stoffe
+  tags: [b1, b1-lektion-3]
+
+- id: 233
+  en: wood
+  uk: дерево, деревина
+  de: Holz
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 234
+  en: wool
+  uk: вовна
+  de: Wolle
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 235
+  en: leather
+  uk: шкіра (матеріал)
+  de: Leder
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 236
+  en: to throw away
+  uk: викидати
+  de: wegwerfen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 237
+  en: to collect, to gather
+  uk: збирати
+  de: sammeln
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 238
+  en: to dispose of (waste)
+  uk: утилізувати, викидати
+  de: entsorgen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 239
+  en: to avoid
+  uk: уникати
+  de: vermeiden
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 240
+  en: to recycle
+  uk: переробляти
+  de: recyceln
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 241
+  en: hazardous waste
+  uk: небезпечні відходи
+  de: Sondermüll
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 242
+  en: bulky waste
+  uk: великогабаритне сміття
+  de: Sperrmüll
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 243
+  en: recycling centre
+  uk: пункт прийому вторинної сировини
+  de: Recyclinghof
+  article: der
+  type: noun
+  forms:
+    pl: die Recyclinghöfe
+  tags: [b1, b1-lektion-3]
+
+- id: 244
+  en: waste collection, refuse collection
+  uk: вивіз сміття
+  de: Müllabfuhr
+  article: die
+  type: noun
+  forms:
+    pl: die Müllabfuhren
+  tags: [b1, b1-lektion-3]
+
+- id: 245
+  en: toxic, poisonous
+  uk: отруйний, токсичний
+  de: giftig
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-3]
+
+- id: 246
+  en: dangerous
+  uk: небезпечний
+  de: gefährlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-3]
+
+- id: 247
+  en: to exchange, to swap
+  uk: обмінювати, міняти
+  de: tauschen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 248
+  en: container, bin
+  uk: контейнер, ємність
+  de: Behälter
+  article: der
+  type: noun
+  forms:
+    pl: die Behälter
+  tags: [b1, b1-lektion-3]
+
+- id: 249
+  en: speed limit
+  uk: обмеження швидкості
+  de: Tempolimit
+  article: das
+  type: noun
+  forms:
+    pl: die Tempolimits
+  tags: [b1, b1-lektion-3]
+
+- id: 250
+  en: parent representative
+  uk: батьківський представник
+  de: Elternsprecher
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 251
+  en: telephone list
+  uk: список телефонів
+  de: Telefonliste
+  article: die
+  type: noun
+  forms:
+    pl: die Telefonlisten
+  tags: [b1, b1-lektion-3]
+
+- id: 252
+  en: to compile, to put together
+  uk: складати, збирати
+  de: zusammenstellen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 253
+  en: to check, to monitor
+  uk: перевіряти, контролювати
+  de: kontrollieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 254
+  en: detail
+  uk: деталь
+  de: Detail
+  article: das
+  type: noun
+  forms:
+    pl: die Details
+  tags: [b1, b1-lektion-3]
+
+- id: 255
+  en: to find out, to learn
+  uk: дізнаватися
+  de: erfahren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 256
+  en: to clarify, to resolve
+  uk: з'ясовувати, вирішувати
+  de: klären
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 257
+  en: to arrange, to agree on
+  uk: домовлятися, погоджувати
+  de: vereinbaren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 258
+  en: to discuss
+  uk: обговорювати
+  de: besprechen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 259
+  en: to be able to arrange sth.
+  uk: мати змогу організувати щось
+  de: sich etwas einrichten können
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-3]
+
+- id: 260
+  en: stuffed animal, cuddly toy
+  uk: м'яка іграшка
+  de: Kuscheltier
+  article: das
+  type: noun
+  forms:
+    pl: die Kuscheltiere
+  tags: [b1, b1-lektion-3]
+
+- id: 261
+  en: first aid course
+  uk: курс першої допомоги
+  de: Erste-Hilfe-Kurs
+  article: der
+  type: noun
+  forms:
+    pl: die Erste-Hilfe-Kurse
+  tags: [b1, b1-lektion-3]
+
+- id: 262
+  en: excited, agitated
+  uk: збуджений, хвилюючий
+  de: aufgeregt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-3]
+
+- id: 263
+  en: to fear, to be afraid of
+  uk: побоюватися
+  de: befürchten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 264
+  en: homesickness
+  uk: туга за домом
+  de: Heimweh
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-3]
+
+- id: 265
+  en: to get lost (on foot)
+  uk: заблукати
+  de: sich verlaufen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 266
+  en: to fall down
+  uk: падати
+  de: hinfallen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 267
+  en: to comfort, to console
+  uk: втішати
+  de: trösten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 268
+  en: shy, timid
+  uk: сором'язливий
+  de: schüchtern
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-3]
+
+- id: 269
+  en: to notice, to realize
+  uk: помічати, усвідомлювати
+  de: merken
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-3]
+
+- id: 270
+  en: judo suit / gi
+  uk: кімоно для дзюдо
+  de: Judoanzug
+  article: der
+  type: noun
+  forms:
+    pl: die Judoanzüge
+  tags: [b1, b1-lektion-4]
+
+- id: 271
+  en: online shop
+  uk: інтернет-магазин
+  de: Onlineshop
+  article: der
+  type: noun
+  forms:
+    pl: die Onlineshops
+  tags: [b1, b1-lektion-4]
+
+- id: 272
+  en: online shopping
+  uk: онлайн-шопінг
+  de: Onlineshopping
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-4]
+
+- id: 273
+  en: customer account
+  uk: обліковий запис клієнта
+  de: Kundenkonto
+  article: das
+  type: noun
+  forms:
+    pl: die Kundenkonten
+  tags: [b1, b1-lektion-4]
+
+- id: 274
+  en: selection, choice
+  uk: вибір, асортимент
+  de: Auswahl
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-4]
+
+- id: 275
+  en: username
+  uk: ім'я користувача
+  de: Benutzername
+  article: der
+  type: noun
+  forms:
+    pl: die Benutzernamen
+  tags: [b1, b1-lektion-4]
+
+- id: 276
+  en: to set, to define
+  uk: встановлювати, визначати
+  de: festlegen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-4]
+
+- id: 277
+  en: around the clock, 24/7
+  uk: цілодобово
+  de: rund um die Uhr
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-4]
+
+- id: 278
+  en: disadvantage
+  uk: недолік, мінус
+  de: Nachteil
+  article: der
+  type: noun
+  forms:
+    pl: die Nachteile
+  tags: [b1, b1-lektion-4]
+
+- id: 279
+  en: rose
+  uk: троянда
+  de: Rose
+  article: die
+  type: noun
+  forms:
+    pl: die Rosen
+  tags: [b1, b1-lektion-4]
+
+- id: 280
+  en: article, item
+  uk: товар, стаття
+  de: Artikel
+  article: der
+  type: noun
+  forms:
+    pl: die Artikel
+  tags: [b1, b1-lektion-4]
+
+- id: 281
+  en: shopping cart
+  uk: кошик покупок
+  de: Warenkorb
+  article: der
+  type: noun
+  forms:
+    pl: die Warenkörbe
+  tags: [b1, b1-lektion-4]
+
+- id: 282
+  en: payment option
+  uk: спосіб оплати
+  de: Zahlungsoption
+  article: die
+  type: noun
+  forms:
+    pl: die Zahlungsoptionen
+  tags: [b1, b1-lektion-4]
+
+- id: 283
+  en: delivery option
+  uk: варіант доставки
+  de: Lieferoption
+  article: die
+  type: noun
+  forms:
+    pl: die Lieferoptionen
+  tags: [b1, b1-lektion-4]
+
+- id: 284
+  en: order
+  uk: замовлення
+  de: Bestellung
+  article: die
+  type: noun
+  forms:
+    pl: die Bestellungen
+  tags: [b1, b1-lektion-4]
+
+- id: 285
+  en: to pay in instalments
+  uk: платити в розстрочку
+  de: in Raten zahlen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-4]
+
+- id: 286
+  en: instalment payment
+  uk: оплата в розстрочку
+  de: Ratenzahlung
+  article: die
+  type: noun
+  forms:
+    pl: die Ratenzahlungen
+  tags: [b1, b1-lektion-4]
+
+- id: 287
+  en: advertising brochure
+  uk: рекламний проспект
+  de: Werbeprospekt
+  article: der
+  type: noun
+  forms:
+    pl: die Werbeprospekte
+  tags: [b1, b1-lektion-4]
+
+- id: 288
+  en: easy-care
+  uk: легкий у догляді
+  de: pflegeleicht
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-4]
+
+- id: 289
+  en: plastic, synthetic material
+  uk: пластик, синтетичний матеріал
+  de: Kunststoff
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-4]
+
+- id: 290
+  en: to produce, to manufacture
+  uk: виробляти
+  de: herstellen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-4]
+
+- id: 291
+  en: to produce
+  uk: виробляти
+  de: produzieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-4]
+
+- id: 292
+  en: product
+  uk: продукт, товар
+  de: Produkt
+  article: das
+  type: noun
+  forms:
+    pl: die Produkte
+  tags: [b1, b1-lektion-4]
+
+- id: 293
+  en: to grow, to cultivate
+  uk: вирощувати (рослини)
+  de: anbauen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-4]
+
+- id: 294
+  en: to dry
+  uk: сушити
+  de: trocknen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-4]
+
+- id: 295
+  en: fig
+  uk: інжир
+  de: Feige
+  article: die
+  type: noun
+  forms:
+    pl: die Feigen
+  tags: [b1, b1-lektion-4]
+
+- id: 296
+  en: guarantee, warranty
+  uk: гарантія
+  de: Garantie
+  article: die
+  type: noun
+  forms:
+    pl: die Garantien
+  tags: [b1, b1-lektion-4]
+
+- id: 297
+  en: to complain about a purchase, to file a complaint
+  uk: рекламувати / подавати скаргу на товар
+  de: reklamieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-4]
+
+- id: 298
+  en: reminder, payment reminder
+  uk: нагадування про оплату
+  de: Mahnung
+  article: die
+  type: noun
+  forms:
+    pl: die Mahnungen
+  tags: [b1, b1-lektion-4]
+
+- id: 299
+  en: to pay by invoice
+  uk: платити за рахунком-фактурою
+  de: per Rechnung zahlen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-4]
+
+- id: 300
+  en: to pay in advance
+  uk: платити авансом
+  de: per Vorkasse zahlen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-4]
+
+- id: 301
+  en: to pay by instant bank transfer
+  uk: платити миттєвим переказом
+  de: per Sofortüberweisung zahlen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-4]
+
+- id: 302
+  en: to pay by direct debit
+  uk: платити прямим списанням
+  de: per Lastschrift zahlen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-4]
+
+- id: 303
+  en: to pay by credit card
+  uk: платити кредитною карткою
+  de: per Kreditkarte zahlen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-4]
+
+- id: 304
+  en: payment
+  uk: оплата, платіж
+  de: Zahlung
+  article: die
+  type: noun
+  forms:
+    pl: die Zahlungen
+  tags: [b1, b1-lektion-4]
+
+- id: 305
+  en: invoice amount
+  uk: сума рахунку
+  de: Rechnungsbetrag
+  article: der
+  type: noun
+  forms:
+    pl: die Rechnungsbeträge
+  tags: [b1, b1-lektion-4]
+
+- id: 306
+  en: to deliver
+  uk: доставляти
+  de: liefern
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-4]
+
+- id: 307
+  en: delivery
+  uk: доставка
+  de: Lieferung
+  article: die
+  type: noun
+  forms:
+    pl: die Lieferungen
+  tags: [b1, b1-lektion-4]
+
+- id: 308
+  en: working day, business day
+  uk: робочий день
+  de: Werktag
+  article: der
+  type: noun
+  forms:
+    pl: die Werktage
+  tags: [b1, b1-lektion-4]
+
+- id: 309
+  en: shipping, dispatch
+  uk: відправка, пересилання
+  de: Versand
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-4]
+
+- id: 310
+  en: shipping costs
+  uk: вартість доставки
+  de: Versandkosten
+  article: ~
+  type: noun
+  tags: [b1, b1-lektion-4]
+
+- id: 311
+  en: general terms and conditions
+  uk: загальні умови та положення
+  de: allgemeine Geschäftsbedingungen / AGB
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-4]
+
+- id: 312
+  en: to revoke, to cancel
+  uk: відкликати, анулювати
+  de: widerrufen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-4]
+
+- id: 313
+  en: small parcel, package
+  uk: посилка, пакет
+  de: Päckchen
+  article: das
+  type: noun
+  forms:
+    pl: die Päckchen
+  tags: [b1, b1-lektion-4]
+
+- id: 314
+  en: return (of goods)
+  uk: повернення товару
+  de: Rücksendung
+  article: die
+  type: noun
+  forms:
+    pl: die Rücksendungen
+  tags: [b1, b1-lektion-4]
+
+- id: 315
+  en: return slip
+  uk: бланк повернення товару
+  de: Rücksendeschein
+  article: der
+  type: noun
+  forms:
+    pl: die Rücksendescheine
+  tags: [b1, b1-lektion-4]
+
+- id: 316
+  en: damaged
+  uk: пошкоджений
+  de: beschädigt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-4]
+
+- id: 317
+  en: media
+  uk: медіа, засоби масової інформації
+  de: Medien
+  article: ~
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 318
+  en: survey, poll
+  uk: опитування
+  de: Umfrage
+  article: die
+  type: noun
+  forms:
+    pl: die Umfragen
+  tags: [b1, b1-lektion-5]
+
+- id: 319
+  en: documentary
+  uk: документальний фільм
+  de: Dokumentation
+  article: die
+  type: noun
+  forms:
+    pl: die Dokumentationen
+  tags: [b1, b1-lektion-5]
+
+- id: 320
+  en: feature film
+  uk: художній фільм
+  de: Spielfilm
+  article: der
+  type: noun
+  forms:
+    pl: die Spielfilme
+  tags: [b1, b1-lektion-5]
+
+- id: 321
+  en: comedy
+  uk: комедія
+  de: Komödie
+  article: die
+  type: noun
+  forms:
+    pl: die Komödien
+  tags: [b1, b1-lektion-5]
+
+- id: 322
+  en: TV series
+  uk: серіал
+  de: Serie
+  article: die
+  type: noun
+  forms:
+    pl: die Serien
+  tags: [b1, b1-lektion-5]
+
+- id: 323
+  en: sports broadcast
+  uk: спортивна передача
+  de: Sportsendung
+  article: die
+  type: noun
+  forms:
+    pl: die Sportsendungen
+  tags: [b1, b1-lektion-5]
+
+- id: 324
+  en: quiz show
+  uk: вікторина
+  de: Quizshow
+  article: die
+  type: noun
+  forms:
+    pl: die Quizshows
+  tags: [b1, b1-lektion-5]
+
+- id: 325
+  en: talk show
+  uk: ток-шоу
+  de: Talkshow
+  article: die
+  type: noun
+  forms:
+    pl: die Talkshows
+  tags: [b1, b1-lektion-5]
+
+- id: 326
+  en: cartoon, animated film
+  uk: мультфільм
+  de: Zeichentrickfilm
+  article: der
+  type: noun
+  forms:
+    pl: die Zeichentrickfilme
+  tags: [b1, b1-lektion-5]
+
+- id: 327
+  en: romance film
+  uk: романтичний фільм
+  de: Liebesfilm
+  article: der
+  type: noun
+  forms:
+    pl: die Liebesfilme
+  tags: [b1, b1-lektion-5]
+
+- id: 328
+  en: to stream
+  uk: стримити
+  de: streamen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-5]
+
+- id: 329
+  en: news
+  uk: новини
+  de: Nachrichten
+  article: ~
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 330
+  en: programme, broadcast
+  uk: передача, програма
+  de: Sendung
+  article: die
+  type: noun
+  forms:
+    pl: die Sendungen
+  tags: [b1, b1-lektion-5]
+
+- id: 331
+  en: TV channel
+  uk: телеканал
+  de: Fernsehsender
+  article: der
+  type: noun
+  forms:
+    pl: die Fernsehsender
+  tags: [b1, b1-lektion-5]
+
+- id: 332
+  en: media library (streaming)
+  uk: медіатека
+  de: Mediathek
+  article: die
+  type: noun
+  forms:
+    pl: die Mediatheken
+  tags: [b1, b1-lektion-5]
+
+- id: 333
+  en: soap opera
+  uk: мильна опера
+  de: Soap
+  article: die
+  type: noun
+  forms:
+    pl: die Soaps
+  tags: [b1, b1-lektion-5]
+
+- id: 334
+  en: crime film/series
+  uk: детектив, кримінальна драма
+  de: Krimi
+  article: der
+  type: noun
+  forms:
+    pl: die Krimis
+  tags: [b1, b1-lektion-5]
+
+- id: 335
+  en: podcast
+  uk: подкаст
+  de: Podcast
+  article: der
+  type: noun
+  forms:
+    pl: die Podcasts
+  tags: [b1, b1-lektion-5]
+
+- id: 336
+  en: by streaming
+  uk: через стрімінг
+  de: per Streaming
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-5]
+
+- id: 337
+  en: webinar
+  uk: вебінар
+  de: Webinar
+  article: das
+  type: noun
+  forms:
+    pl: die Webinare
+  tags: [b1, b1-lektion-5]
+
+- id: 338
+  en: subtitle
+  uk: субтитр
+  de: Untertitel
+  article: der
+  type: noun
+  forms:
+    pl: die Untertitel
+  tags: [b1, b1-lektion-5]
+
+- id: 339
+  en: deaf
+  uk: глухий
+  de: gehörlos
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-5]
+
+- id: 340
+  en: purpose, aim
+  uk: мета, ціль
+  de: Zweck
+  article: der
+  type: noun
+  forms:
+    pl: die Zwecke
+  tags: [b1, b1-lektion-5]
+
+- id: 341
+  en: majority
+  uk: більшість
+  de: Mehrheit
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 342
+  en: minority
+  uk: меншість
+  de: Minderheit
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 343
+  en: half
+  uk: половина
+  de: Hälfte
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 344
+  en: third
+  uk: третина
+  de: Drittel
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 345
+  en: quarter
+  uk: чверть
+  de: Viertel
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 346
+  en: compared to
+  uk: порівняно з
+  de: verglichen mit
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-5]
+
+- id: 347
+  en: frequently, often
+  uk: часто
+  de: häufig
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-5]
+
+- id: 348
+  en: figure skating
+  uk: фігурне катання
+  de: Eiskunstlauf
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 349
+  en: ice hockey
+  uk: хокей на льоду
+  de: Eishockey
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 350
+  en: ski jumping
+  uk: стрибки з трампліна
+  de: Skispringen
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 351
+  en: horse riding
+  uk: верхова їзда
+  de: Reiten
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 352
+  en: athletics, track and field
+  uk: легка атлетика
+  de: Leichtathletik
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 353
+  en: boxing
+  uk: бокс
+  de: Boxen
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 354
+  en: tennis
+  uk: теніс
+  de: Tennis
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 355
+  en: handball
+  uk: гандбол
+  de: Handball
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 356
+  en: tournament
+  uk: турнір
+  de: Turnier
+  article: das
+  type: noun
+  forms:
+    pl: die Turniere
+  tags: [b1, b1-lektion-5]
+
+- id: 357
+  en: team
+  uk: команда
+  de: Mannschaft
+  article: die
+  type: noun
+  forms:
+    pl: die Mannschaften
+  tags: [b1, b1-lektion-5]
+
+- id: 358
+  en: qualifying match
+  uk: кваліфікаційний матч
+  de: Qualifikationsspiel
+  article: das
+  type: noun
+  forms:
+    pl: die Qualifikationsspiele
+  tags: [b1, b1-lektion-5]
+
+- id: 359
+  en: world championship
+  uk: чемпіонат світу
+  de: Weltmeisterschaft
+  article: die
+  type: noun
+  forms:
+    pl: die Weltmeisterschaften
+  tags: [b1, b1-lektion-5]
+
+- id: 360
+  en: European championship
+  uk: чемпіонат Європи
+  de: Europameisterschaft
+  article: die
+  type: noun
+  forms:
+    pl: die Europameisterschaften
+  tags: [b1, b1-lektion-5]
+
+- id: 361
+  en: draw, tie
+  uk: нічия
+  de: unentschieden
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-5]
+
+- id: 362
+  en: to score a goal
+  uk: забити гол
+  de: ein Tor schießen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-5]
+
+- id: 363
+  en: goalkeeper
+  uk: воротар
+  de: Torwart
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 364
+  en: referee
+  uk: суддя (у спорті)
+  de: Schiedsrichter
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 365
+  en: yellow card
+  uk: жовта картка
+  de: gelbe Karte
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 366
+  en: red card
+  uk: червона картка
+  de: rote Karte
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 367
+  en: one to nil, one-zero
+  uk: один до нуля
+  de: eins zu null
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-5]
+
+- id: 368
+  en: injury
+  uk: травма
+  de: Verletzung
+  article: die
+  type: noun
+  forms:
+    pl: die Verletzungen
+  tags: [b1, b1-lektion-5]
+
+- id: 369
+  en: player
+  uk: гравець
+  de: Spieler
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 370
+  en: volleyball
+  uk: волейбол
+  de: Volleyball
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-5]
+
+- id: 371
+  en: fan, supporter
+  uk: фанат, вболівальник
+  de: Fan
+  article: der
+  type: noun
+  forms:
+    pl: die Fans
+  tags: [b1, b1-lektion-5]
+
+- id: 372
+  en: prince / princess
+  uk: принц / принцеса
+  de: Prinz
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 373
+  en: sad
+  uk: сумний
+  de: traurig
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-6]
+
+- id: 374
+  en: owl
+  uk: сова
+  de: Eule
+  article: die
+  type: noun
+  forms:
+    pl: die Eulen
+  tags: [b1, b1-lektion-6]
+
+- id: 375
+  en: fairy tale
+  uk: казка
+  de: Märchen
+  article: das
+  type: noun
+  forms:
+    pl: die Märchen
+  tags: [b1, b1-lektion-6]
+
+- id: 376
+  en: to play hide-and-seek
+  uk: грати в хованки
+  de: verstecken spielen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 377
+  en: childhood
+  uk: дитинство
+  de: Kindheit
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 378
+  en: young person, teenager
+  uk: підліток, молода людина
+  de: Jugendliche
+  article: der/die
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 379
+  en: youth
+  uk: молодість, юність
+  de: Jugend
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 380
+  en: memory, recollection
+  uk: спогад, пам'ять
+  de: Erinnerung
+  article: die
+  type: noun
+  forms:
+    pl: die Erinnerungen
+  tags: [b1, b1-lektion-6]
+
+- id: 381
+  en: to remember, to recall
+  uk: згадувати
+  de: sich erinnern an
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 382
+  en: to spend (time)
+  uk: проводити (час)
+  de: verbringen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 383
+  en: on the whole, by and large
+  uk: загалом, у цілому
+  de: im Großen und Ganzen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 384
+  en: back then, at that time
+  uk: тоді, у той час
+  de: damals
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-6]
+
+- id: 385
+  en: world champion
+  uk: чемпіон світу
+  de: Weltmeister
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 386
+  en: Olympic champion
+  uk: олімпійський чемпіон
+  de: Olympiasieger
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 387
+  en: Berlin Wall
+  uk: Берлінська стіна
+  de: Berliner Mauer
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 388
+  en: fall of the Berlin Wall
+  uk: падіння Берлінської стіни
+  de: Mauerfall
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 389
+  en: the 1980s
+  uk: 80-ті роки
+  de: die 80er Jahre
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 390
+  en: hat
+  uk: капелюх
+  de: Hut
+  article: der
+  type: noun
+  forms:
+    pl: die Hüte
+  tags: [b1, b1-lektion-6]
+
+- id: 391
+  en: pearl necklace
+  uk: перлове намисто
+  de: Perlenkette
+  article: die
+  type: noun
+  forms:
+    pl: die Perlenketten
+  tags: [b1, b1-lektion-6]
+
+- id: 392
+  en: miniskirt
+  uk: міні-спідниця
+  de: Minirock
+  article: der
+  type: noun
+  forms:
+    pl: die Miniröcke
+  tags: [b1, b1-lektion-6]
+
+- id: 393
+  en: floral pattern
+  uk: квітковий узор
+  de: Blumenmuster
+  article: das
+  type: noun
+  forms:
+    pl: die Blumenmuster
+  tags: [b1, b1-lektion-6]
+
+- id: 394
+  en: tights, pantyhose
+  uk: колготки
+  de: Strumpfhose
+  article: die
+  type: noun
+  forms:
+    pl: die Strumpfhosen
+  tags: [b1, b1-lektion-6]
+
+- id: 395
+  en: court shoes, pumps
+  uk: туфлі-лодочки
+  de: Pumps
+  article: der
+  type: noun
+  forms:
+    pl: die Pumps
+  tags: [b1, b1-lektion-6]
+
+- id: 396
+  en: event, occurrence
+  uk: подія
+  de: Ereignis
+  article: das
+  type: noun
+  forms:
+    pl: die Ereignisse
+  tags: [b1, b1-lektion-6]
+
+- id: 397
+  en: to develop
+  uk: розробляти, розвивати
+  de: entwickeln
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 398
+  en: to invent
+  uk: винаходити
+  de: erfinden
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 399
+  en: invention
+  uk: винахід
+  de: Erfindung
+  article: die
+  type: noun
+  forms:
+    pl: die Erfindungen
+  tags: [b1, b1-lektion-6]
+
+- id: 400
+  en: to publish
+  uk: публікувати
+  de: veröffentlichen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 401
+  en: Olympic Games
+  uk: Олімпійські ігри
+  de: Olympische Spiele
+  article: ~
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 402
+  en: medal
+  uk: медаль
+  de: Medaille
+  article: die
+  type: noun
+  forms:
+    pl: die Medaillen
+  tags: [b1, b1-lektion-6]
+
+- id: 403
+  en: to win bronze
+  uk: здобути бронзу
+  de: Bronze holen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 404
+  en: to win silver
+  uk: здобути срібло
+  de: Silber holen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 405
+  en: to win gold
+  uk: здобути золото
+  de: Gold holen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 406
+  en: winner, victor
+  uk: переможець
+  de: Sieger
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 407
+  en: car race
+  uk: автогонки
+  de: Autorennen
+  article: das
+  type: noun
+  forms:
+    pl: die Autorennen
+  tags: [b1, b1-lektion-6]
+
+- id: 408
+  en: host country
+  uk: країна-господиня
+  de: Gastgeberland
+  article: das
+  type: noun
+  forms:
+    pl: die Gastgeberländer
+  tags: [b1, b1-lektion-6]
+
+- id: 409
+  en: trophy, cup
+  uk: кубок, трофей
+  de: Pokal
+  article: der
+  type: noun
+  forms:
+    pl: die Pokale
+  tags: [b1, b1-lektion-6]
+
+- id: 410
+  en: strange, funny
+  uk: дивний, смішний
+  de: komisch
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-6]
+
+- id: 411
+  en: surprised
+  uk: здивований
+  de: überrascht
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-6]
+
+- id: 412
+  en: to get used to
+  uk: звикати до
+  de: sich gewöhnen an
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 413
+  en: used to, accustomed to
+  uk: звиклий до
+  de: gewöhnt an
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-6]
+
+- id: 414
+  en: unfamiliar, unusual
+  uk: незвичний
+  de: ungewohnt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-6]
+
+- id: 415
+  en: usual, customary / unusual
+  uk: звичайний / незвичайний
+  de: üblich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-6]
+
+- id: 416
+  en: common practice, usual
+  uk: загальноприйнятий
+  de: gang und gäbe
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 417
+  en: group work
+  uk: групова робота
+  de: Gruppenarbeit
+  article: die
+  type: noun
+  forms:
+    pl: die Gruppenarbeiten
+  tags: [b1, b1-lektion-6]
+
+- id: 418
+  en: to memorize sth.
+  uk: запам'ятовувати щось
+  de: sich etwas merken
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 419
+  en: to learn by heart
+  uk: вчити напам'ять
+  de: auswendig lernen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 420
+  en: pronunciation
+  uk: вимова
+  de: Aussprache
+  article: die
+  type: noun
+  forms:
+    pl: die Aussprachen
+  tags: [b1, b1-lektion-6]
+
+- id: 421
+  en: role play
+  uk: рольова гра
+  de: Rollenspiel
+  article: das
+  type: noun
+  forms:
+    pl: die Rollenspiele
+  tags: [b1, b1-lektion-6]
+
+- id: 422
+  en: perfectionist
+  uk: перфекціоніст
+  de: Perfektionist
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-6]
+
+- id: 423
+  en: sociable, convivial
+  uk: товариський
+  de: gesellig
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-6]
+
+- id: 424
+  en: reserved, restrained
+  uk: стриманий, замкнений
+  de: zurückhaltend
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-6]
+
+- id: 425
+  en: to be easy (for sb.)
+  uk: давати легко, бути легким
+  de: leichtfallen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 426
+  en: to be difficult (for sb.)
+  uk: даватися важко, бути важким
+  de: schwerfallen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 427
+  en: to belong to, to fit in
+  uk: належати до, бути частиною
+  de: dazugehören
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 428
+  en: to warm to sb., to get comfortable with
+  uk: потоваришувати з кимось
+  de: warm werden mit jdm.
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-6]
+
+- id: 429
+  en: to block
+  uk: блокувати
+  de: blockieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-6]
+
+- id: 430
+  en: homeland, home
+  uk: батьківщина, рідна домівка
+  de: Heimat
+  article: die
+  type: noun
+  forms:
+    pl: die Heimaten
+  tags: [b1, b1-lektion-7]
+
+- id: 431
+  en: country of origin
+  uk: країна походження
+  de: Herkunftsland
+  article: das
+  type: noun
+  forms:
+    pl: die Herkunftsländer
+  tags: [b1, b1-lektion-7]
+
+- id: 432
+  en: to feel comfortable, at ease
+  uk: почуватися добре
+  de: sich wohlfühlen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 433
+  en: to miss (sb./sth.)
+  uk: сумувати за
+  de: vermissen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 434
+  en: guest worker
+  uk: заробітчанин
+  de: Gastarbeiter
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-7]
+
+- id: 435
+  en: future prospect
+  uk: перспектива на майбутнє
+  de: Zukunftsperspektive
+  article: die
+  type: noun
+  forms:
+    pl: die Zukunftsperspektiven
+  tags: [b1, b1-lektion-7]
+
+- id: 436
+  en: glad, happy
+  uk: радий
+  de: froh
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 437
+  en: disappointed
+  uk: розчарований
+  de: enttäuscht
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 438
+  en: relieved
+  uk: полегшений
+  de: erleichtert
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 439
+  en: lonely
+  uk: самотній
+  de: einsam
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 440
+  en: feeling, emotion
+  uk: почуття, відчуття
+  de: Gefühl
+  article: das
+  type: noun
+  forms:
+    pl: die Gefühle
+  tags: [b1, b1-lektion-7]
+
+- id: 441
+  en: to feel
+  uk: відчувати себе
+  de: sich fühlen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 442
+  en: to depend on
+  uk: залежати від
+  de: abhängen von
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 443
+  en: to depend on, to matter
+  uk: залежати від, мати значення
+  de: ankommen auf
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-7]
+
+- id: 444
+  en: nervous
+  uk: нервовий
+  de: nervös
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 445
+  en: patience
+  uk: терпіння
+  de: Geduld
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-7]
+
+- id: 446
+  en: documents, papers
+  uk: документи, папери
+  de: Unterlagen
+  article: ~
+  type: noun
+  tags: [b1, b1-lektion-7]
+
+- id: 447
+  en: recognition, acknowledgment
+  uk: визнання
+  de: Anerkennung
+  article: die
+  type: noun
+  forms:
+    pl: die Anerkennungen
+  tags: [b1, b1-lektion-7]
+
+- id: 448
+  en: to recognize, to acknowledge
+  uk: визнавати
+  de: anerkennen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 449
+  en: graduation certificate
+  uk: атестат, диплом
+  de: Abschlusszeugnis
+  article: das
+  type: noun
+  forms:
+    pl: die Abschlusszeugnisse
+  tags: [b1, b1-lektion-7]
+
+- id: 450
+  en: certificate of good conduct, police clearance
+  uk: довідка про несудимість
+  de: Führungszeugnis
+  article: das
+  type: noun
+  forms:
+    pl: die Führungszeugnisse
+  tags: [b1, b1-lektion-7]
+
+- id: 451
+  en: health certificate
+  uk: медична довідка
+  de: Gesundheitszeugnis
+  article: das
+  type: noun
+  forms:
+    pl: die Gesundheitszeugnisse
+  tags: [b1, b1-lektion-7]
+
+- id: 452
+  en: proof, evidence
+  uk: підтвердження, доказ
+  de: Nachweis
+  article: der
+  type: noun
+  forms:
+    pl: die Nachweise
+  tags: [b1, b1-lektion-7]
+
+- id: 453
+  en: German language certificate
+  uk: сертифікат з німецької мови
+  de: Deutschzertifikat
+  article: das
+  type: noun
+  forms:
+    pl: die Deutschzertifikate
+  tags: [b1, b1-lektion-7]
+
+- id: 454
+  en: study confirmation
+  uk: довідка про навчання
+  de: Studienbescheinigung
+  article: die
+  type: noun
+  forms:
+    pl: die Studienbescheinigungen
+  tags: [b1, b1-lektion-7]
+
+- id: 455
+  en: certified, authenticated
+  uk: завірений, нотаріально посвідчений
+  de: beglaubigt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 456
+  en: specialization
+  uk: спеціалізація
+  de: Spezialisierung
+  article: die
+  type: noun
+  forms:
+    pl: die Spezialisierungen
+  tags: [b1, b1-lektion-7]
+
+- id: 457
+  en: to need, to require
+  uk: потребувати
+  de: benötigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 458
+  en: required, necessary
+  uk: необхідний, обов'язковий
+  de: erforderlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 459
+  en: to work out, to succeed
+  uk: вдаватися, виходити
+  de: klappen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 460
+  en: to get, to obtain
+  uk: діставати, отримувати
+  de: besorgen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 461
+  en: competent
+  uk: компетентний
+  de: kompetent
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 462
+  en: to expect, to count on
+  uk: розраховувати на, чекати
+  de: rechnen mit
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-7]
+
+- id: 463
+  en: stressed
+  uk: напружений, у стресі
+  de: gestresst
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 464
+  en: to tell, to narrate
+  uk: розповідати
+  de: erzählen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 465
+  en: to translate
+  uk: перекладати
+  de: übersetzen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 466
+  en: translation
+  uk: переклад
+  de: Übersetzung
+  article: die
+  type: noun
+  forms:
+    pl: die Übersetzungen
+  tags: [b1, b1-lektion-7]
+
+- id: 467
+  en: to extend, to renew
+  uk: продовжувати, поновлювати
+  de: verlängern
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 468
+  en: authentication, certification
+  uk: завірення, посвідчення
+  de: Beglaubigung
+  article: die
+  type: noun
+  forms:
+    pl: die Beglaubigungen
+  tags: [b1, b1-lektion-7]
+
+- id: 469
+  en: to certify, to confirm
+  uk: засвідчувати, підтверджувати
+  de: bescheinigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 470
+  en: promptly, swiftly
+  uk: швидко, оперативно
+  de: zügig
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-7]
+
+- id: 471
+  en: to guarantee, to ensure
+  uk: гарантувати, забезпечувати
+  de: gewährleisten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 472
+  en: outstanding, missing
+  uk: відсутній, неподаний
+  de: ausstehend
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 473
+  en: as soon as possible
+  uk: якомога швидше
+  de: baldmöglichst
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-7]
+
+- id: 474
+  en: to submit later, to provide subsequently
+  uk: донадати, подати пізніше
+  de: nachreichen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 475
+  en: necessary
+  uk: необхідний
+  de: notwendig
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-7]
+
+- id: 476
+  en: to be sufficient, to suffice
+  uk: бути достатнім
+  de: genügen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 477
+  en: letter (formal), written communication
+  uk: офіційний лист, письмове повідомлення
+  de: Schreiben
+  article: das
+  type: noun
+  forms:
+    pl: die Schreiben
+  tags: [b1, b1-lektion-7]
+
+- id: 478
+  en: hereby
+  uk: цим, цим листом
+  de: hiermit
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-7]
+
+- id: 479
+  en: follow-up question
+  uk: уточнюючий запит
+  de: Rückfrage
+  article: die
+  type: noun
+  forms:
+    pl: die Rückfragen
+  tags: [b1, b1-lektion-7]
+
+- id: 480
+  en: to be available to sb.
+  uk: бути в розпорядженні когось
+  de: jdm. zur Verfügung stehen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-7]
+
+- id: 481
+  en: presumably, expected
+  uk: орієнтовно, очікувано
+  de: voraussichtlich
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-7]
+
+- id: 482
+  en: to confirm
+  uk: підтверджувати
+  de: bestätigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-7]
+
+- id: 483
+  en: part-time position
+  uk: місце на неповний робочий день
+  de: Teilzeitstelle
+  article: die
+  type: noun
+  forms:
+    pl: die Teilzeitstellen
+  tags: [b1, b1-lektion-8]
+
+- id: 484
+  en: full-time position
+  uk: місце на повний робочий день
+  de: Vollzeitstelle
+  article: die
+  type: noun
+  forms:
+    pl: die Vollzeitstellen
+  tags: [b1, b1-lektion-8]
+
+- id: 485
+  en: fixed-term / permanent
+  uk: строковий / безстроковий
+  de: befristet
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-8]
+
+- id: 486
+  en: forklift
+  uk: вилочний навантажувач
+  de: Gabelstapler
+  article: der
+  type: noun
+  forms:
+    pl: die Gabelstapler
+  tags: [b1, b1-lektion-8]
+
+- id: 487
+  en: saw
+  uk: пила
+  de: Säge
+  article: die
+  type: noun
+  forms:
+    pl: die Sägen
+  tags: [b1, b1-lektion-8]
+
+- id: 488
+  en: hammer
+  uk: молоток
+  de: Hammer
+  article: der
+  type: noun
+  forms:
+    pl: die Hämmer
+  tags: [b1, b1-lektion-8]
+
+- id: 489
+  en: drill
+  uk: дриль
+  de: Bohrmaschine
+  article: die
+  type: noun
+  forms:
+    pl: die Bohrmaschinen
+  tags: [b1, b1-lektion-8]
+
+- id: 490
+  en: sewing machine
+  uk: швейна машина
+  de: Nähmaschine
+  article: die
+  type: noun
+  forms:
+    pl: die Nähmaschinen
+  tags: [b1, b1-lektion-8]
+
+- id: 491
+  en: welding mask
+  uk: зварювальна маска
+  de: Schweißermaske
+  article: die
+  type: noun
+  forms:
+    pl: die Schweißermasken
+  tags: [b1, b1-lektion-8]
+
+- id: 492
+  en: welding equipment
+  uk: зварювальний апарат
+  de: Schweißgerät
+  article: das
+  type: noun
+  forms:
+    pl: die Schweißgeräte
+  tags: [b1, b1-lektion-8]
+
+- id: 493
+  en: metalworker, steel construction worker
+  uk: слюсар-металіст
+  de: Metallbauer
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 494
+  en: fashion designer / tailor
+  uk: модельєр / кравець
+  de: Modeschneider
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 495
+  en: concrete
+  uk: бетон
+  de: Beton
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 496
+  en: handling of, dealing with
+  uk: поводження з, вміння працювати з
+  de: Umgang mit
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 497
+  en: able to work in a team
+  uk: здатний до командної роботи
+  de: teamfähig
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-8]
+
+- id: 498
+  en: production, manufacturing
+  uk: виробництво
+  de: Herstellung
+  article: die
+  type: noun
+  forms:
+    pl: die Herstellungen
+  tags: [b1, b1-lektion-8]
+
+- id: 499
+  en: contact person
+  uk: контактна особа
+  de: Ansprechpartner
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 500
+  en: shift work
+  uk: змінна робота
+  de: Schichtdienst
+  article: der
+  type: noun
+  forms:
+    pl: die Schichtdienste
+  tags: [b1, b1-lektion-8]
+
+- id: 501
+  en: reliable
+  uk: надійний
+  de: zuverlässig
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-8]
+
+- id: 502
+  en: reliability
+  uk: надійність
+  de: Zuverlässigkeit
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 503
+  en: resilient, able to work under pressure
+  uk: стресостійкий
+  de: belastbar
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-8]
+
+- id: 504
+  en: resilience, ability to work under pressure
+  uk: стресостійкість
+  de: Belastbarkeit
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 505
+  en: teamwork ability
+  uk: здатність до командної роботи
+  de: Teamfähigkeit
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 506
+  en: to enjoy, to take pleasure in
+  uk: отримувати задоволення від
+  de: Freude haben an
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-8]
+
+- id: 507
+  en: challenge
+  uk: виклик
+  de: Herausforderung
+  article: die
+  type: noun
+  forms:
+    pl: die Herausforderungen
+  tags: [b1, b1-lektion-8]
+
+- id: 508
+  en: career changer, lateral entrant
+  uk: людина, що змінює сферу діяльності
+  de: Seiteneinsteiger
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 509
+  en: career changer without formal training in that field
+  uk: людина без формальної освіти в даній галузі
+  de: Quereinsteiger
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 510
+  en: to think over, to consider
+  uk: обдумувати, розмірковувати
+  de: überlegen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-8]
+
+- id: 511
+  en: to prove, to demonstrate
+  uk: доводити, підтверджувати документально
+  de: nachweisen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-8]
+
+- id: 512
+  en: to make no sense
+  uk: не мати сенсу
+  de: keinen Sinn haben
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-8]
+
+- id: 513
+  en: current, up-to-date
+  uk: актуальний, поточний
+  de: aktuell
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-8]
+
+- id: 514
+  en: induction, training period
+  uk: адаптація, введення в посаду
+  de: Einarbeitung
+  article: die
+  type: noun
+  forms:
+    pl: die Einarbeitungen
+  tags: [b1, b1-lektion-8]
+
+- id: 515
+  en: to expire, to run out
+  uk: закінчуватися, спливати
+  de: ablaufen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-8]
+
+- id: 516
+  en: knowledge, skills
+  uk: знання, навички
+  de: Kenntnisse
+  article: ~
+  type: noun
+  tags: [b1, b1-lektion-8]
+
+- id: 517
+  en: to ask for help
+  uk: просити про допомогу
+  de: um Hilfe bitten
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-8]
+
+- id: 518
+  en: position, role
+  uk: посада, позиція
+  de: Position
+  article: die
+  type: noun
+  forms:
+    pl: die Positionen
+  tags: [b1, b1-lektion-8]
+
+- id: 519
+  en: activity, work
+  uk: діяльність, робота
+  de: Tätigkeit
+  article: die
+  type: noun
+  forms:
+    pl: die Tätigkeiten
+  tags: [b1, b1-lektion-8]
+
+- id: 520
+  en: sender
+  uk: відправник
+  de: Absender
+  article: der
+  type: noun
+  forms:
+    pl: die Absender
+  tags: [b1, b1-lektion-8]
+
+- id: 521
+  en: introduction
+  uk: вступ
+  de: Einleitung
+  article: die
+  type: noun
+  forms:
+    pl: die Einleitungen
+  tags: [b1, b1-lektion-8]
+
+- id: 522
+  en: closing sentence
+  uk: завершальне речення
+  de: Schlusssatz
+  article: der
+  type: noun
+  forms:
+    pl: die Schlusssätze
+  tags: [b1, b1-lektion-8]
+
+- id: 523
+  en: experience
+  uk: досвід
+  de: Erfahrung
+  article: die
+  type: noun
+  forms:
+    pl: die Erfahrungen
+  tags: [b1, b1-lektion-8]
+
+- id: 524
+  en: acceptance, positive response
+  uk: позитивна відповідь, згода
+  de: Zusage
+  article: die
+  type: noun
+  forms:
+    pl: die Zusagen
+  tags: [b1, b1-lektion-8]
+
+- id: 525
+  en: rejection, negative response
+  uk: відмова, відхилення
+  de: Absage
+  article: die
+  type: noun
+  forms:
+    pl: die Absagen
+  tags: [b1, b1-lektion-8]
+
+- id: 526
+  en: job interview
+  uk: співбесіда
+  de: Vorstellungsgespräch
+  article: das
+  type: noun
+  forms:
+    pl: die Vorstellungsgespräche
+  tags: [b1, b1-lektion-8]
+
+- id: 527
+  en: strength
+  uk: сила, перевага
+  de: Stärke
+  article: die
+  type: noun
+  forms:
+    pl: die Stärken
+  tags: [b1, b1-lektion-8]
+
+- id: 528
+  en: weakness
+  uk: слабкість, недолік
+  de: Schwäche
+  article: die
+  type: noun
+  forms:
+    pl: die Schwächen
+  tags: [b1, b1-lektion-8]
+
+- id: 529
+  en: to concentrate on
+  uk: зосередитися на
+  de: sich konzentrieren auf
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-8]
+
+- id: 530
+  en: to reorient oneself, to change direction
+  uk: переорієнтуватися
+  de: sich neu orientieren
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-8]
+
+- id: 531
+  en: to develop further, to grow
+  uk: розвиватися далі
+  de: sich weiterentwickeln
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-8]
+
+- id: 532
+  en: probationary period
+  uk: випробувальний термін
+  de: Probezeit
+  article: die
+  type: noun
+  forms:
+    pl: die Probezeiten
+  tags: [b1, b1-lektion-8]
+
+- id: 533
+  en: performance review, staff appraisal
+  uk: бесіда з керівником, атестація
+  de: Mitarbeitergespräch
+  article: das
+  type: noun
+  forms:
+    pl: die Mitarbeitergespräche
+  tags: [b1, b1-lektion-8]
+
+- id: 534
+  en: time limit, fixed term
+  uk: строковий характер (договору)
+  de: Befristung
+  article: die
+  type: noun
+  forms:
+    pl: die Befristungen
+  tags: [b1, b1-lektion-8]
+
+- id: 535
+  en: wage, pay
+  uk: зарплата, заробіток
+  de: Lohn
+  article: der
+  type: noun
+  forms:
+    pl: die Löhne
+  tags: [b1, b1-lektion-8]
+
+- id: 536
+  en: to be about, to concern
+  uk: йтися про, стосуватися
+  de: gehen um
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-8]
+
+- id: 537
+  en: to be entitled to
+  uk: мати право на
+  de: Anspruch haben auf
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-8]
+
+- id: 538
+  en: weekly
+  uk: щотижнево
+  de: wöchentlich
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-8]
+
+- id: 539
+  en: agreement, arrangement
+  uk: домовленість, угода
+  de: Vereinbarung
+  article: die
+  type: noun
+  forms:
+    pl: die Vereinbarungen
+  tags: [b1, b1-lektion-8]
+
+- id: 540
+  en: to participate in
+  uk: брати участь у
+  de: teilnehmen an
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-8]
+
+- id: 541
+  en: to thank for
+  uk: дякувати за
+  de: sich bedanken für
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-8]
+
+- id: 542
+  en: to wait for
+  uk: чекати на
+  de: warten auf
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-8]
+
+- id: 543
+  en: list
+  uk: список
+  de: Liste
+  article: die
+  type: noun
+  forms:
+    pl: die Listen
+  tags: [b1, b1-lektion-9]
+
+- id: 544
+  en: to air, to ventilate
+  uk: провітрювати
+  de: lüften
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 545
+  en: to tilt the window open
+  uk: відкрити вікно в режимі провітрювання
+  de: das Fenster kippen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-9]
+
+- id: 546
+  en: to turn down (heating)
+  uk: зменшити (нагрів)
+  de: runterdrehen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 547
+  en: device, appliance
+  uk: пристрій, прилад
+  de: Gerät
+  article: das
+  type: noun
+  forms:
+    pl: die Geräte
+  tags: [b1, b1-lektion-9]
+
+- id: 548
+  en: effective
+  uk: ефективний
+  de: effektiv
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 549
+  en: to switch on, to turn on
+  uk: вмикати
+  de: anmachen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 550
+  en: to switch off, to turn off
+  uk: вимикати
+  de: ausmachen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 551
+  en: to open
+  uk: відкривати
+  de: aufmachen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 552
+  en: to close, to shut
+  uk: закривати
+  de: zumachen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 553
+  en: to close, to lock
+  uk: закривати, замикати
+  de: schließen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 554
+  en: to turn on (tap/valve)
+  uk: відкрити (кран)
+  de: aufdrehen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 555
+  en: to turn off (tap/valve)
+  uk: закрити (кран)
+  de: zudrehen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 556
+  en: light
+  uk: світло
+  de: Licht
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-9]
+
+- id: 557
+  en: tap, faucet
+  uk: кран (водопровідний)
+  de: Wasserhahn
+  article: der
+  type: noun
+  forms:
+    pl: die Wasserhähne
+  tags: [b1, b1-lektion-9]
+
+- id: 558
+  en: exaggerated, excessive
+  uk: перебільшений, надмірний
+  de: übertrieben
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 559
+  en: objection
+  uk: заперечення
+  de: Einwand
+  article: der
+  type: noun
+  forms:
+    pl: die Einwände
+  tags: [b1, b1-lektion-9]
+
+- id: 560
+  en: to go too far
+  uk: заходити занадто далеко
+  de: zu weit gehen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-9]
+
+- id: 561
+  en: air
+  uk: повітря
+  de: Luft
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-9]
+
+- id: 562
+  en: measure, step
+  uk: захід, міра
+  de: Maßnahme
+  article: die
+  type: noun
+  forms:
+    pl: die Maßnahmen
+  tags: [b1, b1-lektion-9]
+
+- id: 563
+  en: wallet, purse
+  uk: гаманець
+  de: Geldbeutel
+  article: der
+  type: noun
+  forms:
+    pl: die Geldbeutel
+  tags: [b1, b1-lektion-9]
+
+- id: 564
+  en: sensible, meaningful
+  uk: доцільний, розумний
+  de: sinnvoll
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 565
+  en: responsible for
+  uk: відповідальний за
+  de: verantwortlich für
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 566
+  en: to keep minutes, to write a protocol
+  uk: вести протокол
+  de: ein Protokoll führen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-9]
+
+- id: 567
+  en: to worry about, to think about
+  uk: турбуватися про, думати про
+  de: sich Gedanken machen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-9]
+
+- id: 568
+  en: to react to, to respond to
+  uk: реагувати на
+  de: reagieren auf
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 569
+  en: to create a plan
+  uk: розробити план
+  de: einen Plan erstellen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-9]
+
+- id: 570
+  en: result, outcome
+  uk: результат
+  de: Ergebnis
+  article: das
+  type: noun
+  forms:
+    pl: die Ergebnisse
+  tags: [b1, b1-lektion-9]
+
+- id: 571
+  en: to reduce, to lower
+  uk: знижувати, зменшувати
+  de: senken
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 572
+  en: furious (coll.)
+  uk: несамовито злий (розм.)
+  de: stinksauer
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 573
+  en: annoyed, irritated
+  uk: роздратований
+  de: genervt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 574
+  en: proud
+  uk: гордий
+  de: stolz
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 575
+  en: busy with
+  uk: зайнятий чимось
+  de: beschäftigt mit
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 576
+  en: to be able to afford sth.
+  uk: дозволити собі щось
+  de: sich etwas leisten können
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-9]
+
+- id: 577
+  en: stress
+  uk: стрес
+  de: Stress
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-9]
+
+- id: 578
+  en: employee
+  uk: працівник, найнятий робітник
+  de: Arbeitnehmer
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-9]
+
+- id: 579
+  en: right
+  uk: право
+  de: Recht
+  article: das
+  type: noun
+  forms:
+    pl: die Rechte
+  tags: [b1, b1-lektion-9]
+
+- id: 580
+  en: employee right
+  uk: право працівника
+  de: Arbeitnehmerrecht
+  article: das
+  type: noun
+  forms:
+    pl: die Arbeitnehmerrechte
+  tags: [b1, b1-lektion-9]
+
+- id: 581
+  en: to research, to look into
+  uk: досліджувати, шукати інформацію
+  de: recherchieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 582
+  en: works council
+  uk: рада трудового колективу
+  de: Betriebsrat
+  article: der
+  type: noun
+  forms:
+    pl: die Betriebsräte
+  tags: [b1, b1-lektion-9]
+
+- id: 583
+  en: minimum wage
+  uk: мінімальна зарплата
+  de: Mindestlohn
+  article: der
+  type: noun
+  forms:
+    pl: die Mindestlöhne
+  tags: [b1, b1-lektion-9]
+
+- id: 584
+  en: to disadvantage, to discriminate against
+  uk: ставити у невигідне становище, дискримінувати
+  de: benachteiligen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 585
+  en: origin, descent
+  uk: походження
+  de: Herkunft
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-9]
+
+- id: 586
+  en: prescribed, stipulated
+  uk: встановлений, передбачений
+  de: vorgeschrieben
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 587
+  en: to divide, to split up
+  uk: розподіляти, ділити
+  de: aufteilen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 588
+  en: legal, statutory
+  uk: законний, законодавчий
+  de: gesetzlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 589
+  en: regulated, governed
+  uk: врегульований
+  de: geregelt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-9]
+
+- id: 590
+  en: to copy
+  uk: копіювати
+  de: kopieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 591
+  en: to press a button
+  uk: натиснути кнопку
+  de: auf einen Knopf drücken
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-9]
+
+- id: 592
+  en: to let sb. know, to inform
+  uk: повідомити когось
+  de: jdm. Bescheid sagen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-9]
+
+- id: 593
+  en: to complete, to deal with
+  uk: виконувати, вирішувати
+  de: erledigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 594
+  en: to answer, to reply to
+  uk: відповідати на
+  de: beantworten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 595
+  en: to leave
+  uk: залишати, покидати
+  de: verlassen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-9]
+
+- id: 596
+  en: reason, ground
+  uk: причина
+  de: Grund
+  article: der
+  type: noun
+  forms:
+    pl: die Gründe
+  tags: [b1, b1-lektion-9]
+
+- id: 597
+  en: to pay attention to, to watch out for
+  uk: звертати увагу на
+  de: achten auf
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 598
+  en: to do without, to give up
+  uk: відмовлятися від
+  de: verzichten auf
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 599
+  en: to suffer from
+  uk: страждати від
+  de: leiden an
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 600
+  en: organic product
+  uk: органічний продукт
+  de: Bioprodukt
+  article: das
+  type: noun
+  forms:
+    pl: die Bioprodukte
+  tags: [b1, b1-lektion-10]
+
+- id: 601
+  en: agriculture, farming
+  uk: сільське господарство
+  de: Landwirtschaft
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-10]
+
+- id: 602
+  en: ecological, organic
+  uk: екологічний
+  de: ökologisch
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 603
+  en: cake (layered)
+  uk: торт
+  de: Torte
+  article: die
+  type: noun
+  forms:
+    pl: die Torten
+  tags: [b1, b1-lektion-10]
+
+- id: 604
+  en: to eat, to nourish oneself
+  uk: харчуватися
+  de: sich ernähren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 605
+  en: allergic to
+  uk: алергічний на
+  de: allergisch gegen
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 606
+  en: stomach ache
+  uk: біль у шлунку
+  de: Magenschmerzen
+  article: ~
+  type: noun
+  tags: [b1, b1-lektion-10]
+
+- id: 607
+  en: to tolerate, to digest well
+  uk: переносити, добре засвоювати
+  de: vertragen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 608
+  en: to enjoy
+  uk: насолоджуватися
+  de: genießen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 609
+  en: to try out
+  uk: пробувати, випробовувати
+  de: ausprobieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 610
+  en: together, jointly
+  uk: разом
+  de: gemeinsam
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-10]
+
+- id: 611
+  en: to prepare (food)
+  uk: готувати (їжу)
+  de: zubereiten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 612
+  en: to take time for
+  uk: знаходити час для
+  de: sich Zeit nehmen für
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-10]
+
+- id: 613
+  en: to help sb. with
+  uk: допомагати комусь з
+  de: jdm. helfen bei
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-10]
+
+- id: 614
+  en: to need
+  uk: потребувати
+  de: brauchen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 615
+  en: to think about, to reflect on
+  uk: розмірковувати над
+  de: nachdenken über
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 616
+  en: to think of, to have an opinion about
+  uk: ставитися до, вважати
+  de: halten von
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-10]
+
+- id: 617
+  en: fitness, stamina
+  uk: фізична форма, витривалість
+  de: Kondition
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-10]
+
+- id: 618
+  en: to improve
+  uk: покращувати
+  de: verbessern
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 619
+  en: strength training
+  uk: силові тренування
+  de: Krafttraining
+  article: das
+  type: noun
+  tags: [b1, b1-lektion-10]
+
+- id: 620
+  en: calorie
+  uk: калорія
+  de: Kalorie
+  article: die
+  type: noun
+  forms:
+    pl: die Kalorien
+  tags: [b1, b1-lektion-10]
+
+- id: 621
+  en: to consume, to use up
+  uk: споживати, витрачати
+  de: verbrauchen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 622
+  en: to motivate
+  uk: мотивувати
+  de: motivieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 623
+  en: to count
+  uk: рахувати
+  de: zählen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 624
+  en: step
+  uk: крок
+  de: Schritt
+  article: der
+  type: noun
+  forms:
+    pl: die Schritte
+  tags: [b1, b1-lektion-10]
+
+- id: 625
+  en: useful
+  uk: корисний
+  de: nützlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 626
+  en: to hide
+  uk: ховати
+  de: verstecken
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 627
+  en: expression
+  uk: вираз
+  de: Ausdruck
+  article: der
+  type: noun
+  forms:
+    pl: die Ausdrücke
+  tags: [b1, b1-lektion-10]
+
+- id: 628
+  en: unsuccessful
+  uk: безуспішний
+  de: erfolglos
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 629
+  en: eating habit
+  uk: звичка харчування
+  de: Essgewohnheit
+  article: die
+  type: noun
+  forms:
+    pl: die Essgewohnheiten
+  tags: [b1, b1-lektion-10]
+
+- id: 630
+  en: ingredient
+  uk: інгредієнт
+  de: Zutat
+  article: die
+  type: noun
+  forms:
+    pl: die Zutaten
+  tags: [b1, b1-lektion-10]
+
+- id: 631
+  en: to use, to apply
+  uk: використовувати
+  de: verwenden
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-10]
+
+- id: 632
+  en: sugar-free
+  uk: без цукру
+  de: zuckerfrei
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 633
+  en: rich in vitamins
+  uk: багатий на вітаміни
+  de: vitaminreich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 634
+  en: low-calorie
+  uk: низькокалорійний
+  de: kalorienarm
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 635
+  en: irregular
+  uk: нерегулярний
+  de: unregelmäßig
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 636
+  en: unhealthy
+  uk: нездоровий
+  de: ungesund
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-10]
+
+- id: 637
+  en: vegetarian
+  uk: вегетаріанець
+  de: Vegetarier
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-10]
+
+- id: 638
+  en: vegan
+  uk: веган
+  de: Veganer
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-10]
+
+- id: 639
+  en: percent
+  uk: відсоток
+  de: Prozent
+  article: das
+  type: noun
+  forms:
+    pl: die Prozente
+  tags: [b1, b1-lektion-10]
+
+- id: 640
+  en: statistics
+  uk: статистика
+  de: Statistik
+  article: die
+  type: noun
+  forms:
+    pl: die Statistiken
+  tags: [b1, b1-lektion-10]
+
+- id: 641
+  en: someone, somebody
+  uk: хтось
+  de: jemand
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-10]
+
+- id: 642
+  en: nobody, no one
+  uk: ніхто
+  de: niemand
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-10]
+
+- id: 643
+  en: something, anything
+  uk: щось, будь-що
+  de: irgendetwas
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-10]
+
+- id: 644
+  en: someone, anyone
+  uk: хтось, будь-хто
+  de: irgendjemand
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-10]
+
+- id: 645
+  en: somewhere / sometime / somehow
+  uk: десь / колись / якось
+  de: irgendwo
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-10]
+
+- id: 646
+  en: nutrient
+  uk: поживна речовина
+  de: Nährstoff
+  article: der
+  type: noun
+  forms:
+    pl: die Nährstoffe
+  tags: [b1, b1-lektion-10]
+
+- id: 647
+  en: shopping list
+  uk: список покупок
+  de: Einkaufsliste
+  article: die
+  type: noun
+  forms:
+    pl: die Einkaufslisten
+  tags: [b1, b1-lektion-10]
+
+- id: 648
+  en: insurance
+  uk: страхування
+  de: Versicherung
+  article: die
+  type: noun
+  forms:
+    pl: die Versicherungen
+  tags: [b1, b1-lektion-11]
+
+- id: 649
+  en: liability insurance
+  uk: страхування цивільної відповідальності
+  de: Haftpflichtversicherung
+  article: die
+  type: noun
+  forms:
+    pl: die Haftpflichtversicherungen
+  tags: [b1, b1-lektion-11]
+
+- id: 650
+  en: to fall down, to drop
+  uk: впасти, упасти
+  de: runterfallen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 651
+  en: to damage
+  uk: пошкоджувати
+  de: beschädigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 652
+  en: damage, harm
+  uk: збиток, пошкодження
+  de: Schaden
+  article: der
+  type: noun
+  forms:
+    pl: die Schäden
+  tags: [b1, b1-lektion-11]
+
+- id: 653
+  en: costs, expenses
+  uk: витрати, вартість
+  de: Kosten
+  article: ~
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 654
+  en: to cause
+  uk: спричиняти, завдавати
+  de: verursachen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 655
+  en: insurance premium
+  uk: страховий внесок
+  de: Versicherungsbeitrag
+  article: der
+  type: noun
+  forms:
+    pl: die Versicherungsbeiträge
+  tags: [b1, b1-lektion-11]
+
+- id: 656
+  en: injured party, victim
+  uk: постраждала особа
+  de: Geschädigte
+  article: der/die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 657
+  en: to describe, to depict
+  uk: описувати
+  de: schildern
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 658
+  en: sequence of events leading to damage
+  uk: обставини завдання збитку
+  de: Schadenshergang
+  article: der
+  type: noun
+  forms:
+    pl: die Schadenshergänge
+  tags: [b1, b1-lektion-11]
+
+- id: 659
+  en: to pay for, to cover (costs)
+  uk: відшкодовувати, покривати (витрати)
+  de: aufkommen für
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-11]
+
+- id: 660
+  en: speaker, loudspeaker
+  uk: динамік, гучномовець
+  de: Lautsprecher
+  article: der
+  type: noun
+  forms:
+    pl: die Lautsprecher
+  tags: [b1, b1-lektion-11]
+
+- id: 661
+  en: to topple over, to fall over
+  uk: перекинутися
+  de: umstürzen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 662
+  en: to burn
+  uk: горіти, спалити
+  de: verbrennen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 663
+  en: to flood
+  uk: затоплювати
+  de: überschwemmen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 664
+  en: pension insurance
+  uk: пенсійне страхування
+  de: Rentenversicherung
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 665
+  en: accident insurance
+  uk: страхування від нещасних випадків
+  de: Unfallversicherung
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 666
+  en: legal expenses insurance
+  uk: страхування судових витрат
+  de: Rechtsschutzversicherung
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 667
+  en: building insurance
+  uk: страхування нерухомості
+  de: Wohngebäudeversicherung
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 668
+  en: disability insurance
+  uk: страхування на випадок непрацездатності
+  de: Berufsunfähigkeitsversicherung
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 669
+  en: price comparison
+  uk: порівняння цін
+  de: Preisvergleich
+  article: der
+  type: noun
+  forms:
+    pl: die Preisvergleiche
+  tags: [b1, b1-lektion-11]
+
+- id: 670
+  en: in my opinion
+  uk: на мою думку
+  de: meiner Meinung nach
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-11]
+
+- id: 671
+  en: partial casco insurance
+  uk: часткове страхування автомобіля
+  de: Teilkasko
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 672
+  en: to be worth it, to pay off
+  uk: окупатися, бути вигідним
+  de: sich lohnen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 673
+  en: personal injury
+  uk: шкода здоров'ю
+  de: Personenschaden
+  article: der
+  type: noun
+  forms:
+    pl: die Personenschäden
+  tags: [b1, b1-lektion-11]
+
+- id: 674
+  en: property damage
+  uk: майнова шкода
+  de: Sachschaden
+  article: der
+  type: noun
+  forms:
+    pl: die Sachschäden
+  tags: [b1, b1-lektion-11]
+
+- id: 675
+  en: guilty of, responsible for
+  uk: винний у
+  de: schuld an
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-11]
+
+- id: 676
+  en: vandalism
+  uk: вандалізм
+  de: Vandalismus
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 677
+  en: breakdown, mishap
+  uk: поломка, аварія
+  de: Panne
+  article: die
+  type: noun
+  forms:
+    pl: die Pannen
+  tags: [b1, b1-lektion-11]
+
+- id: 678
+  en: to tow away
+  uk: евакуювати (автомобіль)
+  de: abschleppen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 679
+  en: other party in an accident
+  uk: інша сторона в аварії
+  de: Unfallgegner
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 680
+  en: small car, city car
+  uk: малолітражний автомобіль
+  de: Kleinwagen
+  article: der
+  type: noun
+  forms:
+    pl: die Kleinwagen
+  tags: [b1, b1-lektion-11]
+
+- id: 681
+  en: non-binding, without obligation
+  uk: необов'язковий, без зобов'язань
+  de: unverbindlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-11]
+
+- id: 682
+  en: valuable
+  uk: цінний
+  de: wertvoll
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-11]
+
+- id: 683
+  en: insurance claim, damage case
+  uk: страховий випадок
+  de: Schadensfall
+  article: der
+  type: noun
+  forms:
+    pl: die Schadensfälle
+  tags: [b1, b1-lektion-11]
+
+- id: 684
+  en: insurance coverage
+  uk: страховий захист, покриття
+  de: Versicherungsschutz
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 685
+  en: confused
+  uk: збентежений, розгублений
+  de: verwirrt
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-11]
+
+- id: 686
+  en: uncertain, insecure
+  uk: невпевнений, небезпечний
+  de: unsicher
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-11]
+
+- id: 687
+  en: in principle, fundamentally
+  uk: принципово, в принципі
+  de: grundsätzlich
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-11]
+
+- id: 688
+  en: vehicle registration document
+  uk: свідоцтво про реєстрацію транспортного засобу
+  de: Zulassungsbescheinigung
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 689
+  en: excess, deductible
+  uk: франшиза (у страхуванні)
+  de: Selbstbeteiligung
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-11]
+
+- id: 690
+  en: claim-free, no damage
+  uk: без страхових випадків
+  de: schadenfrei
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-11]
+
+- id: 691
+  en: passenger door
+  uk: двері пасажира
+  de: Beifahrertür
+  article: die
+  type: noun
+  forms:
+    pl: die Beifahrertüren
+  tags: [b1, b1-lektion-11]
+
+- id: 692
+  en: wing mirror, side mirror
+  uk: бічне дзеркало
+  de: Seitenspiegel
+  article: der
+  type: noun
+  forms:
+    pl: die Seitenspiegel
+  tags: [b1, b1-lektion-11]
+
+- id: 693
+  en: tail light, rear light
+  uk: задній ліхтар
+  de: Rücklicht
+  article: das
+  type: noun
+  forms:
+    pl: die Rücklichter
+  tags: [b1, b1-lektion-11]
+
+- id: 694
+  en: dent
+  uk: вм'ятина
+  de: Delle
+  article: die
+  type: noun
+  forms:
+    pl: die Dellen
+  tags: [b1, b1-lektion-11]
+
+- id: 695
+  en: driver's door
+  uk: двері водія
+  de: Fahrertür
+  article: die
+  type: noun
+  forms:
+    pl: die Fahrertüren
+  tags: [b1, b1-lektion-11]
+
+- id: 696
+  en: rear-view mirror
+  uk: дзеркало заднього виду
+  de: Rückspiegel
+  article: der
+  type: noun
+  forms:
+    pl: die Rückspiegel
+  tags: [b1, b1-lektion-11]
+
+- id: 697
+  en: headlight
+  uk: передня фара
+  de: Vorderlicht
+  article: das
+  type: noun
+  forms:
+    pl: die Vorderlichter
+  tags: [b1, b1-lektion-11]
+
+- id: 698
+  en: boot, trunk
+  uk: багажник
+  de: Kofferraum
+  article: der
+  type: noun
+  forms:
+    pl: die Kofferräume
+  tags: [b1, b1-lektion-11]
+
+- id: 699
+  en: number plate, licence plate
+  uk: номерний знак
+  de: Nummernschild
+  article: das
+  type: noun
+  forms:
+    pl: die Nummernschilder
+  tags: [b1, b1-lektion-11]
+
+- id: 700
+  en: tyre
+  uk: шина, покришка
+  de: Reifen
+  article: der
+  type: noun
+  forms:
+    pl: die Reifen
+  tags: [b1, b1-lektion-11]
+
+- id: 701
+  en: indicator, turn signal
+  uk: покажчик повороту
+  de: Blinker
+  article: der
+  type: noun
+  forms:
+    pl: die Blinker
+  tags: [b1, b1-lektion-11]
+
+- id: 702
+  en: bumper
+  uk: бампер
+  de: Stoßstange
+  article: die
+  type: noun
+  forms:
+    pl: die Stoßstangen
+  tags: [b1, b1-lektion-11]
+
+- id: 703
+  en: to slide, to slip
+  uk: ковзати, посковзнутися
+  de: rutschen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 704
+  en: to steer
+  uk: керувати (кермом)
+  de: lenken
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 705
+  en: to brake
+  uk: гальмувати
+  de: bremsen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-11]
+
+- id: 706
+  en: backwards
+  uk: назад
+  de: rückwärts
+  article: ~
+  type: adv
+  tags: [b1, b1-lektion-11]
+
+- id: 707
+  en: to knock off the wing mirror
+  uk: збити бічне дзеркало
+  de: den Seitenspiegel abfahren
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-11]
+
+- id: 708
+  en: cost estimate, quote
+  uk: кошторис, оцінка вартості робіт
+  de: Kostenvoranschlag
+  article: der
+  type: noun
+  forms:
+    pl: die Kostenvoranschläge
+  tags: [b1, b1-lektion-11]
+
+- id: 709
+  en: annoying, irritating
+  uk: дратівливий, прикрий
+  de: ärgerlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-12]
+
+- id: 710
+  en: to fail (exam)
+  uk: провалитися (на іспиті)
+  de: durchfallen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 711
+  en: to prepare for
+  uk: готуватися до
+  de: sich vorbereiten auf
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 712
+  en: to keep fingers crossed for sb.
+  uk: тримати кулаки за когось
+  de: jdm. die Daumen drücken
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 713
+  en: DTZ (Deutsch-Test für Zuwanderer)
+  uk: DTZ — тест з німецької для іммігрантів
+  de: DTZ
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-12]
+
+- id: 714
+  en: certificate
+  uk: сертифікат
+  de: Zertifikat
+  article: das
+  type: noun
+  forms:
+    pl: die Zertifikate
+  tags: [b1, b1-lektion-12]
+
+- id: 715
+  en: prepared
+  uk: підготовлений
+  de: vorbereitet
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-12]
+
+- id: 716
+  en: attempt, try
+  uk: спроба
+  de: Versuch
+  article: der
+  type: noun
+  forms:
+    pl: die Versuche
+  tags: [b1, b1-lektion-12]
+
+- id: 717
+  en: voluntary, unpaid
+  uk: волонтерський, безоплатний
+  de: ehrenamtlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-12]
+
+- id: 718
+  en: helper, volunteer
+  uk: помічник, волонтер
+  de: Helfer
+  article: der
+  type: noun
+  tags: [b1, b1-lektion-12]
+
+- id: 719
+  en: to get involved, to volunteer
+  uk: займатися суспільною діяльністю, волонтерити
+  de: sich engagieren
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 720
+  en: to take care of, to look after
+  uk: піклуватися про, займатися
+  de: sich kümmern um
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 721
+  en: food bank (charity)
+  uk: банк продовольства (благодійна організація)
+  de: Tafel
+  article: die
+  type: noun
+  forms:
+    pl: die Tafeln
+  tags: [b1, b1-lektion-12]
+
+- id: 722
+  en: to distribute, to hand out
+  uk: розподіляти, роздавати
+  de: verteilen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 723
+  en: clothing store (charity)
+  uk: склад одягу (благодійна організація)
+  de: Kleiderkammer
+  article: die
+  type: noun
+  forms:
+    pl: die Kleiderkammern
+  tags: [b1, b1-lektion-12]
+
+- id: 724
+  en: volunteer fire brigade
+  uk: добровільна пожежна охорона
+  de: Freiwillige Feuerwehr
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-12]
+
+- id: 725
+  en: to extinguish a fire
+  uk: гасити вогонь
+  de: Feuer löschen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 726
+  en: animal shelter
+  uk: притулок для тварин
+  de: Tierheim
+  article: das
+  type: noun
+  forms:
+    pl: die Tierheime
+  tags: [b1, b1-lektion-12]
+
+- id: 727
+  en: emergency, distress situation
+  uk: надзвичайна ситуація
+  de: Notsituation
+  article: die
+  type: noun
+  forms:
+    pl: die Notsituationen
+  tags: [b1, b1-lektion-12]
+
+- id: 728
+  en: to do something good
+  uk: робити добро
+  de: etwas Gutes tun
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 729
+  en: to imagine sth.
+  uk: уявити собі щось
+  de: sich etwas vorstellen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 730
+  en: to cheat
+  uk: шахраювати, списувати
+  de: schummeln
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 731
+  en: to deceive
+  uk: обманювати
+  de: täuschen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 732
+  en: cheat sheet, crib notes
+  uk: шпаргалка
+  de: Spickzettel
+  article: der
+  type: noun
+  forms:
+    pl: die Spickzettel
+  tags: [b1, b1-lektion-12]
+
+- id: 733
+  en: to catch (in the act)
+  uk: спіймати (на гарячому)
+  de: erwischen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 734
+  en: honest
+  uk: чесний
+  de: ehrlich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-12]
+
+- id: 735
+  en: to receive a punishment
+  uk: отримати покарання
+  de: eine Strafe bekommen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 736
+  en: to support
+  uk: підтримувати
+  de: unterstützen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 737
+  en: support
+  uk: підтримка
+  de: Unterstützung
+  article: die
+  type: noun
+  forms:
+    pl: die Unterstützungen
+  tags: [b1, b1-lektion-12]
+
+- id: 738
+  en: to not stress oneself out
+  uk: не зводити себе з розуму
+  de: sich nicht verrückt machen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 739
+  en: to stay calm
+  uk: залишатися спокійним
+  de: ruhig bleiben
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 740
+  en: to be there for sb.
+  uk: бути поруч з кимось
+  de: da sein für
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 741
+  en: to give up
+  uk: здаватися, відмовлятися
+  de: aufgeben
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 742
+  en: to master, to overcome
+  uk: опановувати, долати
+  de: meistern
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 743
+  en: nervousness
+  uk: нервозність
+  de: Nervosität
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-12]
+
+- id: 744
+  en: to distract oneself
+  uk: відволікатися
+  de: sich ablenken
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 745
+  en: to think positively
+  uk: мислити позитивно
+  de: positiv denken
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 746
+  en: to lead, to manage
+  uk: керувати, вести
+  de: leiten
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 747
+  en: to look, to appear
+  uk: виглядати
+  de: aussehen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 748
+  en: to let sb. finish speaking
+  uk: давати комусь закінчити думку
+  de: zu Ende reden lassen
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 749
+  en: to calm (sb.)
+  uk: заспокоювати
+  de: beruhigen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 750
+  en: satisfied, content
+  uk: задоволений
+  de: zufrieden
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-12]
+
+- id: 751
+  en: happy
+  uk: щасливий
+  de: glücklich
+  article: ~
+  type: adj
+  tags: [b1, b1-lektion-12]
+
+- id: 752
+  en: to be pleased, to look forward to
+  uk: радіти
+  de: sich freuen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 753
+  en: fear, anxiety
+  uk: страх, тривога
+  de: Angst
+  article: die
+  type: noun
+  forms:
+    pl: die Ängste
+  tags: [b1, b1-lektion-12]
+
+- id: 754
+  en: to manage to do, to accomplish
+  uk: впоратися, досягти
+  de: schaffen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 755
+  en: to pass (a test), to persist
+  uk: скласти (іспит), існувати
+  de: bestehen
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 756
+  en: work permit
+  uk: дозвіл на роботу
+  de: Arbeitserlaubnis
+  article: die
+  type: noun
+  tags: [b1, b1-lektion-12]
+
+- id: 757
+  en: to avoid
+  uk: уникати
+  de: vermeiden
+  article: ~
+  type: verb
+  tags: [b1, b1-lektion-12]
+
+- id: 758
+  en: to deal with, to handle
+  uk: поводитися з, справлятися з
+  de: umgehen mit
+  article: ~
+  type: phrase
+  tags: [b1, b1-lektion-12]
+
+- id: 759
+  en: Dear Sir or Madam, (formal salutation)
+  uk: Шановні пані та панове, (офіційне звернення)
+  de: Sehr geehrte Damen und Herren,
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 760
+  en: Dear Mr. ... / Dear Ms. ..., (formal)
+  uk: Шановний пане ... / Шановна пані ..., (офіційне)
+  de: Sehr geehrter Herr ... / Sehr geehrte Frau ...,
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 761
+  en: Dear Mrs. ... / Dear Mr. ..., (semi-formal)
+  uk: Дорога пані ..., / Дорогий пане ..., (напівофіційне)
+  de: Liebe Frau ..., / Lieber Herr ...,
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 762
+  en: Good day, Mr. / Ms. ..., (semi-formal greeting)
+  uk: Добрий день, пане / пані ..., (напівофіційне)
+  de: Guten Tag, Herr ... / Frau ...,
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 763
+  en: I would like to inquire whether ...
+  uk: Хотів/хотіла би у Вас поцікавитися, чи ...
+  de: Ich möchte mich bei Ihnen erkundigen, ob ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 764
+  en: I am writing to you because ...
+  uk: Пишу Вам, тому що ...
+  de: Ich schreibe Ihnen, weil ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 765
+  en: I have a question about ...
+  uk: У мене є питання щодо ...
+  de: Ich habe eine Frage zu ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 766
+  en: Hereby I would like to ...
+  uk: Цим листом хочу ...
+  de: Hiermit möchte ich ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 767
+  en: Thank you very much for your message.
+  uk: Дякую за Ваше повідомлення.
+  de: Vielen Dank für Ihre Nachricht.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 768
+  en: I wanted to ask you whether ...
+  uk: Хотів/хотіла Вас запитати, чи ...
+  de: Ich wollte Sie fragen, ob ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 769
+  en: I would like to briefly inform you that ...
+  uk: Хочу коротко повідомити Вам, що ...
+  de: Ich möchte Ihnen kurz mitteilen, dass ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 770
+  en: I am happy to hear from you.
+  uk: Радий/рада отримати від Вас новини.
+  de: Es freut mich, von Ihnen zu hören.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 771
+  en: I am requesting information about ...
+  uk: Прошу Вас надати інформацію щодо ...
+  de: Ich bitte Sie um Informationen über ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 772
+  en: Could you please let me know when ...?
+  uk: Чи могли б Ви повідомити мені, коли ...?
+  de: Könnten Sie mir bitte mitteilen, wann ...?
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 773
+  en: I am interested in ...
+  uk: Я цікавлюся ...
+  de: Ich interessiere mich für ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 774
+  en: I would like to complain because ...
+  uk: Хочу поскаржитися Вам, тому що ...
+  de: Ich möchte mich bei Ihnen beschweren, weil ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 775
+  en: I am sorry, but I cannot ...
+  uk: Мені шкода, але я не можу ...
+  de: Es tut mir leid, aber ich kann ... nicht.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 776
+  en: I wanted to follow up to ask whether ...
+  uk: Хотів/хотіла перепитати, чи ...
+  de: Ich wollte nachfragen, ob ...
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 777
+  en: I hope that ... is possible.
+  uk: Сподіваюся, що ... можливо.
+  de: Ich hoffe, dass ... möglich ist.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 778
+  en: Thank you very much in advance for your reply.
+  uk: Наперед дякую за Вашу відповідь.
+  de: Vielen Dank im Voraus für Ihre Antwort.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 779
+  en: I would be happy to receive a quick reply.
+  uk: Буду радий/рада швидкій відповіді.
+  de: Über eine schnelle Rückmeldung würde ich mich freuen.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 780
+  en: I sincerely thank you for your help.
+  uk: Щиро дякую за Вашу допомогу.
+  de: Für Ihre Hilfe bedanke ich mich herzlich.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 781
+  en: Thank you very much for your help.
+  uk: Дякую за Вашу допомогу.
+  de: Vielen Dank für Ihre Hilfe.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 782
+  en: I look forward to your reply.
+  uk: Чекаю з нетерпінням Вашої відповіді.
+  de: Ich freue mich auf Ihre Antwort.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 783
+  en: Please write back to me soon.
+  uk: Будь ласка, напишіть мені найближчим часом.
+  de: Bitte schreiben Sie mir bald zurück.
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 784
+  en: Yours sincerely / Kind regards (formal sign-off)
+  uk: З повагою (офіційне завершення листа)
+  de: Mit freundlichen Grüßen
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 785
+  en: Best regards (semi-formal sign-off)
+  uk: З найкращими побажаннями
+  de: Viele Grüße
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]
+
+- id: 786
+  en: Warm regards (semi-formal sign-off)
+  uk: Щирі вітання
+  de: Herzliche Grüße
+  article: ~
+  type: phrase
+  tags: [letter, b1-writing]

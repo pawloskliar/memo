@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deutsch Karten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="words.js"></script>
+  <style>
+    :root {
+      --bg:        #F0EAE0;
+      --bg2:       #E4DDD2;
+      --card-bg:   #FDFAF6;
+      --back-bg:   #141414;
+      --ink:       #141414;
+      --ink-mid:   #4A4540;
+      --ink-light: #8A847C;
+      --red:       #C42B10;
+      --yellow:    #E8B800;
+      --mint:      #35BCB2;
+      --mint-dark: #8ADCD8;   /* mint on dark card back */
+      --der:       #5B8DD9;
+      --die:       #C42B10;
+      --das:       var(--mint);
+      --border:    2px solid #141414;
+      --font-ui:   'Barlow Condensed', sans-serif;
+      --font-word: 'Playfair Display', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── Bauhaus accent bars ── */
+    .accent-left {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: 5px; background: var(--red); z-index: 200;
+    }
+    .accent-bottom {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      height: 4px; background: var(--mint); z-index: 200;
+    }
+
+    /* ── Layout ── */
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding-left: 5px;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 36px;
+      border-bottom: var(--border);
+    }
+
+    .logo {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+    }
+    .logo em { color: var(--red); font-style: normal; }
+
+    .header-right {
+      display: flex;
+      gap: 0;
+    }
+
+    .btn-icon {
+      width: 42px; height: 42px;
+      border: var(--border);
+      background: transparent;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      margin-left: -2px;
+      transition: background .12s, color .12s;
+      color: var(--ink);
+    }
+    .btn-icon:hover { background: var(--ink); color: var(--bg); }
+
+    /* ── Progress bar ── */
+    .progress-section {
+      padding: 14px 36px 12px;
+      border-bottom: var(--border);
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 9px;
+    }
+    .score-row {
+      display: flex;
+      gap: 20px;
+    }
+    .score-item {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .s-correct { color: var(--das); }
+    .s-wrong   { color: var(--red); }
+    .s-skip    { color: var(--ink-light); }
+    .progress-count {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+    }
+    .progress-track {
+      height: 3px;
+      background: var(--bg2);
+      border: 1px solid rgba(20,20,20,0.2);
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--mint);
+      transition: width .4s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px 60px;
+      gap: 24px;
+    }
+
+    /* ── Card scene ── */
+    .card-scene {
+      width: 100%;
+      max-width: 580px;
+      height: 290px;
+      perspective: 1400px;
+    }
+
+    .card {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform .55s cubic-bezier(.4,0,.2,1);
+      cursor: pointer;
+    }
+    .card.flipped { transform: rotateY(180deg); }
+    .card.no-click { cursor: default; pointer-events: none; }
+
+    .card-face {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border: var(--border);
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Front face ── */
+    .card-front { background: var(--card-bg); }
+
+    .card-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      border: 1px solid var(--bg2);
+      padding: 3px 9px;
+      align-self: flex-start;
+    }
+
+    .card-front-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .word-primary {
+      font-family: var(--font-word);
+      font-size: 46px;
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
+    .word-secondary {
+      font-family: var(--font-word);
+      font-style: italic;
+      font-size: 21px;
+      font-weight: 400;
+      color: var(--ink-light);
+      margin-top: 7px;
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0;
+    }
+
+    .card-stats {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink-light);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stat-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .stat-dot.s-new  { background: var(--bg2); border: 1px solid var(--ink-light); }
+    .stat-dot.s-bad  { background: var(--red); }
+    .stat-dot.s-mid  { background: var(--yellow); }
+    .stat-dot.s-good { background: var(--das); }
+
+    .card-hint-text {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-top: auto;
+    }
+
+    /* ── Back face ── */
+    .card-back {
+      background: var(--back-bg);
+      color: #F0EAE0;
+      transform: rotateY(180deg);
+    }
+
+    .back-article {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .back-article.art-der { color: #8BB4F0; }
+    .back-article.art-die { color: #F08080; }
+    .back-article.art-das { color: var(--mint-dark); }
+    .back-article.art-none { color: #808070; }
+
+    .back-word {
+      font-family: var(--font-word);
+      font-size: 54px;
+      font-weight: 900;
+      line-height: 1;
+      color: #F0EAE0;
+      margin-bottom: 18px;
+    }
+
+    .back-forms {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 5px 18px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      margin-top: auto;
+    }
+
+    .form-key {
+      font-weight: 500;
+      color: #706860;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .form-val { color: #D8D0C4; font-weight: 400; }
+
+    .back-notes {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: #5A544C;
+      margin-top: 8px;
+      grid-column: 1 / -1;
+      font-style: italic;
+    }
+
+    /* ── Action area ── */
+    .action-zone {
+      width: 100%;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 15px 8px;
+      border: var(--border);
+      background: transparent;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .12s, color .12s;
+      color: var(--ink);
+      margin-left: -2px;
+    }
+    .btn:first-child { margin-left: 0; }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--bg);
+      flex: 1;
+      margin-left: 0;
+    }
+    .btn-primary:hover { background: var(--red); }
+
+    .btn-wrong:hover  { background: var(--red); color: white; }
+    .btn-skip:hover   { background: var(--ink); color: var(--bg); }
+    .btn-right:hover  { background: var(--das); color: white; }
+
+    .kb-row {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--ink-light);
+      text-align: center;
+    }
+    .kb {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      border: 1px solid var(--bg2);
+      padding: 1px 5px;
+      background: var(--card-bg);
+    }
+
+    /* ── Type mode ── */
+    .type-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 6px;
+    }
+
+    .type-input-wrap {
+      display: flex;
+      border: var(--border);
+    }
+
+    .type-input {
+      flex: 1;
+      padding: 14px 16px;
+      font-family: var(--font-ui);
+      font-size: 20px;
+      font-weight: 400;
+      border: none;
+      outline: none;
+      background: var(--card-bg);
+      color: var(--ink);
+      transition: background .15s;
+    }
+    .type-input::placeholder { color: var(--ink-light); opacity: 0.6; }
+    .type-input.is-correct { background: #D0F4F2; }
+    .type-input.is-wrong   { background: #F5DEDE; }
+
+    .btn-check {
+      padding: 0 24px;
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .12s;
+      white-space: nowrap;
+    }
+    .btn-check:hover { background: var(--mint); }
+
+    .type-feedback {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      min-height: 18px;
+      margin-top: 2px;
+    }
+    .type-feedback.correct { color: var(--das); }
+    .type-feedback.wrong   { color: var(--red); }
+
+    /* ── Session complete ── */
+    .complete-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+    .complete-screen.active { display: flex; }
+
+    .complete-heading {
+      font-family: var(--font-word);
+      font-size: 80px;
+      font-weight: 900;
+      line-height: 0.9;
+    }
+
+    .complete-stats {
+      display: flex;
+      width: 100%;
+      border: var(--border);
+    }
+    .stat-block {
+      flex: 1;
+      padding: 24px 16px;
+      border-right: var(--border);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-num {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .stat-num.c { color: var(--das); }
+    .stat-num.w { color: var(--red); }
+    .stat-num.s { color: var(--ink-light); }
+    .stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-top: 4px;
+    }
+
+    .complete-message {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink-mid);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Settings overlay ── */
+    .overlay {
+      position: fixed; inset: 0;
+      background: rgba(20,20,20,.45);
+      z-index: 300;
+      display: none;
+    }
+    .overlay.open { display: block; }
+
+    .settings-panel {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 300px;
+      background: var(--bg);
+      border-left: var(--border);
+      z-index: 301;
+      padding: 28px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform .28s cubic-bezier(.4,0,.2,1);
+    }
+    .settings-panel.open { transform: translateX(0); }
+
+    .settings-heading {
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      padding-bottom: 18px;
+      border-bottom: var(--border);
+      margin-bottom: 24px;
+    }
+
+    .setting-block { margin-bottom: 26px; }
+
+    .setting-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 8px;
+    }
+
+    .opts {
+      border: var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .opt {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--bg2);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background .1s;
+    }
+    .opt:last-child { border-bottom: none; }
+    .opt.sel { background: var(--ink); color: var(--bg); }
+    .opt:not(.sel):hover { background: var(--bg2); }
+    .opt-check { font-size: 14px; }
+
+    /* ── Visibility helpers ── */
+    .hidden { display: none !important; }
+
+    /* ── Report panel ── */
+    .report-panel {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      z-index: 250;
+      overflow-y: auto;
+      padding: 0 0 40px;
+      display: none;
+      flex-direction: column;
+    }
+    .report-panel.open { display: flex; }
+
+    .report-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 36px;
+      border-bottom: var(--border);
+      position: sticky; top: 0;
+      background: var(--bg); z-index: 10;
+    }
+    .report-title {
+      font-size: 12px; font-weight: 800;
+      letter-spacing: 0.35em; text-transform: uppercase;
+    }
+
+    .report-body { padding: 36px; display: flex; flex-direction: column; gap: 40px; }
+
+    /* summary stat boxes */
+    .report-stats-row { display: flex; gap: 0; border: var(--border); }
+    .report-stat {
+      flex: 1; padding: 22px 16px;
+      border-right: var(--border);
+    }
+    .report-stat:last-child { border-right: none; }
+    .report-stat-num {
+      font-size: 44px; font-weight: 800; line-height: 1;
+    }
+    .report-stat-num.c { color: var(--mint); }
+    .report-stat-num.r { color: var(--red); }
+    .report-stat-num.n { color: var(--ink-mid); }
+    .report-stat-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-light); margin-top: 5px;
+    }
+
+    /* section labels */
+    .report-section-title {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--ink-light);
+      padding-bottom: 12px;
+      border-bottom: var(--border);
+      margin-bottom: 16px;
+    }
+
+    /* 7-day bar chart */
+    .chart-wrap {
+      display: flex; gap: 6px; align-items: flex-end;
+      height: 100px;
+    }
+    .chart-col {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 6px;
+    }
+    .chart-bars {
+      flex: 1; width: 100%; display: flex;
+      flex-direction: column; justify-content: flex-end;
+      gap: 1px;
+    }
+    .chart-bar-correct  { background: var(--mint);      min-height: 0; }
+    .chart-bar-wrong    { background: var(--red);       min-height: 0; }
+    .chart-bar-skipped  { background: var(--bg2); border: 1px solid var(--ink-light); min-height: 0; }
+    .chart-day-label {
+      font-family: var(--font-mono); font-size: 9px;
+      color: var(--ink-light); text-align: center;
+      white-space: nowrap;
+    }
+    .chart-day-total {
+      font-family: var(--font-mono); font-size: 9px;
+      color: var(--ink-mid); text-align: center;
+    }
+    .chart-today .chart-day-label { color: var(--mint); font-weight: 700; }
+
+    /* word lists */
+    .word-list { display: flex; flex-direction: column; gap: 0; border: var(--border); }
+    .word-row {
+      display: flex; align-items: center;
+      padding: 10px 14px; border-bottom: 1px solid var(--bg2);
+      gap: 12px;
+    }
+    .word-row:last-child { border-bottom: none; }
+    .word-row-de {
+      font-family: var(--font-word); font-size: 18px; font-weight: 700;
+      flex: 1;
+    }
+    .word-row-en {
+      font-size: 12px; color: var(--ink-light);
+      flex: 1; font-style: italic;
+    }
+    .word-row-acc {
+      font-family: var(--font-mono); font-size: 11px;
+      font-weight: 700; white-space: nowrap;
+    }
+    .word-row-acc.good { color: var(--mint); }
+    .word-row-acc.mid  { color: var(--yellow); }
+    .word-row-acc.bad  { color: var(--red); }
+    .word-row-count {
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--ink-light); white-space: nowrap;
+    }
+
+    .report-empty {
+      font-size: 13px; color: var(--ink-light);
+      padding: 20px 0; text-align: center;
+      font-style: italic;
+    }
+
+    /* chart legend */
+    .chart-legend {
+      display: flex; gap: 16px; margin-top: 12px;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-light);
+    }
+    .legend-dot { width: 8px; height: 8px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<div class="accent-left"></div>
+<div class="accent-bottom"></div>
+
+<div class="app">
+
+  <header>
+    <div class="logo">DEUTSCH<em>·</em>KARTEN</div>
+    <div class="header-right">
+      <button class="btn-icon" id="btnReport"   title="Progress report">▤</button>
+      <button class="btn-icon" id="btnShuffle"  title="Restart / Shuffle">⇄</button>
+      <button class="btn-icon" id="btnSettings" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <div class="progress-section" id="progressSection">
+    <div class="progress-meta">
+      <div class="score-row">
+        <span class="score-item s-correct" id="scoreCorrect">✓ 0</span>
+        <span class="score-item s-wrong"   id="scoreWrong">✗ 0</span>
+        <span class="score-item s-skip"    id="scoreSkip">→ 0</span>
+      </div>
+      <span class="progress-count" id="progressCount">0 / 0</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <main id="mainArea">
+
+    <!-- ── Flip mode ─────────────────────────────────── -->
+    <div id="flipMode" class="hidden" style="width:100%;max-width:580px;display:flex;flex-direction:column;gap:24px;align-items:center;">
+
+      <div class="card-scene" id="flipScene">
+        <div class="card" id="flipCard">
+          <!-- Front -->
+          <div class="card-face card-front">
+            <div class="card-top-row">
+              <div class="card-badge" id="fBadge">noun</div>
+              <div class="card-stats" id="fStats"></div>
+            </div>
+            <div class="card-front-body">
+              <div class="word-primary"   id="fMain"></div>
+              <div class="word-secondary" id="fSub"></div>
+            </div>
+            <div class="card-hint-text" id="fHint">click card or press space to flip</div>
+          </div>
+          <!-- Back -->
+          <div class="card-face card-back">
+            <div class="back-article" id="fBackArticle"></div>
+            <div class="back-word"    id="fBackWord"></div>
+            <div class="back-forms"   id="fBackForms"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-zone">
+        <!-- pre-flip -->
+        <div id="flipPreActions">
+          <button class="btn btn-primary" id="btnFlip" style="margin-left:0;width:100%;">FLIP CARD</button>
+        </div>
+        <!-- post-flip -->
+        <div id="flipPostActions" class="hidden">
+          <div class="btn-row">
+            <button class="btn btn-wrong" id="fBtnWrong">✗ Wrong</button>
+            <button class="btn btn-skip"  id="fBtnSkip">→ Skip</button>
+            <button class="btn btn-right" id="fBtnRight">✓ Correct</button>
+          </div>
+        </div>
+        <div class="kb-row">
+          <span class="kb">Space</span> flip &nbsp;
+          <span class="kb">←</span> wrong &nbsp;
+          <span class="kb">→</span> correct &nbsp;
+          <span class="kb">↓</span> skip
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Type mode ──────────────────────────────────── -->
+    <div id="typeMode" class="hidden" style="width:100%;max-width:580px;display:flex;flex-direction:column;gap:24px;align-items:center;">
+
+      <div class="card-scene">
+        <div class="card no-click" id="typeCard">
+          <!-- Front -->
+          <div class="card-face card-front">
+            <div class="card-top-row">
+              <div class="card-badge" id="tBadge">noun</div>
+              <div class="card-stats" id="tStats"></div>
+            </div>
+            <div class="card-front-body">
+              <div class="word-primary"   id="tMain"></div>
+              <div class="word-secondary" id="tSub"></div>
+            </div>
+            <div class="card-hint-text">type the German word below</div>
+          </div>
+          <!-- Back -->
+          <div class="card-face card-back">
+            <div class="back-article" id="tBackArticle"></div>
+            <div class="back-word"    id="tBackWord"></div>
+            <div class="back-forms"   id="tBackForms"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-zone">
+        <div class="type-label">Type in German:</div>
+        <div class="type-input-wrap">
+          <input id="typeInput" class="type-input" type="text"
+            placeholder="e.g. das Haus" autocomplete="off" autocorrect="off"
+            autocapitalize="off" spellcheck="false">
+          <button class="btn-check" id="btnCheck">CHECK</button>
+        </div>
+        <div class="type-feedback" id="typeFeedback"></div>
+
+        <div class="btn-row" id="typePostActions" style="opacity:0;pointer-events:none;transition:opacity .2s;">
+          <button class="btn btn-wrong" id="tBtnWrong">✗ Wrong</button>
+          <button class="btn btn-skip"  id="tBtnSkip">→ Skip</button>
+          <button class="btn btn-right" id="tBtnRight">✓ Correct</button>
+        </div>
+        <div class="kb-row">
+          <span class="kb">Enter</span> check &nbsp;
+          <span class="kb">←</span> wrong &nbsp;
+          <span class="kb">→</span> correct &nbsp;
+          <span class="kb">↓</span> skip
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Session complete ───────────────────────────── -->
+    <div class="complete-screen" id="completeScreen">
+      <div class="complete-heading">Fertig!</div>
+      <div class="complete-stats">
+        <div class="stat-block">
+          <div class="stat-num c" id="finalCorrect">0</div>
+          <div class="stat-label">Correct</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num w" id="finalWrong">0</div>
+          <div class="stat-label">Wrong</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num s" id="finalSkip">0</div>
+          <div class="stat-label">Skipped</div>
+        </div>
+      </div>
+      <div class="complete-message" id="finalMsg"></div>
+      <button class="btn btn-primary" id="btnRestart" style="padding:16px 48px;font-size:13px;">START AGAIN</button>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── Report ──────────────────────────────────────── -->
+<div class="report-panel" id="reportPanel">
+  <div class="report-header">
+    <div class="report-title">Progress Report</div>
+    <button class="btn-icon" id="btnReportClose" style="margin-left:0;">✕</button>
+  </div>
+  <div class="report-body" id="reportBody"><!-- rendered by JS --></div>
+</div>
+
+<!-- ── Settings ─────────────────────────────────────── -->
+<div class="overlay" id="overlay"></div>
+<div class="settings-panel" id="settingsPanel">
+  <div class="settings-heading">Settings</div>
+
+  <div class="setting-block">
+    <div class="setting-title">Study Mode</div>
+    <div class="opts">
+      <div class="opt sel" data-g="mode" data-v="flip">Flip Card <span class="opt-check">✓</span></div>
+      <div class="opt"     data-g="mode" data-v="type">Type Answer <span class="opt-check"></span></div>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <div class="setting-title">Show Prompt In</div>
+    <div class="opts">
+      <div class="opt"     data-g="lang" data-v="en">English only <span class="opt-check"></span></div>
+      <div class="opt"     data-g="lang" data-v="uk">Ukrainian only <span class="opt-check"></span></div>
+      <div class="opt sel" data-g="lang" data-v="both">Both <span class="opt-check">✓</span></div>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <div class="setting-title">Type Mode: Article Required</div>
+    <div class="opts">
+      <div class="opt sel" data-g="article" data-v="yes">Yes — type "das Haus" <span class="opt-check">✓</span></div>
+      <div class="opt"     data-g="article" data-v="no">No — just "Haus" <span class="opt-check"></span></div>
+    </div>
+  </div>
+
+  <div class="setting-block" id="tagFilterBlock">
+    <div class="setting-title">Filter by Tag</div>
+    <div class="opts" id="tagOpts"><!-- built by JS --></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════════
+const cfg = {
+  mode:           'flip',   // 'flip' | 'type'
+  lang:           'both',   // 'en' | 'uk' | 'both'
+  requireArticle: true,
+  tag:            null,     // null = all; string = filter to this tag
+};
+
+const sess = {
+  words:     [],
+  idx:       0,
+  correct:   0,
+  wrong:     0,
+  skipped:   0,
+  flipped:   false,
+  checked:   false,
+  startTime: null,   // Date.now() at session start
+};
+
+// ═══════════════════════════════════════════════════════════════
+//  STATS YAML PARSER
+// ═══════════════════════════════════════════════════════════════
+function parseStatsYAML(text) {
+  const data  = { word_stats: {}, sessions: [] };
+  let section = null, curSess = null;
+
+  for (const raw of text.split('\n')) {
+    const line     = raw.trimEnd();
+    const stripped = line.trimStart();
+    const indent   = line.length - stripped.length;
+    if (!stripped || stripped.startsWith('#')) continue;
+
+    if (line === 'word_stats:') { section = 'word_stats'; continue; }
+    if (line === 'sessions:')   { section = 'sessions';   continue; }
+
+    if (section === 'word_stats' && indent === 2) {
+      const m = stripped.match(/^"?(\w+)"?\s*:\s*\{(.+)\}/);
+      if (m) {
+        const obj = {};
+        for (const pair of m[2].split(',')) {
+          const ci = pair.indexOf(':');
+          if (ci === -1) continue;
+          const k = pair.slice(0, ci).trim();
+          const v = pair.slice(ci + 1).trim().replace(/^"|"$/g, '');
+          obj[k] = /^\d+$/.test(v) ? parseInt(v) : (v === '~' ? null : v);
+        }
+        data.word_stats[m[1]] = obj;
+      }
+    } else if (section === 'sessions') {
+      if (stripped.startsWith('- ')) {
+        if (curSess) data.sessions.push(curSess);
+        curSess = {};
+        const rest = stripped.slice(2), ci = rest.indexOf(': ');
+        if (ci !== -1) curSess[rest.slice(0, ci).trim()] = parseSV(rest.slice(ci + 2));
+      } else if (indent === 4 && curSess) {
+        const ci = stripped.indexOf(': ');
+        if (ci !== -1) curSess[stripped.slice(0, ci).trim()] = parseSV(stripped.slice(ci + 2));
+      }
+    }
+  }
+  if (curSess) data.sessions.push(curSess);
+  return data;
+}
+function parseSV(v) {
+  v = (v || '').trim().replace(/^"|"$/g, '');
+  if (v === '~' || v === 'null' || v === '') return null;
+  if (/^\d+$/.test(v)) return parseInt(v);
+  return v;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  STATS  (persisted to stats.yaml via POST /save-stats)
+// ═══════════════════════════════════════════════════════════════
+const Stats = {
+  _ws:       {},   // { [id]: { correct, wrong, skipped, streak, first_seen, last_seen } }
+  _sessions: [],   // full session history for reports
+
+  init(data) {
+    this._ws       = data.word_stats || {};
+    this._sessions = data.sessions   || [];
+  },
+
+  get(id) {
+    return this._ws[String(id)] || { correct: 0, wrong: 0, skipped: 0, streak: 0, first_seen: null, last_seen: null };
+  },
+
+  record(id, outcome) {   // outcome: 'correct' | 'wrong' | 'skipped'
+    const key = String(id);
+    if (!this._ws[key]) this._ws[key] = { correct: 0, wrong: 0, skipped: 0, streak: 0, first_seen: null, last_seen: null };
+    const s     = this._ws[key];
+    const today = new Date().toISOString().slice(0, 10);
+    if (!s.first_seen) s.first_seen = today;
+    s.last_seen = today;
+    s[outcome]  = (s[outcome] || 0) + 1;
+    if (outcome === 'correct')    s.streak = (s.streak || 0) + 1;
+    else if (outcome === 'wrong') s.streak = 0;
+  },
+
+  weight(id) {
+    const s = this.get(id), total = s.correct + s.wrong + s.skipped;
+    if (total === 0) return 10;
+    if (s.wrong === 0) return Math.max(1, 4 - Math.floor(total / 2));
+    return 2 + (s.wrong / (s.correct + s.wrong)) * 8;
+  },
+
+  badgeHTML(id) {
+    const s = this.get(id), total = s.correct + s.wrong + s.skipped;
+    if (total === 0) return '<span class="stat-dot s-new"></span><span>new</span>';
+    const answered = s.correct + s.wrong;
+    const acc      = answered > 0 ? Math.round(s.correct / answered * 100) : null;
+    const cls      = acc === null ? 's-new' : acc >= 80 ? 's-good' : acc >= 50 ? 's-mid' : 's-bad';
+    return `<span class="stat-dot ${cls}"></span><span>${total}×${acc !== null ? ` · ${acc}%` : ''}</span>`;
+  },
+
+  async save(sessionData) {
+    try {
+      const res = await fetch('/save-stats', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ word_stats: this._ws, session: sessionData }),
+      });
+      if (res.ok && sessionData) this._sessions.push(sessionData);
+    } catch (e) { console.warn('Could not save stats:', e); }
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════════════════════════
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function norm(s) {
+  return (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function isCorrectAnswer(typed, word) {
+  const t = norm(typed);
+  const withArticle    = norm(word.article ? `${word.article} ${word.de}` : word.de);
+  const withoutArticle = norm(word.de);
+  if (cfg.requireArticle && word.article) return t === withArticle;
+  return t === withArticle || t === withoutArticle;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  RENDER HELPERS
+// ═══════════════════════════════════════════════════════════════
+const FORM_LABELS = {
+  // noun
+  gen: 'GEN', dat: 'DAT', acc: 'ACC', pl: 'PL',
+  // verb
+  ich: 'ICH', du: 'DU', er: 'ER·SIE·ES', wir: 'WIR',
+  prät: 'PRÄT', pp: 'P.P.', aux: 'AUX',
+  // adj
+  komp: 'KOMP', sup: 'SUP',
+};
+
+function buildFormsHTML(forms, notes) {
+  if (!forms) return '';
+  let html = '';
+  for (const [k, v] of Object.entries(forms)) {
+    if (!v) continue;
+    const label = FORM_LABELS[k] || k.toUpperCase();
+    html += `<span class="form-key">${label}</span><span class="form-val">${v}</span>`;
+  }
+  if (notes) html += `<span class="back-notes" style="grid-column:1/-1;">※ ${notes}</span>`;
+  return html;
+}
+
+function articleClass(art) {
+  if (art === 'der') return 'art-der';
+  if (art === 'die') return 'art-die';
+  if (art === 'das') return 'art-das';
+  return 'art-none';
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  POPULATE CARD FACES
+// ═══════════════════════════════════════════════════════════════
+function populateCard(word, prefix) {
+  // front
+  const badge = $(`${prefix}Badge`);
+  const main  = $(`${prefix}Main`);
+  const sub   = $(`${prefix}Sub`);
+  if (badge) badge.textContent = word.type || 'word';
+
+  const statsEl = $(`${prefix}Stats`);
+  if (statsEl) statsEl.innerHTML = Stats.badgeHTML(word.id);
+
+  if (cfg.lang === 'en') {
+    main.textContent = word.en;
+    sub.textContent  = '';
+  } else if (cfg.lang === 'uk') {
+    main.textContent = word.uk;
+    sub.textContent  = '';
+  } else {
+    main.textContent = word.en;
+    sub.textContent  = word.uk;
+  }
+
+  // back
+  const ba = $(`${prefix}BackArticle`);
+  const bw = $(`${prefix}BackWord`);
+  const bf = $(`${prefix}BackForms`);
+
+  if (word.article) {
+    ba.textContent = word.article;
+    ba.className   = `back-article ${articleClass(word.article)}`;
+  } else {
+    ba.textContent = '';
+    ba.className   = 'back-article art-none';
+  }
+  bw.textContent = word.de;
+  bf.innerHTML   = buildFormsHTML(word.forms, word.notes);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  PROGRESS
+// ═══════════════════════════════════════════════════════════════
+function updateProgress() {
+  const total = sess.words.length;
+  const done  = sess.idx;
+  $('progressFill').style.width  = total ? `${(done / total) * 100}%` : '0%';
+  $('progressCount').textContent = `${done} / ${total}`;
+  $('scoreCorrect').textContent  = `✓ ${sess.correct}`;
+  $('scoreWrong').textContent    = `✗ ${sess.wrong}`;
+  $('scoreSkip').textContent     = `→ ${sess.skipped}`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SHOW CARD
+// ═══════════════════════════════════════════════════════════════
+function showCard(word) {
+  if (cfg.mode === 'flip') {
+    // Snap back instantly (no transition) so the new back face is never seen mid-animation
+    sess.flipped = false;
+    const card = $('flipCard');
+    card.style.transition = 'none';
+    card.classList.remove('flipped');
+    card.offsetHeight; // force reflow
+    card.style.transition = '';
+    show('flipPreActions');
+    hide('flipPostActions');
+    populateCard(word, 'f');
+  } else {
+    // type mode
+    sess.checked = false;
+    const card = $('typeCard');
+    card.style.transition = 'none';
+    card.classList.remove('flipped');
+    card.offsetHeight; // force reflow
+    card.style.transition = '';
+
+    const inp = $('typeInput');
+    inp.value    = '';
+    inp.disabled = false;
+    inp.className = 'type-input';
+
+    $('typeFeedback').textContent = '';
+    $('typeFeedback').className   = 'type-feedback';
+
+    const pa = $('typePostActions');
+    pa.style.opacity      = '0';
+    pa.style.pointerEvents = 'none';
+
+    populateCard(word, 't');
+    setTimeout(() => inp.focus(), 60);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  ADVANCE
+// ═══════════════════════════════════════════════════════════════
+function advance(outcome) {
+  Stats.record(sess.words[sess.idx].id, outcome === 'skip' ? 'skipped' : outcome);
+
+  if (outcome === 'correct') sess.correct++;
+  else if (outcome === 'wrong') sess.wrong++;
+  else sess.skipped++;
+
+  sess.idx++;
+  updateProgress();
+
+  if (sess.idx >= sess.words.length) {
+    endSession();
+    return;
+  }
+  showCard(sess.words[sess.idx]);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  FLIP
+// ═══════════════════════════════════════════════════════════════
+function doFlip() {
+  if (sess.flipped) return;
+  sess.flipped = true;
+  $('flipCard').classList.add('flipped');
+  hide('flipPreActions');
+  show('flipPostActions');
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  TYPE CHECK
+// ═══════════════════════════════════════════════════════════════
+function doCheck() {
+  if (sess.checked) return;
+  const inp = $('typeInput');
+  if (!inp.value.trim()) return;
+
+  sess.checked = true;
+  inp.disabled = true;
+
+  const word = sess.words[sess.idx];
+  const ok   = isCorrectAnswer(inp.value, word);
+
+  inp.classList.add(ok ? 'is-correct' : 'is-wrong');
+
+  const fb = $('typeFeedback');
+  if (ok) {
+    fb.textContent = '✓ Correct!';
+    fb.className   = 'type-feedback correct';
+  } else {
+    const expected = word.article ? `${word.article} ${word.de}` : word.de;
+    fb.textContent = `✗  Answer: ${expected}`;
+    fb.className   = 'type-feedback wrong';
+  }
+
+  // reveal back
+  $('typeCard').classList.add('flipped');
+
+  // show advance buttons
+  const pa = $('typePostActions');
+  pa.style.opacity      = '1';
+  pa.style.pointerEvents = '';
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SESSION END
+// ═══════════════════════════════════════════════════════════════
+function endSession() {
+  hide('flipMode');
+  hide('typeMode');
+  $('progressSection').style.visibility = 'hidden';
+
+  $('finalCorrect').textContent = sess.correct;
+  $('finalWrong').textContent   = sess.wrong;
+  $('finalSkip').textContent    = sess.skipped;
+
+  const pct = Math.round((sess.correct / sess.words.length) * 100);
+  const msgs = [
+    [100, 'Perfekt! Ausgezeichnet!'],
+    [80,  'Sehr gut! Keep it up.'],
+    [60,  'Gut! A bit more practice and you\'ll nail it.'],
+    [40,  'Getting there. Review the missed ones.'],
+    [0,   'Don\'t give up — every mistake is a lesson.'],
+  ];
+  $('finalMsg').textContent = (msgs.find(([t]) => pct >= t) || msgs[4])[1];
+  $('completeScreen').classList.add('active');
+
+  // Persist session + word stats
+  const now = new Date();
+  Stats.save({
+    date:     now.toISOString().slice(0, 10),
+    time:     now.toTimeString().slice(0, 5),
+    mode:     cfg.mode,
+    tag:      cfg.tag,
+    correct:  sess.correct,
+    wrong:    sess.wrong,
+    skipped:  sess.skipped,
+    total:    sess.words.length,
+    duration: sess.startTime ? Math.round((Date.now() - sess.startTime) / 1000) : null,
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  START / RESTART
+// ═══════════════════════════════════════════════════════════════
+function startSession() {
+  const pool = cfg.tag
+    ? WORDS_DATA.filter(w => w.tags && w.tags.includes(cfg.tag))
+    : WORDS_DATA;
+  // Weighted sort: higher weight (unseen / wrong-heavy) floats to front,
+  // with randomness so the order isn't perfectly rigid each session.
+  sess.words = [...pool].sort((a, b) => {
+    const wa = Stats.weight(a.id) + Math.random() * 2;
+    const wb = Stats.weight(b.id) + Math.random() * 2;
+    return wb - wa;
+  });
+  sess.idx       = 0;
+  sess.correct   = 0;
+  sess.wrong     = 0;
+  sess.skipped   = 0;
+  sess.startTime = Date.now();
+
+  $('completeScreen').classList.remove('active');
+  $('progressSection').style.visibility = '';
+
+  hide('flipMode');
+  hide('typeMode');
+
+  if (cfg.mode === 'flip') {
+    $('flipMode').classList.remove('hidden');
+  } else {
+    $('typeMode').classList.remove('hidden');
+  }
+
+  updateProgress();
+  showCard(sess.words[0]);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SETTINGS
+// ═══════════════════════════════════════════════════════════════
+function openSettings()  {
+  $('overlay').classList.add('open');
+  $('settingsPanel').classList.add('open');
+}
+function closeSettings() {
+  $('overlay').classList.remove('open');
+  $('settingsPanel').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  REPORT
+// ═══════════════════════════════════════════════════════════════
+function openReport() {
+  renderReport();
+  $('reportPanel').classList.add('open');
+}
+function closeReport() {
+  $('reportPanel').classList.remove('open');
+}
+
+function renderReport() {
+  const allSessions = Stats._sessions;
+  const allWS       = Stats._ws;
+
+  // ── Overall totals ──────────────────────────────────────────
+  let totCorrect = 0, totWrong = 0, totSkipped = 0;
+  for (const s of Object.values(allWS)) {
+    totCorrect  += s.correct  || 0;
+    totWrong    += s.wrong    || 0;
+    totSkipped  += s.skipped  || 0;
+  }
+  const totAnswered  = totCorrect + totWrong;
+  const overallRate  = totAnswered > 0 ? Math.round(totCorrect / totAnswered * 100) : 0;
+
+  // ── Mastered: ≥5 attempts, ≥80% accuracy ───────────────────
+  const mastered = Object.entries(allWS).filter(([, s]) => {
+    const att = s.correct + s.wrong;
+    return att >= 5 && s.correct / att >= 0.8;
+  });
+
+  // ── Active study days ───────────────────────────────────────
+  const studyDays = new Set(allSessions.map(s => s.date).filter(Boolean)).size;
+
+  // ── Last 7 days ─────────────────────────────────────────────
+  const days = [];
+  const now  = new Date();
+  for (let i = 6; i >= 0; i--) {
+    const d    = new Date(now); d.setDate(d.getDate() - i);
+    const date = d.toISOString().slice(0, 10);
+    const day  = d.toLocaleDateString('en', { weekday: 'short' });
+    const ss   = allSessions.filter(s => s.date === date);
+    days.push({
+      date, day, isToday: i === 0,
+      correct: ss.reduce((n, s) => n + (s.correct || 0), 0),
+      wrong:   ss.reduce((n, s) => n + (s.wrong   || 0), 0),
+      skipped: ss.reduce((n, s) => n + (s.skipped || 0), 0),
+    });
+  }
+  const maxDay = Math.max(...days.map(d => d.correct + d.wrong + d.skipped), 1);
+
+  function barH(n) { return Math.max(0, Math.round((n / maxDay) * 80)); }
+
+  const chartHTML = `
+    <div>
+      <div class="report-section-title">Last 7 Days</div>
+      <div class="chart-wrap">
+        ${days.map(d => {
+          const total = d.correct + d.wrong + d.skipped;
+          return `
+          <div class="chart-col${d.isToday ? ' chart-today' : ''}">
+            <div class="chart-bars">
+              <div class="chart-bar-wrong"   style="height:${barH(d.wrong)}px"></div>
+              <div class="chart-bar-skipped" style="height:${barH(d.skipped)}px"></div>
+              <div class="chart-bar-correct" style="height:${barH(d.correct)}px"></div>
+            </div>
+            <div class="chart-day-label">${d.day}</div>
+            <div class="chart-day-total">${total || '—'}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--mint)"></div>correct</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>wrong</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--bg2);border:1px solid var(--ink-light)"></div>skipped</div>
+      </div>
+    </div>`;
+
+  // ── Needs practice: ≥3 attempts, >40% wrong ────────────────
+  function wordLabel(id) {
+    const w = WORDS_DATA.find(x => String(x.id) === String(id));
+    return w ? `${w.article ? w.article + ' ' : ''}${w.de}` : `#${id}`;
+  }
+  function wordSub(id) {
+    const w = WORDS_DATA.find(x => String(x.id) === String(id));
+    return w ? w.en : '';
+  }
+  function accClass(pct) { return pct >= 80 ? 'good' : pct >= 50 ? 'mid' : 'bad'; }
+
+  const struggling = Object.entries(allWS)
+    .filter(([, s]) => (s.correct + s.wrong) >= 3 && s.wrong / (s.correct + s.wrong) > 0.4)
+    .sort(([, a], [, b]) => (b.wrong / (b.correct + b.wrong)) - (a.wrong / (a.correct + a.wrong)))
+    .slice(0, 8);
+
+  const struggleHTML = struggling.length === 0
+    ? '<div class="report-empty">No struggling words yet — keep practicing!</div>'
+    : `<div class="word-list">${struggling.map(([id, s]) => {
+        const att = s.correct + s.wrong, pct = Math.round(s.correct / att * 100);
+        return `<div class="word-row">
+          <div class="word-row-de">${wordLabel(id)}</div>
+          <div class="word-row-en">${wordSub(id)}</div>
+          <div class="word-row-acc ${accClass(pct)}">${pct}%</div>
+          <div class="word-row-count">${att} tries</div>
+        </div>`;
+      }).join('')}</div>`;
+
+  // ── Recently mastered ───────────────────────────────────────
+  const recentMastered = mastered
+    .sort(([, a], [, b]) => (b.last_seen || '').localeCompare(a.last_seen || ''))
+    .slice(0, 8);
+
+  const masteredHTML = recentMastered.length === 0
+    ? '<div class="report-empty">No mastered words yet (need ≥ 5 attempts at ≥ 80%).</div>'
+    : `<div class="word-list">${recentMastered.map(([id, s]) => {
+        const att = s.correct + s.wrong, pct = Math.round(s.correct / att * 100);
+        return `<div class="word-row">
+          <div class="word-row-de">${wordLabel(id)}</div>
+          <div class="word-row-en">${wordSub(id)}</div>
+          <div class="word-row-acc ${accClass(pct)}">${pct}%</div>
+          <div class="word-row-count">${att} tries</div>
+        </div>`;
+      }).join('')}</div>`;
+
+  $('reportBody').innerHTML = `
+    <div>
+      <div class="report-stats-row">
+        <div class="report-stat">
+          <div class="report-stat-num n">${totAnswered}</div>
+          <div class="report-stat-label">Cards Answered</div>
+        </div>
+        <div class="report-stat">
+          <div class="report-stat-num ${overallRate >= 70 ? 'c' : overallRate >= 40 ? 'n' : 'r'}">${overallRate}%</div>
+          <div class="report-stat-label">Success Rate</div>
+        </div>
+        <div class="report-stat">
+          <div class="report-stat-num c">${mastered.length}</div>
+          <div class="report-stat-label">Mastered</div>
+        </div>
+        <div class="report-stat">
+          <div class="report-stat-num n">${studyDays}</div>
+          <div class="report-stat-label">Study Days</div>
+        </div>
+      </div>
+    </div>
+
+    ${chartHTML}
+
+    <div>
+      <div class="report-section-title">Needs Practice</div>
+      ${struggleHTML}
+    </div>
+
+    <div>
+      <div class="report-section-title">Mastered (≥ 5 attempts · ≥ 80%)</div>
+      ${masteredHTML}
+    </div>
+  `;
+}
+
+function applyOpt(group, value) {
+  document.querySelectorAll(`[data-g="${group}"]`).forEach(el => {
+    const isMe = el.dataset.v === value;
+    el.classList.toggle('sel', isMe);
+    el.querySelector('.opt-check').textContent = isMe ? '✓' : '';
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  DOM HELPERS
+// ═══════════════════════════════════════════════════════════════
+function $(id) { return document.getElementById(id); }
+function show(id) { $(id).classList.remove('hidden'); }
+function hide(id) { $(id).classList.add('hidden'); }
+
+// ═══════════════════════════════════════════════════════════════
+//  EVENT LISTENERS
+// ═══════════════════════════════════════════════════════════════
+
+// Header buttons
+$('btnReport').addEventListener('click', openReport);
+$('btnReportClose').addEventListener('click', closeReport);
+$('btnSettings').addEventListener('click', openSettings);
+$('btnShuffle').addEventListener('click', () => { startSession(); closeSettings(); });
+$('overlay').addEventListener('click', closeSettings);
+$('btnRestart').addEventListener('click', startSession);
+
+// Flip mode
+$('flipScene').addEventListener('click', doFlip);
+$('btnFlip').addEventListener('click',  e => { e.stopPropagation(); doFlip(); });
+$('fBtnWrong').addEventListener('click', () => advance('wrong'));
+$('fBtnSkip').addEventListener('click',  () => advance('skip'));
+$('fBtnRight').addEventListener('click', () => advance('correct'));
+
+// Type mode
+$('btnCheck').addEventListener('click', doCheck);
+$('tBtnWrong').addEventListener('click', () => advance('wrong'));
+$('tBtnSkip').addEventListener('click',  () => advance('skip'));
+$('tBtnRight').addEventListener('click', () => advance('correct'));
+
+$('typeInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (!sess.checked) doCheck();
+  }
+});
+
+// Settings — event delegation (covers static + dynamically built tag options)
+$('settingsPanel').addEventListener('click', e => {
+  const el = e.target.closest('.opt');
+  if (!el) return;
+  const g = el.dataset.g, v = el.dataset.v;
+  if (!g) return;
+  applyOpt(g, v);
+  if (g === 'mode')    cfg.mode = v;
+  if (g === 'lang')    cfg.lang = v;
+  if (g === 'article') cfg.requireArticle = v === 'yes';
+  if (g === 'tag')     cfg.tag = v || null;
+});
+
+// Build tag filter from data
+function buildTagFilter() {
+  const counts = {};
+  for (const w of WORDS_DATA) {
+    for (const t of (w.tags || [])) counts[t] = (counts[t] || 0) + 1;
+  }
+  const tags = Object.keys(counts).sort();
+  const cap  = s => s.charAt(0).toUpperCase() + s.slice(1);
+  let html = `<div class="opt sel" data-g="tag" data-v="">All words (${WORDS_DATA.length}) <span class="opt-check">✓</span></div>`;
+  for (const t of tags)
+    html += `<div class="opt" data-g="tag" data-v="${t}">${cap(t)} (${counts[t]}) <span class="opt-check"></span></div>`;
+  $('tagOpts').innerHTML = html;
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  const settingsOpen = $('settingsPanel').classList.contains('open');
+  const doneScreen   = $('completeScreen').classList.contains('active');
+
+  if (settingsOpen) return;
+
+  if (doneScreen) {
+    if (e.key === 'Enter') startSession();
+    return;
+  }
+
+  if (cfg.mode === 'flip') {
+    if ((e.key === ' ' || e.code === 'Space') && !sess.flipped) {
+      e.preventDefault();
+      doFlip();
+    } else if (e.key === 'ArrowLeft'  && sess.flipped) advance('wrong');
+    else if    (e.key === 'ArrowRight' && sess.flipped) advance('correct');
+    else if    (e.key === 'ArrowDown'  && sess.flipped) advance('skip');
+
+  } else {
+    // type mode — Enter handled by input listener
+    if (e.key === 'ArrowLeft'  && sess.checked) advance('wrong');
+    else if (e.key === 'ArrowRight' && sess.checked) advance('correct');
+    else if (e.key === 'ArrowDown'  && sess.checked) advance('skip');
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  BOOT — load words.yaml + stats.yaml in parallel, then start
+// ═══════════════════════════════════════════════════════════════
+const fetchWords = fetch('words.yaml')
+  .then(r => { if (!r.ok) throw new Error('words.yaml not found'); return r.text(); })
+  .then(t => parseYAML(t));
+
+const fetchStats = fetch('stats.yaml')
+  .then(r => r.ok ? r.text() : '')
+  .then(t => t ? parseStatsYAML(t) : { word_stats: {}, sessions: [] })
+  .catch(() => ({ word_stats: {}, sessions: [] }));
+
+Promise.all([fetchWords, fetchStats])
+  .then(([words, statsData]) => {
+    window.WORDS_DATA = words;
+    Stats.init(statsData);
+    buildTagFilter();
+    startSession();
+  })
+  .catch(() => {
+    $('mainArea').innerHTML = `
+      <div style="max-width:480px;text-align:center;display:flex;flex-direction:column;gap:20px;align-items:center;">
+        <div style="font-family:var(--font-word);font-size:52px;font-weight:900;line-height:1;">Oops.</div>
+        <div style="font-size:15px;font-weight:600;color:var(--ink-mid);line-height:1.5;">
+          The app needs a local server to load <code style="font-family:var(--font-mono);background:var(--bg2);padding:2px 6px;">words.yaml</code>.<br>
+          Opening as <code style="font-family:var(--font-mono);background:var(--bg2);padding:2px 6px;">file://</code> blocks file fetching.
+        </div>
+        <div style="border:var(--border);padding:20px 24px;text-align:left;width:100%;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--ink-light);margin-bottom:10px;">Run once in terminal:</div>
+          <code style="font-family:var(--font-mono);font-size:14px;">cd ~/memo &amp;&amp; python3 server.py</code>
+        </div>
+        <div style="font-size:13px;color:var(--ink-light);">Then open <strong>http://localhost:8080</strong> in your browser.</div>
+      </div>`;
+  });
+</script>
+</body>
+</html>
