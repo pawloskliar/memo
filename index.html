@@ -1261,6 +1261,7 @@ function endSession() {
 //  START / RESTART
 // ═══════════════════════════════════════════════════════════════
 function startSession() {
+  _cfgDirty = false;
   const pool = cfg.tag
     ? WORDS_DATA.filter(w => w.tags && w.tags.includes(cfg.tag))
     : WORDS_DATA;
@@ -1303,6 +1304,10 @@ function openSettings()  {
 function closeSettings() {
   $('overlay').classList.remove('open');
   $('settingsPanel').classList.remove('open');
+  if (_cfgDirty) {
+    _cfgDirty = false;
+    startSession();
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1512,6 +1517,7 @@ $('typeInput').addEventListener('keydown', e => {
 });
 
 // Settings — event delegation (covers static + dynamically built tag options)
+let _cfgDirty = false;
 $('settingsPanel').addEventListener('click', e => {
   const el = e.target.closest('.opt');
   if (!el) return;
@@ -1522,6 +1528,7 @@ $('settingsPanel').addEventListener('click', e => {
   if (g === 'lang')    cfg.lang = v;
   if (g === 'article') cfg.requireArticle = v === 'yes';
   if (g === 'tag')     cfg.tag = v || null;
+  _cfgDirty = true;
 });
 
 // Build tag filter from data
