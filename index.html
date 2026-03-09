@@ -20,6 +20,10 @@
   <header>
     <div class="logo">DEUTSCH<em>·</em>KARTEN</div>
     <div class="header-right">
+      <div class="btn-icon-wrap">
+        <button class="btn-icon" id="btnAddWord" title="Add word">+</button>
+        <span class="btn-pending-badge hidden" id="pendingBadge"></span>
+      </div>
       <button class="btn-icon" id="btnReport"   title="Progress report">▤</button>
       <button class="btn-icon" id="btnShuffle"  title="Restart / Shuffle">⇄</button>
       <button class="btn-icon" id="btnSettings" title="Settings">⚙</button>
@@ -173,6 +177,30 @@
     <button class="btn-icon" id="btnReportClose" style="margin-left:0;">✕</button>
   </div>
   <div class="report-body" id="reportBody"><!-- rendered by JS --></div>
+</div>
+
+<!-- ── Add Word ──────────────────────────────────────── -->
+<div class="add-word-panel" id="addWordPanel">
+  <div class="settings-heading">ADD WORD</div>
+
+  <div class="setting-block">
+    <div class="setting-title">Word or Phrase</div>
+    <input class="add-word-input" id="addWordInput" type="text"
+      placeholder="renovieren, das Haus, ..." autocomplete="off"
+      autocorrect="off" autocapitalize="off" spellcheck="false">
+  </div>
+
+  <div class="setting-block">
+    <div class="setting-title">Hint <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></div>
+    <input class="add-word-input" id="addWordHint" type="text"
+      placeholder="B1 verb, b1-lektion-3, ..." autocomplete="off">
+  </div>
+
+  <button class="btn btn-primary" id="btnSubmitWord" style="width:100%;margin-left:0;">ADD →</button>
+
+  <div id="addWordStatus"></div>
+
+  <div id="addWordQueue" class="aw-queue hidden"></div>
 </div>
 
 <!-- ── Settings ─────────────────────────────────────── -->

@@ -948,3 +948,296 @@ Promise.all([fetchWords, fetchStats])
         <div style="font-size:13px;color:var(--ink-light);">Then open <strong>http://localhost:8080</strong> in your browser.</div>
       </div>`;
   });
+
+// ═══════════════════════════════════════════════════════════════
+//  ADD WORD
+// ═══════════════════════════════════════════════════════════════
+
+/** Interval handle for the status-poll loop, or null when idle. */
+let _addWordPollInterval = null;
+
+/**
+ * Opens the Add Word panel and focuses the word input.
+ */
+function openAddWord() {
+  $('addWordPanel').classList.add('open');
+  $('overlay').classList.add('open');
+  setTimeout(() => $('addWordInput').focus(), 60);
+}
+
+/**
+ * Closes the Add Word panel and cancels any in-progress poll.
+ */
+function closeAddWord() {
+  $('addWordPanel').classList.remove('open');
+  $('overlay').classList.remove('open');
+  _stopPoll();
+}
+
+/**
+ * Submits the word from the input to POST /add-word, then
+ * starts polling /add-word-status until the agent responds.
+ */
+async function submitWord() {
+  const word = $('addWordInput').value.trim();
+  const hint = $('addWordHint').value.trim();
+  if (!word) { $('addWordInput').focus(); return; }
+
+  _setAddWordLoading(true);
+  $('addWordStatus').innerHTML = `
+    <div class="aw-status-pending">
+      <div class="aw-spinner"></div>
+      Claude is processing…
+    </div>`;
+
+  try {
+    const res  = await fetch('/add-word', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ word, hint }),
+    });
+    const data = await res.json();
+
+    if (!data.ok) throw new Error(data.error || 'Server error');
+
+    _startPoll(data.requestId);
+
+  } catch (e) {
+    _setAddWordLoading(false);
+    $('addWordStatus').innerHTML = `<div class="aw-status-error">✗ ${e.message}</div>`;
+  }
+}
+
+/**
+ * Starts polling /add-word-status every 2 seconds for the given requestId.
+ * @param {string} requestId
+ */
+function _startPoll(requestId) {
+  _stopPoll();
+  _addWordPollInterval = setInterval(async () => {
+    try {
+      const res  = await fetch(`/add-word-status?id=${requestId}`);
+      const data = await res.json();
+
+      if (data.pending) return; // still processing
+
+      _stopPoll();
+      _setAddWordLoading(false);
+
+      if (data.needs_review) {
+        _showNeedsReview(data.question);
+      } else if (data.ok && data.entry) {
+        _onWordAdded(data.entry);
+      } else {
+        $('addWordStatus').innerHTML = `<div class="aw-status-error">✗ ${data.error || 'Unknown error'}</div>`;
+      }
+    } catch (_) { /* network hiccup — keep polling */ }
+  }, 2000);
+}
+
+/**
+ * Cancels the active poll interval.
+ */
+function _stopPoll() {
+  if (_addWordPollInterval) { clearInterval(_addWordPollInterval); _addWordPollInterval = null; }
+}
+
+/**
+ * Enables or disables the add-word form while a request is in flight.
+ * @param {boolean} loading
+ */
+function _setAddWordLoading(loading) {
+  $('addWordInput').disabled  = loading;
+  $('addWordHint').disabled   = loading;
+  $('btnSubmitWord').disabled = loading;
+  $('btnSubmitWord').textContent = loading ? '…' : 'ADD →';
+}
+
+/**
+ * Called when the agent successfully processes a word.
+ * Pushes it into WORDS_DATA, rebuilds the tag filter, shows a preview,
+ * and optionally injects it at the front of the current session.
+ * @param {object} entry - The new word entry returned by the agent
+ */
+function _onWordAdded(entry) {
+  // Add to live word list
+  window.WORDS_DATA.push(entry);
+  buildTagFilter();
+
+  // Rebuild tag filter selection to reflect current cfg.tag
+  if (cfg.tag) applyOpt('tag', cfg.tag);
+
+  const de = entry.article ? `${entry.article} ${entry.de}` : entry.de;
+  const tags = (entry.tags || []).join(', ');
+
+  $('addWordStatus').innerHTML = `
+    <div class="aw-preview">
+      <div class="aw-preview-de">${de}</div>
+      <div class="aw-preview-meta">${entry.type || ''} · #${entry.id}</div>
+      <div class="aw-preview-trans">${entry.en} · ${entry.uk}</div>
+      <div class="aw-preview-tags">${tags}</div>
+      <div class="aw-preview-actions">
+        <button class="btn btn-primary" onclick="_studyNewWord(${entry.id})" style="margin-left:0;">Study now →</button>
+        <button class="btn" onclick="_resetAddWordForm()">Add another</button>
+      </div>
+    </div>`;
+
+  // Reset inputs ready for the next submission
+  $('addWordInput').value = '';
+  $('addWordHint').value  = '';
+}
+
+/**
+ * Shows a "needs review" message when the agent cannot confidently process a word.
+ * @param {string} question - The question from the agent
+ */
+function _showNeedsReview(question) {
+  $('addWordStatus').innerHTML = `
+    <div class="aw-needs-review">
+      <div class="aw-needs-review-label">⚠ Needs review</div>
+      ${question || 'Check the terminal — Claude needs clarification.'}
+    </div>`;
+}
+
+/**
+ * Injects the newly added word at the front of the current session
+ * (weight 10 so it appears as the next card) and navigates to it.
+ * @param {number} id
+ */
+function _studyNewWord(id) {
+  const word = window.WORDS_DATA.find(w => w.id === id);
+  if (!word) return;
+  sess.words.splice(sess.idx, 0, word);
+  showCard(sess.words[sess.idx]);
+  closeAddWord();
+}
+
+/**
+ * Resets the add-word form and status area for a fresh submission.
+ */
+function _resetAddWordForm() {
+  $('addWordStatus').innerHTML = '';
+  $('addWordInput').focus();
+}
+
+// Add Word event listeners
+$('btnAddWord').addEventListener('click', openAddWord);
+$('btnSubmitWord').addEventListener('click', submitWord);
+$('addWordInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); submitWord(); }
+  if (e.key === 'Escape') closeAddWord();
+});
+$('addWordHint').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); submitWord(); }
+  if (e.key === 'Escape') closeAddWord();
+});
+
+// Close add-word panel when overlay is clicked (overlay is shared with settings)
+// Override the existing overlay listener to handle both panels
+$('overlay').removeEventListener('click', closeSettings);
+$('overlay').addEventListener('click', () => {
+  if ($('settingsPanel').classList.contains('open')) closeSettings();
+  if ($('addWordPanel').classList.contains('open'))  closeAddWord();
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  QUEUE VISUALISER
+// ═══════════════════════════════════════════════════════════════
+
+/** Interval handle for the queue poll, or null when panel is closed. */
+let _queuePollInterval = null;
+
+/**
+ * Fetches /add-word-queue and re-renders the queue list and pending badge.
+ * Called on panel open and every 2 seconds while the panel is open.
+ */
+async function refreshQueue() {
+  try {
+    const res   = await fetch('/add-word-queue');
+    const data  = await res.json();
+    if (!data.ok) return;
+    _renderQueue(data.items || []);
+    _updatePendingBadge(data.items || []);
+  } catch (_) { /* ignore network hiccups */ }
+}
+
+/**
+ * Renders the queue item list into #addWordQueue.
+ * @param {object[]} items
+ */
+function _renderQueue(items) {
+  const el = $('addWordQueue');
+  if (items.length === 0) { el.classList.add('hidden'); return; }
+  el.classList.remove('hidden');
+
+  const ICON = { pending: '○', done: '✓', needs_review: '⚠', error: '✗' };
+
+  el.innerHTML = `
+    <div class="aw-queue-title">Queue (${items.length})</div>
+    ${items.map(item => {
+      const icon  = ICON[item.status] || '○';
+      const de    = item.result?.entry ? (item.result.entry.article ? `${item.result.entry.article} ${item.result.entry.de}` : item.result.entry.de) : '';
+      const spin  = item.status === 'pending' ? '<div class="aw-spinner" style="width:12px;height:12px;flex-shrink:0"></div>' : `<span class="aw-queue-icon ${item.status}">${icon}</span>`;
+      return `
+        <div class="aw-queue-item">
+          ${spin}
+          <span class="aw-queue-word">${item.word}</span>
+          ${de ? `<span class="aw-queue-de">${de}</span>` : ''}
+        </div>`;
+    }).join('')}`;
+}
+
+/**
+ * Updates the pending count badge on the + button.
+ * Shows the badge only when there are pending items.
+ * @param {object[]} items
+ */
+function _updatePendingBadge(items) {
+  const count = items.filter(i => i.status === 'pending').length;
+  const badge = $('pendingBadge');
+  if (count > 0) {
+    badge.textContent = count;
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
+}
+
+/**
+ * Starts the queue poll (every 2s). Called when the add-word panel opens.
+ */
+function _startQueuePoll() {
+  _stopQueuePoll();
+  refreshQueue();
+  _queuePollInterval = setInterval(refreshQueue, 2000);
+}
+
+/**
+ * Stops the queue poll. Called when the add-word panel closes.
+ */
+function _stopQueuePoll() {
+  if (_queuePollInterval) { clearInterval(_queuePollInterval); _queuePollInterval = null; }
+}
+
+// Patch openAddWord / closeAddWord to start/stop the queue poll
+const _origOpenAddWord  = openAddWord;
+const _origCloseAddWord = closeAddWord;
+
+openAddWord = function () {
+  _origOpenAddWord();
+  _startQueuePoll();
+};
+
+closeAddWord = function () {
+  _origCloseAddWord();
+  _stopQueuePoll();
+};
+
+// Keep the badge updated globally (poll even when panel is closed)
+setInterval(async () => {
+  try {
+    const res  = await fetch('/add-word-queue');
+    const data = await res.json();
+    if (data.ok) _updatePendingBadge(data.items || []);
+  } catch (_) {}
+}, 5000);
