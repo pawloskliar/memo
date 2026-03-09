@@ -121,6 +121,50 @@ The Shuffle button also calls `startSession()` directly (resets `_cfgDirty` at i
 ```
 Server merges per-word entries (overwrite) and appends the session record, then rewrites `stats.yaml`.
 
+## Word queue listener (ALWAYS DO THIS FIRST)
+
+At the start of **every session** in this project, immediately spawn a background
+agent to watch the word queue before doing anything else:
+
+```
+Agent(
+  description: "Word queue listener",
+  subagent_type: "general-purpose",
+  run_in_background: true,
+  prompt: """
+    You are a background word-queue processor for the Deutsch Karten flashcard app
+    at /Users/pavlo.skliar/memo.
+
+    Poll /Users/pavlo.skliar/memo/.word-queue/ every 5 seconds for files
+    matching *.json that do NOT have a corresponding *.done.json.
+
+    When you find one:
+    1. Read the request file — it contains { id, word, hint? }
+    2. Read words.yaml to determine the next available ID and existing tags
+    3. Translate and format the word into a complete YAML entry:
+       - de: correct German (with article in the `article` field)
+       - en: English translation
+       - uk: Ukrainian translation (not Russian)
+       - type: noun | verb | adj | phrase | adv
+       - forms: only the most useful ones (pl for nouns; past+pp for verbs)
+       - tags: reuse existing tags; infer b1-lektion-N if applicable
+    4. Append the entry to words.yaml
+    5. Write /Users/pavlo.skliar/memo/.word-queue/<id>.done.json:
+       { "ok": true, "entry": { ...the full entry... } }
+    6. Continue polling.
+
+    If you are uncertain about translation, article, or tags, write:
+       { "ok": false, "needs_review": true, "question": "..." }
+    to the .done.json so the server can surface it to the user in the browser.
+
+    Never stop polling until this agent is explicitly terminated.
+  """
+)
+```
+
+This listener handles words submitted from the browser "Add Word" panel without
+requiring any manual trigger. It runs silently in the background throughout the session.
+
 ## What NOT to change
 
 - Do not add external JS dependencies or a build step
