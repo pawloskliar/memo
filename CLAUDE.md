@@ -125,28 +125,14 @@ Server merges per-word entries (overwrite) and appends the session record, then 
 
 ### 1. Start the dev server
 
-Spawn a background agent to run the local HTTP server so it is visible and
-managed within the Claude session (not orphaned):
+Run this via the Bash tool with `run_in_background: true`:
 
+```bash
+kill $(lsof -ti:8080) 2>/dev/null; python3 /Users/pavlo.skliar/memo/server.py
 ```
-Agent(
-  description: "Dev server",
-  subagent_type: "general-purpose",
-  run_in_background: true,
-  prompt: """
-    Run the Deutsch Karten dev server and keep it alive.
 
-    cd /Users/pavlo.skliar/memo
-    python3 server.py
-
-    If the server exits with a port-in-use error, kill the existing process
-    with: kill $(lsof -ti:8080)
-    then retry: python3 server.py
-
-    Keep this agent running as long as the session is active.
-  """
-)
-```
+This kills any orphaned server on port 8080 and starts a fresh one.
+The background Bash task keeps it visible in the session.
 
 ### 2. Start the word queue listener
 
