@@ -121,10 +121,36 @@ The Shuffle button also calls `startSession()` directly (resets `_cfgDirty` at i
 ```
 Server merges per-word entries (overwrite) and appends the session record, then rewrites `stats.yaml`.
 
-## Word queue listener (ALWAYS DO THIS FIRST)
+## Session startup (ALWAYS DO BOTH, IN PARALLEL, BEFORE ANYTHING ELSE)
 
-At the start of **every session** in this project, immediately spawn a background
-agent to watch the word queue before doing anything else:
+### 1. Start the dev server
+
+Spawn a background agent to run the local HTTP server so it is visible and
+managed within the Claude session (not orphaned):
+
+```
+Agent(
+  description: "Dev server",
+  subagent_type: "general-purpose",
+  run_in_background: true,
+  prompt: """
+    Run the Deutsch Karten dev server and keep it alive.
+
+    cd /Users/pavlo.skliar/memo
+    python3 server.py
+
+    If the server exits with a port-in-use error, kill the existing process
+    with: kill $(lsof -ti:8080)
+    then retry: python3 server.py
+
+    Keep this agent running as long as the session is active.
+  """
+)
+```
+
+### 2. Start the word queue listener
+
+Spawn a background agent to watch the word queue before doing anything else:
 
 ```
 Agent(
