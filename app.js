@@ -1020,12 +1020,15 @@ function _startPoll(requestId) {
       const data = await res.json();
 
       if (data.pending) return; // still processing
+      if (data.skipped) { _onWordExists(data.entry); return; }
 
       _stopPoll();
       _setAddWordLoading(false);
 
       if (data.needs_review) {
         _showNeedsReview(data.question);
+      } else if (data.ok && data.entries) {
+        _onBatchAdded(data.entries, data.skippedCount || 0);
       } else if (data.ok && data.entry) {
         _onWordAdded(data.entry);
       } else {
@@ -1088,6 +1091,30 @@ function _onWordAdded(entry) {
 }
 
 /**
+ * Called when the submitted word already exists in the deck.
+ * Shows its entry details without re-adding it.
+ * @param {object} entry
+ */
+function _onWordExists(entry) {
+  const de   = (entry.article && entry.article !== '~') ? `${entry.article} ${entry.de}` : entry.de;
+  const tags = (entry.tags || []).join(', ');
+  $('addWordStatus').innerHTML = `
+    <div class="aw-preview aw-exists">
+      <div class="aw-exists-label">Already in your deck</div>
+      <div class="aw-preview-de">${de}</div>
+      <div class="aw-preview-meta">${entry.type || ''} · #${entry.id}</div>
+      <div class="aw-preview-trans">${entry.en || ''} · ${entry.uk || ''}</div>
+      <div class="aw-preview-tags">${tags}</div>
+      <div class="aw-preview-actions">
+        <button class="btn btn-primary" onclick="_studyNewWord(${entry.id})" style="margin-left:0;">Study it now →</button>
+        <button class="btn" onclick="_resetAddWordForm()">Add another</button>
+      </div>
+    </div>`;
+  $('addWordInput').value = '';
+  $('addWordHint').value  = '';
+}
+
+/**
  * Shows a "needs review" message when the agent cannot confidently process a word.
  * @param {string} question - The question from the agent
  */
@@ -1119,6 +1146,154 @@ function _resetAddWordForm() {
   $('addWordStatus').innerHTML = '';
   $('addWordInput').focus();
 }
+
+// ═══════════════════════════════════════════════════════════════
+// ── Batch Import ───────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+
+/** Currently selected file for batch import, or null. */
+let _batchFile = null;
+
+/** Sets up drag-and-drop and click-to-select on the drop zone. */
+function _initDropzone() {
+  const zone  = $('awDropzone');
+  const input = $('awFileInput');
+  const inner = $('awDropInner');
+
+  zone.addEventListener('click', () => input.click());
+  input.addEventListener('change', () => {
+    if (input.files[0]) _setBatchFile(input.files[0]);
+  });
+
+  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) _setBatchFile(e.dataTransfer.files[0]);
+  });
+}
+
+/**
+ * Registers the selected file and updates the drop zone display.
+ * @param {File} file
+ */
+function _setBatchFile(file) {
+  _batchFile = file;
+  $('awDropInner').innerHTML = `
+    <span class="aw-drop-icon">✓</span>
+    ${file.name}<br>
+    <span class="aw-drop-sub">click to change</span>`;
+  $('awDropzone').classList.add('has-file');
+}
+
+/**
+ * Submits the batch import (file or URL) to POST /add-batch.
+ */
+async function submitBatch() {
+  const url  = $('awUrlInput').value.trim();
+  const hint = $('awBatchHint').value.trim();
+
+  if (!_batchFile && !url) {
+    $('awBatchStatus').innerHTML = `<div class="aw-status-error">Drop a file or enter a URL.</div>`;
+    return;
+  }
+
+  $('btnSubmitBatch').disabled    = true;
+  $('btnSubmitBatch').textContent = '…';
+  $('awBatchStatus').innerHTML    = `<div class="aw-status-pending"><div class="aw-spinner"></div> Queuing import…</div>`;
+
+  try {
+    let body;
+    if (_batchFile) {
+      const b64 = await _fileToBase64(_batchFile);
+      body = {
+        source:   _batchFile.type === 'application/pdf' ? 'pdf' : 'image',
+        data:     b64,
+        filename: _batchFile.name,
+        hint,
+      };
+    } else {
+      body = { source: 'url', url, hint };
+    }
+
+    const res  = await fetch('/add-batch', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(body),
+    });
+    const data = await res.json();
+
+    if (!data.ok) throw new Error(data.error || 'Server error');
+
+    $('awBatchStatus').innerHTML = `<div class="aw-status-pending"><div class="aw-spinner"></div> Processing… check queue below</div>`;
+    _startPoll(data.requestId);
+
+    // Reset for next import
+    _batchFile = null;
+    $('awFileInput').value   = '';
+    $('awUrlInput').value    = '';
+    $('awBatchHint').value   = '';
+    $('awDropInner').innerHTML = `<span class="aw-drop-icon">⊕</span> Drop image or PDF<br><span class="aw-drop-sub">or click to select</span>`;
+    $('awDropzone').classList.remove('has-file');
+
+  } catch (e) {
+    $('awBatchStatus').innerHTML = `<div class="aw-status-error">✗ ${e.message}</div>`;
+  } finally {
+    $('btnSubmitBatch').disabled    = false;
+    $('btnSubmitBatch').textContent = 'IMPORT →';
+  }
+}
+
+/**
+ * Called when a batch import completes successfully.
+ * @param {object[]} entries - Array of newly added entries
+ * @param {number}   skippedCount - Number of duplicates skipped
+ */
+function _onBatchAdded(entries, skippedCount) {
+  // Add all new entries to the live word list
+  for (const entry of entries) {
+    if (!window.WORDS_DATA.find(w => w.id === entry.id)) {
+      window.WORDS_DATA.push(entry);
+    }
+  }
+  buildTagFilter();
+
+  const lines = entries.map(e => {
+    const de = (e.article && e.article !== '~') ? `${e.article} ${e.de}` : e.de;
+    return `<div class="aw-batch-row"><span class="aw-batch-de">${de}</span> <span class="aw-batch-trans">${e.en}</span></div>`;
+  }).join('');
+
+  const skipNote = skippedCount > 0 ? `<div class="aw-batch-skip">${skippedCount} duplicate(s) skipped</div>` : '';
+
+  $('awBatchStatus').innerHTML = `
+    <div class="aw-preview">
+      <div class="aw-preview-meta">✓ Added ${entries.length} word${entries.length !== 1 ? 's' : ''}</div>
+      <div class="aw-batch-list">${lines}</div>
+      ${skipNote}
+    </div>`;
+}
+
+/**
+ * Reads a File as a base64 string (without the data: URI prefix).
+ * @param {File} file
+ * @returns {Promise<string>}
+ */
+function _fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload  = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// Batch import event listeners
+$('btnSubmitBatch').addEventListener('click', submitBatch);
+$('awUrlInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); submitBatch(); }
+});
+_initDropzone();
 
 // Add Word event listeners
 $('btnAddWord').addEventListener('click', openAddWord);

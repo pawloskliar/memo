@@ -159,6 +159,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._handle_save_stats(length)
         elif parsed.path == '/add-word':
             self._handle_add_word(length)
+        elif parsed.path == '/add-batch':
+            self._handle_add_batch(length)
         else:
             self.send_response(404); self.end_headers()
 
@@ -225,6 +227,52 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
             hint_str = f' (hint: "{hint}")' if hint else ''
             print(f'\n⚡ [{datetime.now().strftime("%H:%M:%S")}] New word: "{word}"{hint_str}')
+            print(f'   Queued → .word-queue/{request_id}.json')
+
+            self._json({'ok': True, 'requestId': request_id})
+
+        except Exception as e:
+            self._json({'error': str(e)}, 500)
+
+    def _handle_add_batch(self, length):
+        try:
+            import base64
+            body   = json.loads(self.rfile.read(length))
+            source = body.get('source', '')   # 'image' | 'pdf' | 'url'
+            hint   = body.get('hint', '').strip()
+
+            if source not in ('image', 'pdf', 'url'):
+                return self._json({'ok': False, 'error': 'source must be image, pdf, or url'}, 400)
+
+            QUEUE_DIR.mkdir(exist_ok=True)
+            request_id = str(int(datetime.now().timestamp() * 1000))
+
+            queue_item = {
+                'requestId':   request_id,
+                'type':        'batch',
+                'source':      source,
+                'hint':        hint,
+                'submittedAt': datetime.now().isoformat(),
+            }
+
+            if source in ('image', 'pdf'):
+                data     = body.get('data', '')
+                filename = body.get('filename', f'upload.{"pdf" if source == "pdf" else "png"}')
+                ext      = Path(filename).suffix or ('.pdf' if source == 'pdf' else '.png')
+                saved    = QUEUE_DIR / f'{request_id}.source{ext}'
+                saved.write_bytes(base64.b64decode(data))
+                queue_item['sourcePath'] = str(saved)
+                queue_item['filename']   = filename
+                print(f'\n📎 [{datetime.now().strftime("%H:%M:%S")}] Batch import: {filename}')
+            elif source == 'url':
+                url = body.get('url', '').strip()
+                if not url:
+                    return self._json({'ok': False, 'error': 'url is required'}, 400)
+                queue_item['url'] = url
+                print(f'\n🌐 [{datetime.now().strftime("%H:%M:%S")}] Batch import URL: {url}')
+
+            req_file = QUEUE_DIR / f'{request_id}.json'
+            req_file.write_text(json.dumps(queue_item, ensure_ascii=False), 'utf-8')
             print(f'   Queued → .word-queue/{request_id}.json')
 
             self._json({'ok': True, 'requestId': request_id})

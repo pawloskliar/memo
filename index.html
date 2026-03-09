@@ -201,6 +201,35 @@
   <div id="addWordStatus"></div>
 
   <div id="addWordQueue" class="aw-queue hidden"></div>
+
+  <div class="aw-section-divider">— or import from —</div>
+
+  <div class="setting-block">
+    <div class="setting-title">Image or PDF</div>
+    <div class="aw-dropzone" id="awDropzone">
+      <input type="file" id="awFileInput" accept="image/*,.pdf" style="display:none">
+      <div class="aw-drop-inner" id="awDropInner">
+        <span class="aw-drop-icon">⊕</span>
+        Drop image or PDF<br>
+        <span class="aw-drop-sub">or click to select</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <div class="setting-title">Webpage URL</div>
+    <input class="add-word-input" id="awUrlInput" type="url"
+      placeholder="https://..." autocomplete="off">
+  </div>
+
+  <div class="setting-block">
+    <div class="setting-title">Hint <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></div>
+    <input class="add-word-input" id="awBatchHint" type="text"
+      placeholder="b1-lektion-5, ..." autocomplete="off">
+  </div>
+
+  <button class="btn" id="btnSubmitBatch" style="width:100%;margin-left:0;">IMPORT →</button>
+  <div id="awBatchStatus"></div>
 </div>
 
 <!-- ── Settings ─────────────────────────────────────── -->

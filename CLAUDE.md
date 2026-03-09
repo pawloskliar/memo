@@ -163,6 +163,15 @@ Agent(
     4. Append the entry to words.yaml
     5. Write /Users/pavlo.skliar/memo/.word-queue/<id>.done.json:
        { "ok": true, "entry": { ...the full entry... } }
+
+    For batch queue items (type: "batch"):
+    - source "image" or "pdf": read the base64 file at sourcePath using the Read tool,
+      use your vision/document capabilities to extract all German vocabulary words listed,
+      translate each one (de/en/uk/article/type/forms/tags), append all to words.yaml,
+      write done.json: { "ok": true, "type": "batch", "entries": [...], "skippedCount": N }
+    - source "url": use WebFetch to load the URL, extract all German vocabulary,
+      process each word the same way, write batch done.json as above
+
     6. Continue polling.
 
     If you are uncertain about translation, article, or tags, write:

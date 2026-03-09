@@ -850,3 +850,67 @@ main {
 .aw-queue-icon.done         { color: var(--mint); }
 .aw-queue-icon.needs_review { color: var(--yellow); }
 .aw-queue-icon.error        { color: var(--red); }
+
+/* ── Batch Import ──────────────────────────────────── */
+
+.aw-section-divider {
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: var(--ink-light);
+  margin: 18px 0 14px;
+  position: relative;
+}
+
+.aw-dropzone {
+  border: 2px dashed var(--ink);
+  background: transparent;
+  cursor: pointer;
+  padding: 18px 12px;
+  text-align: center;
+  transition: background .15s, border-color .15s;
+}
+.aw-dropzone:hover,
+.aw-dropzone.drag-over {
+  background: rgba(26,26,26,.05);
+  border-color: var(--mint);
+  border-style: solid;
+}
+.aw-dropzone.has-file {
+  border-style: solid;
+  border-color: var(--mint);
+}
+.aw-drop-inner {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink);
+  pointer-events: none;
+}
+.aw-drop-icon {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+.aw-drop-sub {
+  font-size: 10px;
+  color: var(--ink-light);
+  letter-spacing: .06em;
+}
+
+.aw-exists { background: rgba(232,184,0,.08); }
+.aw-exists-label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--yellow);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.aw-batch-list { margin: 8px 0 4px; }
+.aw-batch-row  { padding: 3px 0; font-size: 13px; }
+.aw-batch-de   { font-family: var(--font-mono); font-weight: 500; margin-right: 8px; }
+.aw-batch-trans { color: var(--ink-light); font-size: 12px; }
+.aw-batch-skip  { font-size: 11px; color: var(--ink-light); margin-top: 4px; }
