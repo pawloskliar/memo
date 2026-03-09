@@ -4,12 +4,12 @@
 //  STATE
 // ═══════════════════════════════════════════════════════════════
 
-/** @type {{ mode: string, lang: string, requireArticle: boolean, tag: string|null }} */
+/** @type {{ mode: string, lang: string, requireArticle: boolean, tags: string[] }} */
 const cfg = {
   mode:           'flip',   // 'flip' | 'type'
   lang:           'both',   // 'en' | 'uk' | 'both'
   requireArticle: true,
-  tag:            null,     // null = all; string = filter to this tag
+  tags:           [],       // empty = all; array of strings = filter to any of these tags
 };
 
 /** @type {{ words: object[], idx: number, correct: number, wrong: number, skipped: number, flipped: boolean, checked: boolean, startTime: number|null }} */
@@ -505,7 +505,7 @@ function endSession() {
     date:     now.toISOString().slice(0, 10),
     time:     now.toTimeString().slice(0, 5),
     mode:     cfg.mode,
-    tag:      cfg.tag,
+    tag:      cfg.tags.length ? cfg.tags.join(',') : null,
     correct:  sess.correct,
     wrong:    sess.wrong,
     skipped:  sess.skipped,
@@ -524,8 +524,8 @@ function endSession() {
  */
 function startSession() {
   _cfgDirty = false;
-  const pool = cfg.tag
-    ? WORDS_DATA.filter(w => w.tags && w.tags.includes(cfg.tag))
+  const pool = cfg.tags.length
+    ? WORDS_DATA.filter(w => w.tags && cfg.tags.some(t => w.tags.includes(t)))
     : WORDS_DATA;
   // Weighted sort: higher weight (unseen / wrong-heavy) floats to front,
   // with randomness so the order isn't perfectly rigid each session.
@@ -861,28 +861,76 @@ $('settingsPanel').addEventListener('click', e => {
   if (!el) return;
   const g = el.dataset.g, v = el.dataset.v;
   if (!g) return;
+
+  if (g === 'tag') {
+    if (!v) {
+      cfg.tags = [];            // "All words" clears selection
+    } else {
+      const idx = cfg.tags.indexOf(v);
+      if (idx >= 0) cfg.tags.splice(idx, 1);
+      else          cfg.tags.push(v);
+    }
+    renderTagOpts();
+    _cfgDirty = true;
+    return;
+  }
+
   applyOpt(g, v);
   if (g === 'mode')    cfg.mode = v;
   if (g === 'lang')    cfg.lang = v;
   if (g === 'article') cfg.requireArticle = v === 'yes';
-  if (g === 'tag')     cfg.tag = v || null;
   _cfgDirty = true;
 });
 
+let _allTags = [], _tagCounts = {};
+
 /**
- * Builds the tag filter option list in settings from the loaded vocabulary data.
- * Called once after WORDS_DATA is available.
+ * Builds tag metadata from loaded vocabulary and renders the tag list.
+ * Called once after WORDS_DATA is available, and after new words are added.
  */
 function buildTagFilter() {
   const counts = {};
   for (const w of WORDS_DATA) {
     for (const t of (w.tags || [])) counts[t] = (counts[t] || 0) + 1;
   }
-  const tags = Object.keys(counts).sort();
-  const cap  = s => s.charAt(0).toUpperCase() + s.slice(1);
-  let html = `<div class="opt sel" data-g="tag" data-v="">All words (${WORDS_DATA.length}) <span class="opt-check">✓</span></div>`;
-  for (const t of tags)
-    html += `<div class="opt" data-g="tag" data-v="${t}">${cap(t)} (${counts[t]}) <span class="opt-check"></span></div>`;
+  _allTags   = Object.keys(counts).sort();
+  _tagCounts = counts;
+  renderTagOpts();
+}
+
+/**
+ * Returns true if every character of query appears in order inside str.
+ * @param {string} query
+ * @param {string} str
+ */
+function _fuzzyMatch(query, str) {
+  query = query.toLowerCase();
+  str   = str.toLowerCase();
+  let qi = 0;
+  for (let i = 0; i < str.length && qi < query.length; i++) {
+    if (str[i] === query[qi]) qi++;
+  }
+  return qi === query.length;
+}
+
+/**
+ * Re-renders the tag option list, applying the current fuzzy search query
+ * and highlighting all currently selected tags.
+ */
+function renderTagOpts() {
+  const query      = ($('tagSearch').value || '').trim();
+  const cap        = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const visible    = query ? _allTags.filter(t => _fuzzyMatch(query, t)) : _allTags;
+  const matchCount = cfg.tags.length
+    ? WORDS_DATA.filter(w => w.tags && cfg.tags.some(t => w.tags.includes(t))).length
+    : WORDS_DATA.length;
+  const allSel     = cfg.tags.length === 0;
+
+  let html = `<div class="opt${allSel ? ' sel' : ''}" data-g="tag" data-v="">All words (${matchCount}) <span class="opt-check">${allSel ? '✓' : ''}</span></div>`;
+  for (const t of visible) {
+    const sel = cfg.tags.includes(t);
+    html += `<div class="opt${sel ? ' sel' : ''}" data-g="tag" data-v="${t}">${cap(t)} (${_tagCounts[t]}) <span class="opt-check">${sel ? '✓' : ''}</span></div>`;
+  }
   $('tagOpts').innerHTML = html;
 }
 
@@ -1066,9 +1114,6 @@ function _onWordAdded(entry) {
   // Add to live word list
   window.WORDS_DATA.push(entry);
   buildTagFilter();
-
-  // Rebuild tag filter selection to reflect current cfg.tag
-  if (cfg.tag) applyOpt('tag', cfg.tag);
 
   const de = entry.article ? `${entry.article} ${entry.de}` : entry.de;
   const tags = (entry.tags || []).join(', ');
@@ -1306,6 +1351,10 @@ $('addWordHint').addEventListener('keydown', e => {
   if (e.key === 'Enter') { e.preventDefault(); submitWord(); }
   if (e.key === 'Escape') closeAddWord();
 });
+
+// Tag search — fuzzy filter the tag list as the user types
+$('tagSearch').addEventListener('input', renderTagOpts);
+$('tagSearch').addEventListener('keydown', e => { if (e.key === 'Escape') $('tagSearch').value = '', renderTagOpts(); });
 
 // Close add-word panel when overlay is clicked (overlay is shared with settings)
 // Override the existing overlay listener to handle both panels

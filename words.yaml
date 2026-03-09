@@ -49,7 +49,7 @@
     dat: dem Haus
     acc: das Haus
     pl: die Häuser
-  tags: [basics, home]
+  tags: [a1, home]
 
 - id: 2
   en: dog
@@ -62,7 +62,7 @@
     dat: dem Hund
     acc: den Hund
     pl: die Hunde
-  tags: [basics, animals]
+  tags: [a1, animals]
 
 - id: 3
   en: cat
@@ -75,7 +75,7 @@
     dat: der Katze
     acc: die Katze
     pl: die Katzen
-  tags: [basics, animals]
+  tags: [a1, animals]
 
 - id: 4
   en: book
@@ -88,7 +88,7 @@
     dat: dem Buch
     acc: das Buch
     pl: die Bücher
-  tags: [basics, objects]
+  tags: [a1, education, daily-life]
 
 - id: 5
   en: time
@@ -101,7 +101,7 @@
     dat: der Zeit
     acc: die Zeit
     pl: die Zeiten
-  tags: [basics, abstract]
+  tags: [a1, time]
 
 # ── VERBS ────────────────────────────────────────────────────────────
 
@@ -118,7 +118,7 @@
     prät: ging
     pp: gegangen
     aux: sein
-  tags: [basics, movement, verbs]
+  tags: [a1, verbs, daily-life]
 
 - id: 7
   en: to eat
@@ -134,7 +134,7 @@
     pp: gegessen
     aux: haben
   notes: stem vowel change du/er — e → i
-  tags: [basics, food, verbs]
+  tags: [a1, verbs, food]
 
 - id: 8
   en: to have
@@ -149,7 +149,7 @@
     prät: hatte
     pp: gehabt
     aux: haben
-  tags: [basics, verbs]
+  tags: [a1, verbs]
 
 - id: 9
   en: to be
@@ -164,7 +164,7 @@
     prät: war
     pp: gewesen
     aux: sein
-  tags: [basics, verbs]
+  tags: [a1, verbs]
 
 # ── ADJECTIVES ───────────────────────────────────────────────────────
 
@@ -177,7 +177,7 @@
   forms:
     komp: besser
     sup: am besten
-  tags: [basics, adjectives]
+  tags: [a1, adjectives]
 
 # ── EMOTIONS (positive) ──────────────────────────────────────────────
 
@@ -190,7 +190,7 @@
   forms:
     komp: fröhlicher
     sup: am fröhlichsten
-  tags: [emotions, emotions-positive]
+  tags: [a2, emotions, adjectives]
 
 - id: 12
   en: enthusiastic / excited
@@ -201,7 +201,7 @@
   forms:
     komp: begeisterter
     sup: am begeistertsten
-  tags: [emotions, emotions-positive]
+  tags: [a2, emotions, adjectives]
 
 - id: 13
   en: funny / amusing
@@ -212,7 +212,7 @@
   forms:
     komp: lustiger
     sup: am lustigsten
-  tags: [emotions, emotions-positive]
+  tags: [a2, emotions, adjectives]
 
 - id: 14
   en: relaxed
@@ -223,7 +223,7 @@
   forms:
     komp: entspannter
     sup: am entspanntesten
-  tags: [emotions, emotions-positive]
+  tags: [a2, emotions, adjectives]
 
 - id: 15
   en: calm / quiet
@@ -234,7 +234,7 @@
   forms:
     komp: ruhiger
     sup: am ruhigsten
-  tags: [emotions, emotions-positive]
+  tags: [a2, emotions, adjectives]
 
 - id: 16
   en: satisfied / content
@@ -245,7 +245,7 @@
   forms:
     komp: zufriedener
     sup: am zufriedensten
-  tags: [emotions, emotions-positive]
+  tags: [a2, emotions, adjectives]
 
 - id: 17
   en: interested
@@ -256,7 +256,7 @@
   forms:
     komp: interessierter
     sup: am interessiertesten
-  tags: [emotions, emotions-positive]
+  tags: [a2, emotions, adjectives]
 
 # ── EMOTIONS (negative) ──────────────────────────────────────────────
 
@@ -269,7 +269,7 @@
   forms:
     komp: trauriger
     sup: am traurigsten
-  tags: [emotions, emotions-negative]
+  tags: [a2, emotions, adjectives]
 
 - id: 19
   en: angry / furious
@@ -280,7 +280,7 @@
   forms:
     komp: wütender
     sup: am wütendsten
-  tags: [emotions, emotions-negative]
+  tags: [a2, emotions, adjectives]
 
 - id: 20
   en: annoyed / upset
@@ -291,7 +291,7 @@
   forms:
     komp: verärgerter
     sup: am verärgertsten
-  tags: [emotions, emotions-negative]
+  tags: [a2, emotions, adjectives]
 
 - id: 21
   en: irritated / fed up
@@ -302,7 +302,7 @@
   forms:
     komp: genervter
     sup: am genervtesten
-  tags: [emotions, emotions-negative]
+  tags: [a2, emotions, adjectives]
 
 - id: 22
   en: bored
@@ -313,7 +313,7 @@
   forms:
     komp: gelangweilter
     sup: am gelangweiltsten
-  tags: [emotions, emotions-negative]
+  tags: [a2, emotions, adjectives]
 
 - id: 23
   en: thoughtful / pensive
@@ -324,7 +324,7 @@
   forms:
     komp: nachdenklicher
     sup: am nachdenklichsten
-  tags: [emotions, emotions-negative]
+  tags: [a2, emotions, adjectives]
 
 - id: 24
   en: annoying / irritating
@@ -335,7 +335,7 @@
   forms:
     komp: ärgerlicher
     sup: am ärgerlichsten
-  tags: [emotions, emotions-negative]
+  tags: [a2, emotions, adjectives]
 
 # ── PICTURE DESCRIPTION — phrases ────────────────────────────────────
 
@@ -345,7 +345,7 @@
   de: Auf dem Foto / auf dem Bild sehe ich ...
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 26
   en: The photo shows ...
@@ -353,7 +353,7 @@
   de: Das Foto zeigt ...
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 27
   en: In the photo one can see ...
@@ -361,7 +361,7 @@
   de: Auf dem Foto sieht man ...
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 28
   en: in the foreground
@@ -369,7 +369,7 @@
   de: im Vordergrund
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 29
   en: in the background
@@ -377,7 +377,7 @@
   de: im Hintergrund
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 30
   en: I suspect / assume that ...
@@ -385,7 +385,7 @@
   de: Ich vermute, dass ...
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 31
   en: I think / I believe / I mean
@@ -393,7 +393,7 @@
   de: Ich denke / ich glaube / ich meine
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 32
   en: In my opinion
@@ -401,7 +401,7 @@
   de: Meiner Meinung nach
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 33
   en: I personally think
@@ -409,7 +409,7 @@
   de: Ich persönlich denke
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 34
   en: As far as I'm concerned
@@ -417,7 +417,7 @@
   de: Was mich angeht
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 35
   en: This picture reminds me of ...
@@ -425,7 +425,7 @@
   de: Dieses Bild erinnert mich an ...
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 36
   en: In my homeland / home country
@@ -433,7 +433,7 @@
   de: In meiner Heimat
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 37
   en: similar to
@@ -441,7 +441,7 @@
   de: ähnlich wie
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 38
   en: different from
@@ -449,7 +449,7 @@
   de: anders als
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
 
 - id: 39
   en: They look / appear ...
@@ -457,7 +457,7 @@
   de: Sie sehen ... aus
   article: ~
   type: phrase
-  tags: [picture-description]
+  tags: [b1, phrases, language]
   notes: separable verb — "aus" goes to the end
 
 # ── DIALOGUE HELPERS — Aufgabe nennen (stating the task) ─────────────
@@ -468,7 +468,7 @@
   de: Wie du weißt, sollen wir zusammen ... planen.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-task]
+  tags: [b1, phrases, language]
 
 - id: 41
   en: Our task is to plan ...
@@ -476,7 +476,7 @@
   de: Unsere Aufgabe ist es, ... zu planen.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-task]
+  tags: [b1, phrases, language]
 
 - id: 42
   en: We should organize ... together.
@@ -484,7 +484,7 @@
   de: Wir sollen gemeinsam ... organisieren.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-task]
+  tags: [b1, phrases, language]
 
 # ── DIALOGUE HELPERS — Etwas vorschlagen (making suggestions) ────────
 
@@ -494,7 +494,7 @@
   de: Ich finde / denke / meine, dass ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-suggest]
+  tags: [b1, phrases, language]
 
 - id: 44
   en: In my opinion, we should ...
@@ -502,7 +502,7 @@
   de: Meiner Meinung nach sollten wir ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-suggest]
+  tags: [b1, phrases, language]
 
 - id: 45
   en: I suggest that we ...
@@ -510,7 +510,7 @@
   de: Ich schlage vor, dass wir ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-suggest]
+  tags: [b1, phrases, language]
 
 - id: 46
   en: My suggestion is that we ...
@@ -518,7 +518,7 @@
   de: Mein Vorschlag ist, dass wir ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-suggest]
+  tags: [b1, phrases, language]
 
 - id: 47
   en: It would be good if we ...
@@ -526,7 +526,7 @@
   de: Es wäre gut, wenn wir ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-suggest]
+  tags: [b1, phrases, language]
 
 - id: 48
   en: My idea would be that we ...
@@ -534,7 +534,7 @@
   de: Meine Idee wäre, dass wir ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-suggest]
+  tags: [b1, phrases, language]
 
 - id: 49
   en: I have an idea. We could ...
@@ -542,7 +542,7 @@
   de: Ich hätte da eine Idee. Wir könnten ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-suggest]
+  tags: [b1, phrases, language]
 
 - id: 50
   en: I would appreciate it if we ...
@@ -550,7 +550,7 @@
   de: Ich würde gut finden, wenn wir ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-suggest]
+  tags: [b1, phrases, language]
 
 # ── DIALOGUE HELPERS — Auf den Partner eingehen (engaging partner) ───
 
@@ -560,7 +560,7 @@
   de: Was meinst / sagst du dazu?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 52
   en: What do you think about it?
@@ -568,7 +568,7 @@
   de: Was hältst du davon?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 53
   en: What is your opinion?
@@ -576,7 +576,7 @@
   de: Was ist deine Meinung?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 54
   en: What do you suggest?
@@ -584,7 +584,7 @@
   de: Was schlägst du vor?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 55
   en: Do you have a (different) suggestion?
@@ -592,7 +592,7 @@
   de: Hast du einen (anderen) Vorschlag?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 56
   en: Do you have a (better) idea?
@@ -600,7 +600,7 @@
   de: Hast du eine (bessere) Idee?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 57
   en: Do you agree with it if we ...?
@@ -608,7 +608,7 @@
   de: Bist du einverstanden damit, wenn wir ...?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 58
   en: What do you think about it if we ...?
@@ -616,7 +616,7 @@
   de: Was hältst du davon, wenn wir ...?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 59
   en: What else do we need?
@@ -624,7 +624,7 @@
   de: Was brauchen wir noch?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 60
   en: What else is important?
@@ -632,7 +632,7 @@
   de: Was ist noch wichtig?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 61
   en: What else do we still need to plan?
@@ -640,7 +640,7 @@
   de: Was müssen wir noch planen?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 - id: 62
   en: What else do we still need to consider?
@@ -648,7 +648,7 @@
   de: Was müssen wir noch beachten?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-engage]
+  tags: [b1, phrases, language]
 
 # ── DIALOGUE HELPERS — Zustimmen (agreeing) ──────────────────────────
 
@@ -658,7 +658,7 @@
   de: Das ist eine gute Idee.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-agree]
+  tags: [b1, phrases, language]
 
 - id: 64
   en: That is a good suggestion / plan.
@@ -666,7 +666,7 @@
   de: Das ist ein guter Vorschlag / Plan.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-agree]
+  tags: [b1, phrases, language]
 
 - id: 65
   en: I (completely) agree with you.
@@ -674,7 +674,7 @@
   de: Ich bin (ganz) deiner Meinung.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-agree]
+  tags: [b1, phrases, language]
 
 - id: 66
   en: I am of the same opinion as you.
@@ -682,7 +682,7 @@
   de: Ich bin der gleichen Meinung wie du.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-agree]
+  tags: [b1, phrases, language]
 
 - id: 67
   en: I agree with you.
@@ -690,7 +690,7 @@
   de: Ich stimme dir zu.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-agree]
+  tags: [b1, phrases, language]
 
 - id: 68
   en: You are right.
@@ -698,7 +698,7 @@
   de: Du hast Recht.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-agree]
+  tags: [b1, phrases, language]
 
 - id: 69
   en: I see it the same way.
@@ -706,7 +706,7 @@
   de: Das sehe ich auch so.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-agree]
+  tags: [b1, phrases, language]
 
 - id: 70
   en: We can do it that way.
@@ -714,7 +714,7 @@
   de: Das können wir so machen.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-agree]
+  tags: [b1, phrases, language]
 
 # ── DIALOGUE HELPERS — Widersprechen (disagreeing) ───────────────────
 
@@ -724,7 +724,7 @@
   de: Nein, ich halte das für keine gute Idee.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 72
   en: I don't agree with you.
@@ -732,7 +732,7 @@
   de: Ich bin nicht deiner Meinung.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 73
   en: I see it differently than you.
@@ -740,7 +740,7 @@
   de: Ich sehe das anders als du.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 74
   en: I must contradict you there.
@@ -748,7 +748,7 @@
   de: Da muss ich dir widersprechen.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 75
   en: I have a better suggestion.
@@ -756,7 +756,7 @@
   de: Ich habe einen besseren Vorschlag.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 76
   en: I have a better idea.
@@ -764,7 +764,7 @@
   de: Ich habe eine bessere Idee.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 77
   en: I don't think that will work.
@@ -772,7 +772,7 @@
   de: Ich glaube nicht, dass das funktioniert.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 78
   en: It would (perhaps) be better if we ...
@@ -780,7 +780,7 @@
   de: Es wäre (vielleicht) besser, wenn wir ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 79
   en: Don't you think it would be better if we ...?
@@ -788,7 +788,7 @@
   de: Denkst du nicht, dass es besser wäre, wenn wir ...?
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 - id: 80
   en: I doubt that will work.
@@ -796,7 +796,7 @@
   de: Ich bezweifle, dass das funktioniert.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-disagree]
+  tags: [b1, phrases, language]
 
 # ── DIALOGUE HELPERS — Zum Abschluss kommen (wrapping up) ────────────
 
@@ -806,7 +806,7 @@
   de: Ich fasse noch einmal zusammen, was wir geplant haben ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-conclude]
+  tags: [b1, phrases, language]
 
 - id: 82
   en: So our plan is ...
@@ -814,7 +814,7 @@
   de: Unser Plan ist also ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-conclude]
+  tags: [b1, phrases, language]
 
 - id: 83
   en: So we will do the following ...
@@ -822,7 +822,7 @@
   de: Wir machen also Folgendes ...
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-conclude]
+  tags: [b1, phrases, language]
 
 - id: 84
   en: We can meet on the weekend and discuss everything in more detail.
@@ -830,7 +830,7 @@
   de: Wir können uns am Wochenende treffen und alles noch einmal genauer besprechen.
   article: ~
   type: phrase
-  tags: [dialogue, dialogue-conclude]
+  tags: [b1, phrases, language]
 
 - id: 85
   en: hiking tour
@@ -840,7 +840,7 @@
   type: noun
   forms:
     pl: die Wandertouren
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 86
   en: beach holiday
@@ -850,7 +850,7 @@
   type: noun
   forms:
     pl: die Strandurlaube
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 87
   en: city trip
@@ -860,7 +860,7 @@
   type: noun
   forms:
     pl: die Städtereisen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 88
   en: business trip
@@ -870,7 +870,7 @@
   type: noun
   forms:
     pl: die Dienstreisen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 89
   en: ski holiday
@@ -880,7 +880,7 @@
   type: noun
   forms:
     pl: die Skiurlaube
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 90
   en: wellness holiday
@@ -890,7 +890,7 @@
   type: noun
   forms:
     pl: die Wellnessurlauben
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 91
   en: high season
@@ -898,7 +898,7 @@
   de: Hauptsaison
   article: die
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 92
   en: low season
@@ -906,7 +906,7 @@
   de: Nebensaison
   article: die
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 93
   en: single room
@@ -916,7 +916,7 @@
   type: noun
   forms:
     pl: die Einzelzimmer
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 94
   en: double room
@@ -926,7 +926,7 @@
   type: noun
   forms:
     pl: die Doppelzimmer
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 95
   en: overnight stay
@@ -936,7 +936,7 @@
   type: noun
   forms:
     pl: die Übernachtungen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 96
   en: to spend the night
@@ -944,7 +944,7 @@
   de: übernachten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 97
   en: arrival / journey to
@@ -954,7 +954,7 @@
   type: noun
   forms:
     pl: die Anreisen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 98
   en: to travel (to a destination)
@@ -962,7 +962,7 @@
   de: anreisen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 99
   en: departure
@@ -972,7 +972,7 @@
   type: noun
   forms:
     pl: die Abreisen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 100
   en: dreamlike, wonderful
@@ -980,7 +980,7 @@
   de: traumhaft
   article: ~
   type: adj
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 101
   en: magnificent, wonderful
@@ -988,7 +988,7 @@
   de: herrlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 102
   en: hotel description
@@ -998,7 +998,7 @@
   type: noun
   forms:
     pl: die Hotelbeschreibungen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 103
   en: location, position
@@ -1008,7 +1008,7 @@
   type: noun
   forms:
     pl: die Lagen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 104
   en: review, rating
@@ -1018,7 +1018,7 @@
   type: noun
   forms:
     pl: die Bewertungen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 105
   en: surroundings, area
@@ -1028,7 +1028,7 @@
   type: noun
   forms:
     pl: die Umgebungen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 106
   en: attentive / inattentive
@@ -1036,7 +1036,7 @@
   de: aufmerksam
   article: ~
   type: adj
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 107
   en: staff, personnel
@@ -1044,7 +1044,7 @@
   de: Personal
   article: das
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 108
   en: service
@@ -1052,7 +1052,7 @@
   de: Service
   article: der
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 109
   en: air conditioning
@@ -1062,7 +1062,7 @@
   type: noun
   forms:
     pl: die Klimaanlagen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 110
   en: youth hostel
@@ -1072,7 +1072,7 @@
   type: noun
   forms:
     pl: die Jugendherbergen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 111
   en: hostel
@@ -1082,7 +1082,7 @@
   type: noun
   forms:
     pl: die Hostels
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 112
   en: campsite
@@ -1092,7 +1092,7 @@
   type: noun
   forms:
     pl: die Campingplätze
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 113
   en: to camp
@@ -1100,7 +1100,7 @@
   de: campen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 114
   en: accommodation
@@ -1110,7 +1110,7 @@
   type: noun
   forms:
     pl: die Unterkünfte
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 115
   en: guesthouse, B&B
@@ -1120,7 +1120,7 @@
   type: noun
   forms:
     pl: die Pensionen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 116
   en: half board
@@ -1128,7 +1128,7 @@
   de: Halbpension
   article: die
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 117
   en: full board
@@ -1136,7 +1136,7 @@
   de: Vollpension
   article: die
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 118
   en: travel agency
@@ -1146,7 +1146,7 @@
   type: noun
   forms:
     pl: die Reisebüros
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 119
   en: flight
@@ -1156,7 +1156,7 @@
   type: noun
   forms:
     pl: die Flüge
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 120
   en: package holiday
@@ -1166,7 +1166,7 @@
   type: noun
   forms:
     pl: die Pauschalreisen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 121
   en: holiday apartment
@@ -1176,7 +1176,7 @@
   type: noun
   forms:
     pl: die Ferienwohnungen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 122
   en: tent
@@ -1186,7 +1186,7 @@
   type: noun
   forms:
     pl: die Zelte
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 123
   en: to camp in a tent
@@ -1194,7 +1194,7 @@
   de: zelten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 124
   en: match (for fire)
@@ -1204,7 +1204,7 @@
   type: noun
   forms:
     pl: die Streichhölzer
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 125
   en: sunscreen
@@ -1214,7 +1214,7 @@
   type: noun
   forms:
     pl: die Sonnencremes
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 126
   en: guidebook / tour guide
@@ -1224,7 +1224,7 @@
   type: noun
   forms:
     pl: die Reiseführer
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 127
   en: bikini
@@ -1234,7 +1234,7 @@
   type: noun
   forms:
     pl: die Bikinis
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 128
   en: permitted, allowed
@@ -1242,7 +1242,7 @@
   de: gestattet
   article: ~
   type: adj
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 129
   en: prohibited, forbidden
@@ -1250,7 +1250,7 @@
   de: untersagt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 130
   en: exception
@@ -1260,7 +1260,7 @@
   type: noun
   forms:
     pl: die Ausnahmen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 131
   en: desired, welcome
@@ -1268,7 +1268,7 @@
   de: erwünscht
   article: ~
   type: adj
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 132
   en: fire
@@ -1278,7 +1278,7 @@
   type: noun
   forms:
     pl: die Feuer
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 133
   en: check-in
@@ -1288,7 +1288,7 @@
   type: noun
   forms:
     pl: die Check-ins
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 134
   en: gate (airport)
@@ -1298,7 +1298,7 @@
   type: noun
   forms:
     pl: die Gates
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 135
   en: to check in
@@ -1306,7 +1306,7 @@
   de: einchecken
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 136
   en: luggage, baggage
@@ -1314,7 +1314,7 @@
   de: Gepäck
   article: das
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 137
   en: takeoff, start
@@ -1324,7 +1324,7 @@
   type: noun
   forms:
     pl: die Starts
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 138
   en: to take off, to start
@@ -1332,7 +1332,7 @@
   de: starten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 139
   en: to land
@@ -1340,7 +1340,7 @@
   de: landen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 140
   en: landing
@@ -1350,7 +1350,7 @@
   type: noun
   forms:
     pl: die Landungen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 141
   en: boarding pass
@@ -1360,7 +1360,7 @@
   type: noun
   forms:
     pl: die Bordkarten
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 142
   en: pilot
@@ -1368,7 +1368,7 @@
   de: Pilot
   article: der
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 143
   en: security check
@@ -1378,7 +1378,7 @@
   type: noun
   forms:
     pl: die Sicherheitskontrollen
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 144
   en: on board
@@ -1386,7 +1386,7 @@
   de: an Bord
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 145
   en: flight attendant
@@ -1394,7 +1394,7 @@
   de: Flugbegleiter
   article: der
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 146
   en: strike
@@ -1404,7 +1404,7 @@
   type: noun
   forms:
     pl: die Streiks
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 147
   en: to get annoyed
@@ -1412,7 +1412,7 @@
   de: sich ärgern
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 148
   en: to calm down
@@ -1420,7 +1420,7 @@
   de: sich beruhigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 149
   en: to complain
@@ -1428,7 +1428,7 @@
   de: sich beschweren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 150
   en: baggage claim
@@ -1438,7 +1438,7 @@
   type: noun
   forms:
     pl: die Gepäckausgaben
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 151
   en: hand luggage
@@ -1446,7 +1446,7 @@
   de: Handgepäck
   article: das
   type: noun
-  tags: [b1, b1-lektion-1]
+  tags: [b1, travel]
 
 - id: 152
   en: winter road service, snow clearing
@@ -1456,7 +1456,7 @@
   type: noun
   forms:
     pl: die Winterdienste
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, weather]
 
 - id: 153
   en: pavement, sidewalk
@@ -1466,7 +1466,7 @@
   type: noun
   forms:
     pl: die Gehwege
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 154
   en: to spread (salt/gravel)
@@ -1474,7 +1474,7 @@
   de: streuen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, weather]
 
 - id: 155
   en: broom
@@ -1484,7 +1484,7 @@
   type: noun
   forms:
     pl: die Besen
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 156
   en: snow shovel
@@ -1494,7 +1494,7 @@
   type: noun
   forms:
     pl: die Schneeschaufeln
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, weather]
 
 - id: 157
   en: to shovel
@@ -1502,7 +1502,7 @@
   de: schaufeln
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, weather]
 
 - id: 158
   en: to sweep
@@ -1510,7 +1510,7 @@
   de: fegen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 159
   en: to clear snow
@@ -1518,7 +1518,7 @@
   de: Schnee räumen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, weather]
 
 - id: 160
   en: to slip, to slide
@@ -1526,7 +1526,7 @@
   de: ausrutschen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, health]
 
 - id: 161
   en: to injure oneself
@@ -1534,7 +1534,7 @@
   de: sich verletzen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 162
   en: obliged, required
@@ -1542,7 +1542,7 @@
   de: verpflichtet
   article: ~
   type: adj
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 163
   en: to promise sb. sth.
@@ -1550,7 +1550,7 @@
   de: jdm. etwas versprechen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 164
   en: to ask for, to request
@@ -1558,7 +1558,7 @@
   de: bitten um
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 165
   en: to think of, to remember
@@ -1566,7 +1566,7 @@
   de: denken an
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 166
   en: to paint (walls), to stroke
@@ -1574,7 +1574,7 @@
   de: streichen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 167
   en: to renovate
@@ -1582,7 +1582,7 @@
   de: renovieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 168
   en: to renew, to replace
@@ -1590,7 +1590,7 @@
   de: erneuern
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 169
   en: to replace
@@ -1598,7 +1598,7 @@
   de: ersetzen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 170
   en: damp, moist
@@ -1606,7 +1606,7 @@
   de: feucht
   article: ~
   type: adj
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 171
   en: defective, broken
@@ -1614,7 +1614,7 @@
   de: defekt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 172
   en: to reach, to achieve
@@ -1622,7 +1622,7 @@
   de: erreichen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 173
   en: tidy / untidy
@@ -1630,7 +1630,7 @@
   de: ordentlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 174
   en: quite, fairly
@@ -1638,7 +1638,7 @@
   de: ziemlich
   article: ~
   type: adv
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, language]
 
 - id: 175
   en: reasonably, somewhat
@@ -1646,7 +1646,7 @@
   de: einigermaßen
   article: ~
   type: adv
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, language]
 
 - id: 176
   en: really, genuinely
@@ -1654,7 +1654,7 @@
   de: echt
   article: ~
   type: adv
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, language]
 
 - id: 177
   en: totally, completely
@@ -1662,7 +1662,7 @@
   de: total
   article: ~
   type: adv
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, language]
 
 - id: 178
   en: somewhat, a little
@@ -1670,7 +1670,7 @@
   de: etwas
   article: ~
   type: adv
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, language]
 
 - id: 179
   en: quite, entirely
@@ -1678,7 +1678,7 @@
   de: ganz
   article: ~
   type: adv
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, language]
 
 - id: 180
   en: not particularly
@@ -1686,7 +1686,7 @@
   de: nicht besonders
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, language]
 
 - id: 181
   en: to annoy, to get on one's nerves
@@ -1694,7 +1694,7 @@
   de: nerven
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, emotions, daily-life]
 
 - id: 182
   en: annoying
@@ -1702,7 +1702,7 @@
   de: nervig
   article: ~
   type: adj
-  tags: [b1, b1-lektion-2]
+  tags: [b1, emotions, adjectives]
 
 - id: 183
   en: to show consideration for
@@ -1710,7 +1710,7 @@
   de: Rücksicht nehmen auf
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, phrases]
 
 - id: 184
   en: annoyance, trouble
@@ -1718,7 +1718,7 @@
   de: Ärger
   article: der
   type: noun
-  tags: [b1, b1-lektion-2]
+  tags: [b1, emotions, daily-life]
 
 - id: 185
   en: to be right
@@ -1726,7 +1726,7 @@
   de: recht haben
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, phrases, language]
 
 - id: 186
   en: to be (not) sure
@@ -1734,7 +1734,7 @@
   de: sich sicher sein
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, phrases, language]
 
 - id: 187
   en: to disturb, to bother
@@ -1742,7 +1742,7 @@
   de: stören
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 188
   en: to have an argument with
@@ -1750,7 +1750,7 @@
   de: Streit haben mit
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, emotions, home]
 
 - id: 189
   en: to argue, to quarrel
@@ -1758,7 +1758,7 @@
   de: sich streiten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, emotions, home]
 
 - id: 190
   en: annoyed, angry (coll.)
@@ -1766,7 +1766,7 @@
   de: sauer
   article: ~
   type: adj
-  tags: [b1, b1-lektion-2]
+  tags: [b1, emotions, adjectives]
 
 - id: 191
   en: to insult, to offend
@@ -1774,7 +1774,7 @@
   de: beleidigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-2]
+  tags: [b1, emotions, daily-life]
 
 - id: 192
   en: polite
@@ -1782,7 +1782,7 @@
   de: höflich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-2]
+  tags: [b1, emotions, adjectives]
 
 - id: 193
   en: termination notice
@@ -1792,7 +1792,7 @@
   type: noun
   forms:
     pl: die Kündigungen
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, job]
 
 - id: 194
   en: deadline, period
@@ -1802,7 +1802,7 @@
   type: noun
   forms:
     pl: die Fristen
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, job]
 
 - id: 195
   en: to give notice in time
@@ -1810,7 +1810,7 @@
   de: fristgerecht kündigen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, job]
 
 - id: 196
   en: to dismiss without notice
@@ -1818,7 +1818,7 @@
   de: fristlos kündigen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, job]
 
 - id: 197
   en: owner's own use (of property)
@@ -1826,7 +1826,7 @@
   de: Eigenbedarf
   article: der
   type: noun
-  tags: [b1, b1-lektion-2]
+  tags: [b1, home, daily-life]
 
 - id: 198
   en: lawyer, attorney
@@ -1834,7 +1834,7 @@
   de: Rechtsanwalt
   article: der
   type: noun
-  tags: [b1, b1-lektion-2]
+  tags: [b1, job, daily-life]
 
 - id: 199
   en: to file an objection against
@@ -1842,7 +1842,7 @@
   de: Widerspruch einlegen gegen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, phrases]
 
 - id: 200
   en: court (of law)
@@ -1852,7 +1852,7 @@
   type: noun
   forms:
     pl: die Gerichte
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, job]
 
 - id: 201
   en: to sue, to take to court
@@ -1860,7 +1860,7 @@
   de: klagen gegen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, phrases]
 
 - id: 202
   en: judge
@@ -1868,7 +1868,7 @@
   de: Richter
   article: der
   type: noun
-  tags: [b1, b1-lektion-2]
+  tags: [b1, job, daily-life]
 
 - id: 203
   en: verdict, judgment
@@ -1878,7 +1878,7 @@
   type: noun
   forms:
     pl: die Urteile
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, job]
 
 - id: 204
   en: to make a decision
@@ -1886,7 +1886,7 @@
   de: eine Entscheidung treffen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-2]
+  tags: [b1, daily-life, phrases]
 
 - id: 205
   en: project week
@@ -1896,7 +1896,7 @@
   type: noun
   forms:
     pl: die Projektwochen
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 206
   en: environment
@@ -1904,7 +1904,7 @@
   de: Umwelt
   article: die
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 207
   en: environmental protection
@@ -1912,7 +1912,7 @@
   de: Umweltschutz
   article: der
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 208
   en: to protect
@@ -1920,7 +1920,7 @@
   de: schützen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 209
   en: climate
@@ -1928,7 +1928,7 @@
   de: Klima
   article: das
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, weather]
 
 - id: 210
   en: climate change
@@ -1936,7 +1936,7 @@
   de: Klimawandel
   article: der
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, weather]
 
 - id: 211
   en: to save energy
@@ -1944,7 +1944,7 @@
   de: Energie sparen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 212
   en: to convey sth. to sb., to teach
@@ -1952,7 +1952,7 @@
   de: jdm. etwas vermitteln
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 213
   en: topic, subject
@@ -1962,7 +1962,7 @@
   type: noun
   forms:
     pl: die Themen
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 214
   en: learning objective
@@ -1972,7 +1972,7 @@
   type: noun
   forms:
     pl: die Lernziele
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 215
   en: high-rise building
@@ -1982,7 +1982,7 @@
   type: noun
   forms:
     pl: die Hochhäuser
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 216
   en: water works, waterworks
@@ -1992,7 +1992,7 @@
   type: noun
   forms:
     pl: die Wasserwerke
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 217
   en: to damage, to harm
@@ -2000,7 +2000,7 @@
   de: schädigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 218
   en: to destroy
@@ -2008,7 +2008,7 @@
   de: zerstören
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 219
   en: to pollute, to dirty
@@ -2016,7 +2016,7 @@
   de: verschmutzen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 220
   en: flood
@@ -2026,7 +2026,7 @@
   type: noun
   forms:
     pl: die Hochwasser
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, weather]
 
 - id: 221
   en: tsunami
@@ -2036,7 +2036,7 @@
   type: noun
   forms:
     pl: die Tsunami
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, weather]
 
 - id: 222
   en: earthquake
@@ -2046,7 +2046,7 @@
   type: noun
   forms:
     pl: die Erdbeben
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, weather]
 
 - id: 223
   en: to waste
@@ -2054,7 +2054,7 @@
   de: verschwenden
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 224
   en: harmful to the environment / eco-friendly
@@ -2062,7 +2062,7 @@
   de: umweltschädlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 225
   en: everyday life
@@ -2070,7 +2070,7 @@
   de: Alltag
   article: der
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 226
   en: to change, to alter
@@ -2078,7 +2078,7 @@
   de: verändern
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 227
   en: change, alteration
@@ -2088,7 +2088,7 @@
   type: noun
   forms:
     pl: die Veränderungen
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 228
   en: material
@@ -2098,7 +2098,7 @@
   type: noun
   forms:
     pl: die Materialien
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 229
   en: paper
@@ -2106,7 +2106,7 @@
   de: Papier
   article: das
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 230
   en: cardboard
@@ -2114,7 +2114,7 @@
   de: Pappe
   article: die
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 231
   en: metal
@@ -2122,7 +2122,7 @@
   de: Metall
   article: das
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 232
   en: fabric, material, substance
@@ -2132,7 +2132,7 @@
   type: noun
   forms:
     pl: die Stoffe
-  tags: [b1, b1-lektion-3]
+  tags: [b1, clothes, nature]
 
 - id: 233
   en: wood
@@ -2140,7 +2140,7 @@
   de: Holz
   article: das
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, home]
 
 - id: 234
   en: wool
@@ -2148,7 +2148,7 @@
   de: Wolle
   article: die
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, clothes, nature]
 
 - id: 235
   en: leather
@@ -2156,7 +2156,7 @@
   de: Leder
   article: das
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, clothes, nature]
 
 - id: 236
   en: to throw away
@@ -2164,7 +2164,7 @@
   de: wegwerfen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 237
   en: to collect, to gather
@@ -2172,7 +2172,7 @@
   de: sammeln
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 238
   en: to dispose of (waste)
@@ -2180,7 +2180,7 @@
   de: entsorgen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 239
   en: to avoid
@@ -2188,7 +2188,7 @@
   de: vermeiden
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 240
   en: to recycle
@@ -2196,7 +2196,7 @@
   de: recyceln
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 241
   en: hazardous waste
@@ -2204,7 +2204,7 @@
   de: Sondermüll
   article: der
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 242
   en: bulky waste
@@ -2212,7 +2212,7 @@
   de: Sperrmüll
   article: der
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 243
   en: recycling centre
@@ -2222,7 +2222,7 @@
   type: noun
   forms:
     pl: die Recyclinghöfe
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 244
   en: waste collection, refuse collection
@@ -2232,7 +2232,7 @@
   type: noun
   forms:
     pl: die Müllabfuhren
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 245
   en: toxic, poisonous
@@ -2240,7 +2240,7 @@
   de: giftig
   article: ~
   type: adj
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 246
   en: dangerous
@@ -2248,7 +2248,7 @@
   de: gefährlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 247
   en: to exchange, to swap
@@ -2256,7 +2256,7 @@
   de: tauschen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 248
   en: container, bin
@@ -2266,7 +2266,7 @@
   type: noun
   forms:
     pl: die Behälter
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 249
   en: speed limit
@@ -2276,7 +2276,7 @@
   type: noun
   forms:
     pl: die Tempolimits
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 250
   en: parent representative
@@ -2284,7 +2284,7 @@
   de: Elternsprecher
   article: der
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 251
   en: telephone list
@@ -2294,7 +2294,7 @@
   type: noun
   forms:
     pl: die Telefonlisten
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 252
   en: to compile, to put together
@@ -2302,7 +2302,7 @@
   de: zusammenstellen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 253
   en: to check, to monitor
@@ -2310,7 +2310,7 @@
   de: kontrollieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 254
   en: detail
@@ -2320,7 +2320,7 @@
   type: noun
   forms:
     pl: die Details
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 255
   en: to find out, to learn
@@ -2328,7 +2328,7 @@
   de: erfahren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 256
   en: to clarify, to resolve
@@ -2336,7 +2336,7 @@
   de: klären
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 257
   en: to arrange, to agree on
@@ -2344,7 +2344,7 @@
   de: vereinbaren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 258
   en: to discuss
@@ -2352,7 +2352,7 @@
   de: besprechen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 259
   en: to be able to arrange sth.
@@ -2360,7 +2360,7 @@
   de: sich etwas einrichten können
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 260
   en: stuffed animal, cuddly toy
@@ -2370,7 +2370,7 @@
   type: noun
   forms:
     pl: die Kuscheltiere
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 261
   en: first aid course
@@ -2380,7 +2380,7 @@
   type: noun
   forms:
     pl: die Erste-Hilfe-Kurse
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 262
   en: excited, agitated
@@ -2388,7 +2388,7 @@
   de: aufgeregt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 263
   en: to fear, to be afraid of
@@ -2396,7 +2396,7 @@
   de: befürchten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 264
   en: homesickness
@@ -2404,7 +2404,7 @@
   de: Heimweh
   article: das
   type: noun
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 265
   en: to get lost (on foot)
@@ -2412,7 +2412,7 @@
   de: sich verlaufen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 266
   en: to fall down
@@ -2420,7 +2420,7 @@
   de: hinfallen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 267
   en: to comfort, to console
@@ -2428,7 +2428,7 @@
   de: trösten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 268
   en: shy, timid
@@ -2436,7 +2436,7 @@
   de: schüchtern
   article: ~
   type: adj
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 269
   en: to notice, to realize
@@ -2444,7 +2444,7 @@
   de: merken
   article: ~
   type: verb
-  tags: [b1, b1-lektion-3]
+  tags: [b1, nature, daily-life]
 
 - id: 270
   en: judo suit / gi
@@ -2454,7 +2454,7 @@
   type: noun
   forms:
     pl: die Judoanzüge
-  tags: [b1, b1-lektion-4]
+  tags: [b1, clothes, health]
 
 - id: 271
   en: online shop
@@ -2464,7 +2464,7 @@
   type: noun
   forms:
     pl: die Onlineshops
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 272
   en: online shopping
@@ -2472,7 +2472,7 @@
   de: Onlineshopping
   article: das
   type: noun
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 273
   en: customer account
@@ -2482,7 +2482,7 @@
   type: noun
   forms:
     pl: die Kundenkonten
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 274
   en: selection, choice
@@ -2490,7 +2490,7 @@
   de: Auswahl
   article: die
   type: noun
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 275
   en: username
@@ -2500,7 +2500,7 @@
   type: noun
   forms:
     pl: die Benutzernamen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 276
   en: to set, to define
@@ -2508,7 +2508,7 @@
   de: festlegen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 277
   en: around the clock, 24/7
@@ -2516,7 +2516,7 @@
   de: rund um die Uhr
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 278
   en: disadvantage
@@ -2526,7 +2526,7 @@
   type: noun
   forms:
     pl: die Nachteile
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 279
   en: rose
@@ -2536,7 +2536,7 @@
   type: noun
   forms:
     pl: die Rosen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, nature, daily-life]
 
 - id: 280
   en: article, item
@@ -2546,7 +2546,7 @@
   type: noun
   forms:
     pl: die Artikel
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 281
   en: shopping cart
@@ -2556,7 +2556,7 @@
   type: noun
   forms:
     pl: die Warenkörbe
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 282
   en: payment option
@@ -2566,7 +2566,7 @@
   type: noun
   forms:
     pl: die Zahlungsoptionen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 283
   en: delivery option
@@ -2576,7 +2576,7 @@
   type: noun
   forms:
     pl: die Lieferoptionen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 284
   en: order
@@ -2586,7 +2586,7 @@
   type: noun
   forms:
     pl: die Bestellungen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 285
   en: to pay in instalments
@@ -2594,7 +2594,7 @@
   de: in Raten zahlen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 286
   en: instalment payment
@@ -2604,7 +2604,7 @@
   type: noun
   forms:
     pl: die Ratenzahlungen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 287
   en: advertising brochure
@@ -2614,7 +2614,7 @@
   type: noun
   forms:
     pl: die Werbeprospekte
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 288
   en: easy-care
@@ -2622,7 +2622,7 @@
   de: pflegeleicht
   article: ~
   type: adj
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 289
   en: plastic, synthetic material
@@ -2630,7 +2630,7 @@
   de: Kunststoff
   article: der
   type: noun
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 290
   en: to produce, to manufacture
@@ -2638,7 +2638,7 @@
   de: herstellen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 291
   en: to produce
@@ -2646,7 +2646,7 @@
   de: produzieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 292
   en: product
@@ -2656,7 +2656,7 @@
   type: noun
   forms:
     pl: die Produkte
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 293
   en: to grow, to cultivate
@@ -2664,7 +2664,7 @@
   de: anbauen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 294
   en: to dry
@@ -2672,7 +2672,7 @@
   de: trocknen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 295
   en: fig
@@ -2682,7 +2682,7 @@
   type: noun
   forms:
     pl: die Feigen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 296
   en: guarantee, warranty
@@ -2692,7 +2692,7 @@
   type: noun
   forms:
     pl: die Garantien
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 297
   en: to complain about a purchase, to file a complaint
@@ -2700,7 +2700,7 @@
   de: reklamieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 298
   en: reminder, payment reminder
@@ -2710,7 +2710,7 @@
   type: noun
   forms:
     pl: die Mahnungen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 299
   en: to pay by invoice
@@ -2718,7 +2718,7 @@
   de: per Rechnung zahlen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 300
   en: to pay in advance
@@ -2726,7 +2726,7 @@
   de: per Vorkasse zahlen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 301
   en: to pay by instant bank transfer
@@ -2734,7 +2734,7 @@
   de: per Sofortüberweisung zahlen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 302
   en: to pay by direct debit
@@ -2742,7 +2742,7 @@
   de: per Lastschrift zahlen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 303
   en: to pay by credit card
@@ -2750,7 +2750,7 @@
   de: per Kreditkarte zahlen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 304
   en: payment
@@ -2760,7 +2760,7 @@
   type: noun
   forms:
     pl: die Zahlungen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 305
   en: invoice amount
@@ -2770,7 +2770,7 @@
   type: noun
   forms:
     pl: die Rechnungsbeträge
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 306
   en: to deliver
@@ -2778,7 +2778,7 @@
   de: liefern
   article: ~
   type: verb
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 307
   en: delivery
@@ -2788,7 +2788,7 @@
   type: noun
   forms:
     pl: die Lieferungen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 308
   en: working day, business day
@@ -2798,7 +2798,7 @@
   type: noun
   forms:
     pl: die Werktage
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 309
   en: shipping, dispatch
@@ -2806,7 +2806,7 @@
   de: Versand
   article: der
   type: noun
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 310
   en: shipping costs
@@ -2814,7 +2814,7 @@
   de: Versandkosten
   article: ~
   type: noun
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 311
   en: general terms and conditions
@@ -2822,7 +2822,7 @@
   de: allgemeine Geschäftsbedingungen / AGB
   article: die
   type: noun
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 312
   en: to revoke, to cancel
@@ -2830,7 +2830,7 @@
   de: widerrufen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 313
   en: small parcel, package
@@ -2840,7 +2840,7 @@
   type: noun
   forms:
     pl: die Päckchen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 314
   en: return (of goods)
@@ -2850,7 +2850,7 @@
   type: noun
   forms:
     pl: die Rücksendungen
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 315
   en: return slip
@@ -2860,7 +2860,7 @@
   type: noun
   forms:
     pl: die Rücksendescheine
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 316
   en: damaged
@@ -2868,7 +2868,7 @@
   de: beschädigt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-4]
+  tags: [b1, money, daily-life]
 
 - id: 317
   en: media
@@ -2876,7 +2876,7 @@
   de: Medien
   article: ~
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 318
   en: survey, poll
@@ -2886,7 +2886,7 @@
   type: noun
   forms:
     pl: die Umfragen
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 319
   en: documentary
@@ -2896,7 +2896,7 @@
   type: noun
   forms:
     pl: die Dokumentationen
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 320
   en: feature film
@@ -2906,7 +2906,7 @@
   type: noun
   forms:
     pl: die Spielfilme
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 321
   en: comedy
@@ -2916,7 +2916,7 @@
   type: noun
   forms:
     pl: die Komödien
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 322
   en: TV series
@@ -2926,7 +2926,7 @@
   type: noun
   forms:
     pl: die Serien
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 323
   en: sports broadcast
@@ -2936,7 +2936,7 @@
   type: noun
   forms:
     pl: die Sportsendungen
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 324
   en: quiz show
@@ -2946,7 +2946,7 @@
   type: noun
   forms:
     pl: die Quizshows
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 325
   en: talk show
@@ -2956,7 +2956,7 @@
   type: noun
   forms:
     pl: die Talkshows
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 326
   en: cartoon, animated film
@@ -2966,7 +2966,7 @@
   type: noun
   forms:
     pl: die Zeichentrickfilme
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 327
   en: romance film
@@ -2976,7 +2976,7 @@
   type: noun
   forms:
     pl: die Liebesfilme
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 328
   en: to stream
@@ -2984,7 +2984,7 @@
   de: streamen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 329
   en: news
@@ -2992,7 +2992,7 @@
   de: Nachrichten
   article: ~
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 330
   en: programme, broadcast
@@ -3002,7 +3002,7 @@
   type: noun
   forms:
     pl: die Sendungen
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 331
   en: TV channel
@@ -3012,7 +3012,7 @@
   type: noun
   forms:
     pl: die Fernsehsender
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 332
   en: media library (streaming)
@@ -3022,7 +3022,7 @@
   type: noun
   forms:
     pl: die Mediatheken
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 333
   en: soap opera
@@ -3032,7 +3032,7 @@
   type: noun
   forms:
     pl: die Soaps
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 334
   en: crime film/series
@@ -3042,7 +3042,7 @@
   type: noun
   forms:
     pl: die Krimis
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 335
   en: podcast
@@ -3052,7 +3052,7 @@
   type: noun
   forms:
     pl: die Podcasts
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 336
   en: by streaming
@@ -3060,7 +3060,7 @@
   de: per Streaming
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 337
   en: webinar
@@ -3070,7 +3070,7 @@
   type: noun
   forms:
     pl: die Webinare
-  tags: [b1, b1-lektion-5]
+  tags: [b1, education, language]
 
 - id: 338
   en: subtitle
@@ -3080,7 +3080,7 @@
   type: noun
   forms:
     pl: die Untertitel
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, language]
 
 - id: 339
   en: deaf
@@ -3088,7 +3088,7 @@
   de: gehörlos
   article: ~
   type: adj
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, adjectives]
 
 - id: 340
   en: purpose, aim
@@ -3098,7 +3098,7 @@
   type: noun
   forms:
     pl: die Zwecke
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life]
 
 - id: 341
   en: majority
@@ -3106,7 +3106,7 @@
   de: Mehrheit
   article: die
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, numbers]
 
 - id: 342
   en: minority
@@ -3114,7 +3114,7 @@
   de: Minderheit
   article: die
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life, numbers]
 
 - id: 343
   en: half
@@ -3122,7 +3122,7 @@
   de: Hälfte
   article: die
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, numbers]
 
 - id: 344
   en: third
@@ -3130,7 +3130,7 @@
   de: Drittel
   article: das
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, numbers]
 
 - id: 345
   en: quarter
@@ -3138,7 +3138,7 @@
   de: Viertel
   article: das
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, numbers, time]
 
 - id: 346
   en: compared to
@@ -3146,7 +3146,7 @@
   de: verglichen mit
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-5]
+  tags: [b1, phrases, language]
 
 - id: 347
   en: frequently, often
@@ -3154,7 +3154,7 @@
   de: häufig
   article: ~
   type: adv
-  tags: [b1, b1-lektion-5]
+  tags: [b1, daily-life]
 
 - id: 348
   en: figure skating
@@ -3162,7 +3162,7 @@
   de: Eiskunstlauf
   article: der
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, travel, daily-life]
 
 - id: 349
   en: ice hockey
@@ -3170,7 +3170,7 @@
   de: Eishockey
   article: das
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, travel, daily-life]
 
 - id: 350
   en: ski jumping
@@ -3178,7 +3178,7 @@
   de: Skispringen
   article: das
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, travel, daily-life]
 
 - id: 351
   en: horse riding
@@ -3186,7 +3186,7 @@
   de: Reiten
   article: das
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, travel, daily-life]
 
 - id: 352
   en: athletics, track and field
@@ -3194,7 +3194,7 @@
   de: Leichtathletik
   article: die
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 353
   en: boxing
@@ -3202,7 +3202,7 @@
   de: Boxen
   article: das
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 354
   en: tennis
@@ -3210,7 +3210,7 @@
   de: Tennis
   article: das
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 355
   en: handball
@@ -3218,7 +3218,7 @@
   de: Handball
   article: der
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 356
   en: tournament
@@ -3228,7 +3228,7 @@
   type: noun
   forms:
     pl: die Turniere
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 357
   en: team
@@ -3238,7 +3238,7 @@
   type: noun
   forms:
     pl: die Mannschaften
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 358
   en: qualifying match
@@ -3248,7 +3248,7 @@
   type: noun
   forms:
     pl: die Qualifikationsspiele
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 359
   en: world championship
@@ -3258,7 +3258,7 @@
   type: noun
   forms:
     pl: die Weltmeisterschaften
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 360
   en: European championship
@@ -3268,7 +3268,7 @@
   type: noun
   forms:
     pl: die Europameisterschaften
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 361
   en: draw, tie
@@ -3276,7 +3276,7 @@
   de: unentschieden
   article: ~
   type: adj
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 362
   en: to score a goal
@@ -3284,7 +3284,7 @@
   de: ein Tor schießen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 363
   en: goalkeeper
@@ -3292,7 +3292,7 @@
   de: Torwart
   article: der
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 364
   en: referee
@@ -3300,7 +3300,7 @@
   de: Schiedsrichter
   article: der
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 365
   en: yellow card
@@ -3308,7 +3308,7 @@
   de: gelbe Karte
   article: die
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 366
   en: red card
@@ -3316,7 +3316,7 @@
   de: rote Karte
   article: die
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 367
   en: one to nil, one-zero
@@ -3324,7 +3324,7 @@
   de: eins zu null
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 368
   en: injury
@@ -3334,7 +3334,7 @@
   type: noun
   forms:
     pl: die Verletzungen
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 369
   en: player
@@ -3342,7 +3342,7 @@
   de: Spieler
   article: der
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 370
   en: volleyball
@@ -3350,7 +3350,7 @@
   de: Volleyball
   article: der
   type: noun
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 371
   en: fan, supporter
@@ -3360,7 +3360,7 @@
   type: noun
   forms:
     pl: die Fans
-  tags: [b1, b1-lektion-5]
+  tags: [b1, health, daily-life]
 
 - id: 372
   en: prince / princess
@@ -3368,7 +3368,7 @@
   de: Prinz
   article: der
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, family, daily-life]
 
 - id: 373
   en: sad
@@ -3376,7 +3376,7 @@
   de: traurig
   article: ~
   type: adj
-  tags: [b1, b1-lektion-6]
+  tags: [b1, emotions, adjectives]
 
 - id: 374
   en: owl
@@ -3386,7 +3386,7 @@
   type: noun
   forms:
     pl: die Eulen
-  tags: [b1, b1-lektion-6]
+  tags: [b1, animals, nature]
 
 - id: 375
   en: fairy tale
@@ -3396,7 +3396,7 @@
   type: noun
   forms:
     pl: die Märchen
-  tags: [b1, b1-lektion-6]
+  tags: [b1, language, daily-life]
 
 - id: 376
   en: to play hide-and-seek
@@ -3404,7 +3404,7 @@
   de: verstecken spielen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 377
   en: childhood
@@ -3412,7 +3412,7 @@
   de: Kindheit
   article: die
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, family, daily-life]
 
 - id: 378
   en: young person, teenager
@@ -3420,7 +3420,7 @@
   de: Jugendliche
   article: der/die
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, family, daily-life]
 
 - id: 379
   en: youth
@@ -3428,7 +3428,7 @@
   de: Jugend
   article: die
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, family, daily-life]
 
 - id: 380
   en: memory, recollection
@@ -3438,7 +3438,7 @@
   type: noun
   forms:
     pl: die Erinnerungen
-  tags: [b1, b1-lektion-6]
+  tags: [b1, emotions, daily-life]
 
 - id: 381
   en: to remember, to recall
@@ -3446,7 +3446,7 @@
   de: sich erinnern an
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 382
   en: to spend (time)
@@ -3454,7 +3454,7 @@
   de: verbringen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 383
   en: on the whole, by and large
@@ -3462,7 +3462,7 @@
   de: im Großen und Ganzen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 384
   en: back then, at that time
@@ -3470,7 +3470,7 @@
   de: damals
   article: ~
   type: adv
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 385
   en: world champion
@@ -3478,7 +3478,7 @@
   de: Weltmeister
   article: der
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, daily-life]
 
 - id: 386
   en: Olympic champion
@@ -3486,7 +3486,7 @@
   de: Olympiasieger
   article: der
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, daily-life]
 
 - id: 387
   en: Berlin Wall
@@ -3494,7 +3494,7 @@
   de: Berliner Mauer
   article: die
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, travel]
 
 - id: 388
   en: fall of the Berlin Wall
@@ -3502,7 +3502,7 @@
   de: Mauerfall
   article: der
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, travel]
 
 - id: 389
   en: the 1980s
@@ -3510,7 +3510,7 @@
   de: die 80er Jahre
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, time, daily-life]
 
 - id: 390
   en: hat
@@ -3520,7 +3520,7 @@
   type: noun
   forms:
     pl: die Hüte
-  tags: [b1, b1-lektion-6]
+  tags: [b1, clothes]
 
 - id: 391
   en: pearl necklace
@@ -3530,7 +3530,7 @@
   type: noun
   forms:
     pl: die Perlenketten
-  tags: [b1, b1-lektion-6]
+  tags: [b1, clothes]
 
 - id: 392
   en: miniskirt
@@ -3540,7 +3540,7 @@
   type: noun
   forms:
     pl: die Miniröcke
-  tags: [b1, b1-lektion-6]
+  tags: [b1, clothes]
 
 - id: 393
   en: floral pattern
@@ -3550,7 +3550,7 @@
   type: noun
   forms:
     pl: die Blumenmuster
-  tags: [b1, b1-lektion-6]
+  tags: [b1, clothes]
 
 - id: 394
   en: tights, pantyhose
@@ -3560,7 +3560,7 @@
   type: noun
   forms:
     pl: die Strumpfhosen
-  tags: [b1, b1-lektion-6]
+  tags: [b1, clothes]
 
 - id: 395
   en: court shoes, pumps
@@ -3570,7 +3570,7 @@
   type: noun
   forms:
     pl: die Pumps
-  tags: [b1, b1-lektion-6]
+  tags: [b1, clothes]
 
 - id: 396
   en: event, occurrence
@@ -3580,7 +3580,7 @@
   type: noun
   forms:
     pl: die Ereignisse
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life, education]
 
 - id: 397
   en: to develop
@@ -3588,7 +3588,7 @@
   de: entwickeln
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, verbs]
 
 - id: 398
   en: to invent
@@ -3596,7 +3596,7 @@
   de: erfinden
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, verbs]
 
 - id: 399
   en: invention
@@ -3606,7 +3606,7 @@
   type: noun
   forms:
     pl: die Erfindungen
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, daily-life]
 
 - id: 400
   en: to publish
@@ -3614,7 +3614,7 @@
   de: veröffentlichen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, verbs]
 
 - id: 401
   en: Olympic Games
@@ -3622,7 +3622,7 @@
   de: Olympische Spiele
   article: ~
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, travel]
 
 - id: 402
   en: medal
@@ -3632,7 +3632,7 @@
   type: noun
   forms:
     pl: die Medaillen
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, daily-life]
 
 - id: 403
   en: to win bronze
@@ -3640,7 +3640,7 @@
   de: Bronze holen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, daily-life]
 
 - id: 404
   en: to win silver
@@ -3648,7 +3648,7 @@
   de: Silber holen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, daily-life]
 
 - id: 405
   en: to win gold
@@ -3656,7 +3656,7 @@
   de: Gold holen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, daily-life]
 
 - id: 406
   en: winner, victor
@@ -3664,7 +3664,7 @@
   de: Sieger
   article: der
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, daily-life]
 
 - id: 407
   en: car race
@@ -3674,7 +3674,7 @@
   type: noun
   forms:
     pl: die Autorennen
-  tags: [b1, b1-lektion-6]
+  tags: [b1, travel, daily-life]
 
 - id: 408
   en: host country
@@ -3684,7 +3684,7 @@
   type: noun
   forms:
     pl: die Gastgeberländer
-  tags: [b1, b1-lektion-6]
+  tags: [b1, travel, daily-life]
 
 - id: 409
   en: trophy, cup
@@ -3694,7 +3694,7 @@
   type: noun
   forms:
     pl: die Pokale
-  tags: [b1, b1-lektion-6]
+  tags: [b1, health, daily-life]
 
 - id: 410
   en: strange, funny
@@ -3702,7 +3702,7 @@
   de: komisch
   article: ~
   type: adj
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 411
   en: surprised
@@ -3710,7 +3710,7 @@
   de: überrascht
   article: ~
   type: adj
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 412
   en: to get used to
@@ -3718,7 +3718,7 @@
   de: sich gewöhnen an
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 413
   en: used to, accustomed to
@@ -3726,7 +3726,7 @@
   de: gewöhnt an
   article: ~
   type: adj
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 414
   en: unfamiliar, unusual
@@ -3734,7 +3734,7 @@
   de: ungewohnt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 415
   en: usual, customary / unusual
@@ -3742,7 +3742,7 @@
   de: üblich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 416
   en: common practice, usual
@@ -3750,7 +3750,7 @@
   de: gang und gäbe
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 417
   en: group work
@@ -3760,7 +3760,7 @@
   type: noun
   forms:
     pl: die Gruppenarbeiten
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, language]
 
 - id: 418
   en: to memorize sth.
@@ -3768,7 +3768,7 @@
   de: sich etwas merken
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, language]
 
 - id: 419
   en: to learn by heart
@@ -3776,7 +3776,7 @@
   de: auswendig lernen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, language]
 
 - id: 420
   en: pronunciation
@@ -3786,7 +3786,7 @@
   type: noun
   forms:
     pl: die Aussprachen
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, language]
 
 - id: 421
   en: role play
@@ -3796,7 +3796,7 @@
   type: noun
   forms:
     pl: die Rollenspiele
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, language]
 
 - id: 422
   en: perfectionist
@@ -3804,7 +3804,7 @@
   de: Perfektionist
   article: der
   type: noun
-  tags: [b1, b1-lektion-6]
+  tags: [b1, education, daily-life]
 
 - id: 423
   en: sociable, convivial
@@ -3812,7 +3812,7 @@
   de: gesellig
   article: ~
   type: adj
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 424
   en: reserved, restrained
@@ -3820,7 +3820,7 @@
   de: zurückhaltend
   article: ~
   type: adj
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 425
   en: to be easy (for sb.)
@@ -3828,7 +3828,7 @@
   de: leichtfallen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 426
   en: to be difficult (for sb.)
@@ -3836,7 +3836,7 @@
   de: schwerfallen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 427
   en: to belong to, to fit in
@@ -3844,7 +3844,7 @@
   de: dazugehören
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 428
   en: to warm to sb., to get comfortable with
@@ -3852,7 +3852,7 @@
   de: warm werden mit jdm.
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 429
   en: to block
@@ -3860,7 +3860,7 @@
   de: blockieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-6]
+  tags: [b1, daily-life]
 
 - id: 430
   en: homeland, home
@@ -3870,7 +3870,7 @@
   type: noun
   forms:
     pl: die Heimaten
-  tags: [b1, b1-lektion-7]
+  tags: [b1, travel, daily-life]
 
 - id: 431
   en: country of origin
@@ -3880,7 +3880,7 @@
   type: noun
   forms:
     pl: die Herkunftsländer
-  tags: [b1, b1-lektion-7]
+  tags: [b1, travel, daily-life]
 
 - id: 432
   en: to feel comfortable, at ease
@@ -3888,7 +3888,7 @@
   de: sich wohlfühlen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, daily-life]
 
 - id: 433
   en: to miss (sb./sth.)
@@ -3896,7 +3896,7 @@
   de: vermissen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, daily-life]
 
 - id: 434
   en: guest worker
@@ -3904,7 +3904,7 @@
   de: Gastarbeiter
   article: der
   type: noun
-  tags: [b1, b1-lektion-7]
+  tags: [b1, job, daily-life]
 
 - id: 435
   en: future prospect
@@ -3914,7 +3914,7 @@
   type: noun
   forms:
     pl: die Zukunftsperspektiven
-  tags: [b1, b1-lektion-7]
+  tags: [b1, job, daily-life]
 
 - id: 436
   en: glad, happy
@@ -3922,7 +3922,7 @@
   de: froh
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, adjectives]
 
 - id: 437
   en: disappointed
@@ -3930,7 +3930,7 @@
   de: enttäuscht
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, adjectives]
 
 - id: 438
   en: relieved
@@ -3938,7 +3938,7 @@
   de: erleichtert
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, adjectives]
 
 - id: 439
   en: lonely
@@ -3946,7 +3946,7 @@
   de: einsam
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, adjectives]
 
 - id: 440
   en: feeling, emotion
@@ -3956,7 +3956,7 @@
   type: noun
   forms:
     pl: die Gefühle
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions]
 
 - id: 441
   en: to feel
@@ -3964,7 +3964,7 @@
   de: sich fühlen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, verbs]
 
 - id: 442
   en: to depend on
@@ -3972,7 +3972,7 @@
   de: abhängen von
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 443
   en: to depend on, to matter
@@ -3980,7 +3980,7 @@
   de: ankommen auf
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 444
   en: nervous
@@ -3988,7 +3988,7 @@
   de: nervös
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, adjectives]
 
 - id: 445
   en: patience
@@ -3996,7 +3996,7 @@
   de: Geduld
   article: die
   type: noun
-  tags: [b1, b1-lektion-7]
+  tags: [b1, emotions, daily-life]
 
 - id: 446
   en: documents, papers
@@ -4004,7 +4004,7 @@
   de: Unterlagen
   article: ~
   type: noun
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 447
   en: recognition, acknowledgment
@@ -4014,7 +4014,7 @@
   type: noun
   forms:
     pl: die Anerkennungen
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 448
   en: to recognize, to acknowledge
@@ -4022,7 +4022,7 @@
   de: anerkennen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 449
   en: graduation certificate
@@ -4032,7 +4032,7 @@
   type: noun
   forms:
     pl: die Abschlusszeugnisse
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 450
   en: certificate of good conduct, police clearance
@@ -4042,7 +4042,7 @@
   type: noun
   forms:
     pl: die Führungszeugnisse
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 451
   en: health certificate
@@ -4052,7 +4052,7 @@
   type: noun
   forms:
     pl: die Gesundheitszeugnisse
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 452
   en: proof, evidence
@@ -4062,7 +4062,7 @@
   type: noun
   forms:
     pl: die Nachweise
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 453
   en: German language certificate
@@ -4072,7 +4072,7 @@
   type: noun
   forms:
     pl: die Deutschzertifikate
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 454
   en: study confirmation
@@ -4082,7 +4082,7 @@
   type: noun
   forms:
     pl: die Studienbescheinigungen
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 455
   en: certified, authenticated
@@ -4090,7 +4090,7 @@
   de: beglaubigt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 456
   en: specialization
@@ -4100,7 +4100,7 @@
   type: noun
   forms:
     pl: die Spezialisierungen
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 457
   en: to need, to require
@@ -4108,7 +4108,7 @@
   de: benötigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 458
   en: required, necessary
@@ -4116,7 +4116,7 @@
   de: erforderlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 459
   en: to work out, to succeed
@@ -4124,7 +4124,7 @@
   de: klappen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 460
   en: to get, to obtain
@@ -4132,7 +4132,7 @@
   de: besorgen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 461
   en: competent
@@ -4140,7 +4140,7 @@
   de: kompetent
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 462
   en: to expect, to count on
@@ -4148,7 +4148,7 @@
   de: rechnen mit
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 463
   en: stressed
@@ -4156,7 +4156,7 @@
   de: gestresst
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 464
   en: to tell, to narrate
@@ -4164,7 +4164,7 @@
   de: erzählen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 465
   en: to translate
@@ -4172,7 +4172,7 @@
   de: übersetzen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 466
   en: translation
@@ -4182,7 +4182,7 @@
   type: noun
   forms:
     pl: die Übersetzungen
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 467
   en: to extend, to renew
@@ -4190,7 +4190,7 @@
   de: verlängern
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 468
   en: authentication, certification
@@ -4200,7 +4200,7 @@
   type: noun
   forms:
     pl: die Beglaubigungen
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 469
   en: to certify, to confirm
@@ -4208,7 +4208,7 @@
   de: bescheinigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 470
   en: promptly, swiftly
@@ -4216,7 +4216,7 @@
   de: zügig
   article: ~
   type: adv
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 471
   en: to guarantee, to ensure
@@ -4224,7 +4224,7 @@
   de: gewährleisten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 472
   en: outstanding, missing
@@ -4232,7 +4232,7 @@
   de: ausstehend
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 473
   en: as soon as possible
@@ -4240,7 +4240,7 @@
   de: baldmöglichst
   article: ~
   type: adv
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 474
   en: to submit later, to provide subsequently
@@ -4248,7 +4248,7 @@
   de: nachreichen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 475
   en: necessary
@@ -4256,7 +4256,7 @@
   de: notwendig
   article: ~
   type: adj
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 476
   en: to be sufficient, to suffice
@@ -4264,7 +4264,7 @@
   de: genügen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 477
   en: letter (formal), written communication
@@ -4274,7 +4274,7 @@
   type: noun
   forms:
     pl: die Schreiben
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 478
   en: hereby
@@ -4282,7 +4282,7 @@
   de: hiermit
   article: ~
   type: adv
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 479
   en: follow-up question
@@ -4292,7 +4292,7 @@
   type: noun
   forms:
     pl: die Rückfragen
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 480
   en: to be available to sb.
@@ -4300,7 +4300,7 @@
   de: jdm. zur Verfügung stehen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 481
   en: presumably, expected
@@ -4308,7 +4308,7 @@
   de: voraussichtlich
   article: ~
   type: adv
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 482
   en: to confirm
@@ -4316,7 +4316,7 @@
   de: bestätigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-7]
+  tags: [b1, daily-life, language]
 
 - id: 483
   en: part-time position
@@ -4326,7 +4326,7 @@
   type: noun
   forms:
     pl: die Teilzeitstellen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 484
   en: full-time position
@@ -4336,7 +4336,7 @@
   type: noun
   forms:
     pl: die Vollzeitstellen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 485
   en: fixed-term / permanent
@@ -4344,7 +4344,7 @@
   de: befristet
   article: ~
   type: adj
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 486
   en: forklift
@@ -4354,7 +4354,7 @@
   type: noun
   forms:
     pl: die Gabelstapler
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 487
   en: saw
@@ -4364,7 +4364,7 @@
   type: noun
   forms:
     pl: die Sägen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 488
   en: hammer
@@ -4374,7 +4374,7 @@
   type: noun
   forms:
     pl: die Hämmer
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 489
   en: drill
@@ -4384,7 +4384,7 @@
   type: noun
   forms:
     pl: die Bohrmaschinen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 490
   en: sewing machine
@@ -4394,7 +4394,7 @@
   type: noun
   forms:
     pl: die Nähmaschinen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 491
   en: welding mask
@@ -4404,7 +4404,7 @@
   type: noun
   forms:
     pl: die Schweißermasken
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 492
   en: welding equipment
@@ -4414,7 +4414,7 @@
   type: noun
   forms:
     pl: die Schweißgeräte
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 493
   en: metalworker, steel construction worker
@@ -4422,7 +4422,7 @@
   de: Metallbauer
   article: der
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 494
   en: fashion designer / tailor
@@ -4430,7 +4430,7 @@
   de: Modeschneider
   article: der
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 495
   en: concrete
@@ -4438,7 +4438,7 @@
   de: Beton
   article: der
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 496
   en: handling of, dealing with
@@ -4446,7 +4446,7 @@
   de: Umgang mit
   article: der
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 497
   en: able to work in a team
@@ -4454,7 +4454,7 @@
   de: teamfähig
   article: ~
   type: adj
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 498
   en: production, manufacturing
@@ -4464,7 +4464,7 @@
   type: noun
   forms:
     pl: die Herstellungen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 499
   en: contact person
@@ -4472,7 +4472,7 @@
   de: Ansprechpartner
   article: der
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 500
   en: shift work
@@ -4482,7 +4482,7 @@
   type: noun
   forms:
     pl: die Schichtdienste
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 501
   en: reliable
@@ -4490,7 +4490,7 @@
   de: zuverlässig
   article: ~
   type: adj
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 502
   en: reliability
@@ -4498,7 +4498,7 @@
   de: Zuverlässigkeit
   article: die
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 503
   en: resilient, able to work under pressure
@@ -4506,7 +4506,7 @@
   de: belastbar
   article: ~
   type: adj
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 504
   en: resilience, ability to work under pressure
@@ -4514,7 +4514,7 @@
   de: Belastbarkeit
   article: die
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 505
   en: teamwork ability
@@ -4522,7 +4522,7 @@
   de: Teamfähigkeit
   article: die
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 506
   en: to enjoy, to take pleasure in
@@ -4530,7 +4530,7 @@
   de: Freude haben an
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 507
   en: challenge
@@ -4540,7 +4540,7 @@
   type: noun
   forms:
     pl: die Herausforderungen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 508
   en: career changer, lateral entrant
@@ -4548,7 +4548,7 @@
   de: Seiteneinsteiger
   article: der
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 509
   en: career changer without formal training in that field
@@ -4556,7 +4556,7 @@
   de: Quereinsteiger
   article: der
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 510
   en: to think over, to consider
@@ -4564,7 +4564,7 @@
   de: überlegen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 511
   en: to prove, to demonstrate
@@ -4572,7 +4572,7 @@
   de: nachweisen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 512
   en: to make no sense
@@ -4580,7 +4580,7 @@
   de: keinen Sinn haben
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 513
   en: current, up-to-date
@@ -4588,7 +4588,7 @@
   de: aktuell
   article: ~
   type: adj
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 514
   en: induction, training period
@@ -4598,7 +4598,7 @@
   type: noun
   forms:
     pl: die Einarbeitungen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 515
   en: to expire, to run out
@@ -4606,7 +4606,7 @@
   de: ablaufen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 516
   en: knowledge, skills
@@ -4614,7 +4614,7 @@
   de: Kenntnisse
   article: ~
   type: noun
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 517
   en: to ask for help
@@ -4622,7 +4622,7 @@
   de: um Hilfe bitten
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 518
   en: position, role
@@ -4632,7 +4632,7 @@
   type: noun
   forms:
     pl: die Positionen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 519
   en: activity, work
@@ -4642,7 +4642,7 @@
   type: noun
   forms:
     pl: die Tätigkeiten
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 520
   en: sender
@@ -4652,7 +4652,7 @@
   type: noun
   forms:
     pl: die Absender
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 521
   en: introduction
@@ -4662,7 +4662,7 @@
   type: noun
   forms:
     pl: die Einleitungen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 522
   en: closing sentence
@@ -4672,7 +4672,7 @@
   type: noun
   forms:
     pl: die Schlusssätze
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 523
   en: experience
@@ -4682,7 +4682,7 @@
   type: noun
   forms:
     pl: die Erfahrungen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 524
   en: acceptance, positive response
@@ -4692,7 +4692,7 @@
   type: noun
   forms:
     pl: die Zusagen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 525
   en: rejection, negative response
@@ -4702,7 +4702,7 @@
   type: noun
   forms:
     pl: die Absagen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 526
   en: job interview
@@ -4712,7 +4712,7 @@
   type: noun
   forms:
     pl: die Vorstellungsgespräche
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 527
   en: strength
@@ -4722,7 +4722,7 @@
   type: noun
   forms:
     pl: die Stärken
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 528
   en: weakness
@@ -4732,7 +4732,7 @@
   type: noun
   forms:
     pl: die Schwächen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 529
   en: to concentrate on
@@ -4740,7 +4740,7 @@
   de: sich konzentrieren auf
   article: ~
   type: verb
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 530
   en: to reorient oneself, to change direction
@@ -4748,7 +4748,7 @@
   de: sich neu orientieren
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 531
   en: to develop further, to grow
@@ -4756,7 +4756,7 @@
   de: sich weiterentwickeln
   article: ~
   type: verb
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 532
   en: probationary period
@@ -4766,7 +4766,7 @@
   type: noun
   forms:
     pl: die Probezeiten
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 533
   en: performance review, staff appraisal
@@ -4776,7 +4776,7 @@
   type: noun
   forms:
     pl: die Mitarbeitergespräche
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 534
   en: time limit, fixed term
@@ -4786,7 +4786,7 @@
   type: noun
   forms:
     pl: die Befristungen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 535
   en: wage, pay
@@ -4796,7 +4796,7 @@
   type: noun
   forms:
     pl: die Löhne
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 536
   en: to be about, to concern
@@ -4804,7 +4804,7 @@
   de: gehen um
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 537
   en: to be entitled to
@@ -4812,7 +4812,7 @@
   de: Anspruch haben auf
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 538
   en: weekly
@@ -4820,7 +4820,7 @@
   de: wöchentlich
   article: ~
   type: adv
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 539
   en: agreement, arrangement
@@ -4830,7 +4830,7 @@
   type: noun
   forms:
     pl: die Vereinbarungen
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 540
   en: to participate in
@@ -4838,7 +4838,7 @@
   de: teilnehmen an
   article: ~
   type: verb
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 541
   en: to thank for
@@ -4846,7 +4846,7 @@
   de: sich bedanken für
   article: ~
   type: verb
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 542
   en: to wait for
@@ -4854,7 +4854,7 @@
   de: warten auf
   article: ~
   type: verb
-  tags: [b1, b1-lektion-8]
+  tags: [b1, job]
 
 - id: 543
   en: list
@@ -4864,7 +4864,7 @@
   type: noun
   forms:
     pl: die Listen
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 544
   en: to air, to ventilate
@@ -4872,7 +4872,7 @@
   de: lüften
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 545
   en: to tilt the window open
@@ -4880,7 +4880,7 @@
   de: das Fenster kippen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 546
   en: to turn down (heating)
@@ -4888,7 +4888,7 @@
   de: runterdrehen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 547
   en: device, appliance
@@ -4898,7 +4898,7 @@
   type: noun
   forms:
     pl: die Geräte
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 548
   en: effective
@@ -4906,7 +4906,7 @@
   de: effektiv
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 549
   en: to switch on, to turn on
@@ -4914,7 +4914,7 @@
   de: anmachen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 550
   en: to switch off, to turn off
@@ -4922,7 +4922,7 @@
   de: ausmachen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 551
   en: to open
@@ -4930,7 +4930,7 @@
   de: aufmachen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 552
   en: to close, to shut
@@ -4938,7 +4938,7 @@
   de: zumachen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 553
   en: to close, to lock
@@ -4946,7 +4946,7 @@
   de: schließen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 554
   en: to turn on (tap/valve)
@@ -4954,7 +4954,7 @@
   de: aufdrehen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 555
   en: to turn off (tap/valve)
@@ -4962,7 +4962,7 @@
   de: zudrehen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 556
   en: light
@@ -4970,7 +4970,7 @@
   de: Licht
   article: das
   type: noun
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 557
   en: tap, faucet
@@ -4980,7 +4980,7 @@
   type: noun
   forms:
     pl: die Wasserhähne
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 558
   en: exaggerated, excessive
@@ -4988,7 +4988,7 @@
   de: übertrieben
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 559
   en: objection
@@ -4998,7 +4998,7 @@
   type: noun
   forms:
     pl: die Einwände
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 560
   en: to go too far
@@ -5006,7 +5006,7 @@
   de: zu weit gehen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 561
   en: air
@@ -5014,7 +5014,7 @@
   de: Luft
   article: die
   type: noun
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 562
   en: measure, step
@@ -5024,7 +5024,7 @@
   type: noun
   forms:
     pl: die Maßnahmen
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 563
   en: wallet, purse
@@ -5034,7 +5034,7 @@
   type: noun
   forms:
     pl: die Geldbeutel
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 564
   en: sensible, meaningful
@@ -5042,7 +5042,7 @@
   de: sinnvoll
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 565
   en: responsible for
@@ -5050,7 +5050,7 @@
   de: verantwortlich für
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 566
   en: to keep minutes, to write a protocol
@@ -5058,7 +5058,7 @@
   de: ein Protokoll führen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 567
   en: to worry about, to think about
@@ -5066,7 +5066,7 @@
   de: sich Gedanken machen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 568
   en: to react to, to respond to
@@ -5074,7 +5074,7 @@
   de: reagieren auf
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 569
   en: to create a plan
@@ -5082,7 +5082,7 @@
   de: einen Plan erstellen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 570
   en: result, outcome
@@ -5092,7 +5092,7 @@
   type: noun
   forms:
     pl: die Ergebnisse
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 571
   en: to reduce, to lower
@@ -5100,7 +5100,7 @@
   de: senken
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 572
   en: furious (coll.)
@@ -5108,7 +5108,7 @@
   de: stinksauer
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, emotions, adjectives]
 
 - id: 573
   en: annoyed, irritated
@@ -5116,7 +5116,7 @@
   de: genervt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, emotions, adjectives]
 
 - id: 574
   en: proud
@@ -5124,7 +5124,7 @@
   de: stolz
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, emotions, adjectives]
 
 - id: 575
   en: busy with
@@ -5132,7 +5132,7 @@
   de: beschäftigt mit
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 576
   en: to be able to afford sth.
@@ -5140,7 +5140,7 @@
   de: sich etwas leisten können
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 577
   en: stress
@@ -5148,7 +5148,7 @@
   de: Stress
   article: der
   type: noun
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 578
   en: employee
@@ -5156,7 +5156,7 @@
   de: Arbeitnehmer
   article: der
   type: noun
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 579
   en: right
@@ -5166,7 +5166,7 @@
   type: noun
   forms:
     pl: die Rechte
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 580
   en: employee right
@@ -5176,7 +5176,7 @@
   type: noun
   forms:
     pl: die Arbeitnehmerrechte
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 581
   en: to research, to look into
@@ -5184,7 +5184,7 @@
   de: recherchieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 582
   en: works council
@@ -5194,7 +5194,7 @@
   type: noun
   forms:
     pl: die Betriebsräte
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 583
   en: minimum wage
@@ -5204,7 +5204,7 @@
   type: noun
   forms:
     pl: die Mindestlöhne
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 584
   en: to disadvantage, to discriminate against
@@ -5212,7 +5212,7 @@
   de: benachteiligen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 585
   en: origin, descent
@@ -5220,7 +5220,7 @@
   de: Herkunft
   article: die
   type: noun
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 586
   en: prescribed, stipulated
@@ -5228,7 +5228,7 @@
   de: vorgeschrieben
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 587
   en: to divide, to split up
@@ -5236,7 +5236,7 @@
   de: aufteilen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 588
   en: legal, statutory
@@ -5244,7 +5244,7 @@
   de: gesetzlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 589
   en: regulated, governed
@@ -5252,7 +5252,7 @@
   de: geregelt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 590
   en: to copy
@@ -5260,7 +5260,7 @@
   de: kopieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 591
   en: to press a button
@@ -5268,7 +5268,7 @@
   de: auf einen Knopf drücken
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 592
   en: to let sb. know, to inform
@@ -5276,7 +5276,7 @@
   de: jdm. Bescheid sagen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 593
   en: to complete, to deal with
@@ -5284,7 +5284,7 @@
   de: erledigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 594
   en: to answer, to reply to
@@ -5292,7 +5292,7 @@
   de: beantworten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 595
   en: to leave
@@ -5300,7 +5300,7 @@
   de: verlassen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 596
   en: reason, ground
@@ -5310,7 +5310,7 @@
   type: noun
   forms:
     pl: die Gründe
-  tags: [b1, b1-lektion-9]
+  tags: [b1, home, daily-life]
 
 - id: 597
   en: to pay attention to, to watch out for
@@ -5318,7 +5318,7 @@
   de: achten auf
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 598
   en: to do without, to give up
@@ -5326,7 +5326,7 @@
   de: verzichten auf
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 599
   en: to suffer from
@@ -5334,7 +5334,7 @@
   de: leiden an
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 600
   en: organic product
@@ -5344,7 +5344,7 @@
   type: noun
   forms:
     pl: die Bioprodukte
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 601
   en: agriculture, farming
@@ -5352,7 +5352,7 @@
   de: Landwirtschaft
   article: die
   type: noun
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 602
   en: ecological, organic
@@ -5360,7 +5360,7 @@
   de: ökologisch
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 603
   en: cake (layered)
@@ -5370,7 +5370,7 @@
   type: noun
   forms:
     pl: die Torten
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 604
   en: to eat, to nourish oneself
@@ -5378,7 +5378,7 @@
   de: sich ernähren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 605
   en: allergic to
@@ -5386,7 +5386,7 @@
   de: allergisch gegen
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 606
   en: stomach ache
@@ -5394,7 +5394,7 @@
   de: Magenschmerzen
   article: ~
   type: noun
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 607
   en: to tolerate, to digest well
@@ -5402,7 +5402,7 @@
   de: vertragen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 608
   en: to enjoy
@@ -5410,7 +5410,7 @@
   de: genießen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 609
   en: to try out
@@ -5418,7 +5418,7 @@
   de: ausprobieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 610
   en: together, jointly
@@ -5426,7 +5426,7 @@
   de: gemeinsam
   article: ~
   type: adv
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 611
   en: to prepare (food)
@@ -5434,7 +5434,7 @@
   de: zubereiten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 612
   en: to take time for
@@ -5442,7 +5442,7 @@
   de: sich Zeit nehmen für
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 613
   en: to help sb. with
@@ -5450,7 +5450,7 @@
   de: jdm. helfen bei
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 614
   en: to need
@@ -5458,7 +5458,7 @@
   de: brauchen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 615
   en: to think about, to reflect on
@@ -5466,7 +5466,7 @@
   de: nachdenken über
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 616
   en: to think of, to have an opinion about
@@ -5474,7 +5474,7 @@
   de: halten von
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 617
   en: fitness, stamina
@@ -5482,7 +5482,7 @@
   de: Kondition
   article: die
   type: noun
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 618
   en: to improve
@@ -5490,7 +5490,7 @@
   de: verbessern
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 619
   en: strength training
@@ -5498,7 +5498,7 @@
   de: Krafttraining
   article: das
   type: noun
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 620
   en: calorie
@@ -5508,7 +5508,7 @@
   type: noun
   forms:
     pl: die Kalorien
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 621
   en: to consume, to use up
@@ -5516,7 +5516,7 @@
   de: verbrauchen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 622
   en: to motivate
@@ -5524,7 +5524,7 @@
   de: motivieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 623
   en: to count
@@ -5532,7 +5532,7 @@
   de: zählen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 624
   en: step
@@ -5542,7 +5542,7 @@
   type: noun
   forms:
     pl: die Schritte
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 625
   en: useful
@@ -5550,7 +5550,7 @@
   de: nützlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 626
   en: to hide
@@ -5558,7 +5558,7 @@
   de: verstecken
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 627
   en: expression
@@ -5568,7 +5568,7 @@
   type: noun
   forms:
     pl: die Ausdrücke
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 628
   en: unsuccessful
@@ -5576,7 +5576,7 @@
   de: erfolglos
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 629
   en: eating habit
@@ -5586,7 +5586,7 @@
   type: noun
   forms:
     pl: die Essgewohnheiten
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 630
   en: ingredient
@@ -5596,7 +5596,7 @@
   type: noun
   forms:
     pl: die Zutaten
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 631
   en: to use, to apply
@@ -5604,7 +5604,7 @@
   de: verwenden
   article: ~
   type: verb
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 632
   en: sugar-free
@@ -5612,7 +5612,7 @@
   de: zuckerfrei
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 633
   en: rich in vitamins
@@ -5620,7 +5620,7 @@
   de: vitaminreich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 634
   en: low-calorie
@@ -5628,7 +5628,7 @@
   de: kalorienarm
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 635
   en: irregular
@@ -5636,7 +5636,7 @@
   de: unregelmäßig
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 636
   en: unhealthy
@@ -5644,7 +5644,7 @@
   de: ungesund
   article: ~
   type: adj
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 637
   en: vegetarian
@@ -5652,7 +5652,7 @@
   de: Vegetarier
   article: der
   type: noun
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 638
   en: vegan
@@ -5660,7 +5660,7 @@
   de: Veganer
   article: der
   type: noun
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 639
   en: percent
@@ -5670,7 +5670,7 @@
   type: noun
   forms:
     pl: die Prozente
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 640
   en: statistics
@@ -5680,7 +5680,7 @@
   type: noun
   forms:
     pl: die Statistiken
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 641
   en: someone, somebody
@@ -5688,7 +5688,7 @@
   de: jemand
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 642
   en: nobody, no one
@@ -5696,7 +5696,7 @@
   de: niemand
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 643
   en: something, anything
@@ -5704,7 +5704,7 @@
   de: irgendetwas
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 644
   en: someone, anyone
@@ -5712,7 +5712,7 @@
   de: irgendjemand
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 645
   en: somewhere / sometime / somehow
@@ -5720,7 +5720,7 @@
   de: irgendwo
   article: ~
   type: adv
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 646
   en: nutrient
@@ -5730,7 +5730,7 @@
   type: noun
   forms:
     pl: die Nährstoffe
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 647
   en: shopping list
@@ -5740,7 +5740,7 @@
   type: noun
   forms:
     pl: die Einkaufslisten
-  tags: [b1, b1-lektion-10]
+  tags: [b1, health, food]
 
 - id: 648
   en: insurance
@@ -5750,7 +5750,7 @@
   type: noun
   forms:
     pl: die Versicherungen
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 649
   en: liability insurance
@@ -5760,7 +5760,7 @@
   type: noun
   forms:
     pl: die Haftpflichtversicherungen
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 650
   en: to fall down, to drop
@@ -5768,7 +5768,7 @@
   de: runterfallen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 651
   en: to damage
@@ -5776,7 +5776,7 @@
   de: beschädigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 652
   en: damage, harm
@@ -5786,7 +5786,7 @@
   type: noun
   forms:
     pl: die Schäden
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 653
   en: costs, expenses
@@ -5794,7 +5794,7 @@
   de: Kosten
   article: ~
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 654
   en: to cause
@@ -5802,7 +5802,7 @@
   de: verursachen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 655
   en: insurance premium
@@ -5812,7 +5812,7 @@
   type: noun
   forms:
     pl: die Versicherungsbeiträge
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 656
   en: injured party, victim
@@ -5820,7 +5820,7 @@
   de: Geschädigte
   article: der/die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 657
   en: to describe, to depict
@@ -5828,7 +5828,7 @@
   de: schildern
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 658
   en: sequence of events leading to damage
@@ -5838,7 +5838,7 @@
   type: noun
   forms:
     pl: die Schadenshergänge
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 659
   en: to pay for, to cover (costs)
@@ -5846,7 +5846,7 @@
   de: aufkommen für
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 660
   en: speaker, loudspeaker
@@ -5856,7 +5856,7 @@
   type: noun
   forms:
     pl: die Lautsprecher
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 661
   en: to topple over, to fall over
@@ -5864,7 +5864,7 @@
   de: umstürzen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 662
   en: to burn
@@ -5872,7 +5872,7 @@
   de: verbrennen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 663
   en: to flood
@@ -5880,7 +5880,7 @@
   de: überschwemmen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 664
   en: pension insurance
@@ -5888,7 +5888,7 @@
   de: Rentenversicherung
   article: die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 665
   en: accident insurance
@@ -5896,7 +5896,7 @@
   de: Unfallversicherung
   article: die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 666
   en: legal expenses insurance
@@ -5904,7 +5904,7 @@
   de: Rechtsschutzversicherung
   article: die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 667
   en: building insurance
@@ -5912,7 +5912,7 @@
   de: Wohngebäudeversicherung
   article: die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 668
   en: disability insurance
@@ -5920,7 +5920,7 @@
   de: Berufsunfähigkeitsversicherung
   article: die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 669
   en: price comparison
@@ -5930,7 +5930,7 @@
   type: noun
   forms:
     pl: die Preisvergleiche
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 670
   en: in my opinion
@@ -5938,7 +5938,7 @@
   de: meiner Meinung nach
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 671
   en: partial casco insurance
@@ -5946,7 +5946,7 @@
   de: Teilkasko
   article: die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 672
   en: to be worth it, to pay off
@@ -5954,7 +5954,7 @@
   de: sich lohnen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 673
   en: personal injury
@@ -5964,7 +5964,7 @@
   type: noun
   forms:
     pl: die Personenschäden
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 674
   en: property damage
@@ -5974,7 +5974,7 @@
   type: noun
   forms:
     pl: die Sachschäden
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 675
   en: guilty of, responsible for
@@ -5982,7 +5982,7 @@
   de: schuld an
   article: ~
   type: adj
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 676
   en: vandalism
@@ -5990,7 +5990,7 @@
   de: Vandalismus
   article: der
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 677
   en: breakdown, mishap
@@ -6000,7 +6000,7 @@
   type: noun
   forms:
     pl: die Pannen
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 678
   en: to tow away
@@ -6008,7 +6008,7 @@
   de: abschleppen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 679
   en: other party in an accident
@@ -6016,7 +6016,7 @@
   de: Unfallgegner
   article: der
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 680
   en: small car, city car
@@ -6026,7 +6026,7 @@
   type: noun
   forms:
     pl: die Kleinwagen
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 681
   en: non-binding, without obligation
@@ -6034,7 +6034,7 @@
   de: unverbindlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 682
   en: valuable
@@ -6042,7 +6042,7 @@
   de: wertvoll
   article: ~
   type: adj
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 683
   en: insurance claim, damage case
@@ -6052,7 +6052,7 @@
   type: noun
   forms:
     pl: die Schadensfälle
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 684
   en: insurance coverage
@@ -6060,7 +6060,7 @@
   de: Versicherungsschutz
   article: der
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 685
   en: confused
@@ -6068,7 +6068,7 @@
   de: verwirrt
   article: ~
   type: adj
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 686
   en: uncertain, insecure
@@ -6076,7 +6076,7 @@
   de: unsicher
   article: ~
   type: adj
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 687
   en: in principle, fundamentally
@@ -6084,7 +6084,7 @@
   de: grundsätzlich
   article: ~
   type: adv
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 688
   en: vehicle registration document
@@ -6092,7 +6092,7 @@
   de: Zulassungsbescheinigung
   article: die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 689
   en: excess, deductible
@@ -6100,7 +6100,7 @@
   de: Selbstbeteiligung
   article: die
   type: noun
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 690
   en: claim-free, no damage
@@ -6108,7 +6108,7 @@
   de: schadenfrei
   article: ~
   type: adj
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 691
   en: passenger door
@@ -6118,7 +6118,7 @@
   type: noun
   forms:
     pl: die Beifahrertüren
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 692
   en: wing mirror, side mirror
@@ -6128,7 +6128,7 @@
   type: noun
   forms:
     pl: die Seitenspiegel
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 693
   en: tail light, rear light
@@ -6138,7 +6138,7 @@
   type: noun
   forms:
     pl: die Rücklichter
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 694
   en: dent
@@ -6148,7 +6148,7 @@
   type: noun
   forms:
     pl: die Dellen
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 695
   en: driver's door
@@ -6158,7 +6158,7 @@
   type: noun
   forms:
     pl: die Fahrertüren
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 696
   en: rear-view mirror
@@ -6168,7 +6168,7 @@
   type: noun
   forms:
     pl: die Rückspiegel
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 697
   en: headlight
@@ -6178,7 +6178,7 @@
   type: noun
   forms:
     pl: die Vorderlichter
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 698
   en: boot, trunk
@@ -6188,7 +6188,7 @@
   type: noun
   forms:
     pl: die Kofferräume
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 699
   en: number plate, licence plate
@@ -6198,7 +6198,7 @@
   type: noun
   forms:
     pl: die Nummernschilder
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 700
   en: tyre
@@ -6208,7 +6208,7 @@
   type: noun
   forms:
     pl: die Reifen
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 701
   en: indicator, turn signal
@@ -6218,7 +6218,7 @@
   type: noun
   forms:
     pl: die Blinker
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 702
   en: bumper
@@ -6228,7 +6228,7 @@
   type: noun
   forms:
     pl: die Stoßstangen
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 703
   en: to slide, to slip
@@ -6236,7 +6236,7 @@
   de: rutschen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 704
   en: to steer
@@ -6244,7 +6244,7 @@
   de: lenken
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 705
   en: to brake
@@ -6252,7 +6252,7 @@
   de: bremsen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 706
   en: backwards
@@ -6260,7 +6260,7 @@
   de: rückwärts
   article: ~
   type: adv
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 707
   en: to knock off the wing mirror
@@ -6268,7 +6268,7 @@
   de: den Seitenspiegel abfahren
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-11]
+  tags: [b1, travel, daily-life]
 
 - id: 708
   en: cost estimate, quote
@@ -6278,7 +6278,7 @@
   type: noun
   forms:
     pl: die Kostenvoranschläge
-  tags: [b1, b1-lektion-11]
+  tags: [b1, money, daily-life]
 
 - id: 709
   en: annoying, irritating
@@ -6286,7 +6286,7 @@
   de: ärgerlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 710
   en: to fail (exam)
@@ -6294,7 +6294,7 @@
   de: durchfallen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 711
   en: to prepare for
@@ -6302,7 +6302,7 @@
   de: sich vorbereiten auf
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 712
   en: to keep fingers crossed for sb.
@@ -6310,7 +6310,7 @@
   de: jdm. die Daumen drücken
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 713
   en: DTZ (Deutsch-Test für Zuwanderer)
@@ -6318,7 +6318,7 @@
   de: DTZ
   article: der
   type: noun
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 714
   en: certificate
@@ -6328,7 +6328,7 @@
   type: noun
   forms:
     pl: die Zertifikate
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 715
   en: prepared
@@ -6336,7 +6336,7 @@
   de: vorbereitet
   article: ~
   type: adj
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 716
   en: attempt, try
@@ -6346,7 +6346,7 @@
   type: noun
   forms:
     pl: die Versuche
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 717
   en: voluntary, unpaid
@@ -6354,7 +6354,7 @@
   de: ehrenamtlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 718
   en: helper, volunteer
@@ -6362,7 +6362,7 @@
   de: Helfer
   article: der
   type: noun
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 719
   en: to get involved, to volunteer
@@ -6370,7 +6370,7 @@
   de: sich engagieren
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 720
   en: to take care of, to look after
@@ -6378,7 +6378,7 @@
   de: sich kümmern um
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 721
   en: food bank (charity)
@@ -6388,7 +6388,7 @@
   type: noun
   forms:
     pl: die Tafeln
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 722
   en: to distribute, to hand out
@@ -6396,7 +6396,7 @@
   de: verteilen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 723
   en: clothing store (charity)
@@ -6406,7 +6406,7 @@
   type: noun
   forms:
     pl: die Kleiderkammern
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 724
   en: volunteer fire brigade
@@ -6414,7 +6414,7 @@
   de: Freiwillige Feuerwehr
   article: die
   type: noun
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 725
   en: to extinguish a fire
@@ -6422,7 +6422,7 @@
   de: Feuer löschen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 726
   en: animal shelter
@@ -6432,7 +6432,7 @@
   type: noun
   forms:
     pl: die Tierheime
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 727
   en: emergency, distress situation
@@ -6442,7 +6442,7 @@
   type: noun
   forms:
     pl: die Notsituationen
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 728
   en: to do something good
@@ -6450,7 +6450,7 @@
   de: etwas Gutes tun
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 729
   en: to imagine sth.
@@ -6458,7 +6458,7 @@
   de: sich etwas vorstellen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 730
   en: to cheat
@@ -6466,7 +6466,7 @@
   de: schummeln
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 731
   en: to deceive
@@ -6474,7 +6474,7 @@
   de: täuschen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 732
   en: cheat sheet, crib notes
@@ -6484,7 +6484,7 @@
   type: noun
   forms:
     pl: die Spickzettel
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 733
   en: to catch (in the act)
@@ -6492,7 +6492,7 @@
   de: erwischen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 734
   en: honest
@@ -6500,7 +6500,7 @@
   de: ehrlich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 735
   en: to receive a punishment
@@ -6508,7 +6508,7 @@
   de: eine Strafe bekommen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 736
   en: to support
@@ -6516,7 +6516,7 @@
   de: unterstützen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 737
   en: support
@@ -6526,7 +6526,7 @@
   type: noun
   forms:
     pl: die Unterstützungen
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 738
   en: to not stress oneself out
@@ -6534,7 +6534,7 @@
   de: sich nicht verrückt machen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 739
   en: to stay calm
@@ -6542,7 +6542,7 @@
   de: ruhig bleiben
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 740
   en: to be there for sb.
@@ -6550,7 +6550,7 @@
   de: da sein für
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 741
   en: to give up
@@ -6558,7 +6558,7 @@
   de: aufgeben
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 742
   en: to master, to overcome
@@ -6566,7 +6566,7 @@
   de: meistern
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 743
   en: nervousness
@@ -6574,7 +6574,7 @@
   de: Nervosität
   article: die
   type: noun
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 744
   en: to distract oneself
@@ -6582,7 +6582,7 @@
   de: sich ablenken
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 745
   en: to think positively
@@ -6590,7 +6590,7 @@
   de: positiv denken
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 746
   en: to lead, to manage
@@ -6598,7 +6598,7 @@
   de: leiten
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 747
   en: to look, to appear
@@ -6606,7 +6606,7 @@
   de: aussehen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 748
   en: to let sb. finish speaking
@@ -6614,7 +6614,7 @@
   de: zu Ende reden lassen
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 749
   en: to calm (sb.)
@@ -6622,7 +6622,7 @@
   de: beruhigen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 750
   en: satisfied, content
@@ -6630,7 +6630,7 @@
   de: zufrieden
   article: ~
   type: adj
-  tags: [b1, b1-lektion-12]
+  tags: [b1, emotions, adjectives]
 
 - id: 751
   en: happy
@@ -6638,7 +6638,7 @@
   de: glücklich
   article: ~
   type: adj
-  tags: [b1, b1-lektion-12]
+  tags: [b1, emotions, adjectives]
 
 - id: 752
   en: to be pleased, to look forward to
@@ -6646,7 +6646,7 @@
   de: sich freuen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, emotions, verbs]
 
 - id: 753
   en: fear, anxiety
@@ -6656,7 +6656,7 @@
   type: noun
   forms:
     pl: die Ängste
-  tags: [b1, b1-lektion-12]
+  tags: [b1, emotions]
 
 - id: 754
   en: to manage to do, to accomplish
@@ -6664,7 +6664,7 @@
   de: schaffen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 755
   en: to pass (a test), to persist
@@ -6672,7 +6672,7 @@
   de: bestehen
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 756
   en: work permit
@@ -6680,7 +6680,7 @@
   de: Arbeitserlaubnis
   article: die
   type: noun
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 757
   en: to avoid
@@ -6688,7 +6688,7 @@
   de: vermeiden
   article: ~
   type: verb
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 758
   en: to deal with, to handle
@@ -6696,7 +6696,7 @@
   de: umgehen mit
   article: ~
   type: phrase
-  tags: [b1, b1-lektion-12]
+  tags: [b1, education, daily-life]
 
 - id: 759
   en: Dear Sir or Madam, (formal salutation)
@@ -6704,7 +6704,7 @@
   de: Sehr geehrte Damen und Herren,
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 760
   en: Dear Mr. ... / Dear Ms. ..., (formal)
@@ -6712,7 +6712,7 @@
   de: Sehr geehrter Herr ... / Sehr geehrte Frau ...,
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 761
   en: Dear Mrs. ... / Dear Mr. ..., (semi-formal)
@@ -6720,7 +6720,7 @@
   de: Liebe Frau ..., / Lieber Herr ...,
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 762
   en: Good day, Mr. / Ms. ..., (semi-formal greeting)
@@ -6728,7 +6728,7 @@
   de: Guten Tag, Herr ... / Frau ...,
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 763
   en: I would like to inquire whether ...
@@ -6736,7 +6736,7 @@
   de: Ich möchte mich bei Ihnen erkundigen, ob ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 764
   en: I am writing to you because ...
@@ -6744,7 +6744,7 @@
   de: Ich schreibe Ihnen, weil ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 765
   en: I have a question about ...
@@ -6752,7 +6752,7 @@
   de: Ich habe eine Frage zu ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 766
   en: Hereby I would like to ...
@@ -6760,7 +6760,7 @@
   de: Hiermit möchte ich ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 767
   en: Thank you very much for your message.
@@ -6768,7 +6768,7 @@
   de: Vielen Dank für Ihre Nachricht.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 768
   en: I wanted to ask you whether ...
@@ -6776,7 +6776,7 @@
   de: Ich wollte Sie fragen, ob ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 769
   en: I would like to briefly inform you that ...
@@ -6784,7 +6784,7 @@
   de: Ich möchte Ihnen kurz mitteilen, dass ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 770
   en: I am happy to hear from you.
@@ -6792,7 +6792,7 @@
   de: Es freut mich, von Ihnen zu hören.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 771
   en: I am requesting information about ...
@@ -6800,7 +6800,7 @@
   de: Ich bitte Sie um Informationen über ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 772
   en: Could you please let me know when ...?
@@ -6808,7 +6808,7 @@
   de: Könnten Sie mir bitte mitteilen, wann ...?
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 773
   en: I am interested in ...
@@ -6816,7 +6816,7 @@
   de: Ich interessiere mich für ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 774
   en: I would like to complain because ...
@@ -6824,7 +6824,7 @@
   de: Ich möchte mich bei Ihnen beschweren, weil ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 775
   en: I am sorry, but I cannot ...
@@ -6832,7 +6832,7 @@
   de: Es tut mir leid, aber ich kann ... nicht.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 776
   en: I wanted to follow up to ask whether ...
@@ -6840,7 +6840,7 @@
   de: Ich wollte nachfragen, ob ...
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 777
   en: I hope that ... is possible.
@@ -6848,7 +6848,7 @@
   de: Ich hoffe, dass ... möglich ist.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 778
   en: Thank you very much in advance for your reply.
@@ -6856,7 +6856,7 @@
   de: Vielen Dank im Voraus für Ihre Antwort.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 779
   en: I would be happy to receive a quick reply.
@@ -6864,7 +6864,7 @@
   de: Über eine schnelle Rückmeldung würde ich mich freuen.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 780
   en: I sincerely thank you for your help.
@@ -6872,7 +6872,7 @@
   de: Für Ihre Hilfe bedanke ich mich herzlich.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 781
   en: Thank you very much for your help.
@@ -6880,7 +6880,7 @@
   de: Vielen Dank für Ihre Hilfe.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 782
   en: I look forward to your reply.
@@ -6888,7 +6888,7 @@
   de: Ich freue mich auf Ihre Antwort.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 783
   en: Please write back to me soon.
@@ -6896,7 +6896,7 @@
   de: Bitte schreiben Sie mir bald zurück.
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 784
   en: Yours sincerely / Kind regards (formal sign-off)
@@ -6904,7 +6904,7 @@
   de: Mit freundlichen Grüßen
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 785
   en: Best regards (semi-formal sign-off)
@@ -6912,7 +6912,7 @@
   de: Viele Grüße
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
 
 - id: 786
   en: Warm regards (semi-formal sign-off)
@@ -6920,4 +6920,5 @@
   de: Herzliche Grüße
   article: ~
   type: phrase
-  tags: [letter, b1-writing]
+  tags: [b1, letter, writing]
+

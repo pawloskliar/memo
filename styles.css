@@ -511,6 +511,27 @@ main {
   display: flex;
   flex-direction: column;
 }
+.tag-opts-scroll {
+  max-height: 220px;
+  overflow-y: auto;
+  border-top: none;
+}
+.tag-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  border: var(--border);
+  border-bottom: none;
+  background: var(--bg);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  outline: none;
+}
+.tag-search::placeholder { color: var(--ink-light); font-weight: 400; }
+.tag-search:focus { background: var(--bg2); }
 
 .opt {
   padding: 11px 14px;
