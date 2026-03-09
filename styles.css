@@ -935,3 +935,255 @@ main {
 .aw-batch-de   { font-family: var(--font-mono); font-weight: 500; margin-right: 8px; }
 .aw-batch-trans { color: var(--ink-light); font-size: 12px; }
 .aw-batch-skip  { font-size: 11px; color: var(--ink-light); margin-top: 4px; }
+
+/* ── Writing Practice ──────────────────────────────── */
+
+.write-panel {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 250;
+  display: none;
+  flex-direction: column;
+}
+.write-panel.open { display: flex; }
+
+.write-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 36px;
+  border-bottom: var(--border);
+  flex-shrink: 0;
+}
+.write-title {
+  font-size: 12px; font-weight: 800;
+  letter-spacing: 0.35em; text-transform: uppercase;
+}
+.write-subtitle {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-light); margin-top: 3px;
+}
+
+/* Each view fills remaining space */
+.write-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Student textarea */
+.write-textarea {
+  flex: 1;
+  width: 100%;
+  padding: 32px 40px;
+  font-family: var(--font-word);
+  font-size: 20px;
+  line-height: 1.75;
+  border: none;
+  background: var(--card-bg);
+  color: var(--ink);
+  outline: none;
+  resize: none;
+}
+.write-textarea::placeholder { color: var(--ink-light); font-style: italic; }
+
+/* Bottom toolbar */
+.write-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 14px 36px;
+  border-top: var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.write-meta {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+/* Teacher split view */
+.write-split {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+.write-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: var(--border);
+  overflow: hidden;
+  min-width: 0;
+}
+.write-pane:last-child { border-right: none; }
+.write-pane-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--ink-light);
+  padding: 11px 20px;
+  border-bottom: var(--border);
+  flex-shrink: 0;
+  background: var(--bg);
+}
+
+/* Correction textarea sits inside a pane */
+.write-correction { padding: 24px 28px; font-size: 18px; }
+
+/* ── Texts strip ── */
+.write-texts-strip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 8px 20px;
+  border-bottom: var(--border);
+  background: var(--bg);
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+.write-texts-strip::-webkit-scrollbar { display: none; }
+
+.write-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: var(--border);
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: -2px;
+  transition: background .1s, color .1s;
+  color: var(--ink);
+}
+.write-chip:first-child { margin-left: 0; }
+.write-chip:not(.active):hover { background: var(--bg2); }
+.write-chip.active { background: var(--ink); color: var(--bg); }
+.write-chip-new { color: var(--ink-light); }
+.write-chip-new:hover { color: var(--ink) !important; }
+
+.write-chip-del {
+  font-size: 15px;
+  line-height: 1;
+  opacity: 0.4;
+  padding: 0 1px;
+  margin-left: 1px;
+}
+.write-chip-del:hover { opacity: 1; }
+.write-chip.active .write-chip-del { opacity: 0.5; }
+.write-chip.active .write-chip-del:hover { opacity: 1; }
+
+.write-chip-corr {
+  font-size: 18px;
+  line-height: 0;
+  color: var(--mint);
+  margin-right: 2px;
+  vertical-align: middle;
+}
+.write-chip.active .write-chip-corr { color: var(--mint-dark); }
+
+/* Review URL display in teacher toolbar */
+.write-review-url {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-light);
+  letter-spacing: 0.03em;
+  padding: 6px 10px;
+  border: 1px solid var(--bg2);
+  background: var(--card-bg);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  transition: color .1s, border-color .1s;
+}
+.write-review-url:hover { color: var(--ink); border-color: var(--mint); }
+
+/* Inline save-name row */
+.write-save-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 8px 20px;
+  border-bottom: var(--border);
+  background: var(--bg2);
+  flex-shrink: 0;
+}
+.write-save-input {
+  flex: 1;
+  padding: 9px 14px;
+  border: var(--border);
+  background: var(--card-bg);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  outline: none;
+  margin-right: -2px;
+}
+.write-save-input::placeholder { color: var(--ink-light); font-weight: 400; }
+.write-save-input:focus { border-color: var(--mint); }
+
+/* Pane label with inline diff legend on the right */
+.write-pane-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.diff-legend-inline {
+  display: flex;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Live diff panel (right column in teacher mode) */
+.write-live-diff {
+  flex: 1;
+  padding: 24px 28px;
+  font-family: var(--font-word);
+  font-size: 18px;
+  line-height: 1.75;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  background: var(--card-bg);
+  word-break: break-word;
+}
+
+/* Tracked-changes markup */
+.diff-del {
+  background: rgba(196,43,16,.1);
+  color: var(--red);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  padding: 1px 3px;
+}
+.diff-ins {
+  background: rgba(53,188,178,.15);
+  color: #178078;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 2px;
+  padding: 1px 3px;
+}
+
+@media (max-width: 600px) {
+  .write-split { flex-direction: column; }
+  .write-pane  { border-right: none; border-bottom: var(--border); }
+  .write-pane:last-child { border-bottom: none; }
+  .write-textarea, .write-live-diff { padding: 16px 18px; font-size: 16px; }
+  .write-bar { padding: 12px 18px; }
+}

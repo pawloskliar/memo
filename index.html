@@ -25,6 +25,7 @@
         <span class="btn-pending-badge hidden" id="pendingBadge"></span>
       </div>
       <button class="btn-icon" id="btnReport"   title="Progress report">▤</button>
+      <button class="btn-icon" id="btnWrite"    title="Writing practice">✏</button>
       <button class="btn-icon" id="btnShuffle"  title="Restart / Shuffle">⇄</button>
       <button class="btn-icon" id="btnSettings" title="Settings">⚙</button>
     </div>
@@ -230,6 +231,65 @@
 
   <button class="btn" id="btnSubmitBatch" style="width:100%;margin-left:0;">IMPORT →</button>
   <div id="awBatchStatus"></div>
+</div>
+
+<!-- ── Writing Practice ─────────────────────────────── -->
+<div class="write-panel" id="writePanel">
+
+  <div class="write-header">
+    <div class="write-title-area">
+      <div class="write-title">SCHREIBEN</div>
+      <div class="write-subtitle" id="wSubtitle">Student Mode</div>
+    </div>
+    <button class="btn-icon" id="btnWriteClose" style="margin-left:0;">✕</button>
+  </div>
+
+  <!-- ── Student view ── -->
+  <div class="write-view" id="wViewStudent">
+    <div class="write-texts-strip" id="wTextsStrip"><!-- chips rendered by JS --></div>
+    <div class="write-save-row hidden" id="wSaveRow">
+      <input class="write-save-input" id="wSaveName" type="text"
+        placeholder="Name this text…" autocomplete="off" autocorrect="off" autocapitalize="off">
+      <button class="btn btn-primary" id="btnSaveConfirm" style="margin-left:0;padding:10px 20px;">Save</button>
+      <button class="btn" id="btnSaveCancel" style="margin-left:0;padding:10px 14px;">✕</button>
+    </div>
+    <textarea class="write-textarea" id="wTextarea"
+      placeholder="Schreibe hier auf Deutsch…"
+      autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+    <div class="write-bar">
+      <span class="write-meta" id="wWordCount">0 Wörter</span>
+      <button class="btn btn-primary" id="btnSendToTeacher" style="margin-left:auto;">Share for Review →</button>
+    </div>
+  </div>
+
+  <!-- ── Teacher view (live diff) ── -->
+  <div class="write-view hidden" id="wViewTeacher">
+    <div class="write-split">
+      <div class="write-pane">
+        <div class="write-pane-label">Korrektur</div>
+        <textarea class="write-textarea write-correction" id="wCorrectionArea"
+          autocorrect="off" autocapitalize="off" spellcheck="false"
+          placeholder="Edit the student's text here…"></textarea>
+      </div>
+      <div class="write-pane">
+        <div class="write-pane-label">
+          Änderungen
+          <span class="diff-legend-inline">
+            <span class="diff-del" style="text-decoration:none;font-size:10px;">removed</span>
+            <span class="diff-ins" style="text-decoration:none;font-size:10px;">added</span>
+          </span>
+        </div>
+        <div class="write-live-diff" id="wDiffOutput"></div>
+      </div>
+    </div>
+    <div class="write-bar">
+      <button class="btn" id="btnTeacherBack" style="margin-left:0;">← Student</button>
+      <span class="write-review-url hidden" id="wReviewUrl" title="Click to copy"></span>
+      <button class="btn" id="btnSaveCorrection" style="margin-left:auto;">Save Correction</button>
+      <button class="btn btn-primary" id="btnWriteNew" style="margin-left:0;">New Text</button>
+    </div>
+  </div>
+
 </div>
 
 <!-- ── Settings ─────────────────────────────────────── -->

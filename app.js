@@ -937,9 +937,10 @@ function renderTagOpts() {
 // Keyboard shortcuts
 document.addEventListener('keydown', e => {
   const settingsOpen = $('settingsPanel').classList.contains('open');
+  const writeOpen    = $('writePanel').classList.contains('open');
   const doneScreen   = $('completeScreen').classList.contains('active');
 
-  if (settingsOpen) return;
+  if (settingsOpen || writeOpen) return;
 
   if (doneScreen) {
     if (e.key === 'Enter') startSession();
@@ -980,6 +981,15 @@ Promise.all([fetchWords, fetchStats])
     Stats.init(statsData);
     buildTagFilter();
     startSession();
+    // Auto-open review mode if URL has ?review=slug
+    const reviewSlug = new URLSearchParams(window.location.search).get('review');
+    if (reviewSlug) {
+      openWrite();
+      fetch(`/text/${reviewSlug}`)
+        .then(r => r.json())
+        .then(entry => { if (entry.ok !== false) _wOpenTeacher(entry); })
+        .catch(() => {});
+    }
   })
   .catch(() => {
     $('mainArea').innerHTML = `
@@ -1465,3 +1475,346 @@ setInterval(async () => {
     if (data.ok) _updatePendingBadge(data.items || []);
   } catch (_) {}
 }, 5000);
+
+// ═══════════════════════════════════════════════════════════════
+//  WRITING MODE
+// ═══════════════════════════════════════════════════════════════
+
+/** Opens the full-screen writing panel. */
+function openWrite() {
+  $('writePanel').classList.add('open');
+  _wShowView('student');
+  _wLoadTexts();
+  $('wTextarea').focus();
+}
+
+/** Closes the writing panel. */
+function closeWrite() {
+  $('writePanel').classList.remove('open');
+}
+
+/**
+ * Switches between the two writing sub-views.
+ * @param {'student'|'teacher'} view
+ */
+function _wShowView(view) {
+  const views     = { student: 'wViewStudent', teacher: 'wViewTeacher' };
+  const subtitles = { student: 'Student Mode', teacher: 'Teacher Mode' };
+  for (const [k, id] of Object.entries(views))
+    $(id).classList.toggle('hidden', k !== view);
+  $('wSubtitle').textContent = subtitles[view];
+}
+
+// Update word count as student types
+$('wTextarea').addEventListener('input', () => {
+  const n = $('wTextarea').value.trim().split(/\s+/).filter(Boolean).length;
+  $('wWordCount').textContent = n === 1 ? '1 Wort' : `${n} Wörter`;
+});
+
+/** Holds the student's original text while the teacher edits. */
+let _wOriginal = '';
+
+/** Updates the live diff panel from the current correction textarea value. */
+function _wUpdateDiff() {
+  $('wDiffOutput').innerHTML = _renderDiff(_wOriginal, $('wCorrectionArea').value);
+}
+
+// Share for Review: prompt for name, save, then open teacher mode
+$('btnSendToTeacher').addEventListener('click', () => {
+  const text = $('wTextarea').value.trim();
+  if (!text) return;
+  $('wSaveRow').classList.remove('hidden');
+  $('wSaveName').value = '';
+  $('wSaveName').focus();
+});
+
+// Live diff: update on every keystroke
+$('wCorrectionArea').addEventListener('input', _wUpdateDiff);
+
+$('btnTeacherBack').addEventListener('click', () => _wShowView('student'));
+
+// New text: reset to student view
+$('btnWriteNew').addEventListener('click', () => {
+  $('wTextarea').value = '';
+  $('wWordCount').textContent = '0 Wörter';
+  _wOriginal = '';
+  _wCurrentSlug = null;
+  _wRenderStrip();
+  _wShowView('student');
+  history.replaceState(null, '', window.location.pathname);
+  $('wTextarea').focus();
+});
+
+$('btnWriteClose').addEventListener('click', closeWrite);
+$('btnWrite').addEventListener('click', openWrite);
+
+// Escape closes the write panel
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && $('writePanel').classList.contains('open')) closeWrite();
+});
+
+// ── Diff algorithm ───────────────────────────────────────────
+
+/**
+ * Splits text into word tokens, treating newlines as paragraph-break sentinels.
+ * @param {string} text
+ * @returns {string[]}
+ */
+function _wTokenize(text) {
+  const tokens = [];
+  const lines  = text.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    for (const w of lines[i].split(/\s+/)) if (w) tokens.push(w);
+    if (i < lines.length - 1) tokens.push('\n');
+  }
+  // Trim trailing newline sentinels
+  while (tokens.length && tokens[tokens.length - 1] === '\n') tokens.pop();
+  return tokens;
+}
+
+/**
+ * LCS-based word-level diff.
+ * Returns array of {type:'equal'|'delete'|'insert', tokens:string[]}.
+ * @param {string} original
+ * @param {string} corrected
+ */
+function _wComputeDiff(original, corrected) {
+  const a = _wTokenize(original);
+  const b = _wTokenize(corrected);
+  const m = a.length, n = b.length;
+
+  // Build LCS DP table
+  const dp = Array.from({ length: m + 1 }, () => new Uint16Array(n + 1));
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+
+  // Backtrack
+  const raw = [];
+  let i = m, j = n;
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && a[i-1] === b[j-1]) {
+      raw.push({ type: 'equal',  token: a[i-1] }); i--; j--;
+    } else if (j > 0 && (i === 0 || dp[i][j-1] >= dp[i-1][j])) {
+      raw.push({ type: 'insert', token: b[j-1] }); j--;
+    } else {
+      raw.push({ type: 'delete', token: a[i-1] }); i--;
+    }
+  }
+  raw.reverse();
+
+  // Merge consecutive same-type items into chunks
+  const chunks = [];
+  for (const item of raw) {
+    if (chunks.length && chunks[chunks.length - 1].type === item.type)
+      chunks[chunks.length - 1].tokens.push(item.token);
+    else
+      chunks.push({ type: item.type, tokens: [item.token] });
+  }
+  return chunks;
+}
+
+/**
+ * Escapes HTML special characters.
+ * @param {string} s
+ */
+function _escHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/**
+ * Renders the diff of original vs corrected as tracked-changes HTML.
+ * Deletions are shown with red strikethrough; insertions with green underline.
+ * @param {string} original
+ * @param {string} corrected
+ * @returns {string} HTML string
+ */
+function _renderDiff(original, corrected) {
+  const chunks = _wComputeDiff(original, corrected);
+  // Flatten to a stream of {type, token} so we can control spacing precisely
+  const stream = chunks.flatMap(c => c.tokens.map(t => ({ type: c.type, token: t })));
+
+  let html = '';
+  let prevNl = true; // treat start as after-newline to skip leading space
+
+  for (let i = 0; i < stream.length; i++) {
+    const { type, token } = stream[i];
+
+    if (token === '\n') {
+      html += '<br>';
+      prevNl = true;
+      continue;
+    }
+
+    if (!prevNl) html += ' ';
+    prevNl = false;
+
+    const esc = _escHtml(token);
+    if      (type === 'equal')  html += esc;
+    else if (type === 'delete') html += `<span class="diff-del">${esc}</span>`;
+    else                        html += `<span class="diff-ins">${esc}</span>`;
+  }
+  return html;
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  TEXT LIBRARY  (save / load writing practice texts)
+// ═══════════════════════════════════════════════════════════════
+
+let _wCurrentSlug = null;  // slug of the currently loaded text, or null if unsaved
+let _wTexts       = [];    // [{name, slug, saved, hasCorrection}]
+
+/** Fetches /list-texts and refreshes the chip strip. */
+async function _wLoadTexts() {
+  try {
+    const r = await fetch('/list-texts');
+    _wTexts = r.ok ? (await r.json()).texts || [] : [];
+  } catch (_) {
+    _wTexts = [];
+  }
+  _wRenderStrip();
+}
+
+/** Renders saved-text chips. Always ends with a "+ New" chip. */
+function _wRenderStrip() {
+  const strip = $('wTextsStrip');
+  const chips = _wTexts.map(t => {
+    const label   = t.name.length > 22 ? t.name.slice(0, 20) + '…' : t.name;
+    const corrDot = t.hasCorrection ? '<span class="write-chip-corr" title="Has correction">·</span>' : '';
+    return `<button class="write-chip${t.slug === _wCurrentSlug ? ' active' : ''}" data-slug="${t.slug}">${corrDot}${_escHtml(label)}<span class="write-chip-del" data-del="${t.slug}">×</span></button>`;
+  }).join('');
+  strip.innerHTML = chips + `<button class="write-chip write-chip-new" data-new>+ New</button>`;
+}
+
+/** POSTs to /save-text, updates _wCurrentId, reloads strip. */
+/** Briefly flashes a button label to confirm a save. */
+function _wFlashSaved(btnId, label) {
+  const btn = $(btnId);
+  btn.textContent = 'Saved ✓';
+  setTimeout(() => { btn.textContent = label; }, 1500);
+}
+
+/** Saves the teacher's correction for the current (always-named) text. */
+async function _wSaveCorrection() {
+  if (!_wCurrentSlug) return;
+  const correction = $('wCorrectionArea').value;
+  try {
+    const res  = await fetch('/save-text', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: _wCurrentSlug, correction }),
+    });
+    const data = await res.json();
+    if (data.ok) { await _wLoadTexts(); _wFlashSaved('btnSaveCorrection', 'Save Correction'); }
+  } catch (_) {}
+}
+
+/** Deletes a saved text by slug. */
+async function _wDeleteText(slug) {
+  try {
+    await fetch('/delete-text', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug }),
+    });
+    if (_wCurrentSlug === slug) { _wCurrentSlug = null; _wShowView('student'); }
+    await _wLoadTexts();
+  } catch (_) {}
+}
+
+function _hideSaveRow() {
+  $('wSaveRow').classList.add('hidden');
+  $('wSaveName').value = '';
+}
+
+/**
+ * Opens teacher mode for a full entry object {name, slug, text, correction?, …}.
+ * Updates the URL to ?review=slug without a page reload.
+ */
+function _wOpenTeacher(entry) {
+  _wCurrentSlug = entry.slug;
+  _wOriginal    = entry.text || '';
+  $('wCorrectionArea').value = entry.correction || entry.text || '';
+  _wUpdateDiff();
+  _wRenderStrip();
+  _wShowView('teacher');
+  $('wCorrectionArea').focus();
+  // Update browser URL so the review link is shareable
+  history.replaceState(null, '', `?review=${entry.slug}`);
+  // Show the review URL in the toolbar
+  $('wReviewUrl').textContent = window.location.href;
+  $('wReviewUrl').classList.remove('hidden');
+}
+
+// Strip click — open teacher mode, delete ×, or new
+$('wTextsStrip').addEventListener('click', async e => {
+  const del = e.target.closest('[data-del]');
+  if (del) { e.stopPropagation(); _wDeleteText(del.dataset.del); return; }
+
+  const chip = e.target.closest('.write-chip');
+  if (!chip) return;
+
+  if ('new' in chip.dataset) {
+    _wCurrentSlug = null;
+    $('wTextarea').value = '';
+    $('wWordCount').textContent = '0 Wörter';
+    _wRenderStrip();
+    _hideSaveRow();
+    _wShowView('student');
+    history.replaceState(null, '', window.location.pathname);
+    $('wTextarea').focus();
+    return;
+  }
+
+  // Fetch full text from server then open teacher mode
+  const slug = chip.dataset.slug;
+  if (!slug) return;
+  try {
+    const r     = await fetch(`/text/${slug}`);
+    const entry = await r.json();
+    if (entry.ok !== false) _wOpenTeacher(entry);
+  } catch (_) {}
+});
+
+// Share for Review: save text with name, then open teacher mode
+$('btnSaveConfirm').addEventListener('click', async () => {
+  const name = $('wSaveName').value.trim();
+  const text = $('wTextarea').value.trim();
+  if (!name || !text) return;
+  _hideSaveRow();
+  try {
+    const res  = await fetch('/save-text', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, text }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      await _wLoadTexts();
+      const r     = await fetch(`/text/${data.slug}`);
+      const entry = await r.json();
+      if (entry.ok !== false) _wOpenTeacher(entry);
+    }
+  } catch (_) {}
+});
+
+$('wSaveName').addEventListener('keydown', e => {
+  if (e.key === 'Enter')  { e.preventDefault(); $('btnSaveConfirm').click(); }
+  if (e.key === 'Escape') _hideSaveRow();
+});
+
+$('btnSaveCancel').addEventListener('click', _hideSaveRow);
+
+$('btnSaveCorrection').addEventListener('click', _wSaveCorrection);
+
+// Click review URL to copy it
+$('wReviewUrl').addEventListener('click', () => {
+  const url = $('wReviewUrl').textContent;
+  if (!url) return;
+  navigator.clipboard.writeText(url).then(() => {
+    const el = $('wReviewUrl');
+    const orig = el.textContent;
+    el.textContent = 'Copied!';
+    setTimeout(() => { el.textContent = orig; }, 1500);
+  });
+});

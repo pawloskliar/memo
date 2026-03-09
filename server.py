@@ -18,6 +18,7 @@ from pathlib import Path
 PORT      = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
 BASE_DIR  = Path(__file__).parent
 STATS     = BASE_DIR / 'stats.yaml'
+TEXTS_DIR = BASE_DIR / 'texts'
 QUEUE_DIR = BASE_DIR / '.word-queue'
 
 
@@ -119,6 +120,74 @@ def _read_yaml(text: str) -> dict:
     return data
 
 
+# ── Text YAML helpers ──────────────────────────────────────────────────────
+
+import re as _re
+
+def _slugify(name: str) -> str:
+    s = name.lower()
+    s = _re.sub(r'[äöü]', lambda m: {'ä':'ae','ö':'oe','ü':'ue'}[m.group()], s)
+    s = s.replace('ß', 'ss')
+    s = _re.sub(r'[^a-z0-9]+', '-', s).strip('-')
+    return s or 'text'
+
+def _unique_slug(name: str) -> str:
+    base = _slugify(name)
+    slug, i = base, 2
+    while (TEXTS_DIR / f'{slug}.yaml').exists():
+        slug = f'{base}-{i}'; i += 1
+    return slug
+
+def _write_text_yaml(entry: dict) -> str:
+    def block(key, value):
+        lines = [f'{key}: |-']
+        for line in (value or '').split('\n'):
+            lines.append(f'  {line}')
+        return lines
+
+    out = [
+        '# Deutsch Karten — Writing Practice',
+        f'name: {_scalar(entry["name"])}',
+        f'slug: {entry["slug"]}',
+        f'saved: {_scalar(entry.get("saved", ""))}',
+    ]
+    out += block('text', entry.get('text', ''))
+    if entry.get('correction'):
+        out.append(f'corrected: {_scalar(entry.get("corrected", ""))}')
+        out += block('correction', entry['correction'])
+    return '\n'.join(out) + '\n'
+
+def _read_text_yaml(content: str) -> dict:
+    entry = {}
+    current_block = None
+    block_lines   = []
+
+    for raw in content.splitlines():
+        line = raw.rstrip()
+
+        if current_block is not None:
+            if raw.startswith('  '):
+                block_lines.append(raw[2:])
+                continue
+            # block ended
+            entry[current_block] = '\n'.join(block_lines)
+            current_block = None; block_lines = []
+
+        stripped = line.lstrip()
+        if not stripped or stripped.startswith('#'):
+            continue
+        if stripped.endswith(': |-') or stripped.endswith(': |'):
+            key = stripped.split(':')[0].strip()
+            current_block = key; block_lines = []
+        elif ': ' in stripped:
+            k, _, v = stripped.partition(': ')
+            entry[k.strip()] = _parse_scalar(v.strip())
+
+    if current_block is not None:
+        entry[current_block] = '\n'.join(block_lines)
+    return entry
+
+
 # ── HTTP handler ───────────────────────────────────────────────────────────
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -148,6 +217,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     return self._json({'ok': False, 'error': str(e)}, 500)
             return self._json({'ok': True, 'pending': True})
 
+        if parsed.path == '/list-texts':
+            return self._handle_list_texts()
+
+        if parsed.path.startswith('/text/'):
+            slug = parsed.path[6:].strip('/')
+            if slug and '/' not in slug:
+                return self._handle_get_text(slug)
+
         # Fall through to static file serving
         super().do_GET()
 
@@ -161,6 +238,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._handle_add_word(length)
         elif parsed.path == '/add-batch':
             self._handle_add_batch(length)
+        elif parsed.path == '/save-text':
+            self._handle_save_text(length)
+        elif parsed.path == '/delete-text':
+            self._handle_delete_text(length)
+
         else:
             self.send_response(404); self.end_headers()
 
@@ -280,6 +362,79 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         except Exception as e:
             self._json({'error': str(e)}, 500)
 
+    def _handle_list_texts(self):
+        texts = []
+        if TEXTS_DIR.exists():
+            for f in sorted(TEXTS_DIR.glob('*.yaml'), key=lambda p: p.stat().st_mtime, reverse=True):
+                try:
+                    e = _read_text_yaml(f.read_text('utf-8'))
+                    texts.append({
+                        'name':          e.get('name', f.stem),
+                        'slug':          e.get('slug', f.stem),
+                        'saved':         e.get('saved', ''),
+                        'hasCorrection': bool(e.get('correction')),
+                    })
+                except Exception:
+                    pass
+        self._json({'ok': True, 'texts': texts})
+
+    def _handle_get_text(self, slug):
+        f = TEXTS_DIR / f'{slug}.yaml'
+        if not f.exists():
+            return self._json({'ok': False, 'error': 'not found'}, 404)
+        try:
+            entry = _read_text_yaml(f.read_text('utf-8'))
+            self._json({'ok': True, **entry})
+        except Exception as e:
+            self._json({'error': str(e)}, 500)
+
+    def _handle_save_text(self, length):
+        try:
+            body     = json.loads(self.rfile.read(length))
+            slug     = body.get('slug', '').strip()
+            name     = body.get('name', '').strip()
+            has_text = 'text'       in body
+            has_corr = 'correction' in body
+
+            TEXTS_DIR.mkdir(exist_ok=True)
+            now = datetime.now().strftime('%Y-%m-%d %H:%M')
+
+            if slug:
+                # Update existing file
+                f = TEXTS_DIR / f'{slug}.yaml'
+                entry = _read_text_yaml(f.read_text('utf-8')) if f.exists() else {'slug': slug, 'name': name or slug}
+                if name:     entry['name']       = name
+                if has_text: entry['text']        = body['text'];       entry['saved']     = now
+                if has_corr: entry['correction']  = body['correction']; entry['corrected'] = now
+            else:
+                # New text — generate unique slug from name
+                if not name:
+                    return self._json({'ok': False, 'error': 'name required'}, 400)
+                slug  = _unique_slug(name)
+                entry = {'name': name, 'slug': slug, 'saved': now}
+                if has_text: entry['text']       = body['text']
+                if has_corr: entry['correction']  = body['correction']; entry['corrected'] = now
+
+            (TEXTS_DIR / f'{slug}.yaml').write_text(_write_text_yaml(entry), 'utf-8')
+            action = 'correction' if has_corr and not has_text else 'text'
+            print(f'  📝 Saved {action}: "{entry["name"]}" → texts/{slug}.yaml')
+            self._json({'ok': True, 'slug': slug})
+        except Exception as e:
+            self._json({'error': str(e)}, 500)
+
+    def _handle_delete_text(self, length):
+        try:
+            body = json.loads(self.rfile.read(length))
+            slug = body.get('slug', '').strip()
+            if not slug:
+                return self._json({'ok': False, 'error': 'slug required'}, 400)
+            f = TEXTS_DIR / f'{slug}.yaml'
+            if f.exists():
+                f.unlink()
+            self._json({'ok': True})
+        except Exception as e:
+            self._json({'error': str(e)}, 500)
+
     def _json(self, data, status=200):
         self.send_response(status)
         self._cors_headers()
@@ -302,9 +457,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 if __name__ == '__main__':
     os.chdir(BASE_DIR)
+    TEXTS_DIR.mkdir(exist_ok=True)
     QUEUE_DIR.mkdir(exist_ok=True)
     print(f'  Deutsch Karten  →  http://localhost:{PORT}')
     print(f'  Stats file      →  {STATS}')
+    print(f'  Texts dir       →  {TEXTS_DIR}/')
     print(f'  Word queue      →  {QUEUE_DIR}')
     print( '  Stop with Ctrl+C\n')
     with http.server.HTTPServer(('', PORT), Handler) as httpd:
