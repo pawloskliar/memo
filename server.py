@@ -124,7 +124,9 @@ def _read_yaml(text: str) -> dict:
 class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_OPTIONS(self):
-        self._cors(); self.end_headers()
+        self.send_response(200)
+        self._cors_headers()
+        self.end_headers()
 
     def do_GET(self):
         # Status poll for a pending word-addition request
@@ -231,14 +233,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self._json({'error': str(e)}, 500)
 
     def _json(self, data, status=200):
-        self._cors()
         self.send_response(status)
+        self._cors_headers()
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
         self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
 
-    def _cors(self):
-        self.send_response(200)
+    def _cors_headers(self):
         self.send_header('Access-Control-Allow-Origin',  '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
