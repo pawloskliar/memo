@@ -1112,6 +1112,7 @@ function closeAddWord() {
   $('addWordPanel').classList.remove('open');
   $('overlay').classList.remove('open');
   _stopPoll();
+  _clearWordMatch();
 }
 
 /**
@@ -1281,8 +1282,120 @@ function _studyNewWord(id) {
  */
 function _resetAddWordForm() {
   $('addWordStatus').innerHTML = '';
+  _clearWordMatch();
   $('addWordInput').focus();
 }
+
+// ═══════════════════════════════════════════════════════════════
+// ── Duplicate Detection ────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+
+/** Current suggestion list (for keyboard nav). */
+let _matchSuggestions = [];
+let _matchFocusIdx    = -1;
+let _matchDebounce    = null;
+
+/** Normalises a string for match comparison. */
+function _normMatch(s) { return (s || '').trim().toLowerCase(); }
+
+/** Strips a leading article token ("der/die/das") from a typed string. */
+function _stripArticle(s) { return s.replace(/^(der|die|das)\s+/i, '').trim(); }
+
+/**
+ * Searches WORDS_DATA for exact, prefix, and contains matches.
+ * Returns { exact: word|null, suggestions: word[] }.
+ */
+function _matchWords(query) {
+  const q = _normMatch(_stripArticle(query));
+  if (q.length < 3) return { exact: null, suggestions: [] };
+
+  const exact = [], prefix = [], contains = [];
+  for (const w of (window.WORDS_DATA || [])) {
+    const de = _normMatch(w.de);
+    const en = _normMatch(w.en || '');
+    if (de === q) { exact.push(w); continue; }
+    if (de.startsWith(q)) { prefix.push(w); continue; }
+    if (de.includes(q) || en.includes(q)) contains.push(w);
+  }
+
+  return { exact: exact[0] || null, suggestions: [...prefix, ...contains].slice(0, 5) };
+}
+
+/** Hides the match area and resets suggestion state. */
+function _clearWordMatch() {
+  const el = $('addWordMatch');
+  if (el) el.innerHTML = '';
+  _matchSuggestions = [];
+  _matchFocusIdx    = -1;
+}
+
+/** Updates the visual focus highlight on suggestion rows. */
+function _updateMatchFocus() {
+  document.querySelectorAll('.aw-suggestion-row').forEach((el, i) => {
+    el.classList.toggle('focused', i === _matchFocusIdx);
+  });
+}
+
+/** Fills the input with the selected suggestion and re-runs match. */
+function _selectSuggestion(word) {
+  const full = (word.article && word.article !== '~') ? `${word.article} ${word.de}` : word.de;
+  $('addWordInput').value = full;
+  _matchFocusIdx = -1;
+  _renderWordMatch(full);
+}
+
+/**
+ * Runs the duplicate check and renders the match area.
+ * Shows an exact-match preview or a suggestion list.
+ */
+function _renderWordMatch(query) {
+  const { exact, suggestions } = _matchWords(query);
+  const el = $('addWordMatch');
+
+  if (exact) {
+    _matchSuggestions = [];
+    _matchFocusIdx    = -1;
+    const de   = (exact.article && exact.article !== '~') ? `${exact.article} ${exact.de}` : exact.de;
+    const tags = (exact.tags || []).join(', ');
+    el.innerHTML = `
+      <div class="aw-preview aw-exists">
+        <div class="aw-exists-label" style="padding:12px 16px 4px;">⚑ Already in your deck</div>
+        <div class="aw-preview-de">${de}</div>
+        <div class="aw-preview-meta">${exact.type || 'word'} · #${exact.id}</div>
+        <div class="aw-preview-trans">${exact.en || ''} · ${exact.uk || ''}</div>
+        ${tags ? `<div class="aw-preview-tags">${tags}</div>` : ''}
+        <div class="aw-preview-actions">
+          <button class="btn btn-primary" id="awMatchStudy" style="margin-left:0;">Study now →</button>
+          <button class="btn" id="awMatchIgnore" style="margin-left:0;">Add anyway</button>
+        </div>
+      </div>`;
+    $('awMatchStudy').addEventListener('click',  () => _studyNewWord(exact.id));
+    $('awMatchIgnore').addEventListener('click', _clearWordMatch);
+
+  } else if (suggestions.length > 0) {
+    _matchSuggestions = suggestions;
+    _matchFocusIdx    = -1;
+    el.innerHTML = `<div class="aw-suggestion-list">${suggestions.map((w, i) => {
+      const de = (w.article && w.article !== '~') ? `${w.article} ${w.de}` : w.de;
+      return `<div class="aw-suggestion-row" data-idx="${i}">
+        <span class="aw-suggestion-de">${de}</span>
+        <span class="aw-suggestion-en">${w.en || ''}</span>
+        <span class="aw-suggestion-stat">${Stats.badgeHTML(w.id)}</span>
+      </div>`;
+    }).join('')}</div>`;
+
+  } else {
+    _clearWordMatch();
+  }
+}
+
+// Click-to-select on suggestions (event delegation)
+$('addWordMatch').addEventListener('click', e => {
+  const row = e.target.closest('.aw-suggestion-row');
+  if (!row) return;
+  const idx = +row.dataset.idx;
+  if (_matchSuggestions[idx]) _selectSuggestion(_matchSuggestions[idx]);
+});
 
 // ═══════════════════════════════════════════════════════════════
 // ── Batch Import ───────────────────────────────────────────────
@@ -1436,8 +1549,32 @@ _initDropzone();
 $('btnAddWord').addEventListener('click', openAddWord);
 $('btnSubmitWord').addEventListener('click', submitWord);
 $('addWordInput').addEventListener('keydown', e => {
+  // Keyboard navigation for suggestion list
+  if (e.key === 'ArrowDown' && _matchSuggestions.length) {
+    e.preventDefault();
+    _matchFocusIdx = Math.min(_matchFocusIdx + 1, _matchSuggestions.length - 1);
+    _updateMatchFocus();
+    return;
+  }
+  if (e.key === 'ArrowUp' && _matchSuggestions.length) {
+    e.preventDefault();
+    _matchFocusIdx = Math.max(_matchFocusIdx - 1, -1);
+    _updateMatchFocus();
+    return;
+  }
+  if (e.key === 'Enter' && _matchFocusIdx >= 0) {
+    e.preventDefault();
+    _selectSuggestion(_matchSuggestions[_matchFocusIdx]);
+    return;
+  }
   if (e.key === 'Enter') { e.preventDefault(); submitWord(); }
-  if (e.key === 'Escape') closeAddWord();
+  if (e.key === 'Escape') { _clearWordMatch(); closeAddWord(); }
+});
+$('addWordInput').addEventListener('input', () => {
+  clearTimeout(_matchDebounce);
+  const q = $('addWordInput').value.trim();
+  if (q.length < 3) { _clearWordMatch(); return; }
+  _matchDebounce = setTimeout(() => _renderWordMatch(q), 220);
 });
 $('addWordHint').addEventListener('keydown', e => {
   if (e.key === 'Enter') { e.preventDefault(); submitWord(); }

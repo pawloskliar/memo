@@ -844,6 +844,54 @@ main {
   margin-bottom: 6px;
 }
 
+/* ── Add Word — duplicate match area ── */
+.aw-match { margin-top: 4px; }
+
+.aw-suggestion-list {
+  border: var(--border);
+}
+.aw-suggestion-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--bg2);
+  cursor: pointer;
+  transition: background .1s;
+}
+.aw-suggestion-row:last-child { border-bottom: none; }
+.aw-suggestion-row:hover,
+.aw-suggestion-row.focused { background: var(--bg2); }
+.aw-suggestion-de {
+  font-family: var(--font-word);
+  font-size: 16px;
+  font-weight: 700;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aw-suggestion-en {
+  font-size: 12px;
+  color: var(--ink-light);
+  font-style: italic;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.aw-suggestion-stat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
 /* ── Add Word — pending badge on + button ── */
 .btn-icon-wrap {
   position: relative;
