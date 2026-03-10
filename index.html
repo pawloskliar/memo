@@ -92,6 +92,9 @@
           <span class="kb">→</span> correct &nbsp;
           <span class="kb">↓</span> skip
         </div>
+        <div class="ban-row">
+          <button class="btn-ban" id="fBtnBan" title="Ban this word from the session pool"><span class="kb">B</span> ban word</button>
+        </div>
       </div>
 
     </div>
@@ -142,6 +145,9 @@
           <span class="kb">←</span> wrong &nbsp;
           <span class="kb">→</span> correct &nbsp;
           <span class="kb">↓</span> skip
+        </div>
+        <div class="ban-row">
+          <button class="btn-ban" id="tBtnBan" title="Ban this word from the session pool"><span class="kb">B</span> ban word</button>
         </div>
       </div>
 
@@ -241,6 +247,7 @@
       <div class="write-title">SCHREIBEN</div>
       <div class="write-subtitle" id="wSubtitle">Student Mode</div>
     </div>
+    <span class="write-review-url hidden" id="wReviewUrl" title="Click to copy link"></span>
     <button class="btn-icon" id="btnWriteClose" style="margin-left:0;">✕</button>
   </div>
 
@@ -275,8 +282,8 @@
         <div class="write-pane-label">
           Änderungen
           <span class="diff-legend-inline">
-            <span class="diff-del" style="text-decoration:none;font-size:10px;">removed</span>
-            <span class="diff-ins" style="text-decoration:none;font-size:10px;">added</span>
+            <span class="diff-del" style="text-decoration:none;font-size:10px;padding:0 2px;">removed</span>
+            <span class="diff-ins" style="text-decoration:none;font-size:10px;padding:0 2px;">added</span>
           </span>
         </div>
         <div class="write-live-diff" id="wDiffOutput"></div>
@@ -284,7 +291,6 @@
     </div>
     <div class="write-bar">
       <button class="btn" id="btnTeacherBack" style="margin-left:0;">← Student</button>
-      <span class="write-review-url hidden" id="wReviewUrl" title="Click to copy"></span>
       <button class="btn" id="btnSaveCorrection" style="margin-left:auto;">Save Correction</button>
       <button class="btn btn-primary" id="btnWriteNew" style="margin-left:0;">New Text</button>
     </div>
@@ -319,6 +325,16 @@
     <div class="opts">
       <div class="opt sel" data-g="article" data-v="yes">Yes — type "das Haus" <span class="opt-check">✓</span></div>
       <div class="opt"     data-g="article" data-v="no">No — just "Haus" <span class="opt-check"></span></div>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <div class="setting-title">Session Size</div>
+    <div class="opts">
+      <div class="opt sel" data-g="limit" data-v="">All words <span class="opt-check">✓</span></div>
+      <div class="opt"     data-g="limit" data-v="20">20 words <span class="opt-check"></span></div>
+      <div class="opt"     data-g="limit" data-v="30">30 words <span class="opt-check"></span></div>
+      <div class="opt"     data-g="limit" data-v="50">50 words <span class="opt-check"></span></div>
     </div>
   </div>
 

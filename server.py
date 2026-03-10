@@ -45,7 +45,7 @@ def _write_yaml(data: dict) -> str:
     # word_stats — one word per line as flow mapping for readability
     lines.append('word_stats:')
     for wid, s in sorted(data.get('word_stats', {}).items(), key=lambda x: int(x[0])):
-        keys = ['correct', 'wrong', 'skipped', 'streak', 'first_seen', 'last_seen']
+        keys = ['correct', 'wrong', 'skipped', 'streak', 'first_seen', 'last_seen', 'banned']
         parts = ', '.join(f'{k}: {_scalar(s[k])}' for k in keys if k in s)
         lines.append(f'  "{wid}": {{ {parts} }}')
 

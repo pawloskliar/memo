@@ -10,6 +10,7 @@ const cfg = {
   lang:           'both',   // 'en' | 'uk' | 'both'
   requireArticle: true,
   tags:           [],       // empty = all; array of strings = filter to any of these tags
+  limit:          null,     // null = all; number = max words per session
 };
 
 /** @type {{ words: object[], idx: number, correct: number, wrong: number, skipped: number, flipped: boolean, checked: boolean, startTime: number|null }} */
@@ -60,7 +61,7 @@ function parseStatsYAML(text) {
           if (ci === -1) continue;
           const k = pair.slice(0, ci).trim();
           const v = pair.slice(ci + 1).trim().replace(/^"|"$/g, '');
-          obj[k] = /^\d+$/.test(v) ? parseInt(v) : (v === '~' ? null : v);
+          obj[k] = /^\d+$/.test(v) ? parseInt(v) : v === 'true' ? true : v === 'false' ? false : (v === '~' ? null : v);
         }
         data.word_stats[m[1]] = obj;
       }
@@ -184,6 +185,32 @@ const Stats = {
       });
       if (res.ok && sessionData) this._sessions.push(sessionData);
     } catch (e) { console.warn('Could not save stats:', e); }
+  },
+
+  ban(id) {
+    const key = String(id);
+    if (!this._ws[key]) this._ws[key] = { correct: 0, wrong: 0, skipped: 0, streak: 0, first_seen: null, last_seen: null };
+    this._ws[key].banned = true;
+    this._saveBan(key);
+  },
+
+  unban(id) {
+    const key = String(id);
+    if (this._ws[key]) { this._ws[key].banned = false; this._saveBan(key); }
+  },
+
+  isBanned(id) {
+    const s = this._ws[String(id)];
+    return s ? s.banned === true : false;
+  },
+
+  async _saveBan(key) {
+    try {
+      await fetch('/save-stats', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ word_stats: { [key]: this._ws[key] } }),
+      });
+    } catch (e) { console.warn('Could not save ban:', e); }
   },
 };
 
@@ -414,6 +441,29 @@ function advance(outcome) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+//  BAN
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * Bans the current card's word from the pool, removes it from the session,
+ * and advances to the next card (or ends the session).
+ */
+function doBan() {
+  if (sess.idx >= sess.words.length) return;
+  const word = sess.words[sess.idx];
+  Stats.ban(word.id);
+  sess.words.splice(sess.idx, 1);
+  sess.flipped = false;
+  sess.checked = false;
+  updateProgress();
+  if (sess.words.length === 0 || sess.idx >= sess.words.length) {
+    endSession();
+  } else {
+    showCard(sess.words[sess.idx]);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
 //  FLIP
 // ═══════════════════════════════════════════════════════════════
 
@@ -524,16 +574,18 @@ function endSession() {
  */
 function startSession() {
   _cfgDirty = false;
-  const pool = cfg.tags.length
+  let pool = cfg.tags.length
     ? WORDS_DATA.filter(w => w.tags && cfg.tags.some(t => w.tags.includes(t)))
-    : WORDS_DATA;
+    : [...WORDS_DATA];
+  pool = pool.filter(w => !Stats.isBanned(w.id));
   // Weighted sort: higher weight (unseen / wrong-heavy) floats to front,
   // with randomness so the order isn't perfectly rigid each session.
-  sess.words = [...pool].sort((a, b) => {
+  sess.words = pool.sort((a, b) => {
     const wa = Stats.weight(a.id) + Math.random() * 2;
     const wb = Stats.weight(b.id) + Math.random() * 2;
     return wb - wa;
   });
+  if (cfg.limit) sess.words = sess.words.slice(0, cfg.limit);
   sess.idx       = 0;
   sess.correct   = 0;
   sess.wrong     = 0;
@@ -749,6 +801,20 @@ function renderReport() {
         </div>`;
       }).join('')}</div>`;
 
+  // ── Banned words ─────────────────────────────────────────────
+  const banned = Object.entries(allWS).filter(([, s]) => s.banned === true);
+  const bannedHTML = banned.length === 0
+    ? '<div class="report-empty">No banned words.</div>'
+    : `<div class="word-list">${banned.map(([id, s]) => {
+        const label = wordLabel(id);
+        const sub   = wordSub(id);
+        return `<div class="word-row">
+          <div class="word-row-de">${label}</div>
+          <div class="word-row-en">${sub}</div>
+          <button class="btn-unban" onclick="Stats.unban('${id}'); renderReport();">unban</button>
+        </div>`;
+      }).join('')}</div>`;
+
   $('reportBody').innerHTML = `
     <div>
       <div class="report-stats-row">
@@ -782,6 +848,12 @@ function renderReport() {
       <div class="report-section-title">Mastered (≥ 5 attempts · ≥ 80%)</div>
       ${masteredHTML}
     </div>
+
+    ${banned.length > 0 ? `
+    <div>
+      <div class="report-section-title">Banned (${banned.length})</div>
+      ${bannedHTML}
+    </div>` : ''}
   `;
 }
 
@@ -840,12 +912,14 @@ $('btnFlip').addEventListener('click',  e => { e.stopPropagation(); doFlip(); })
 $('fBtnWrong').addEventListener('click', () => advance('wrong'));
 $('fBtnSkip').addEventListener('click',  () => advance('skip'));
 $('fBtnRight').addEventListener('click', () => advance('correct'));
+$('fBtnBan').addEventListener('click',   e => { e.stopPropagation(); doBan(); });
 
 // Type mode
 $('btnCheck').addEventListener('click', doCheck);
 $('tBtnWrong').addEventListener('click', () => advance('wrong'));
 $('tBtnSkip').addEventListener('click',  () => advance('skip'));
 $('tBtnRight').addEventListener('click', () => advance('correct'));
+$('tBtnBan').addEventListener('click',   () => doBan());
 
 $('typeInput').addEventListener('keydown', e => {
   if (e.key === 'Enter') {
@@ -879,6 +953,7 @@ $('settingsPanel').addEventListener('click', e => {
   if (g === 'mode')    cfg.mode = v;
   if (g === 'lang')    cfg.lang = v;
   if (g === 'article') cfg.requireArticle = v === 'yes';
+  if (g === 'limit')   cfg.limit = v ? +v : null;
   _cfgDirty = true;
 });
 
@@ -944,6 +1019,13 @@ document.addEventListener('keydown', e => {
 
   if (doneScreen) {
     if (e.key === 'Enter') startSession();
+    return;
+  }
+
+  // Ban current word (any time during a card)
+  if ((e.key === 'b' || e.key === 'B') && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    doBan();
     return;
   }
 
@@ -1741,9 +1823,11 @@ function _wOpenTeacher(entry) {
   $('wCorrectionArea').focus();
   // Update browser URL so the review link is shareable
   history.replaceState(null, '', `?review=${entry.slug}`);
-  // Show the review URL in the toolbar
-  $('wReviewUrl').textContent = window.location.href;
-  $('wReviewUrl').classList.remove('hidden');
+  // Show doc name as the copyable link label
+  const el = $('wReviewUrl');
+  el.textContent = entry.name;
+  el.dataset.url = window.location.href;
+  el.classList.remove('hidden');
 }
 
 // Strip click — open teacher mode, delete ×, or new
@@ -1807,12 +1891,12 @@ $('btnSaveCancel').addEventListener('click', _hideSaveRow);
 
 $('btnSaveCorrection').addEventListener('click', _wSaveCorrection);
 
-// Click review URL to copy it
+// Click doc name to copy its review URL
 $('wReviewUrl').addEventListener('click', () => {
-  const url = $('wReviewUrl').textContent;
+  const el  = $('wReviewUrl');
+  const url = el.dataset.url;
   if (!url) return;
   navigator.clipboard.writeText(url).then(() => {
-    const el = $('wReviewUrl');
     const orig = el.textContent;
     el.textContent = 'Copied!';
     setTimeout(() => { el.textContent = orig; }, 1500);

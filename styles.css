@@ -350,6 +350,30 @@ main {
   background: var(--card-bg);
 }
 
+/* ── Ban button ── */
+.ban-row {
+  text-align: center;
+  margin-top: -2px;
+}
+.btn-ban {
+  background: none;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  cursor: pointer;
+  padding: 3px 8px;
+  opacity: 0.45;
+  transition: opacity .15s, color .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.btn-ban:hover { opacity: 1; color: var(--red); }
+
 /* ── Type mode ── */
 .type-label {
   font-size: 10.5px;
@@ -664,6 +688,21 @@ main {
   font-family: var(--font-mono); font-size: 10px;
   color: var(--ink-light); white-space: nowrap;
 }
+.btn-unban {
+  background: none;
+  border: 1px solid var(--bg2);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  cursor: pointer;
+  padding: 3px 8px;
+  white-space: nowrap;
+  transition: border-color .12s, color .12s;
+}
+.btn-unban:hover { border-color: var(--mint); color: var(--mint); }
 
 .report-empty {
   font-size: 13px; color: var(--ink-light);
@@ -1030,6 +1069,9 @@ main {
   border-bottom: var(--border);
   flex-shrink: 0;
   background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Correction textarea sits inside a pane */
@@ -1094,21 +1136,21 @@ main {
 
 /* Review URL display in teacher toolbar */
 .write-review-url {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--ink-light);
-  letter-spacing: 0.03em;
-  padding: 6px 10px;
-  border: 1px solid var(--bg2);
-  background: var(--card-bg);
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 300px;
-  transition: color .1s, border-color .1s;
+  max-width: 260px;
+  transition: color .12s;
+  margin: 0 auto;
 }
-.write-review-url:hover { color: var(--ink); border-color: var(--mint); }
+.write-review-url:hover { color: var(--ink); }
 
 /* Inline save-name row */
 .write-save-row {
@@ -1136,14 +1178,11 @@ main {
 .write-save-input:focus { border-color: var(--mint); }
 
 /* Pane label with inline diff legend on the right */
-.write-pane-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 .diff-legend-inline {
   display: flex;
+  align-items: center;
   gap: 10px;
+  line-height: 1;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
