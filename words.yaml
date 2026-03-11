@@ -6922,3 +6922,14 @@
   type: phrase
   tags: [b1, letter, writing]
 
+- id: 787
+  en: to upload
+  uk: завантажувати / вивантажувати (у мережу)
+  de: hochladen
+  article: ~
+  type: verb
+  forms:
+    past: lud hoch
+    pp: hochgeladen
+  tags: [b1, digital, technology]
+
