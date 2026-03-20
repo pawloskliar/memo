@@ -1071,6 +1071,15 @@ Promise.all([fetchWords, fetchStats])
         .then(r => r.json())
         .then(entry => { if (entry.ok !== false) _wOpenTeacher(entry); })
         .catch(() => {});
+    } else if (localStorage.getItem(_W_OPEN_KEY) === '1') {
+      // Restore writing panel and any unsaved draft
+      openWrite();
+      const draft = localStorage.getItem(_W_DRAFT_KEY);
+      if (draft) {
+        $('wTextarea').value = draft;
+        const n = draft.trim().split(/\s+/).filter(Boolean).length;
+        $('wWordCount').textContent = n === 1 ? '1 Wort' : `${n} Wörter`;
+      }
     }
   })
   .catch(() => {
@@ -1302,23 +1311,55 @@ function _normMatch(s) { return (s || '').trim().toLowerCase(); }
 function _stripArticle(s) { return s.replace(/^(der|die|das)\s+/i, '').trim(); }
 
 /**
- * Searches WORDS_DATA for exact, prefix, and contains matches.
- * Returns { exact: word|null, suggestions: word[] }.
+ * Tokenises a normalised string into a Set of meaningful words,
+ * stripping German articles and short stop-words.
+ */
+const _STOP = new Set(['der', 'die', 'das', 'ein', 'eine', 'und', 'oder', 'in', 'im',
+  'an', 'am', 'auf', 'zu', 'zur', 'zum', 'von', 'vom', 'mit', 'bei', 'nach',
+  'für', 'fur', 'über', 'uber', 'unter', 'durch', 'gegen', 'ohne', 'um',
+  'the', 'a', 'an', 'of', 'to', 'in', 'is', 'it', 'and', 'or', 'be']);
+
+function _tokenSet(s) {
+  return new Set(s.split(/\s+/).filter(t => t.length > 1 && !_STOP.has(t)));
+}
+
+/**
+ * Searches WORDS_DATA for exact, prefix, contains, and phrase-similarity matches.
+ * Returns { exact: word|null, suggestions: word[], similar: word[] }.
+ * `similar` contains entries whose German text shares >= 50% of query words.
  */
 function _matchWords(query) {
   const q = _normMatch(_stripArticle(query));
-  if (q.length < 3) return { exact: null, suggestions: [] };
+  if (q.length < 3) return { exact: null, suggestions: [], similar: [] };
 
-  const exact = [], prefix = [], contains = [];
+  const qTokens   = _tokenSet(q);
+  const isPhrase  = qTokens.size >= 2;
+
+  const exact = [], prefix = [], contains = [], similar = [];
   for (const w of (window.WORDS_DATA || [])) {
     const de = _normMatch(w.de);
     const en = _normMatch(w.en || '');
     if (de === q) { exact.push(w); continue; }
     if (de.startsWith(q)) { prefix.push(w); continue; }
-    if (de.includes(q) || en.includes(q)) contains.push(w);
+    if (de.includes(q) || en.includes(q)) { contains.push(w); continue; }
+
+    // Phrase similarity: word-set intersection
+    if (isPhrase) {
+      const wTokens    = _tokenSet(de);
+      if (wTokens.size === 0) continue;
+      const shared     = [...qTokens].filter(t => wTokens.has(t)).length;
+      const coverage   = shared / qTokens.size;   // fraction of query words found in entry
+      if (coverage >= 0.5) similar.push({ word: w, coverage });
+    }
   }
 
-  return { exact: exact[0] || null, suggestions: [...prefix, ...contains].slice(0, 5) };
+  similar.sort((a, b) => b.coverage - a.coverage);
+
+  return {
+    exact:       exact[0] || null,
+    suggestions: [...prefix, ...contains].slice(0, 5),
+    similar:     similar.slice(0, 3).map(s => s.word),
+  };
 }
 
 /** Hides the match area and resets suggestion state. */
@@ -1705,11 +1746,13 @@ function openWrite() {
   _wShowView('student');
   _wLoadTexts();
   $('wTextarea').focus();
+  localStorage.setItem(_W_OPEN_KEY, '1');
 }
 
 /** Closes the writing panel. */
 function closeWrite() {
   $('writePanel').classList.remove('open');
+  localStorage.removeItem(_W_OPEN_KEY);
 }
 
 /**
@@ -1724,10 +1767,26 @@ function _wShowView(view) {
   $('wSubtitle').textContent = subtitles[view];
 }
 
-// Update word count as student types
+// Draft persistence — save unsaved (new) text to localStorage
+const _W_DRAFT_KEY  = 'write_draft';
+const _W_OPEN_KEY   = 'write_panel_open';
+let   _wDraftTimer  = null;
+
+function _wSaveDraft() {
+  if (_wCurrentSlug !== null) return;  // only save unsaved new texts
+  localStorage.setItem(_W_DRAFT_KEY, $('wTextarea').value);
+}
+
+function _wClearDraft() {
+  localStorage.removeItem(_W_DRAFT_KEY);
+}
+
+// Update word count as student types, and save draft
 $('wTextarea').addEventListener('input', () => {
   const n = $('wTextarea').value.trim().split(/\s+/).filter(Boolean).length;
   $('wWordCount').textContent = n === 1 ? '1 Wort' : `${n} Wörter`;
+  clearTimeout(_wDraftTimer);
+  _wDraftTimer = setTimeout(_wSaveDraft, 800);
 });
 
 /** Holds the student's original text while the teacher edits. */
@@ -1747,8 +1806,13 @@ $('btnSendToTeacher').addEventListener('click', () => {
   $('wSaveName').focus();
 });
 
-// Live diff: update on every keystroke
-$('wCorrectionArea').addEventListener('input', _wUpdateDiff);
+// Live diff: update on every keystroke; autosave correction after a pause
+let _wCorrTimer = null;
+$('wCorrectionArea').addEventListener('input', () => {
+  _wUpdateDiff();
+  clearTimeout(_wCorrTimer);
+  _wCorrTimer = setTimeout(_wSaveCorrection, 1200);
+});
 
 $('btnTeacherBack').addEventListener('click', () => _wShowView('student'));
 
@@ -1758,6 +1822,7 @@ $('btnWriteNew').addEventListener('click', () => {
   $('wWordCount').textContent = '0 Wörter';
   _wOriginal = '';
   _wCurrentSlug = null;
+  _wClearDraft();
   _wRenderStrip();
   _wShowView('student');
   history.replaceState(null, '', window.location.pathname);
@@ -1841,38 +1906,152 @@ function _escHtml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+/** Levenshtein distance between two strings. */
+function _editDist(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({ length: m + 1 }, (_, i) => {
+    const row = new Uint16Array(n + 1);
+    row[0] = i;
+    return row;
+  });
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1]
+        : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  return dp[m][n];
+}
+
+/** Character-level LCS diff. Returns [{type:'equal'|'delete'|'insert', ch}]. */
+function _charDiff(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({ length: m + 1 }, () => new Uint16Array(n + 1));
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+  const raw = [];
+  let i = m, j = n;
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && a[i-1] === b[j-1]) {
+      raw.push({ type: 'equal',  ch: a[i-1] }); i--; j--;
+    } else if (j > 0 && (i === 0 || dp[i][j-1] >= dp[i-1][j])) {
+      raw.push({ type: 'insert', ch: b[j-1] }); j--;
+    } else {
+      raw.push({ type: 'delete', ch: a[i-1] }); i--;
+    }
+  }
+  return raw.reverse();
+}
+
+/**
+ * Renders a word substitution as a stacked widget:
+ *   correction (mint, small) on top
+ *   original   (red, struck-through changed chars) below
+ * Only changed characters are highlighted; shared characters appear normally.
+ */
+function _renderSubst(del, ins) {
+  const chars = _charDiff(del, ins);
+  let topHtml = '', botHtml = '';
+  for (const { type, ch } of chars) {
+    const esc = _escHtml(ch);
+    if (type === 'equal') {
+      topHtml += esc;
+      botHtml += esc;
+    } else if (type === 'delete') {
+      botHtml += `<span class="diff-char-del">${esc}</span>`;
+    } else {
+      topHtml += `<span class="diff-char-ins">${esc}</span>`;
+    }
+  }
+  return `<span class="diff-subst"><span class="diff-subst-top">${topHtml}</span><span class="diff-subst-bot">${botHtml}</span></span>`;
+}
+
 /**
  * Renders the diff of original vs corrected as tracked-changes HTML.
- * Deletions are shown with red strikethrough; insertions with green underline.
- * @param {string} original
- * @param {string} corrected
- * @returns {string} HTML string
+ *
+ * Three cases:
+ *  • equal                        → plain text
+ *  • delete+insert (similar word) → stacked character-level widget
+ *  • delete+insert (diff word)    → whole-word del then ins
+ *  • pure delete                  → red strikethrough word
+ *  • pure insert                  → green left-border word with + marker
  */
 function _renderDiff(original, corrected) {
   const chunks = _wComputeDiff(original, corrected);
-  // Flatten to a stream of {type, token} so we can control spacing precisely
-  const stream = chunks.flatMap(c => c.tokens.map(t => ({ type: c.type, token: t })));
 
-  let html = '';
-  let prevNl = true; // treat start as after-newline to skip leading space
+  let html   = '';
+  let prevNl = true;
+  let ci     = 0;
 
-  for (let i = 0; i < stream.length; i++) {
-    const { type, token } = stream[i];
+  /** Emit a space unless at line-start. */
+  function sp() { if (!prevNl) html += ' '; prevNl = false; }
 
-    if (token === '\n') {
-      html += '<br>';
-      prevNl = true;
+  while (ci < chunks.length) {
+    const chunk = chunks[ci];
+
+    // ── equal ────────────────────────────────────────────────
+    if (chunk.type === 'equal') {
+      for (const t of chunk.tokens) {
+        if (t === '\n') { html += '<br>'; prevNl = true; }
+        else { sp(); html += _escHtml(t); }
+      }
+      ci++;
       continue;
     }
 
-    if (!prevNl) html += ' ';
-    prevNl = false;
+    // ── delete — look ahead for matching insert ────────────
+    if (chunk.type === 'delete') {
+      const next = chunks[ci + 1];
+      if (next && next.type === 'insert') {
+        // Pair del/ins tokens greedily, one-for-one up to min length
+        const dels = chunk.tokens.filter(t => t !== '\n');
+        const ins  = next.tokens.filter(t => t !== '\n');
+        const pairs = Math.min(dels.length, ins.length);
 
-    const esc = _escHtml(token);
-    if      (type === 'equal')  html += esc;
-    else if (type === 'delete') html += `<span class="diff-del">${esc}</span>`;
-    else                        html += `<span class="diff-ins">${esc}</span>`;
+        for (let k = 0; k < pairs; k++) {
+          const d = dels[k], iv = ins[k];
+          sp();
+          const maxLen = Math.max(d.length, iv.length);
+          const similar = maxLen > 0 && _editDist(d.toLowerCase(), iv.toLowerCase()) / maxLen <= 0.6;
+          if (similar) {
+            html += _renderSubst(d, iv);
+          } else {
+            html += `<span class="diff-del">${_escHtml(d)}</span> <span class="diff-ins">${_escHtml(iv)}</span>`;
+          }
+        }
+        // leftover deletions
+        for (let k = pairs; k < dels.length; k++) {
+          sp(); html += `<span class="diff-del">${_escHtml(dels[k])}</span>`;
+        }
+        // leftover insertions
+        for (let k = pairs; k < ins.length; k++) {
+          sp(); html += `<span class="diff-ins-new"><span class="diff-ins-marker">+</span>${_escHtml(ins[k])}</span>`;
+        }
+        // handle any newlines
+        for (const t of [...chunk.tokens, ...next.tokens]) {
+          if (t === '\n') { html += '<br>'; prevNl = true; }
+        }
+        ci += 2;
+        continue;
+      }
+
+      // pure deletion
+      for (const t of chunk.tokens) {
+        if (t === '\n') { html += '<br>'; prevNl = true; }
+        else { sp(); html += `<span class="diff-del">${_escHtml(t)}</span>`; }
+      }
+      ci++;
+      continue;
+    }
+
+    // ── pure insert ──────────────────────────────────────────
+    for (const t of chunk.tokens) {
+      if (t === '\n') { html += '<br>'; prevNl = true; }
+      else { sp(); html += `<span class="diff-ins-new"><span class="diff-ins-marker">+</span>${_escHtml(t)}</span>`; }
+    }
+    ci++;
   }
+
   return html;
 }
 
@@ -2011,6 +2190,7 @@ $('btnSaveConfirm').addEventListener('click', async () => {
     });
     const data = await res.json();
     if (data.ok) {
+      _wClearDraft();
       await _wLoadTexts();
       const r     = await fetch(`/text/${data.slug}`);
       const entry = await r.json();
@@ -2027,6 +2207,186 @@ $('wSaveName').addEventListener('keydown', e => {
 $('btnSaveCancel').addEventListener('click', _hideSaveRow);
 
 $('btnSaveCorrection').addEventListener('click', _wSaveCorrection);
+
+// ═══════════════════════════════════════════════════════════════
+//  QUICK-QUEUE (double-click a word in writing/review views)
+// ═══════════════════════════════════════════════════════════════
+
+let _qqToastTimer        = null;
+let _qqPopoverWord       = null;   // word currently shown in the popover
+let _qqPollInterval      = null;
+let _qqIgnoreNextClick   = false;  // suppress the click that immediately follows mouseup
+
+/** Show a brief toast at the bottom of the screen. */
+function _qqToast(msg, kind = 'ok') {
+  let el = document.getElementById('qqToast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'qqToast';
+    el.className = 'qq-toast';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.className = `qq-toast qq-${kind} qq-show`;
+  clearTimeout(_qqToastTimer);
+  _qqToastTimer = setTimeout(() => { el.classList.remove('qq-show'); }, 2400);
+}
+
+/** Dismiss the confirmation popover. */
+function _qqClosePopover() {
+  const el = document.getElementById('qqPopover');
+  if (el) el.remove();
+  _qqPopoverWord = null;
+}
+
+/**
+ * Show a confirmation popover near the mouse position.
+ * Checks WORDS_DATA for an existing match, shows status, and offers a Queue button.
+ * @param {string} word   Already-stripped word.
+ * @param {MouseEvent} ev The dblclick event (for positioning).
+ */
+function _qqShowPopover(word, ev) {
+  _qqClosePopover();
+  _qqPopoverWord = word;
+
+  const { exact, similar } = _matchWords(word);
+  const hasDup = exact || similar.length > 0;
+
+  // Build status HTML
+  let statusHtml = '';
+  if (exact) {
+    const art = (exact.article && exact.article !== '~') ? exact.article + ' ' : '';
+    statusHtml = `<div class="qq-pop-exists">
+      Already in deck: <strong>${art}${_escHtml(exact.de)}</strong>
+      <span class="qq-pop-meta">${_escHtml(exact.en || '')}${exact.uk ? ' · ' + _escHtml(exact.uk) : ''}</span>
+    </div>`;
+  } else if (similar.length > 0) {
+    const rows = similar.map(w => {
+      const art = (w.article && w.article !== '~') ? w.article + ' ' : '';
+      return `<div class="qq-pop-similar-row">
+        <strong>${art}${_escHtml(w.de)}</strong>
+        <span class="qq-pop-meta">${_escHtml(w.en || '')}${w.uk ? ' · ' + _escHtml(w.uk) : ''}</span>
+      </div>`;
+    }).join('');
+    statusHtml = `<div class="qq-pop-exists qq-pop-similar">Similar in deck:${rows}</div>`;
+  }
+
+  const pop = document.createElement('div');
+  pop.id        = 'qqPopover';
+  pop.className = 'qq-pop' + (hasDup ? ' qq-pop-dup' : '');
+  pop.innerHTML = `
+    <div class="qq-pop-word">${_escHtml(word)}</div>
+    ${statusHtml}
+    <div class="qq-pop-actions">
+      <button class="qq-pop-btn qq-pop-confirm" id="qqBtnConfirm">
+        ${hasDup ? 'Queue anyway' : 'Add to vocabulary'}
+      </button>
+      <button class="qq-pop-btn qq-pop-cancel" id="qqBtnCancel">✕</button>
+    </div>`;
+
+  document.body.appendChild(pop);
+  _qqIgnoreNextClick = true; // the click event following mouseup would close us immediately
+
+  // Position near click, keep within viewport
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const pw = 260, ph = similar.length > 0 ? 180 : 110;
+  let x = ev.clientX + 12, y = ev.clientY + 12;
+  if (x + pw > vw - 12) x = ev.clientX - pw - 4;
+  if (y + ph > vh - 12) y = ev.clientY - ph - 4;
+  pop.style.left = x + 'px';
+  pop.style.top  = y + 'px';
+
+  document.getElementById('qqBtnConfirm').addEventListener('click', () => {
+    _qqClosePopover();
+    _qqSubmit(word);
+  });
+  document.getElementById('qqBtnCancel').addEventListener('click', _qqClosePopover);
+}
+
+/**
+ * POST word to /add-word, then poll and show toast with result.
+ * @param {string} word
+ */
+async function _qqSubmit(word) {
+  _qqToast(`Queuing: ${word}…`, 'ok');
+  try {
+    const res  = await fetch('/add-word', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ word }),
+    });
+    const data = await res.json();
+    if (!data.ok) { _qqToast(`✗ ${data.error || 'error'}`, 'err'); return; }
+
+    const id = data.requestId;
+    let polls = 0;
+    if (_qqPollInterval) clearInterval(_qqPollInterval);
+    _qqPollInterval = setInterval(async () => {
+      polls++;
+      try {
+        const r = await fetch(`/add-word-status?id=${id}`);
+        const d = await r.json();
+        if (d.pending) {
+          if (polls === 2) _qqToast(`⏳ ${word} — processing…`, 'ok');
+          return;
+        }
+        clearInterval(_qqPollInterval);
+        if (d.skipped)   _qqToast(`↩ Already in deck: ${word}`, 'skip');
+        else if (d.ok)   _qqToast(`✓ Added: ${word}`, 'ok');
+        else             _qqToast(`✗ ${d.error || 'error'}`, 'err');
+      } catch (_) {}
+    }, 2000);
+    setTimeout(() => clearInterval(_qqPollInterval), 60000);
+  } catch (e) {
+    _qqToast(`✗ ${e.message}`, 'err');
+  }
+}
+
+/** Strip punctuation/quotes from the edges of a raw selection. */
+function _qqCleanWord(raw) {
+  return raw.replace(/^[«"„'"'\s]+|[»"'"'\s.,!?;:()]+$/g, '').trim();
+}
+
+/** Handle mouseup on a textarea — works for both dblclick-word and dragged phrase. */
+function _qqHandleTextarea(ta, ev) {
+  const raw  = ta.value.substring(ta.selectionStart, ta.selectionEnd);
+  const word = _qqCleanWord(raw);
+  if (word.length >= 2) _qqShowPopover(word, ev);
+}
+
+/** Handle mouseup on a div/span — use Selection API. */
+function _qqHandleSelection(ev) {
+  const raw  = (window.getSelection() || '').toString();
+  const word = _qqCleanWord(raw);
+  if (word.length >= 2) _qqShowPopover(word, ev);
+}
+
+// Close popover on outside click (but ignore the click that immediately follows mouseup)
+document.addEventListener('click', e => {
+  if (_qqIgnoreNextClick) { _qqIgnoreNextClick = false; return; }
+  const pop = document.getElementById('qqPopover');
+  if (pop && !pop.contains(e.target)) _qqClosePopover();
+});
+
+// Escape key closes popover
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('qqPopover')) {
+    e.stopPropagation();
+    _qqClosePopover();
+  }
+});
+
+// Attach to student textarea, teacher correction area, and diff output.
+// dblclick handles single-word selection (browser selects word during dblclick, after mouseup).
+// mouseup handles drag-selected phrases (selection is ready by mouseup).
+// Both have the word.length >= 2 guard so they don't interfere with each other.
+function _qqAttach(el, handler) {
+  el.addEventListener('dblclick', handler);
+  el.addEventListener('mouseup',  handler);
+}
+_qqAttach($('wTextarea'),       ev => _qqHandleTextarea($('wTextarea'), ev));
+_qqAttach($('wCorrectionArea'), ev => _qqHandleTextarea($('wCorrectionArea'), ev));
+_qqAttach($('wDiffOutput'),     _qqHandleSelection);
 
 // Click doc name to copy its review URL
 $('wReviewUrl').addEventListener('click', () => {

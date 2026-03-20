@@ -6933,3 +6933,22 @@
     pp: hochgeladen
   tags: [b1, digital, technology]
 
+
+- id: 788
+  en: within, inside (of)
+  uk: всередині, у межах
+  de: innerhalb
+  article: ~
+  type: adv
+  tags: [b1]
+
+- id: 789
+  en: Mr. / gentleman / lord
+  uk: пан / добродій
+  de: Herr
+  article: der
+  type: noun
+  forms:
+    pl: die Herren
+    gen: des Herrn
+  tags: [basics]
