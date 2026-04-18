@@ -25,7 +25,8 @@
         <span class="btn-pending-badge hidden" id="pendingBadge"></span>
       </div>
       <button class="btn-icon" id="btnReport"   title="Progress report">▤</button>
-      <button class="btn-icon" id="btnWrite"    title="Writing practice">✏</button>
+      <button class="btn-icon" id="btnWrite"      title="Writing practice">✏</button>
+      <button class="btn-icon" id="btnExercises" title="Exercises">⊞</button>
       <button class="btn-icon" id="btnShuffle"  title="Restart / Shuffle">⇄</button>
       <button class="btn-icon" id="btnSettings" title="Settings">⚙</button>
     </div>
@@ -90,9 +91,11 @@
           <span class="kb">Space</span> flip &nbsp;
           <span class="kb">←</span> wrong &nbsp;
           <span class="kb">→</span> correct &nbsp;
-          <span class="kb">↓</span> skip
+          <span class="kb">↓</span> skip &nbsp;
+          <span class="kb">↑</span> back
         </div>
         <div class="ban-row">
+          <button class="btn-ban hidden" id="fBtnBack" title="Go back to previous card">← back</button>
           <button class="btn-ban" id="fBtnBan" title="Ban this word from the session pool"><span class="kb">B</span> ban word</button>
         </div>
       </div>
@@ -293,7 +296,65 @@
     <div class="write-bar">
       <button class="btn" id="btnTeacherBack" style="margin-left:0;">← Student</button>
       <button class="btn" id="btnSaveCorrection" style="margin-left:auto;">Save Correction</button>
+      <button class="btn" id="btnGenerateExercises" style="margin-left:0;">⊞ Exercises</button>
       <button class="btn btn-primary" id="btnWriteNew" style="margin-left:0;">New Text</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Exercises ─────────────────────────────────────── -->
+<div class="exercise-panel" id="exercisePanel">
+
+  <div class="exercise-header">
+    <div class="exercise-title-area">
+      <div class="exercise-title">ÜBUNGEN</div>
+      <div class="exercise-subtitle" id="exSubtitle">Exercise Library</div>
+    </div>
+    <button class="btn-icon" id="btnExerciseClose" style="margin-left:0;">✕</button>
+  </div>
+
+  <!-- ── Library view ── -->
+  <div class="exercise-view" id="exViewLibrary">
+    <div class="exercise-sets-strip" id="exSetsStrip"><!-- chips rendered by JS --></div>
+    <div class="exercise-topic-bar">
+      <span class="exercise-topic-label">Generate from topic:</span>
+      <input class="exercise-topic-input" id="exTopicInput" type="text"
+        placeholder="e.g. b1-lektion-5 or adjektive"
+        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <button class="btn btn-primary" id="btnGenTopic" style="margin-left:0;">Generate →</button>
+    </div>
+    <div class="exercise-library-empty hidden" id="exLibraryEmpty">
+      No exercise sets yet.<br>Correct a writing text and click <strong>⊞ Exercises</strong>, or generate from a vocabulary topic above.
+    </div>
+
+    <div class="ex-specialized-section">
+      <div class="ex-specialized-label">Spezialisierte Übungen</div>
+      <div class="ex-special-strip" id="exSpecialStrip"><!-- rendered by JS --></div>
+    </div>
+  </div>
+
+  <!-- ── Practice view ── -->
+  <div class="exercise-view hidden" id="exViewPractice">
+    <div class="exercise-progress-track">
+      <div class="exercise-progress-fill" id="exProgressFill" style="width:0%"></div>
+    </div>
+    <div class="exercise-card-wrap">
+      <div class="exercise-counter" id="exCounter">1 / 8</div>
+      <div class="exercise-card" id="exCard"><!-- rendered by JS --></div>
+    </div>
+    <div class="exercise-bar">
+      <button class="btn" id="btnExBack">← Library</button>
+      <button class="btn btn-primary hidden" id="btnExNext">Next →</button>
+    </div>
+  </div>
+
+  <!-- ── End screen ── -->
+  <div class="exercise-view hidden" id="exViewEnd">
+    <div class="exercise-end-wrap" id="exEndWrap"><!-- rendered by JS --></div>
+    <div class="exercise-bar">
+      <button class="btn" id="btnExRetryWrong">Retry Wrong</button>
+      <button class="btn btn-primary" id="btnExBackLib">← Library</button>
     </div>
   </div>
 

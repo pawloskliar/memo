@@ -1418,3 +1418,380 @@ main {
   line-height: 1.4;
 }
 .qq-pop-similar-row:first-of-type { margin-top: 4px; padding-top: 0; border-top: none; }
+
+/* ═══════════════════════════════════════════════════════
+   EXERCISE PANEL
+   ═══════════════════════════════════════════════════════ */
+
+.exercise-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform .25s cubic-bezier(.4,0,.2,1);
+}
+.exercise-panel.open { transform: translateY(0); }
+
+/* Header */
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 28px 16px;
+  border-bottom: var(--border);
+  flex-shrink: 0;
+}
+.exercise-title-area { flex: 1; }
+.exercise-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  line-height: 1;
+}
+.exercise-subtitle {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 3px;
+}
+
+/* View containers */
+.exercise-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.exercise-view.hidden { display: none; }
+
+/* ── Library view ── */
+.exercise-sets-strip {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  overflow-x: auto;
+  padding: 14px 24px 0;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+.exercise-sets-strip::-webkit-scrollbar { display: none; }
+
+.exercise-topic-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 24px 14px;
+  border-bottom: var(--border);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.exercise-topic-label {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  white-space: nowrap;
+}
+.exercise-topic-input {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  border: var(--border);
+  background: var(--bg);
+  color: var(--ink);
+  padding: 8px 12px;
+  flex: 1;
+  min-width: 160px;
+  outline: none;
+}
+.exercise-topic-input:focus { border-color: var(--mint); }
+
+.exercise-library-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  color: var(--ink-light);
+  padding: 40px 32px;
+  line-height: 1.7;
+}
+
+/* ── Specialized exercises section ── */
+.ex-specialized-section {
+  flex-shrink: 0;
+  border-top: var(--border);
+  padding: 14px 24px 16px;
+}
+.ex-specialized-label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 10px;
+}
+.ex-special-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ex-special-chip {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border: var(--border);
+  border-left: 4px solid var(--der);
+  background: var(--bg);
+  color: var(--ink);
+  padding: 8px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ex-special-chip.active { background: var(--ink); color: var(--bg); }
+.ex-special-chip:hover:not(.active) { background: rgba(0,0,0,.06); }
+.ex-special-chip .ex-chip-count { background: var(--der); }
+.ex-special-chip.active .ex-chip-count { background: var(--bg); color: var(--ink); }
+
+/* Exercise set chips (same pattern as write-chip) */
+.ex-set-chip {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border: var(--border);
+  border-right: none;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 8px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ex-set-chip:last-child { border-right: var(--border); }
+.ex-set-chip.active { background: var(--ink); color: var(--bg); }
+.ex-set-chip:hover:not(.active) { background: rgba(0,0,0,.06); }
+.ex-chip-count {
+  font-size: 10px;
+  background: var(--mint);
+  color: var(--ink);
+  padding: 1px 5px;
+  line-height: 1.4;
+}
+.ex-set-chip.active .ex-chip-count { background: var(--bg); }
+.ex-chip-del {
+  font-size: 14px;
+  line-height: 1;
+  opacity: .5;
+  margin-left: 2px;
+  padding: 0 2px;
+}
+.ex-chip-del:hover { opacity: 1; color: var(--red); }
+
+/* ── Progress bar ── */
+.exercise-progress-track {
+  height: 4px;
+  background: rgba(0,0,0,.08);
+  flex-shrink: 0;
+}
+.exercise-progress-fill {
+  height: 100%;
+  background: var(--mint);
+  transition: width .3s ease;
+}
+
+/* ── Practice view ── */
+.exercise-card-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.exercise-counter {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.exercise-card {
+  border: var(--border);
+  border-left: 5px solid var(--red);
+  padding: 28px 28px 24px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ex-focus {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mint);
+  border-bottom: 2px solid var(--mint);
+  padding-bottom: 6px;
+  display: inline-block;
+}
+.ex-instruction {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: .05em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+}
+.ex-prompt {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.ex-blank {
+  font-family: var(--font-word);
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: .05em;
+}
+
+/* Select options */
+.ex-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ex-opt {
+  font-family: var(--font-word);
+  font-size: 16px;
+  border: var(--border);
+  background: transparent;
+  color: var(--ink);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background .1s, color .1s;
+}
+.ex-opt:hover:not(:disabled) { background: var(--ink); color: var(--bg); }
+.ex-opt:disabled { cursor: default; }
+.ex-opt.ex-opt-correct { background: var(--mint); border-color: var(--mint); color: var(--ink); }
+.ex-opt.ex-opt-wrong   { background: var(--red);  border-color: var(--red);  color: var(--bg); }
+
+/* Fill input */
+.ex-fill-area {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.ex-fill-input {
+  font-family: var(--font-word);
+  font-size: 18px;
+  border: var(--border);
+  background: var(--bg);
+  color: var(--ink);
+  padding: 10px 14px;
+  flex: 1;
+  min-width: 140px;
+  outline: none;
+}
+.ex-fill-input:focus { border-color: var(--mint); }
+.ex-fill-input:disabled { opacity: .7; }
+.ex-fill-input.ex-fill-correct { border-color: var(--mint); background: rgba(53,188,178,.1); }
+.ex-fill-input.ex-fill-wrong   { border-color: var(--red);  background: rgba(196,43,16,.08); }
+
+/* Result / explanation */
+.ex-result {
+  border-top: var(--border);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ex-result.hidden { display: none; }
+.ex-verdict {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.ex-verdict-ok  { color: var(--mint); }
+.ex-verdict-err { color: var(--red); }
+.ex-correct-answer {
+  font-family: var(--font-word);
+  font-weight: 700;
+  color: var(--ink);
+  background: rgba(53,188,178,.2);
+  padding: 1px 6px;
+}
+.ex-exp-text {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Practice bottom bar */
+.exercise-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: var(--border);
+  flex-shrink: 0;
+}
+
+/* ── End screen ── */
+.exercise-end-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 28px;
+}
+.ex-end-score {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+}
+.ex-end-pct {
+  font-family: var(--font-word);
+  font-size: 28px;
+  color: var(--mint);
+}
+.ex-end-label {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+@media (max-width: 600px) {
+  .exercise-header  { padding: 14px 18px 12px; }
+  .exercise-card    { padding: 20px 18px; }
+  .ex-prompt        { font-size: 18px; }
+  .ex-end-score     { font-size: 48px; }
+}

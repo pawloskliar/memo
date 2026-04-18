@@ -13,7 +13,7 @@ const cfg = {
   limit:          null,     // null = all; number = max words per session
 };
 
-/** @type {{ words: object[], idx: number, correct: number, wrong: number, skipped: number, flipped: boolean, checked: boolean, startTime: number|null }} */
+/** @type {{ words: object[], idx: number, correct: number, wrong: number, skipped: number, flipped: boolean, checked: boolean, startTime: number|null, history: Array<{word: object, outcome: string}> }} */
 const sess = {
   words:     [],
   idx:       0,
@@ -23,6 +23,7 @@ const sess = {
   flipped:   false,
   checked:   false,
   startTime: null,   // Date.now() at session start
+  history:   [],     // [{word, outcome}] for go-back support
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -424,20 +425,111 @@ function showCard(word) {
  * @param {'correct'|'wrong'|'skip'} outcome
  */
 function advance(outcome) {
-  Stats.record(sess.words[sess.idx].id, outcome === 'skip' ? 'skipped' : outcome);
+  const word = sess.words[sess.idx];
+  Stats.record(word.id, outcome === 'skip' ? 'skipped' : outcome);
 
   if (outcome === 'correct') sess.correct++;
   else if (outcome === 'wrong') sess.wrong++;
   else sess.skipped++;
 
+  sess.history.push({ word, outcome });
   sess.idx++;
   updateProgress();
+  updateBackBtn();
+  saveSession();
 
   if (sess.idx >= sess.words.length) {
     endSession();
     return;
   }
   showCard(sess.words[sess.idx]);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  GO BACK
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * Shows or hides the back button based on history depth.
+ */
+function updateBackBtn() {
+  const btn = $('fBtnBack');
+  if (!btn) return;
+  if (sess.history.length > 0) {
+    btn.classList.remove('hidden');
+  } else {
+    btn.classList.add('hidden');
+  }
+}
+
+/**
+ * Goes back to the previous card, undoing the last outcome from session counters.
+ * Stats already written to the server are not reversed (a fresh mark will be added).
+ */
+function doGoBack() {
+  if (sess.history.length === 0) return;
+  const { outcome } = sess.history.pop();
+
+  // Undo session counter
+  if (outcome === 'correct') sess.correct = Math.max(0, sess.correct - 1);
+  else if (outcome === 'wrong') sess.wrong = Math.max(0, sess.wrong - 1);
+  else sess.skipped = Math.max(0, sess.skipped - 1);
+
+  sess.idx--;
+  updateProgress();
+  updateBackBtn();
+  saveSession();
+  showCard(sess.words[sess.idx]);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SESSION PERSISTENCE
+// ═══════════════════════════════════════════════════════════════
+
+let _saveSessionTimer = null;
+
+/**
+ * Debounced POST of the current flip-mode session state to /save-session.
+ * Called after each advance or go-back so a reload restores exactly where we were.
+ */
+function saveSession() {
+  if (cfg.mode !== 'flip') return;
+  clearTimeout(_saveSessionTimer);
+  _saveSessionTimer = setTimeout(() => {
+    const data = {
+      wordIds:   sess.words.map(w => w.id),
+      idx:       sess.idx,
+      correct:   sess.correct,
+      wrong:     sess.wrong,
+      skipped:   sess.skipped,
+      history:   sess.history.map(h => ({ wordId: h.word.id, outcome: h.outcome })),
+      startTime: sess.startTime,
+      cfg: {
+        mode:           cfg.mode,
+        lang:           cfg.lang,
+        requireArticle: cfg.requireArticle,
+        tags:           [...cfg.tags],
+        limit:          cfg.limit,
+      },
+    };
+    fetch('/save-session', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(data),
+    }).catch(() => {});
+  }, 400);
+}
+
+/**
+ * Removes the persisted session so the next boot starts fresh.
+ */
+function clearSession() {
+  clearTimeout(_saveSessionTimer);
+  fetch('/clear-session', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    '{}',
+  }).catch(() => {});
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -468,15 +560,20 @@ function doBan() {
 // ═══════════════════════════════════════════════════════════════
 
 /**
- * Flips the flip-mode card to reveal the answer.
- * No-ops if the card is already flipped.
+ * Toggles the flip-mode card between front (prompt) and back (answer).
  */
 function doFlip() {
-  if (sess.flipped) return;
-  sess.flipped = true;
-  $('flipCard').classList.add('flipped');
-  hide('flipPreActions');
-  show('flipPostActions');
+  sess.flipped = !sess.flipped;
+  const card = $('flipCard');
+  if (sess.flipped) {
+    card.classList.add('flipped');
+    hide('flipPreActions');
+    show('flipPostActions');
+  } else {
+    card.classList.remove('flipped');
+    show('flipPreActions');
+    hide('flipPostActions');
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -549,6 +646,8 @@ function endSession() {
   $('finalMsg').textContent = (SESSION_END_MESSAGES.find(([t]) => pct >= t) || SESSION_END_MESSAGES[4])[1];
   $('completeScreen').classList.add('active');
 
+  clearSession();
+
   // Persist session + word stats
   const now = new Date();
   Stats.save({
@@ -573,6 +672,7 @@ function endSession() {
  * starts a fresh session.  Called on boot, shuffle, and settings close.
  */
 function startSession() {
+  clearSession();
   _cfgDirty = false;
   let pool = cfg.tags.length
     ? WORDS_DATA.filter(w => w.tags && cfg.tags.some(t => w.tags.includes(t)))
@@ -591,6 +691,7 @@ function startSession() {
   sess.wrong     = 0;
   sess.skipped   = 0;
   sess.startTime = Date.now();
+  sess.history   = [];
 
   $('completeScreen').classList.remove('active');
   $('progressSection').style.visibility = '';
@@ -913,6 +1014,7 @@ $('fBtnWrong').addEventListener('click', () => advance('wrong'));
 $('fBtnSkip').addEventListener('click',  () => advance('skip'));
 $('fBtnRight').addEventListener('click', () => advance('correct'));
 $('fBtnBan').addEventListener('click',   e => { e.stopPropagation(); doBan(); });
+$('fBtnBack').addEventListener('click',  e => { e.stopPropagation(); doGoBack(); });
 
 // Type mode
 $('btnCheck').addEventListener('click', doCheck);
@@ -1030,7 +1132,8 @@ document.addEventListener('keydown', e => {
   }
 
   if (cfg.mode === 'flip') {
-    if ((e.key === ' ' || e.code === 'Space') && !sess.flipped) {
+    if (e.key === 'ArrowUp') { e.preventDefault(); doGoBack(); }
+    else if (e.key === ' ' || e.code === 'Space') {
       e.preventDefault();
       doFlip();
     } else if (e.key === 'ArrowLeft'  && sess.flipped) advance('wrong');
@@ -1046,7 +1149,7 @@ document.addEventListener('keydown', e => {
 });
 
 // ═══════════════════════════════════════════════════════════════
-//  BOOT — load words.yaml + stats.yaml in parallel, then start
+//  BOOT — load words.yaml + stats.yaml + session in parallel
 // ═══════════════════════════════════════════════════════════════
 const fetchWords = fetch('words.yaml')
   .then(r => { if (!r.ok) throw new Error('words.yaml not found'); return r.text(); })
@@ -1057,29 +1160,80 @@ const fetchStats = fetch('stats.yaml')
   .then(t => t ? parseStatsYAML(t) : { word_stats: {}, sessions: [] })
   .catch(() => ({ word_stats: {}, sessions: [] }));
 
-Promise.all([fetchWords, fetchStats])
-  .then(([words, statsData]) => {
+const fetchSession = fetch('/session')
+  .then(r => r.ok ? r.json() : { ok: false })
+  .catch(() => ({ ok: false }));
+
+/**
+ * Applies all cfg values to the settings panel UI (called after restoring a saved session).
+ */
+function syncCfgToUI() {
+  applyOpt('mode',    cfg.mode);
+  applyOpt('lang',    cfg.lang);
+  applyOpt('article', cfg.requireArticle ? 'yes' : 'no');
+  applyOpt('limit',   cfg.limit ? String(cfg.limit) : '');
+  renderTagOpts();
+}
+
+Promise.all([fetchWords, fetchStats, fetchSession])
+  .then(([words, statsData, savedSession]) => {
     window.WORDS_DATA = words;
     Stats.init(statsData);
     buildTagFilter();
-    startSession();
-    // Auto-open review mode if URL has ?review=slug
-    const reviewSlug = new URLSearchParams(window.location.search).get('review');
-    if (reviewSlug) {
-      openWrite();
-      fetch(`/text/${reviewSlug}`)
-        .then(r => r.json())
-        .then(entry => { if (entry.ok !== false) _wOpenTeacher(entry); })
-        .catch(() => {});
-    } else if (localStorage.getItem(_W_OPEN_KEY) === '1') {
-      // Restore writing panel and any unsaved draft
-      openWrite();
-      const draft = localStorage.getItem(_W_DRAFT_KEY);
-      if (draft) {
-        $('wTextarea').value = draft;
-        const n = draft.trim().split(/\s+/).filter(Boolean).length;
-        $('wWordCount').textContent = n === 1 ? '1 Wort' : `${n} Wörter`;
+
+    // Attempt to restore a persisted flip-mode session
+    let restored = false;
+    if (savedSession.ok && savedSession.cfg && savedSession.cfg.mode === 'flip'
+        && Array.isArray(savedSession.wordIds) && savedSession.wordIds.length > 0
+        && typeof savedSession.idx === 'number' && savedSession.idx < savedSession.wordIds.length) {
+      const wordMap = new Map(words.map(w => [w.id, w]));
+      const restoredWords = savedSession.wordIds.map(id => wordMap.get(id)).filter(Boolean);
+
+      if (restoredWords.length > 0 && savedSession.idx < restoredWords.length) {
+        // Restore cfg
+        const sc = savedSession.cfg;
+        cfg.mode           = sc.mode;
+        cfg.lang           = sc.lang           || cfg.lang;
+        cfg.requireArticle = sc.requireArticle ?? cfg.requireArticle;
+        cfg.tags           = Array.isArray(sc.tags) ? sc.tags : [];
+        cfg.limit          = sc.limit          || null;
+
+        // Restore session state
+        sess.words     = restoredWords;
+        sess.idx       = savedSession.idx;
+        sess.correct   = savedSession.correct  || 0;
+        sess.wrong     = savedSession.wrong    || 0;
+        sess.skipped   = savedSession.skipped  || 0;
+        sess.startTime = savedSession.startTime || Date.now();
+        sess.history   = (savedSession.history || [])
+          .map(h => ({ word: wordMap.get(h.wordId), outcome: h.outcome }))
+          .filter(h => h.word);
+
+        hide('flipMode');
+        hide('typeMode');
+        $('flipMode').classList.remove('hidden');
+        $('completeScreen').classList.remove('active');
+        $('progressSection').style.visibility = '';
+
+        syncCfgToUI();
+        updateProgress();
+        updateBackBtn();
+        showCard(sess.words[sess.idx]);
+        restored = true;
       }
+    }
+
+    if (!restored) startSession();
+    // Stamp initial history state so popstate always has a typed state object
+    const initState = _parseRoute();
+    history.replaceState(initState, '', window.location.href);
+    // Route to the correct panel based on URL, falling back to localStorage
+    if (Object.keys(initState).length > 0) {
+      _applyRoute(initState);
+    } else if (localStorage.getItem(_W_OPEN_KEY) === '1') {
+      // Restore write panel from previous session (no URL params present)
+      _navReplace({ panel: 'write' });
+      _applyRoute({ panel: 'write' });
     }
   })
   .catch(() => {
@@ -1740,8 +1894,9 @@ setInterval(async () => {
 //  WRITING MODE
 // ═══════════════════════════════════════════════════════════════
 
-/** Opens the full-screen writing panel. */
+/** Opens the full-screen writing panel and pushes a history entry. */
 function openWrite() {
+  _navPush({ panel: 'write' });
   $('writePanel').classList.add('open');
   _wShowView('student');
   _wLoadTexts();
@@ -1749,10 +1904,11 @@ function openWrite() {
   localStorage.setItem(_W_OPEN_KEY, '1');
 }
 
-/** Closes the writing panel. */
+/** Closes the writing panel and replaces history state with main. */
 function closeWrite() {
   $('writePanel').classList.remove('open');
   localStorage.removeItem(_W_OPEN_KEY);
+  _navReplace({});
 }
 
 /**
@@ -1814,7 +1970,10 @@ $('wCorrectionArea').addEventListener('input', () => {
   _wCorrTimer = setTimeout(_wSaveCorrection, 1200);
 });
 
-$('btnTeacherBack').addEventListener('click', () => _wShowView('student'));
+$('btnTeacherBack').addEventListener('click', () => {
+  _navPush({ panel: 'write' });
+  _wShowView('student');
+});
 
 // New text: reset to student view
 $('btnWriteNew').addEventListener('click', () => {
@@ -1824,8 +1983,8 @@ $('btnWriteNew').addEventListener('click', () => {
   _wCurrentSlug = null;
   _wClearDraft();
   _wRenderStrip();
+  _navPush({ panel: 'write' });
   _wShowView('student');
-  history.replaceState(null, '', window.location.pathname);
   $('wTextarea').focus();
 });
 
@@ -2126,24 +2285,32 @@ function _hideSaveRow() {
 }
 
 /**
- * Opens teacher mode for a full entry object {name, slug, text, correction?, …}.
- * Updates the URL to ?review=slug without a page reload.
+ * Sets up teacher mode UI for a full entry object {name, slug, text, correction?, …}.
+ * Does NOT touch history — callers handle navigation.
  */
-function _wOpenTeacher(entry) {
+function _wOpenTeacherUI(entry) {
   _wCurrentSlug = entry.slug;
   _wOriginal    = entry.text || '';
   $('wCorrectionArea').value = entry.correction || entry.text || '';
   _wUpdateDiff();
   _wRenderStrip();
   _wShowView('teacher');
-  $('wCorrectionArea').focus();
-  // Update browser URL so the review link is shareable
-  history.replaceState(null, '', `?review=${entry.slug}`);
-  // Show doc name as the copyable link label
+  _wResetExerciseBtn();
+  // Show doc name as the copyable review link (URL already updated by caller)
   const el = $('wReviewUrl');
   el.textContent = entry.name;
   el.dataset.url = window.location.href;
   el.classList.remove('hidden');
+  $('wCorrectionArea').focus();
+}
+
+/**
+ * Navigates to teacher mode for a full entry object and sets up the UI.
+ * Pushes a ?review=slug history entry.
+ */
+function _wOpenTeacher(entry) {
+  _navPush({ panel: 'review', slug: entry.slug });
+  _wOpenTeacherUI(entry);
 }
 
 // Strip click — open teacher mode, delete ×, or new
@@ -2160,8 +2327,8 @@ $('wTextsStrip').addEventListener('click', async e => {
     $('wWordCount').textContent = '0 Wörter';
     _wRenderStrip();
     _hideSaveRow();
+    _navPush({ panel: 'write' });
     _wShowView('student');
-    history.replaceState(null, '', window.location.pathname);
     $('wTextarea').focus();
     return;
   }
@@ -2388,6 +2555,61 @@ _qqAttach($('wTextarea'),       ev => _qqHandleTextarea($('wTextarea'), ev));
 _qqAttach($('wCorrectionArea'), ev => _qqHandleTextarea($('wCorrectionArea'), ev));
 _qqAttach($('wDiffOutput'),     _qqHandleSelection);
 
+// ── Generate Exercises button (teacher view) ─────────────────
+
+let _exGenState = 'idle'; // 'idle' | 'pending' | 'ready'
+let _exGenSlug  = null;
+
+$('btnGenerateExercises').addEventListener('click', async () => {
+  if (_exGenState === 'pending') return;
+
+  if (_exGenState === 'ready' && _exGenSlug) {
+    closeWrite();
+    openExercises();
+    _exStart(_exGenSlug);
+    return;
+  }
+
+  const slug       = _wCurrentSlug;
+  const original   = _wOriginal;
+  const correction = $('wCorrectionArea').value.trim();
+  if (!slug || !correction) return;
+
+  const btn = $('btnGenerateExercises');
+  _exGenState = 'pending';
+  btn.textContent = '⟳ Generating…';
+  btn.disabled = true;
+
+  const textName = (_wTexts.find(t => t.slug === slug) || {}).name || slug;
+  const requestId = await _exQueueGenerate({
+    sourceType: 'writing', sourceRef: slug,
+    original, correction,
+    name: `Mistakes — ${textName}`,
+  });
+
+  if (!requestId) {
+    _exGenState = 'idle';
+    btn.textContent = '⊞ Exercises';
+    btn.disabled = false;
+    return;
+  }
+
+  _exPollStatus(requestId, (exerciseSlug) => {
+    _exGenState = 'ready';
+    _exGenSlug  = exerciseSlug;
+    btn.textContent = 'Practice Mistakes →';
+    btn.disabled = false;
+  });
+});
+
+// Reset exercise gen state when text changes
+function _wResetExerciseBtn() {
+  _exGenState = 'idle';
+  _exGenSlug  = null;
+  $('btnGenerateExercises').textContent = '⊞ Exercises';
+  $('btnGenerateExercises').disabled = false;
+}
+
 // Click doc name to copy its review URL
 $('wReviewUrl').addEventListener('click', () => {
   const el  = $('wReviewUrl');
@@ -2398,4 +2620,862 @@ $('wReviewUrl').addEventListener('click', () => {
     el.textContent = 'Copied!';
     setTimeout(() => { el.textContent = orig; }, 1500);
   });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  ROUTING  (hash-free, history API)
+// ═══════════════════════════════════════════════════════════════
+
+/*
+ * URL scheme:
+ *   (none)          → main flashcard view
+ *   ?write          → writing panel, student mode
+ *   ?review=slug    → writing panel, teacher mode
+ *   ?exercises      → exercise panel, library
+ *   ?exercise=slug  → exercise panel, practice set
+ */
+
+function _routeUrl(state) {
+  const { panel, slug } = state || {};
+  if (panel === 'write')     return '?write';
+  if (panel === 'review')    return `?review=${encodeURIComponent(slug)}`;
+  if (panel === 'exercises') return '?exercises';
+  if (panel === 'exercise')  return `?exercise=${encodeURIComponent(slug)}`;
+  return window.location.pathname;
+}
+
+function _navPush(state) {
+  history.pushState(state, '', _routeUrl(state));
+}
+
+function _navReplace(state) {
+  history.replaceState(state, '', _routeUrl(state));
+}
+
+/** Parse the current URL search string into a state object. */
+function _parseRoute() {
+  const p = new URLSearchParams(window.location.search);
+  if (p.has('review'))    return { panel: 'review',    slug: p.get('review') };
+  if (p.has('exercise'))  return { panel: 'exercise',  slug: p.get('exercise') };
+  if (p.has('write'))     return { panel: 'write' };
+  if (p.has('exercises')) return { panel: 'exercises' };
+  return {};
+}
+
+/** Close all navigable panels — UI only, no history change. */
+function _closeAllPanelsUI() {
+  $('writePanel').classList.remove('open');
+  $('exercisePanel').classList.remove('open');
+  localStorage.removeItem(_W_OPEN_KEY);
+}
+
+/**
+ * Apply a route state object to the UI.
+ * Called from the popstate listener and on initial page load.
+ * Does NOT push/replace history — callers manage that.
+ */
+async function _applyRoute(state) {
+  _closeAllPanelsUI();
+  const { panel, slug } = state || {};
+
+  if (panel === 'review' && slug) {
+    $('writePanel').classList.add('open');
+    localStorage.setItem(_W_OPEN_KEY, '1');
+    await _wLoadTexts();
+    try {
+      const r     = await fetch(`/text/${slug}`);
+      const entry = await r.json();
+      if (entry.ok !== false) _wOpenTeacherUI(entry);
+      else _wShowView('student');
+    } catch (_) { _wShowView('student'); }
+
+  } else if (panel === 'write') {
+    $('writePanel').classList.add('open');
+    localStorage.setItem(_W_OPEN_KEY, '1');
+    _wShowView('student');
+    await _wLoadTexts();
+    const draft = localStorage.getItem(_W_DRAFT_KEY);
+    if (draft) {
+      $('wTextarea').value = draft;
+      const n = draft.trim().split(/\s+/).filter(Boolean).length;
+      $('wWordCount').textContent = n === 1 ? '1 Wort' : `${n} Wörter`;
+    }
+    $('wTextarea').focus();
+
+  } else if (panel === 'exercise' && slug) {
+    $('exercisePanel').classList.add('open');
+    await _exLoadSets();
+    await _exStartUI(slug);
+
+  } else if (panel === 'exercises') {
+    $('exercisePanel').classList.add('open');
+    _exShowView('library');
+    await _exLoadSets();
+  }
+}
+
+window.addEventListener('popstate', e => _applyRoute(e.state || {}));
+
+// ═══════════════════════════════════════════════════════════════
+//  SPECIALIZED EXERCISE SETS  (hardcoded — no server fetch)
+// ═══════════════════════════════════════════════════════════════
+
+const SPECIALIZED_SETS = {
+  'prep-faelle': {
+    name: 'Präpositionen: Welcher Fall?',
+    exercises: [
+      { id:1,  type:'select', focus:'Akkusativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'durch', blank:'Akkusativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"durch" immer Akkusativ: durch den Wald / durch die Stadt fahren.' },
+      { id:2,  type:'select', focus:'Akkusativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'für', blank:'Akkusativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"für" immer Akkusativ: Das ist für dich / für einen Freund.' },
+      { id:3,  type:'select', focus:'Akkusativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'ohne', blank:'Akkusativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"ohne" immer Akkusativ: ohne einen Fehler / ohne mich.' },
+      { id:4,  type:'select', focus:'Akkusativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'gegen', blank:'Akkusativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"gegen" immer Akkusativ: gegen den Wind / gegen Kopfschmerzen.' },
+      { id:5,  type:'select', focus:'Akkusativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'um', blank:'Akkusativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"um" immer Akkusativ: um den Tisch / um 8 Uhr.' },
+      { id:6,  type:'select', focus:'Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'mit', blank:'Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"mit" immer Dativ: mit dem Bus / mit einem Freund.' },
+      { id:7,  type:'select', focus:'Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'von', blank:'Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"von" immer Dativ: von dem (→ vom) Bahnhof.' },
+      { id:8,  type:'select', focus:'Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'nach', blank:'Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"nach" immer Dativ: nach der Arbeit / nach Berlin fahren.' },
+      { id:9,  type:'select', focus:'Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'seit', blank:'Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"seit" immer Dativ: seit einem Jahr / seit der Schule.' },
+      { id:10, type:'select', focus:'Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'außer', blank:'Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"außer" immer Dativ: außer mir / außer dem Chef.' },
+      { id:11, type:'select', focus:'Akkusativ + Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'in', blank:'Akkusativ + Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"in" ist Wechselpräposition: in die Stadt (Wohin? → Akk), in der Stadt (Wo? → Dat).' },
+      { id:12, type:'select', focus:'Akkusativ + Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'auf', blank:'Akkusativ + Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"auf" ist Wechselpräposition: auf den Tisch (Wohin?), auf dem Tisch (Wo?).' },
+      { id:13, type:'select', focus:'Akkusativ + Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'an', blank:'Akkusativ + Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"an" ist Wechselpräposition: ans Meer fahren (Wohin?), am Meer (Wo?).' },
+      { id:14, type:'select', focus:'Akkusativ + Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'unter', blank:'Akkusativ + Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"unter" ist Wechselpräposition: unter den Tisch (Wohin?), unter dem Tisch (Wo?).' },
+      { id:15, type:'select', focus:'Akkusativ + Dativ',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'neben', blank:'Akkusativ + Dativ',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"neben" ist Wechselpräposition: neben den Stuhl (Wohin?), neben dem Stuhl (Wo?).' },
+      { id:16, type:'select', focus:'Genitiv',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'wegen', blank:'Genitiv',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"wegen" regiert Genitiv: wegen des Regens. (Umgangsspr. auch Dativ möglich.)' },
+      { id:17, type:'select', focus:'Genitiv',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'während', blank:'Genitiv',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"während" regiert Genitiv: während des Sommers / während der Nacht.' },
+      { id:18, type:'select', focus:'Genitiv',
+        instruction:'Welchen Fall regiert diese Präposition?',
+        prompt:'trotz', blank:'Genitiv',
+        options:['Akkusativ','Dativ','Genitiv','Akkusativ + Dativ'],
+        explanation:'"trotz" regiert Genitiv: trotz des schlechten Wetters.' },
+    ]
+  },
+
+  'prep-wo-wohin': {
+    name: 'Präpositionen: Wo / Wohin?',
+    exercises: [
+      { id:1,  type:'select', focus:'Wohin? → Akkusativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle den richtigen Artikel.',
+        prompt:'Ich lege das Buch ___ Tisch. (auf)',
+        blank:'auf den',
+        options:['auf den','auf dem'],
+        explanation:'legen = Bewegung an einen Ort → Wohin? → Akkusativ. "Tisch" mask. → auf den.' },
+      { id:2,  type:'select', focus:'Wo? → Dativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle den richtigen Artikel.',
+        prompt:'Das Buch liegt ___ Tisch. (auf)',
+        blank:'auf dem',
+        options:['auf den','auf dem'],
+        explanation:'liegen = statische Lage → Wo? → Dativ. "Tisch" mask. → auf dem.' },
+      { id:3,  type:'select', focus:'Wohin? → Akkusativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle die richtige Form.',
+        prompt:'Das Kind läuft ___ Zimmer. (in)',
+        blank:'ins',
+        options:['ins','im'],
+        explanation:'laufen in = Bewegung hinein → Wohin? → Akkusativ. "Zimmer" neutr. → in das → ins.' },
+      { id:4,  type:'select', focus:'Wo? → Dativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle die richtige Form.',
+        prompt:'Das Kind spielt ___ Zimmer. (in)',
+        blank:'im',
+        options:['ins','im'],
+        explanation:'spielen = statische Aktivität → Wo? → Dativ. "Zimmer" neutr. → in dem → im.' },
+      { id:5,  type:'select', focus:'Wohin? → Akkusativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle den richtigen Artikel.',
+        prompt:'Er hängt das Bild ___ Wand. (an)',
+        blank:'an die',
+        options:['an die','an der'],
+        explanation:'hängen (transitiv) = aufhängen → Wohin? → Akkusativ. "Wand" fem. → an die.' },
+      { id:6,  type:'select', focus:'Wo? → Dativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle den richtigen Artikel.',
+        prompt:'Das Bild hängt ___ Wand. (an)',
+        blank:'an der',
+        options:['an die','an der'],
+        explanation:'hängen (intransitiv) = hängen bleiben → Wo? → Dativ. "Wand" fem. → an der.' },
+      { id:7,  type:'select', focus:'Wohin? → Akkusativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle die richtige Form.',
+        prompt:'Er stellt die Flasche ___ Regal. (in)',
+        blank:'ins',
+        options:['ins','im'],
+        explanation:'stellen = aufrecht hinstellen → Wohin? → Akkusativ. "Regal" neutr. → in das → ins.' },
+      { id:8,  type:'select', focus:'Wo? → Dativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle die richtige Form.',
+        prompt:'Die Flasche steht ___ Regal. (in)',
+        blank:'im',
+        options:['ins','im'],
+        explanation:'stehen = statische Lage → Wo? → Dativ. "Regal" neutr. → in dem → im.' },
+      { id:9,  type:'select', focus:'Wohin? → Akkusativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle den richtigen Artikel.',
+        prompt:'Wir fahren ___ Berge. (in)',
+        blank:'in die',
+        options:['in die','in den'],
+        explanation:'fahren in = Bewegung in Richtung → Wohin? → Akkusativ. "Berge" Plural Akk → in die.' },
+      { id:10, type:'select', focus:'Wo? → Dativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle den richtigen Artikel.',
+        prompt:'Wir wandern ___ Bergen. (in)',
+        blank:'in den',
+        options:['in die','in den'],
+        explanation:'wandern = Aktivität am Ort → Wo? → Dativ. Plural Dativ → in den.' },
+      { id:11, type:'select', focus:'Wohin? → Akkusativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle den richtigen Artikel.',
+        prompt:'Sie geht ___ Supermarkt. (in)',
+        blank:'in den',
+        options:['in den','im'],
+        explanation:'gehen in = Bewegung hinein → Wohin? → Akkusativ. "Supermarkt" mask. → in den.' },
+      { id:12, type:'select', focus:'Wo? → Dativ',
+        instruction:'Wo? (Dativ) oder Wohin? (Akkusativ) — wähle die richtige Form.',
+        prompt:'Sie kauft ___ Supermarkt ein. (in)',
+        blank:'im',
+        options:['in den','im'],
+        explanation:'einkaufen = Aktivität am Ort → Wo? → Dativ. "Supermarkt" mask. → in dem → im.' },
+    ]
+  },
+
+  'prep-kontraktionen': {
+    name: 'Präpositionen: Kontraktionen',
+    exercises: [
+      { id:1, type:'fill', focus:'Dativ',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'von + dem = ___',
+        blank:'vom',
+        explanation:'"von + dem" → vom. Ich komme vom Bahnhof / vom Arzt.' },
+      { id:2, type:'fill', focus:'Dativ',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'zu + dem = ___',
+        blank:'zum',
+        explanation:'"zu + dem" → zum. Ich gehe zum Arzt / zum Bahnhof.' },
+      { id:3, type:'fill', focus:'Dativ',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'bei + dem = ___',
+        blank:'beim',
+        explanation:'"bei + dem" → beim. Beim Essen, beim Arzt.' },
+      { id:4, type:'fill', focus:'Dativ',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'zu + der = ___',
+        blank:'zur',
+        explanation:'"zu + der" → zur. Zur Schule, zur Arbeit, zur Polizei.' },
+      { id:5, type:'fill', focus:'Dativ (Wechselpräp.)',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'in + dem = ___',
+        blank:'im',
+        explanation:'"in + dem" → im. Im Zimmer, im Sommer (Wo? → Dativ).' },
+      { id:6, type:'fill', focus:'Dativ (Wechselpräp.)',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'an + dem = ___',
+        blank:'am',
+        explanation:'"an + dem" → am. Am Tisch, am Montag (Wo? → Dativ).' },
+      { id:7, type:'fill', focus:'Akkusativ (Wechselpräp.)',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'an + das = ___',
+        blank:'ans',
+        explanation:'"an + das" → ans. Ans Fenster gehen (Wohin? → Akkusativ).' },
+      { id:8, type:'fill', focus:'Akkusativ (Wechselpräp.)',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'in + das = ___',
+        blank:'ins',
+        explanation:'"in + das" → ins. Ins Kino gehen, ins Zimmer laufen (Wohin? → Akkusativ).' },
+      { id:9, type:'fill', focus:'Akkusativ (Wechselpräp.)',
+        instruction:'Schreibe die Kontraktion.',
+        prompt:'auf + das = ___',
+        blank:'aufs',
+        explanation:'"auf + das" → aufs. Aufs Land fahren (Wohin? → Akkusativ).' },
+    ]
+  },
+
+  'prep-richtige': {
+    name: 'Präpositionen: Welche Präposition?',
+    exercises: [
+      { id:1,  type:'select', focus:'Richtung / Ziel',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Ich fahre ___ Berlin.',
+        blank:'nach',
+        options:['nach','in','zu','durch'],
+        explanation:'"nach" steht vor Städte- und Ländernamen (ohne Artikel): nach Berlin, nach Deutschland.' },
+      { id:2,  type:'select', focus:'Zweck / Zugehörigkeit',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Das Paket ist ___ dich.',
+        blank:'für',
+        options:['für','von','zu','gegen'],
+        explanation:'"für" + Akkusativ drückt Zweck oder Empfänger aus: Das ist für dich.' },
+      { id:3,  type:'select', focus:'Verkehrsmittel',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Sie fährt ___ dem Fahrrad zur Arbeit.',
+        blank:'mit',
+        options:['mit','auf','in','an'],
+        explanation:'Verkehrsmittel werden mit "mit" + Dativ ausgedrückt: mit dem Bus, mit dem Zug.' },
+      { id:4,  type:'select', focus:'Herkunft / Verlassen eines Ortes',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Er kommt gerade ___ der Schule.',
+        blank:'aus',
+        options:['aus','von','nach','bei'],
+        explanation:'"aus" = Herkunft aus einem Gebäude/Land. "von" = Wegpunkt (von einer Person, von der Arbeit).' },
+      { id:5,  type:'select', focus:'Erwartung / Ziel',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Wir warten ___ den nächsten Bus.',
+        blank:'auf',
+        options:['auf','an','für','bei'],
+        explanation:'"warten auf" + Akkusativ: auf jemanden/etwas warten (fixed phrase).' },
+      { id:6,  type:'select', focus:'Zeitdauer (Gegenwart)',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Ich lerne Deutsch ___ einem Jahr.',
+        blank:'seit',
+        options:['seit','vor','ab','für'],
+        explanation:'"seit" + Dativ = Zeitraum, der in der Vergangenheit begann und noch andauert.' },
+      { id:7,  type:'select', focus:'Position / Lage',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Das Café ist direkt ___ dem Bahnhof.',
+        blank:'gegenüber',
+        options:['gegenüber','neben','vor','hinter'],
+        explanation:'"gegenüber" + Dativ = direkt auf der anderen Seite. Kann auch nachgestellt werden: dem Bahnhof gegenüber.' },
+      { id:8,  type:'select', focus:'Zufriedenheit (feste Verbindung)',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Wir sind ___ den Ergebnissen sehr zufrieden.',
+        blank:'mit',
+        options:['mit','von','über','zu'],
+        explanation:'"zufrieden sein mit" + Dativ ist eine feste Verbindung.' },
+      { id:9,  type:'select', focus:'Fortbewegung',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Er geht immer ___ Fuß.',
+        blank:'zu',
+        options:['zu','mit','auf','per'],
+        explanation:'"zu Fuß" ist eine feste Wendung = on foot. Immer ohne Artikel.' },
+      { id:10, type:'select', focus:'Interesse (feste Verbindung)',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Ich interessiere mich sehr ___ Musik.',
+        blank:'für',
+        options:['für','an','mit','über'],
+        explanation:'"sich interessieren für" + Akkusativ ist eine feste Verbindung.' },
+      { id:11, type:'select', focus:'Durchquerung',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Wir fahren ___ den Tunnel.',
+        blank:'durch',
+        options:['durch','über','um','an'],
+        explanation:'"durch" + Akkusativ = Bewegung durch etwas hindurch.' },
+      { id:12, type:'select', focus:'Herkunft (von einer Person/Stelle)',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Er kommt direkt ___ der Arbeit.',
+        blank:'von',
+        options:['von','aus','nach','ab'],
+        explanation:'"von" + Dativ = Wegpunkt (von der Arbeit ≠ aus dem Büro: "aus" betont das Gebäude).' },
+      { id:13, type:'select', focus:'Nettigkeit (feste Verbindung)',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Das ist sehr nett ___ dir!',
+        blank:'von',
+        options:['von','für','zu','bei'],
+        explanation:'"nett von jemandem" = it\'s nice of you. Im Deutschen: von + Dativ.' },
+      { id:14, type:'select', focus:'Übereinstimmung (feste Verbindung)',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Ich bin ___ dir einverstanden.',
+        blank:'mit',
+        options:['mit','zu','von','bei'],
+        explanation:'"einverstanden sein mit" + Dativ = to agree with someone.' },
+      { id:15, type:'select', focus:'Ziel (Richtung zu einer Person)',
+        instruction:'Wähle die richtige Präposition.',
+        prompt:'Ich gehe morgen ___ dem Arzt.',
+        blank:'zu',
+        options:['zu','nach','bei','an'],
+        explanation:'"zu" + Dativ = Ziel bei Personen und bestimmten Institutionen: zum Arzt, zum Bäcker.' },
+    ]
+  },
+
+  'prep-deklination': {
+    name: 'Präpositionen: Deklination',
+    exercises: [
+      { id:1,  type:'select', focus:'Dativ maskulin',
+        instruction:'Dekliniere den Artikel nach der Präposition.',
+        prompt:'mit ___ (der Bus)',
+        blank:'dem Bus',
+        options:['dem Bus','den Bus','der Bus','des Busses'],
+        explanation:'"mit" regiert immer Dativ. Maskulin Dativ → dem: mit dem Bus.' },
+      { id:2,  type:'select', focus:'Akkusativ feminin',
+        instruction:'Dekliniere den Artikel nach der Präposition.',
+        prompt:'für ___ (die Frau)',
+        blank:'die Frau',
+        options:['die Frau','der Frau','den Frauen','der Frauen'],
+        explanation:'"für" regiert Akkusativ. Feminin Akkusativ → die (gleich wie Nominativ): für die Frau.' },
+      { id:3,  type:'select', focus:'Akkusativ neutrum',
+        instruction:'Dekliniere den Artikel nach der Präposition.',
+        prompt:'durch ___ (das Dorf)',
+        blank:'das Dorf',
+        options:['das Dorf','dem Dorf','des Dorfes','den Dörfern'],
+        explanation:'"durch" regiert Akkusativ. Neutrum Akkusativ → das (gleich wie Nominativ): durch das Dorf.' },
+      { id:4,  type:'select', focus:'Dativ feminin',
+        instruction:'Dekliniere den Artikel nach der Präposition.',
+        prompt:'seit ___ (die Kindheit)',
+        blank:'der Kindheit',
+        options:['der Kindheit','die Kindheit','dem Kindheit','des Kindheit'],
+        explanation:'"seit" regiert Dativ. Feminin Dativ → der: seit der Kindheit.' },
+      { id:5,  type:'select', focus:'Dativ neutrum',
+        instruction:'Dekliniere den Artikel nach der Präposition.',
+        prompt:'nach ___ (das Konzert)',
+        blank:'dem Konzert',
+        options:['dem Konzert','das Konzert','des Konzerts','den Konzerten'],
+        explanation:'"nach" regiert Dativ. Neutrum Dativ → dem: nach dem Konzert.' },
+      { id:6,  type:'select', focus:'Genitiv maskulin',
+        instruction:'Dekliniere den Artikel (+ Nomen) nach der Präposition.',
+        prompt:'wegen ___ (der Regen)',
+        blank:'des Regens',
+        options:['des Regens','dem Regen','den Regen','der Regen'],
+        explanation:'"wegen" regiert Genitiv. Maskulin Genitiv → des + Nomen-(e)s: des Regens.' },
+      { id:7,  type:'select', focus:'Genitiv neutrum',
+        instruction:'Dekliniere den Artikel (+ Nomen) nach der Präposition.',
+        prompt:'trotz ___ (das Wetter)',
+        blank:'des Wetters',
+        options:['des Wetters','dem Wetter','das Wetter','der Wetters'],
+        explanation:'"trotz" regiert Genitiv. Neutrum Genitiv → des + Nomen-(e)s: des Wetters.' },
+      { id:8,  type:'select', focus:'Genitiv feminin',
+        instruction:'Dekliniere den Artikel nach der Präposition.',
+        prompt:'während ___ (die Nacht)',
+        blank:'der Nacht',
+        options:['der Nacht','die Nacht','dem Nacht','des Nacht'],
+        explanation:'"während" regiert Genitiv. Feminin Genitiv → der (kein -s am Nomen): während der Nacht.' },
+      { id:9,  type:'select', focus:'Dativ maskulin (Wechselpräp., Wo?)',
+        instruction:'Wo? → Dativ. Dekliniere den Artikel.',
+        prompt:'Das Buch liegt auf ___ (der Tisch).',
+        blank:'dem Tisch',
+        options:['dem Tisch','den Tisch','der Tisch','des Tisches'],
+        explanation:'liegen = Wo? → Dativ. Maskulin Dativ → dem: auf dem Tisch.' },
+      { id:10, type:'select', focus:'Akkusativ maskulin (Wechselpräp., Wohin?)',
+        instruction:'Wohin? → Akkusativ. Dekliniere den Artikel.',
+        prompt:'Ich lege das Buch auf ___ (der Tisch).',
+        blank:'den Tisch',
+        options:['den Tisch','dem Tisch','der Tisch','des Tisches'],
+        explanation:'legen = Wohin? → Akkusativ. Maskulin Akkusativ → den: auf den Tisch.' },
+      { id:11, type:'select', focus:'Dativ neutrum (Wechselpräp., Wo?)',
+        instruction:'Wo? → Dativ. Dekliniere den Artikel.',
+        prompt:'Sie sitzt in ___ (das Café).',
+        blank:'dem Café',
+        options:['dem Café','das Café','des Cafés','den Cafés'],
+        explanation:'sitzen = Wo? → Dativ. Neutrum Dativ → dem: in dem Café (→ im Café).' },
+      { id:12, type:'select', focus:'Akkusativ feminin (Wechselpräp., Wohin?)',
+        instruction:'Wohin? → Akkusativ. Dekliniere den Artikel.',
+        prompt:'Er hängt das Bild an ___ (die Wand).',
+        blank:'die Wand',
+        options:['die Wand','der Wand','das Wand','den Wand'],
+        explanation:'hängen (tr.) = Wohin? → Akkusativ. Feminin Akkusativ → die: an die Wand.' },
+      { id:13, type:'select', focus:'Dativ Plural',
+        instruction:'Dekliniere den Artikel nach der Präposition.',
+        prompt:'mit ___ (die Kinder)',
+        blank:'den Kindern',
+        options:['den Kindern','die Kinder','der Kinder','des Kindes'],
+        explanation:'Plural Dativ → den + Nomen + (-n wenn nötig): mit den Kindern.' },
+      { id:14, type:'select', focus:'Akkusativ maskulin',
+        instruction:'Dekliniere den Artikel nach der Präposition.',
+        prompt:'ohne ___ (der Fehler)',
+        blank:'einen Fehler',
+        options:['einen Fehler','einem Fehler','ein Fehler','eines Fehlers'],
+        explanation:'"ohne" regiert Akkusativ. Maskulin Akkusativ indef. → einen: ohne einen Fehler.' },
+    ]
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════
+//  EXERCISES MODE
+// ═══════════════════════════════════════════════════════════════
+
+let _exSets        = [];   // [{name, slug, source_type, source_ref, generated, count}]
+let _exCurrentSlug = null;
+let _exExercises   = [];   // exercises array for current set
+let _exIdx         = 0;
+let _exResults     = [];   // {id, correct} per exercise
+let _exAnswered    = false;
+let _exPollTimer   = null;
+
+/** Opens the full-screen exercise panel and pushes a history entry. */
+function openExercises() {
+  _navPush({ panel: 'exercises' });
+  $('exercisePanel').classList.add('open');
+  _exShowView('library');
+  _exLoadSets();
+}
+
+/** Closes the exercise panel and replaces history state with main. */
+function closeExercises() {
+  $('exercisePanel').classList.remove('open');
+  _navReplace({});
+}
+
+/**
+ * Switches between exercise sub-views.
+ * @param {'library'|'practice'|'end'} view
+ */
+function _exShowView(view) {
+  const views = { library: 'exViewLibrary', practice: 'exViewPractice', end: 'exViewEnd' };
+  const subtitles = {
+    library:  'Exercise Library',
+    practice: _exCurrentSlug || 'Practice',
+    end:      'Results',
+  };
+  for (const [k, id] of Object.entries(views))
+    $(id).classList.toggle('hidden', k !== view);
+  $('exSubtitle').textContent = subtitles[view];
+}
+
+/** Fetches /list-exercises and re-renders the library. */
+async function _exLoadSets() {
+  try {
+    const r = await fetch('/list-exercises');
+    _exSets = r.ok ? (await r.json()).sets || [] : [];
+  } catch (_) { _exSets = []; }
+  _exRenderLibrary();
+}
+
+/** Renders set chips, specialized section, and empty state. */
+function _exRenderLibrary() {
+  const strip = $('exSetsStrip');
+  strip.innerHTML = _exSets.map(s => {
+    const label = s.name.length > 26 ? s.name.slice(0, 24) + '…' : s.name;
+    return `<button class="ex-set-chip${s.slug === _exCurrentSlug ? ' active' : ''}" data-slug="${s.slug}">` +
+      `<span class="ex-chip-count">${s.count}</span>${_escHtml(label)}` +
+      `<span class="ex-chip-del" data-del="${s.slug}">×</span></button>`;
+  }).join('');
+
+  $('exLibraryEmpty').classList.toggle('hidden', _exSets.length > 0);
+
+  const specialStrip = $('exSpecialStrip');
+  specialStrip.innerHTML = Object.entries(SPECIALIZED_SETS).map(([key, s]) => {
+    const active = key === _exCurrentSlug;
+    return `<button class="ex-special-chip${active ? ' active' : ''}" data-special="${key}">` +
+      `<span class="ex-chip-count">${s.exercises.length}</span>${_escHtml(s.name)}</button>`;
+  }).join('');
+}
+
+/** Starts a built-in specialized exercise set (no server fetch). */
+async function _exStartBuiltin(key) {
+  const set = SPECIALIZED_SETS[key];
+  if (!set) return;
+  _exCurrentSlug = key;
+  _exExercises   = set.exercises.map((ex, i) => ({ ...ex, id: i + 1 }));
+  _exIdx         = 0;
+  _exResults     = [];
+  _navPush({ panel: 'exercise', slug: key });
+  _exShowView('practice');
+  _exRenderCard();
+}
+
+// Strip click — start practice or delete
+$('exSetsStrip').addEventListener('click', async e => {
+  const del = e.target.closest('[data-del]');
+  if (del) { e.stopPropagation(); _exDeleteSet(del.dataset.del); return; }
+  const chip = e.target.closest('.ex-set-chip');
+  if (chip && chip.dataset.slug) _exStart(chip.dataset.slug);
+});
+
+// Specialized set click
+$('exSpecialStrip').addEventListener('click', e => {
+  const chip = e.target.closest('.ex-special-chip');
+  if (chip && chip.dataset.special) _exStartBuiltin(chip.dataset.special);
+});
+
+/** Sets up and starts an exercise set — UI only, no history change. */
+async function _exStartUI(slug) {
+  try {
+    const r    = await fetch(`/exercise/${slug}`);
+    const data = await r.json();
+    if (!data.ok) return;
+    _exCurrentSlug = slug;
+    _exExercises   = data.exercises || [];
+    _exIdx         = 0;
+    _exResults     = [];
+    _exShowView('practice');
+    _exRenderCard();
+  } catch (_) {}
+}
+
+/** Navigates to an exercise set and starts it. Pushes a history entry. */
+async function _exStart(slug) {
+  _navPush({ panel: 'exercise', slug });
+  await _exStartUI(slug);
+}
+
+/** Renders the current exercise card. */
+function _exRenderCard() {
+  const ex = _exExercises[_exIdx];
+  if (!ex) { _exShowEnd(); return; }
+
+  _exAnswered = false;
+  $('exCounter').textContent = `${_exIdx + 1} / ${_exExercises.length}`;
+  $('exProgressFill').style.width = `${(_exIdx / _exExercises.length) * 100}%`;
+  $('btnExNext').classList.add('hidden');
+
+  const focusHtml = ex.focus
+    ? `<div class="ex-focus">${_escHtml(ex.focus.replace(/-/g, ' '))}</div>` : '';
+
+  let answerHtml;
+  if (ex.type === 'select') {
+    answerHtml = `<div class="ex-options">${
+      (ex.options || []).map(o =>
+        `<button class="ex-opt" data-opt="${_escHtml(o)}">${_escHtml(o)}</button>`
+      ).join('')
+    }</div>`;
+  } else {
+    answerHtml = `<div class="ex-fill-area">
+      <input class="ex-fill-input" id="exFillInput" type="text"
+        placeholder="Deine Antwort…"
+        autocorrect="off" autocapitalize="off" spellcheck="false">
+      <button class="btn btn-primary" id="btnExCheck">Check →</button>
+    </div>`;
+  }
+
+  $('exCard').innerHTML = `
+    ${focusHtml}
+    <div class="ex-instruction">${_escHtml(ex.instruction || '')}</div>
+    <div class="ex-prompt">${_exFormatPrompt(ex.prompt || '')}</div>
+    <div>${answerHtml}</div>
+    <div class="ex-result hidden" id="exResult">
+      <div class="ex-verdict" id="exVerdict"></div>
+      <p class="ex-exp-text hidden" id="exExpText"></p>
+    </div>`;
+
+  if (ex.type === 'select') {
+    $('exCard').querySelectorAll('.ex-opt').forEach(btn =>
+      btn.addEventListener('click', () => _exCheckAnswer(btn.dataset.opt))
+    );
+  } else {
+    const input = $('exFillInput');
+    input.focus();
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !_exAnswered) _exCheckAnswer(input.value);
+      else if (e.key === 'Enter' && _exAnswered) $('btnExNext').click();
+    });
+    $('btnExCheck').addEventListener('click', () => _exCheckAnswer(input.value));
+  }
+}
+
+/** Highlights the blank placeholder in the prompt HTML. */
+function _exFormatPrompt(prompt) {
+  return _escHtml(prompt).replace(/___/g, '<span class="ex-blank">___</span>');
+}
+
+/** Normalizes an answer for comparison: trim, lowercase, umlaut-substitution. */
+function _exNormalize(s) {
+  return (s || '').trim().toLowerCase()
+    .replace(/ae/g, 'ä').replace(/oe/g, 'ö').replace(/ue(?!r)/g, 'ü').replace(/\bss\b/g, 'ß');
+}
+
+/** Checks the submitted answer, shows result, reveals Next button. */
+function _exCheckAnswer(answer) {
+  if (_exAnswered) return;
+  _exAnswered = true;
+
+  const ex      = _exExercises[_exIdx];
+  const correct = _exNormalize(answer) === _exNormalize(ex.blank);
+  _exResults.push({ id: ex.id, correct });
+
+  const resultEl  = $('exResult');
+  const verdictEl = $('exVerdict');
+  const expEl     = $('exExpText');
+
+  resultEl.classList.remove('hidden');
+  if (correct) {
+    verdictEl.className = 'ex-verdict ex-verdict-ok';
+    verdictEl.textContent = '✓ Richtig!';
+  } else {
+    verdictEl.className = 'ex-verdict ex-verdict-err';
+    verdictEl.innerHTML = `✗ Falsch — <span class="ex-correct-answer">${_escHtml(ex.blank)}</span>`;
+  }
+  if (ex.explanation) {
+    expEl.classList.remove('hidden');
+    expEl.textContent = ex.explanation;
+  }
+
+  if (ex.type === 'select') {
+    $('exCard').querySelectorAll('.ex-opt').forEach(btn => {
+      btn.disabled = true;
+      if (_exNormalize(btn.dataset.opt) === _exNormalize(ex.blank))
+        btn.classList.add('ex-opt-correct');
+      else if (_exNormalize(btn.dataset.opt) === _exNormalize(answer))
+        btn.classList.add('ex-opt-wrong');
+    });
+  } else {
+    const input = $('exFillInput');
+    input.disabled = true;
+    input.classList.add(correct ? 'ex-fill-correct' : 'ex-fill-wrong');
+    const checkBtn = document.getElementById('btnExCheck');
+    if (checkBtn) checkBtn.disabled = true;
+  }
+
+  $('btnExNext').classList.remove('hidden');
+  $('btnExNext').focus();
+}
+
+/** Shows the end-of-set summary screen. */
+function _exShowEnd() {
+  $('exProgressFill').style.width = '100%';
+  const total   = _exResults.length;
+  const correct = _exResults.filter(r => r.correct).length;
+  const pct     = total ? Math.round(correct / total * 100) : 0;
+  const label   = pct >= 80 ? 'Sehr gut!' : pct >= 60 ? 'Gut gemacht!' : 'Weiter üben!';
+
+  $('exEndWrap').innerHTML = `
+    <div class="ex-end-score">${correct} / ${total}</div>
+    <div class="ex-end-pct">${pct}%</div>
+    <div class="ex-end-label">${_escHtml(label)}</div>`;
+
+  const wrongIds = new Set(_exResults.filter(r => !r.correct).map(r => r.id));
+  const retryBtn = $('btnExRetryWrong');
+  retryBtn.disabled = wrongIds.size === 0;
+  retryBtn.onclick = () => {
+    _exExercises = _exExercises.filter(ex => wrongIds.has(ex.id));
+    _exIdx = 0; _exResults = [];
+    _exShowView('practice');
+    _exRenderCard();
+  };
+
+  _exShowView('end');
+}
+
+/** Deletes an exercise set. */
+async function _exDeleteSet(slug) {
+  try {
+    await fetch('/delete-exercise', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug }),
+    });
+    if (_exCurrentSlug === slug) _exCurrentSlug = null;
+    await _exLoadSets();
+  } catch (_) {}
+}
+
+/** POSTs a generation request to /queue-exercises. Returns requestId or null. */
+async function _exQueueGenerate({ sourceType, sourceRef, original, correction, name }) {
+  try {
+    const res  = await fetch('/queue-exercises', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ source_type: sourceType, source_ref: sourceRef, original, correction, name }),
+    });
+    const data = await res.json();
+    return data.ok ? data.requestId : null;
+  } catch (_) { return null; }
+}
+
+/** Polls /exercise-status every 2s; calls onReady(slug) when done. */
+function _exPollStatus(requestId, onReady) {
+  if (_exPollTimer) clearInterval(_exPollTimer);
+  let polls = 0;
+  _exPollTimer = setInterval(async () => {
+    polls++;
+    try {
+      const r = await fetch(`/exercise-status?id=${requestId}`);
+      const d = await r.json();
+      if (d.pending) return;
+      clearInterval(_exPollTimer); _exPollTimer = null;
+      if (d.ok && d.slug) onReady(d.slug);
+    } catch (_) {}
+    if (polls > 150) { clearInterval(_exPollTimer); _exPollTimer = null; } // 5 min cap
+  }, 2000);
+}
+
+// Topic generation from library bar
+$('btnGenTopic').addEventListener('click', async () => {
+  const tag = $('exTopicInput').value.trim();
+  if (!tag) return;
+  const btn = $('btnGenTopic');
+  btn.textContent = '⟳ Generating…';
+  btn.disabled = true;
+
+  const requestId = await _exQueueGenerate({
+    sourceType: 'topic', sourceRef: tag,
+    name: `Topic — ${tag}`,
+  });
+  if (!requestId) {
+    btn.textContent = '✗ Error';
+    setTimeout(() => { btn.textContent = 'Generate →'; btn.disabled = false; }, 2000);
+    return;
+  }
+  _exPollStatus(requestId, async (slug) => {
+    btn.textContent = 'Generate →';
+    btn.disabled = false;
+    $('exTopicInput').value = '';
+    await _exLoadSets();
+    _exStart(slug);
+  });
+});
+$('exTopicInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') $('btnGenTopic').click();
+});
+
+// Nav / close buttons
+$('btnExercises').addEventListener('click', openExercises);
+$('btnExerciseClose').addEventListener('click', closeExercises);
+$('btnExNext').addEventListener('click', () => { _exIdx++; _exRenderCard(); });
+$('btnExBack').addEventListener('click', () => {
+  _navPush({ panel: 'exercises' });
+  _exShowView('library');
+  _exRenderLibrary();
+});
+$('btnExBackLib').addEventListener('click', () => {
+  _navPush({ panel: 'exercises' });
+  _exShowView('library');
+  _exRenderLibrary();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && $('exercisePanel').classList.contains('open')) closeExercises();
 });
