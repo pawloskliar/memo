@@ -3267,8 +3267,9 @@ function _exRenderCard() {
 
   let answerHtml;
   if (ex.type === 'select') {
+    const opts = [...(ex.options || [])].sort(() => Math.random() - 0.5);
     answerHtml = `<div class="ex-options">${
-      (ex.options || []).map(o =>
+      opts.map(o =>
         `<button class="ex-opt" data-opt="${_escHtml(o)}">${_escHtml(o)}</button>`
       ).join('')
     }</div>`;
